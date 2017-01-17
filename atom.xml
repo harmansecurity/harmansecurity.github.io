@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-01-17T14:03:52.753Z</updated>
+  <updated>2017-01-17T14:08:04.565Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -20,11 +20,10 @@
     <link href="http://harmansecurity.cn/2017/01/17/VC6.0%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
     <id>http://harmansecurity.cn/2017/01/17/VC6.0插件安装/</id>
     <published>2017-01-17T06:49:04.000Z</published>
-    <updated>2017-01-17T14:03:52.753Z</updated>
+    <updated>2017-01-17T14:08:04.565Z</updated>
     
     <content type="html"><![CDATA[<p>　 　因为PBC源码库的一些函数不是很全，导致用VS写了几个程序只好放弃，而支持VC6.0的PBC库比较全，绕了一圈所以只好转战VC++6.0。VC++6.0是一款很老的工具，不是很人性化，对于我这个深度完美主义者肯定是不能接受的，想方设法使它更适合开发，所以安装了一些插件，使开发效率更高。</p>
-<p>我主要安装的插件是：<br>1.Visual studio Boosteer;(源码窗口管理)</p>
-<ul>
+<h4 id="我主要安装的插件是"><a href="#我主要安装的插件是" class="headerlink" title="我主要安装的插件是:"></a>我主要安装的插件是:</h4><h5 id="1-Visual-studio-Boosteer-源码窗口管理"><a href="#1-Visual-studio-Boosteer-源码窗口管理" class="headerlink" title="1.Visual studio Boosteer;(源码窗口管理)"></a>1.Visual studio Boosteer;(源码窗口管理)</h5><ul>
 <li>下载地址:<code>http://pan.baidu.com/s/1pJAZApP</code>.</li>
 <li>功能:方便查看源码，一页里面可以打开多个C文件。</li>
 </ul>
@@ -65,8 +64,7 @@
     <summary type="html">
     
       &lt;p&gt;　 　因为PBC源码库的一些函数不是很全，导致用VS写了几个程序只好放弃，而支持VC6.0的PBC库比较全，绕了一圈所以只好转战VC++6.0。VC++6.0是一款很老的工具，不是很人性化，对于我这个深度完美主义者肯定是不能接受的，想方设法使它更适合开发，所以安装了一些插件，使开发效率更高。&lt;/p&gt;
-&lt;p&gt;我主要安装的插件是：&lt;br&gt;1.Visual studio Boosteer;(源码窗口管理)&lt;/p&gt;
-&lt;ul&gt;
+&lt;h4 id=&quot;我主要安装的插件是&quot;&gt;&lt;a href=&quot;#我主要安装的插件是&quot; class=&quot;headerlink&quot; title=&quot;我主要安装的插件是:&quot;&gt;&lt;/a&gt;我主要安装的插件是:&lt;/h4&gt;&lt;h5 id=&quot;1-Visual-studio-Boosteer-源码窗口管理&quot;&gt;&lt;a href=&quot;#1-Visual-studio-Boosteer-源码窗口管理&quot; class=&quot;headerlink&quot; title=&quot;1.Visual studio Boosteer;(源码窗口管理)&quot;&gt;&lt;/a&gt;1.Visual studio Boosteer;(源码窗口管理)&lt;/h5&gt;&lt;ul&gt;
 &lt;li&gt;下载地址:&lt;code&gt;http://pan.baidu.com/s/1pJAZApP&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;功能:方便查看源码，一页里面可以打开多个C文件。&lt;/li&gt;
 &lt;/ul&gt;

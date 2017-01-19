@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-01-19T12:36:20.214Z</updated>
+  <updated>2017-01-19T12:45:56.850Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Http抓包与调试</title>
-    <link href="http://harmansecurity.cn/2017/01/19/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95/"/>
-    <id>http://harmansecurity.cn/2017/01/19/Http抓包与调试/</id>
+    <title>Http抓包与调试(Firefox插件)</title>
+    <link href="http://harmansecurity.cn/2017/01/19/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95(Firefox%E6%8F%92%E4%BB%B6)/"/>
+    <id>http://harmansecurity.cn/2017/01/19/Http抓包与调试(Firefox插件)/</id>
     <published>2017-01-19T08:22:55.000Z</published>
-    <updated>2017-01-19T12:36:20.214Z</updated>
+    <updated>2017-01-19T12:45:56.850Z</updated>
     
     <content type="html"><![CDATA[<p>　 　这边主要介绍火狐的几款插件工具分别是Firebug、TamperData、LiveHttpHeaders、Hackbar和ModifyHeaders，它们可以用来测试和发掘Web应用程序中的跨站漏洞。</p>
 <hr>

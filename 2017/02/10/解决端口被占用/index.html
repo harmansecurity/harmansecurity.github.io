@@ -8,20 +8,26 @@
   <link rel="dns-prefetch" href="http://harmansecurity.cn">
   <title>解决端口被占用 | 骑士安全</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.开始—-&amp;gt;运行—-&amp;gt;cmd，调出命令窗口2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。##### 3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372##### 4.继续输入tasklist|findstr “372”，">
+  <meta name="description" content="1.开始—-&amp;gt;运行—-&amp;gt;cmd，调出命令窗口2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。
+
+3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决端口被占用">
 <meta property="og:url" content="http://harmansecurity.cn/2017/02/10/解决端口被占用/index.html">
 <meta property="og:site_name" content="骑士安全">
-<meta property="og:description" content="1.开始—-&amp;gt;运行—-&amp;gt;cmd，调出命令窗口2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。##### 3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372##### 4.继续输入tasklist|findstr “372”，">
+<meta property="og:description" content="1.开始—-&amp;gt;运行—-&amp;gt;cmd，调出命令窗口2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。
+
+3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372">
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A81.png">
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A82.png">
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A83.png">
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A84.png">
-<meta property="og:updated_time" content="2017-02-10T13:05:02.995Z">
+<meta property="og:updated_time" content="2017-02-10T13:09:34.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决端口被占用">
-<meta name="twitter:description" content="1.开始—-&amp;gt;运行—-&amp;gt;cmd，调出命令窗口2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。##### 3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372##### 4.继续输入tasklist|findstr “372”，">
+<meta name="twitter:description" content="1.开始—-&amp;gt;运行—-&amp;gt;cmd，调出命令窗口2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。
+
+3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372">
 <meta name="twitter:image" content="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A81.png">
   
     <link rel="alternative" href="/atom.xml" title="骑士安全" type="application/atom+xml">
@@ -187,7 +193,14 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="1-开始—-gt-运行—-gt-cmd，调出命令窗口"><a href="#1-开始—-gt-运行—-gt-cmd，调出命令窗口" class="headerlink" title="1.开始—-&gt;运行—-&gt;cmd，调出命令窗口"></a>1.开始—-&gt;运行—-&gt;cmd，调出命令窗口</h5><h5 id="2-输入命令：netstat-ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。"><a href="#2-输入命令：netstat-ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。" class="headerlink" title="2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。"></a>2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。</h5><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A81.png" alt=""><br></div><br>##### 3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A82.png" alt=""><br></div><br>##### 4.继续输入tasklist|findstr “372”，回车，查看是哪个进程或者程序占用了372端口<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A83.png" alt=""><br></div><br>##### 5.结束该进程：在任务管理器中选中该进程点击”结束进程“按钮，或者是在cmd的命令窗口中输入：taskkill /f /t /im nvvsvc.exe<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A84.png" alt=""><br></div>
+        <h5 id="1-开始—-gt-运行—-gt-cmd，调出命令窗口"><a href="#1-开始—-gt-运行—-gt-cmd，调出命令窗口" class="headerlink" title="1.开始—-&gt;运行—-&gt;cmd，调出命令窗口"></a>1.开始—-&gt;运行—-&gt;cmd，调出命令窗口</h5><h5 id="2-输入命令：netstat-ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。"><a href="#2-输入命令：netstat-ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。" class="headerlink" title="2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。"></a>2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。</h5><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A81.png" alt=""><br></div>
+
+<h5 id="3-查看被占用端口对应的PID，输入命令：netstat-aon-findstr-“4000”，回车，记下最后一位数字，即PID-这里是372"><a href="#3-查看被占用端口对应的PID，输入命令：netstat-aon-findstr-“4000”，回车，记下最后一位数字，即PID-这里是372" class="headerlink" title="3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372"></a>3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372</h5><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A82.png" alt=""><br></div>
+
+<a id="more"></a>
+<h5 id="4-继续输入tasklist-findstr-“372”，回车，查看是哪个进程或者程序占用了372端口"><a href="#4-继续输入tasklist-findstr-“372”，回车，查看是哪个进程或者程序占用了372端口" class="headerlink" title="4.继续输入tasklist|findstr “372”，回车，查看是哪个进程或者程序占用了372端口"></a>4.继续输入tasklist|findstr “372”，回车，查看是哪个进程或者程序占用了372端口</h5><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A83.png" alt=""><br></div>
+
+<h5 id="5-结束该进程：在任务管理器中选中该进程点击”结束进程“按钮，或者是在cmd的命令窗口中输入：taskkill-f-t-im-nvvsvc-exe"><a href="#5-结束该进程：在任务管理器中选中该进程点击”结束进程“按钮，或者是在cmd的命令窗口中输入：taskkill-f-t-im-nvvsvc-exe" class="headerlink" title="5.结束该进程：在任务管理器中选中该进程点击”结束进程“按钮，或者是在cmd的命令窗口中输入：taskkill /f /t /im nvvsvc.exe"></a>5.结束该进程：在任务管理器中选中该进程点击”结束进程“按钮，或者是在cmd的命令窗口中输入：taskkill /f /t /im nvvsvc.exe</h5><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A84.png" alt=""><br></div>
       
 
       
@@ -414,6 +427,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
               </li>
              
@@ -434,6 +451,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PBC</a>
               </li>
              
@@ -443,14 +464,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2918.png">
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2919.jpg">
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2920.png">
-<meta property="og:updated_time" content="2017-02-10T08:17:19.952Z">
+<meta property="og:updated_time" content="2017-02-10T09:10:30.869Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Http抓包与调试(Fiddler)">
 <meta name="twitter:description" content="一、什么是Fiddler？　 　1.Fiddler是位于客户端和服务器端的HTTP代理，也是目前最常用的http抓包工具之一。它能够记录客户端和服务器之间的所有HTTP请求，可以针对特定的HTTP请求，分析请求数据、设置断点、调试web应用、修改请求的数据，甚至可以修改服务器返回的数据，功能非常强大，是web调试的利器。既然是代理，也就是说：客户端的所有请求都要先经过Fiddler，然后转发到相应">
@@ -208,14 +208,33 @@
 
 <hr>
 <h4 id="二、Fiddler使用界面简介"><a href="#二、Fiddler使用界面简介" class="headerlink" title="二、Fiddler使用界面简介"></a>二、Fiddler使用界面简介</h4><p>Fiddler主界面的布局如下：</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%294.png" alt=""><br></div><br>###### 主界面中主要包括四个常用的块：<br><em> Fiddler的菜单栏，上图绿色部分。包括捕获http请求，停止捕获请求，保存http请求，载入本地session、设置捕获规则等功能。
-</em> Fiddler的工具栏,上图红色部分。<code>Replay：回放按钮;</code> <code>X：清空监控面板；</code> <code>Go：调试Debug；``Stream：模式切换；（流模式与缓冲模式）</code> <code>Decode：解压请求；</code> <code>Keep session：保持会话；</code> <code>Any Process：过滤请求；（如只查看Chrome的请求）</code> <code>Find：查找；</code> <code>Save：保存会话；</code> <code>保存截图；</code> <code>计时器；</code> <code>Browser：快速启动浏览器；</code> <code>TextWizard：编码/解码；（非常常用）</code> <code>Tearoff：分离面板；</code> <code>MSDN Search：MSDN搜索；</code><br><em> web Session面板，上图黄色区域，主要是Fiddler抓取到的每条http请求（每一条称为一个session）,主要包含了请求的url，协议，状态码，body等信息，详细的字段含义如下图所示：<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%295.png" alt=""><br></div>
-</em> 详情和数据统计面板。针对每条http请求的具体统计（例如发送/接受字节数，发送/接收时间，还有粗略统计世界各地访问该服务器所花费的时间）和数据包分析。如inspector面板下，提供headers、textview、hexview,Raw等多种方式查看单条http请求的请求报文的信息：<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%296.png" alt=""><br></div><br>而composer面板下，则可以模拟向相应的服务器发送数据的过程（这就是灌水机器人的基本原理,也可以是部分http flood的一种方式）。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%297.png" alt=""><br></div><br>也可以粘贴一次请求的raw http headers,达到模拟请求的目的：<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%298.png" alt=""><br></div>
+<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%294.png" alt=""><br></div>
 
+<h6 id="主界面中主要包括四个常用的块："><a href="#主界面中主要包括四个常用的块：" class="headerlink" title="主界面中主要包括四个常用的块："></a>主界面中主要包括四个常用的块：</h6><ul>
+<li>Fiddler的菜单栏，上图绿色部分。包括捕获http请求，停止捕获请求，保存http请求，载入本地session、设置捕获规则等功能。</li>
+<li>Fiddler的工具栏,上图红色部分。<code>Replay：回放按钮;</code> <code>X：清空监控面板；</code> <code>Go：调试Debug；</code> <code>Stream：模式切换；（流模式与缓冲模式）</code> <code>Decode：解压请求；</code> <code>Keep session：保持会话；</code> <code>Any Process：过滤请求；（如只查看Chrome的请求）</code> <code>Find：查找；</code> <code>Save：保存会话；</code> <code>保存截图；</code> <code>计时器；</code> <code>Browser：快速启动浏览器；</code> <code>TextWizard：编码/解码；（非常常用）</code> <code>Tearoff：分离面板；</code> <code>MSDN Search：MSDN搜索；</code></li>
+<li>web Session面板，上图黄色区域，主要是Fiddler抓取到的每条http请求（每一条称为一个session）,主要包含了请求的url，协议，状态码，body等信息，详细的字段含义如下图所示：<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%295.png" alt=""><br></div></li>
+<li>详情和数据统计面板。针对每条http请求的具体统计（例如发送/接受字节数，发送/接收时间，还有粗略统计世界各地访问该服务器所花费的时间）和数据包分析。如inspector面板下，提供headers、textview、hexview,Raw等多种方式查看单条http请求的请求报文的信息：<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%296.png" alt=""><br></div><br>而composer面板下，则可以模拟向相应的服务器发送数据的过程（这就是灌水机器人的基本原理,也可以是部分http flood的一种方式）。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%297.png" alt=""><br></div><br>也可以粘贴一次请求的raw http headers,达到模拟请求的目的：<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%298.png" alt=""><br></div>
+
+</li>
+</ul>
 <hr>
 <h4 id="三、Fiddler内置命令"><a href="#三、Fiddler内置命令" class="headerlink" title="三、Fiddler内置命令"></a>三、Fiddler内置命令</h4><p>　 　为了更加方便的管理所有的session, Fiddler提供了一系列内置的函数用于筛选和操作这些session.输入命令的位置在websession管理面板的下方（通过快捷键alt+q可以focus到命令行）.<br>Fiddler内置的命令有如下几种：</p>
 <h6 id="1-select命令。"><a href="#1-select命令。" class="headerlink" title="1. select命令。"></a>1. select命令。</h6><p>选择所有相应类型（指content-type）为指定类型的HTTP请求，如选择图片，使用命令<code>select image</code>.而<code>select css</code>则可以选择所有相应类型为css的请求，<code>select html</code>则选择所有响应为HTML的请求（怎么样，是不是跟SQL语句很像？）。如图是执行<code>select image</code>之后的结果：</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%299.png" alt=""><br></div><br>###### 2. allbut命令。<br>allbut命令用于选择所有响应类型不是给定类型的HTTP请求。如allbut image用于选择所有相应类型不是图片的session(HTTP请求)，该命令还有一个别名keeponly.需要注意的是，keeponly和allbut命令是将不是该类型的session删除，留下的都是该类型的响应。因此，如果你执行allbut xxxx（不存在的类型），实际上类似与执行cls命令（删除所有的session, ctrl+x快捷键也是这个作用）<br>###### 3. ?text命令<br>选择所有 URL 匹配问号后的字符的全部 session<br>###### 4. &gt;size 和 <size命令 选择响应大小大于某个大小（单位是b）或者小于某个大小的所有http请求="" ######="" 5.="status命令" 选择响应状态等于给定状态的所有http请求。="" 例如，选择所有状态为200的http请求：="200" 6.="" @host命令="" 选择包含指定="" host="" 的全部="" http请求。例如：@csdn.net="" 选择所有host包含csdn.net的请求="" 7.="" bpafter，="" bps,="" bpv,="" bpm,="" bpu="" 这几个命令主要用于批量设置断点：<br=""><br>Bpafter xxx: 中断 URL 包含指定字符的全部 session 响应<br><br>Bps xxx: 中断 HTTP 响应状态为指定字符的全部 session 响应。<br><br>Bpv xxx: 中断指定请求方式的全部 session 响应<br><br>Bpm xxx: 中断指定请求方式的全部 session 响应。等同于bpv xxx<br><br>Bpu xxx:与bpafter类似。<br><br>当这些命令没有加参数时，会清空所有设置了断点的HTTP请求。<br><br><br>———————————————————————————————————————————-<br><br>#### 四、Fiddler抓包分析<br>　 　抓包是Fiddler的最基本的应用，在Fiddler的web session界面捕获到HTTP请求。各字段的详细说明已经解释过，这里不再说明。需要注意的是#号列中的图标，每种图标代表不同的相应类型，具体的类型包括：<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2910.png" alt=""><br></div><br>另外，注意请求的host字段。可以看到有来自多个www.csdn.net的子域名的响应，说明在大型网站的架构中，大多需要多个子域名，这些子域名可能是单独用于缓存静态资源的，也可能是专门负责媒体资源的，或者是专门负责数据统计的（如pingback）。<br>###### 右键单击其中的一条请求。可以选择的操作有：save(保存请求的报文信息，可以是请求报文，可以是响应报文)。<br>###### 如果想要重新发送某些请求，可以选中这些请求，然后点击工具栏中的reply.就可以重新发送选中的这些请求。<br>##### 左键点击单条HTTP请求，可以在右侧的tab面板中看到如下信息：<br>###### 1. Statistic。<br>关于HTTP请求的性能和其他数据分析，使用Statistics页签，用户可以通过选择多个会话来得来这几个会话的总的信息统计，比如多个请求和传输的字节数。选择第一个请求和最后一个请求，可获得整个页面加载所消耗的总体时间。从条形图表中还可以分别出哪些请求耗时最多，从而对页面的访问进行访问速度优化。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2911.png" alt=""><br></div><br>###### 2. Inspectors。<br>分为上下两个部分，上半部分是请求头部分，下半部分是响应头部分。对于每一部分，提供了多种不同格式查看每个请求和响应的内容。JPG 格式使用 ImageView 就可以看到图片，HTML/JS/CSS 使用 TextView可以看到响应的内容。Raw标签可以查看原始的符合HTTP标准的请求和响应头。Auth则可以查看授权Proxy-Authorization和Authorization的相关信息。Cookies标签可以看到请求的cookie和响应的set-cookie头信息。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2912.png" alt=""><br></div>
+<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%299.png" alt=""><br></div>
+
+<h6 id="2-allbut命令。"><a href="#2-allbut命令。" class="headerlink" title="2. allbut命令。"></a>2. allbut命令。</h6><p>allbut命令用于选择所有响应类型不是给定类型的HTTP请求。如allbut image用于选择所有相应类型不是图片的session(HTTP请求)，该命令还有一个别名keeponly.需要注意的是，keeponly和allbut命令是将不是该类型的session删除，留下的都是该类型的响应。因此，如果你执行allbut xxxx（不存在的类型），实际上类似与执行cls命令（删除所有的session, ctrl+x快捷键也是这个作用）</p>
+<h6 id="3-text命令"><a href="#3-text命令" class="headerlink" title="3. ?text命令"></a>3. ?text命令</h6><p>选择所有 URL 匹配问号后的字符的全部 session</p>
+<h6 id="4-gt-size-和-lt-size命令"><a href="#4-gt-size-和-lt-size命令" class="headerlink" title="4. &gt;size 和 &lt;size命令"></a>4. &gt;size 和 &lt;size命令</h6><p>选择响应大小大于某个大小（单位是b）或者小于某个大小的所有HTTP请求</p>
+<h6 id="5-status命令"><a href="#5-status命令" class="headerlink" title="5. =status命令"></a>5. =status命令</h6><p>选择响应状态等于给定状态的所有HTTP请求。<br><br>例如，选择所有状态为200的HTTP请求：=200<br></p>
+<h6 id="6-host命令"><a href="#6-host命令" class="headerlink" title="6. @host命令"></a>6. @host命令</h6><p>选择包含指定 HOST 的全部 HTTP请求。例如：@csdn.net<br><br>选择所有host包含csdn.net的请求<br></p>
+<h6 id="7-Bpafter，-Bps-bpv-bpm-bpu"><a href="#7-Bpafter，-Bps-bpv-bpm-bpu" class="headerlink" title="7. Bpafter， Bps, bpv, bpm, bpu"></a>7. Bpafter， Bps, bpv, bpm, bpu</h6><p>这几个命令主要用于批量设置断点：<br><br>Bpafter xxx: 中断 URL 包含指定字符的全部 session 响应<br><br>Bps xxx: 中断 HTTP 响应状态为指定字符的全部 session 响应。<br><br>Bpv xxx: 中断指定请求方式的全部 session 响应<br><br>Bpm xxx: 中断指定请求方式的全部 session 响应。等同于bpv xxx<br><br>Bpu xxx:与bpafter类似。<br><br>当这些命令没有加参数时，会清空所有设置了断点的HTTP请求。<br></p>
+<hr>
+<h4 id="四、Fiddler抓包分析"><a href="#四、Fiddler抓包分析" class="headerlink" title="四、Fiddler抓包分析"></a>四、Fiddler抓包分析</h4><p>　 　抓包是Fiddler的最基本的应用，在Fiddler的web session界面捕获到HTTP请求。各字段的详细说明已经解释过，这里不再说明。需要注意的是#号列中的图标，每种图标代表不同的相应类型，具体的类型包括：</p>
+<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2910.png" alt=""><br></div><br>另外，注意请求的host字段。可以看到有来自多个www.csdn.net的子域名的响应，说明在大型网站的架构中，大多需要多个子域名，这些子域名可能是单独用于缓存静态资源的，也可能是专门负责媒体资源的，或者是专门负责数据统计的（如pingback）。<br><em>右键单击其中的一条请求。可以选择的操作有：save(保存请求的报文信息，可以是请求报文，可以是响应报文)。</em><br><em>如果想要重新发送某些请求，可以选中这些请求，然后点击工具栏中的reply.就可以重新发送选中的这些请求。</em><br><strong>左键点击单条HTTP请求，可以在右侧的tab面板中看到如下信息：</strong><br><br><strong>(1). Statistic。</strong><br>关于HTTP请求的性能和其他数据分析，使用Statistics页签，用户可以通过选择多个会话来得来这几个会话的总的信息统计，比如多个请求和传输的字节数。选择第一个请求和最后一个请求，可获得整个页面加载所消耗的总体时间。从条形图表中还可以分别出哪些请求耗时最多，从而对页面的访问进行访问速度优化。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2911.png" alt=""><br></div>
+
+<p><strong>(2). Inspectors。</strong><br>分为上下两个部分，上半部分是请求头部分，下半部分是响应头部分。对于每一部分，提供了多种不同格式查看每个请求和响应的内容。JPG 格式使用 ImageView 就可以看到图片，HTML/JS/CSS 使用 TextView可以看到响应的内容。Raw标签可以查看原始的符合HTTP标准的请求和响应头。Auth则可以查看授权Proxy-Authorization和Authorization的相关信息。Cookies标签可以看到请求的cookie和响应的set-cookie头信息。</p>
+<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2912.png" alt=""><br></div>
 
 <ul>
 <li>Http Request Header<h6 id="Cache-头域"><a href="#Cache-头域" class="headerlink" title="Cache 头域"></a>Cache 头域</h6>If-Modified-Since作用：把浏览器端缓存页面的最后修改时间发送到服务器去，服务器会把这个时间与服务器上实际文件的最后修改时间进行对比。如果时间一致，那么返回304，客户端 就直接使用本地缓存文件。如果时间不一致，就会返回200和新的文件内容。客户端接到之后，会丢弃旧文件，把新文件缓存起来，并显示在浏览器中。例如：If-Modified-Since: Thu, 09 Feb 2012 09:07:57 GMT<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2913.png" alt=""><br></div><br>If-None-Match作用: If-None-Match和ETag一起工作，工作原理是在HTTP Response中添加ETag信息。 当用户再次请求该资源时，将在HTTP Request 中加入If-None-Match信息(ETag的值)。如果服务器验证资源的ETag没有改变（该资源没有更新），将返回一个304状态告诉客户端使用 本地缓存文件。否则将返回200状态和新的资源和Etag.  使用这样的机制将提高网站的性能例如: If-None-Match: “03f2b33c0bfcc1:0”<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2914.png" alt=""><br></div><br>Pragma作用：防止页面被缓存， 在HTTP/1.1版本中，它和Cache-Control:no-cache作用一模一样。Pargma只有一个用法，例如：Pragma: no-cache.<br>注意: 在HTTP/1.0版本中，只实现了Pragema:no-cache, 没有实现Cache-Control。Cache-Control作用: 这个是非常重要的规则。 这个用来指定Response-Request遵循的缓存机制。各个指令含义如下</li>
@@ -223,7 +242,7 @@
 <p>Cache-Control:Public   可以被任何缓存所缓存（）</p>
 <p>Cache-Control:Private     内容只缓存到私有缓存中</p>
 <p>Cache-Control:no-cache  所有内容都不会被缓存</p>
-<h6 id="Client-头域"><a href="#Client-头域" class="headerlink" title="Client 头域"></a>Client 头域</h6><p> Accept: text/html代表浏览器可以接受服务器回发的类型为 text/html  也就是我们常说的html文档,如果服务器无法返回text/html类型的数据，服务器应该返回一个406错误(non acceptable)。</p>
+<h4 id="Client-头域"><a href="#Client-头域" class="headerlink" title="Client 头域"></a>Client 头域</h4><p> Accept: text/html代表浏览器可以接受服务器回发的类型为 text/html  也就是我们常说的html文档,如果服务器无法返回text/html类型的数据，服务器应该返回一个406错误(non acceptable)。</p>
 <p> Accept: <em>/</em>  代表浏览器可以处理所有类型，(一般浏览器发给服务器都是发这个)。</p>
 <p> Accept-Encoding：作用：浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法（gzip，deflate），（注意：这不是只字符编码）。</p>
 <p>Accept-Language作用： 浏览器申明自己接收的语言。 </p>
@@ -236,9 +255,9 @@
 <h6 id="Transport-头域"><a href="#Transport-头域" class="headerlink" title="Transport 头域"></a>Transport 头域</h6><p>Connection</p>
 <p>例如：Connection: keep-alive   当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接</p>
 <p>例如：Connection: close  代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭， 当客户端再次发送Request，需要重新建立TCP连接。</p>
-<p>Host（发送请求时，该报头域是必需的）作用: 请求报头域主要用于指定被请求资源的Internet主机和端口号，它通常从HTTP URL中提取出来的。例如: 我们在浏览器中输入：<a href="http://www.guet.edu.cn/index.html。浏览器发送的请求消息中，就会包含Host请求报头域，如下：Host：http://www.guet.edu.cn此处使用缺省端口号80，若指定了端口号，则变成：Host：指定端口号" target="_blank" rel="external">http://www.guet.edu.cn/index.html。浏览器发送的请求消息中，就会包含Host请求报头域，如下：Host：http://www.guet.edu.cn此处使用缺省端口号80，若指定了端口号，则变成：Host：指定端口号</a></p>
-<h6 id="3-AutoResponder。"><a href="#3-AutoResponder。" class="headerlink" title="3. AutoResponder。"></a>3. AutoResponder。</h6><p>Fiddler比较重要且比较强大的功能之一。可用于拦截某一请求，并重定向到本地的资源，或者使用Fiddler的内置响应。可用于调试服务器端代码而无需修改服务器端的代码和配置，因为拦截和重定向后，实际上访问的是本地的文件或者得到的是Fiddler的内置响应。当勾选EnableRules并设置相应的规则后（本例中的规则是将<code>http://www.cnblogs.com/HYanqing/p/5294968.html</code>的请求拦截到本地的文件）,如下图所示:</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2915.png" alt=""><br></div><br>然后在浏览器中访问<code>http://www.cnblogs.com/HYanqing/p/5294968.html</code>，得到的结果实际为本地的网页。说明请求已经成功被拦截到本地.当然也可以使用Fiddler的内置响应。因此如果要调试服务器的某个脚本文件，可以将该脚本拦截到本地，在本地修改完脚本之后，再修改服务器端的内容，这可以保证，尽量在真实的环境下去调试，从而最大限度的减少bug发生的可能性。<br><br>不仅是单个url，Fiddler支持多种url匹配的方式：<br><br>I. 字符匹配<br><br>如 example可以匹配 <code>http://www.example.com</code>和<code>http://example.com.cn</code><br><br>II. 完全匹配<br><br>以EXACT开头表示完全匹配，如上边的例子<br><br>EXACT:<code>http://www.cnblogs.com/HYanqing/p/5294968.html</code><br><br>III. 正则表达式匹配<br><br>以regex: 开头，使用正则表达式来匹配URL.如：regex:(?insx).*.(css|js|php)$  表示匹配所有以css,js,php结尾的请求url<br>###### 4. Composer。（模拟请求）<br>老版本的fiddler中叫request-builder.顾名思义，可以构建相应的请求，有两种常用的方式构建请求:<br><br>(1)Parsed 输入请求的url之后executed即可，也可以修改相应的头信息（如添加常用的accept, host, referrer, cookie，cache-control等头部）后execute.这个功能的常见应用是：“刷票”（不是火车票！！），如刷新页面的访问量。<br><br>(2)Raw。使用HTTP头部信息构建http请求。与上类似。不多叙述<br>###### 5. Filter<br>Fiddler另一个比较强大的功能。Fiddler提供了多维度的过滤规则，足以满足日常开发调试的需求。<br><br>过滤规则有：<br><br>a. host和zone过滤。可以过滤只显示intranet或则internet的HTTP请求。也可以选择特定域名的HTTP请求。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2916.png" alt=""><br></div><br>b. client process:可以捕获指定进程的请求。这对于调试单个应用的请求很有帮助。<br><br><br>———————————————————————————————————————————-<br><br>#### 五、Fiddler中设置断点修改Request<br>　 　Fiddler最强大的功能莫过于设置断点了，设置好断点后，你可以修改httpRequest的任何信息包括host,cookie或者表单中的数据。设置断点有两种方法：<br><br>第一种：打开Fiddler 点击Rules-&gt; Automatic Breakpoint  -&gt;Before Requests(这种方法会中断所有的会话)<br><br>如何消除命令呢？  点击Rules-&gt; Automatic Breakpoint  -&gt;Disabled<br><br>第二种:  在命令行中输入命令:  bpu www.baidu.com   (这种方法只会中断www.baidu.com)<br><br>如何消除命令呢？  在命令行中输入命令 bpu<br><br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2917.jpg" alt=""><br></div><br>看个实例，模拟麦子学院的登录，在火狐中打开麦子学院的登录页面，输入错误的用户名和密码，用Fiddler中断会话，修改成正确的用户名密码。这样就能成功登录：<br><br>1. 用火狐打开麦子学院的登录界面  <code>http://www.maiziedu.com/</code><br><br>2. 打开Fiddler,  在命令行中输入bpu <code>http://www.maiziedu.com/</code><br><br>3. 输入错误的用户名和密码，点击登录<br><br>4. Fiddler 能中断这次会话，选择被中断的会话，点击Inspectors tab下的WebForms tab 修改用户名密码，然后点击Run to Completion 如下图所示:<br><br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2918.png" alt=""><br></div><br>5. 结果是正确地登录了麦子学院<br><br><br>———————————————————————————————————————————-<br><br>#### 六、Fiddler中设置断点修改Response<br>当然Fiddler中也能修改Response：<br><br>第一种：打开Fiddler 点击Rules-&gt; Automatic Breakpoint  -&gt;After Response  (这种方法会中断所有的会话)<br><br>如何消除命令呢？  点击Rules-&gt; Automatic Breakpoint  -&gt;Disabled<br><br>第二种:  在命令行中输入命令:  bpuafter www.baidu.com   (这种方法只会中断www.baidu.com)<br><br>如何消除命令呢？  在命令行中输入命令 bpuafter<br><br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2919.jpg" alt=""><br></div>
+<p>Host（发送请求时，该报头域是必需的）作用: 请求报头域主要用于指定被请求资源的Internet主机和端口号，它通常从HTTP URL中提取出来的。例如: 我们在浏览器中输入：<code>http://www.guet.edu.cn/index.html</code>。浏览器发送的请求消息中，就会包含Host请求报头域，如下：<code>Host：http://www.guet.edu.cn</code>此处使用缺省端口号80，若指定了端口号，则变成：Host：指定端口号</p>
+<p><strong>(3). AutoResponder。</strong><br>Fiddler比较重要且比较强大的功能之一。可用于拦截某一请求，并重定向到本地的资源，或者使用Fiddler的内置响应。可用于调试服务器端代码而无需修改服务器端的代码和配置，因为拦截和重定向后，实际上访问的是本地的文件或者得到的是Fiddler的内置响应。当勾选EnableRules并设置相应的规则后（本例中的规则是将<code>http://www.cnblogs.com/HYanqing/p/5294968.html</code>的请求拦截到本地的文件）,如下图所示:</p>
+<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2915.png" alt=""><br></div><br>然后在浏览器中访问<code>http://www.cnblogs.com/HYanqing/p/5294968.html</code>，得到的结果实际为本地的网页。说明请求已经成功被拦截到本地.当然也可以使用Fiddler的内置响应。因此如果要调试服务器的某个脚本文件，可以将该脚本拦截到本地，在本地修改完脚本之后，再修改服务器端的内容，这可以保证，尽量在真实的环境下去调试，从而最大限度的减少bug发生的可能性。<br><br>不仅是单个url，Fiddler支持多种url匹配的方式：<br><br>I. 字符匹配<br><br>如 example可以匹配 <code>http://www.example.com</code>和<code>http://example.com.cn</code><br><br>II. 完全匹配<br><br>以EXACT开头表示完全匹配，如上边的例子<br><br>EXACT:<code>http://www.cnblogs.com/HYanqing/p/5294968.html</code><br><br>III. 正则表达式匹配<br><br>以regex: 开头，使用正则表达式来匹配URL.如：<code>regex:(?insx).*\.(css|js|php)$</code>  表示匹配所有以css,js,php结尾的请求url<br><br><strong>(4). Composer。（模拟请求）</strong><br>老版本的fiddler中叫request-builder.顾名思义，可以构建相应的请求，有两种常用的方式构建请求:<br><br>(1)Parsed 输入请求的url之后executed即可，也可以修改相应的头信息（如添加常用的accept, host, referrer, cookie，cache-control等头部）后execute.这个功能的常见应用是：“刷票”（不是火车票！！），如刷新页面的访问量。<br><br>(2)Raw。使用HTTP头部信息构建http请求。与上类似。不多叙述<br><br><strong>(5). Filter。</strong><br>Fiddler另一个比较强大的功能。Fiddler提供了多维度的过滤规则，足以满足日常开发调试的需求。<br><br>过滤规则有：<br><br>a. host和zone过滤。可以过滤只显示intranet或则internet的HTTP请求。也可以选择特定域名的HTTP请求。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2916.png" alt=""><br></div><br>b. client process:可以捕获指定进程的请求。这对于调试单个应用的请求很有帮助。<br><br><strong>五、Fiddler中设置断点修改Request</strong><br>　 　Fiddler最强大的功能莫过于设置断点了，设置好断点后，你可以修改httpRequest的任何信息包括host,cookie或者表单中的数据。设置断点有两种方法：<br><br>第一种：打开Fiddler 点击Rules-&gt; Automatic Breakpoint  -&gt;Before Requests(这种方法会中断所有的会话)<br><br>如何消除命令呢？  点击Rules-&gt; Automatic Breakpoint  -&gt;Disabled<br><br>第二种:  在命令行中输入命令:  bpu www.baidu.com   (这种方法只会中断www.baidu.com)<br><br>如何消除命令呢？  在命令行中输入命令 bpu<br><br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2917.jpg" alt=""><br></div><br>看个实例，模拟麦子学院的登录，在火狐中打开麦子学院的登录页面，输入错误的用户名和密码，用Fiddler中断会话，修改成正确的用户名密码。这样就能成功登录：<br><br>1. 用火狐打开麦子学院的登录界面  <code>http://www.maiziedu.com/</code><br><br>2. 打开Fiddler,  在命令行中输入bpu <code>http://www.maiziedu.com/</code><br><br>3. 输入错误的用户名和密码，点击登录<br><br>4. Fiddler 能中断这次会话，选择被中断的会话，点击Inspectors tab下的WebForms tab 修改用户名密码，然后点击Run to Completion 如下图所示:<br><br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2918.png" alt=""><br></div><br>5. 结果是正确地登录了麦子学院<br><br><strong>六、Fiddler中设置断点修改Response</strong><br>当然Fiddler中也能修改Response：<br><br>第一种：打开Fiddler 点击Rules-&gt; Automatic Breakpoint  -&gt;After Response  (这种方法会中断所有的会话)<br><br>如何消除命令呢？  点击Rules-&gt; Automatic Breakpoint  -&gt;Disabled<br><br>第二种:  在命令行中输入命令:  bpuafter www.baidu.com   (这种方法只会中断www.baidu.com)<br><br>如何消除命令呢？  在命令行中输入命令 bpuafter<br><br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2919.jpg" alt=""><br></div>
 
 <hr>
 <h4 id="七、Watcher-安全扫描工具，第三方扩展"><a href="#七、Watcher-安全扫描工具，第三方扩展" class="headerlink" title="七、Watcher(安全扫描工具，第三方扩展)"></a>七、Watcher(安全扫描工具，第三方扩展)</h4><p>　 　Watcher是一个实时的，被动分析基于HTTP协议的Web应用程序的安全工具(Fiddler插件)。所谓被动分析就是指它不会对现有系统产生任何破坏。Watcher可以被安全的用于分布式网络，共享式网络和专用宿主网络。Watcher能够自动检查这些问题：cookie设置、SSL配置、信息泄露等。另外，Watcher是一个非常好的HTTP协议调试工具，不过，它的HTTP调试功能是以Fiddler插件方式工作的。总之，Watcher是一个很好的渗透测试工具，有助于渗透测试人员的渗透测试工作。</p>
@@ -252,7 +271,7 @@
 <li><code>http://www.imooc.com/course/note/id/37?sort=last&amp;page=1</code></li>
 <li><code>http://www.freebuf.com/sectool/6770.html</code></li>
 </ul>
-</size命令>
+
       
 
       
@@ -479,6 +498,22 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Fiddler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">浏览器代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">拦截请求或响应</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">抓包和重放</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
               </li>
              
@@ -499,22 +534,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Fiddler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浏览器代理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">拦截请求或响应</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">抓包和重放</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PBC</a>
               </li>
              
@@ -527,11 +546,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
+                <a href="javascript:void(0)" class="js-tag color3">总结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
+                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
               </li>
             
             <div class="clearfix"></div>

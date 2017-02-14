@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://harmansecurity.cn">
-  <title>Tag: VC6.0 | 骑士安全</title>
+  <title>Http抓包与调试(Wireshark) | 骑士安全</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="骑士安全">
-<meta property="og:url" content="http://harmansecurity.cn/tags/VC6-0/index.html">
+  <meta name="description" content="wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Http抓包与调试(Wireshark)">
+<meta property="og:url" content="http://harmansecurity.cn/2017/02/14/Http抓包与调试(Wireshark)/index.html">
 <meta property="og:site_name" content="骑士安全">
+<meta property="og:description" content="wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容">
+<meta property="og:updated_time" content="2017-02-14T06:54:06.770Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="骑士安全">
+<meta name="twitter:title" content="Http抓包与调试(Wireshark)">
+<meta name="twitter:description" content="wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容">
   
     <link rel="alternative" href="/atom.xml" title="骑士安全" type="application/atom+xml">
   
@@ -157,69 +161,169 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Http抓包与调试(Wireshark)" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/17/VC6.0插件安装/" class="archive-article-date">
-  	<time datetime="2017-01-17T06:49:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/17/VC6.0插件安装/">VC6.0插件安装</a>
+    <h1 class="article-title" itemprop="name">
+      Http抓包与调试(Wireshark)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/02/14/Http抓包与调试(Wireshark)/" class="archive-article-date">
+  	<time datetime="2017-02-14T06:23:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-14</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 　 　wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容，总结，<strong>如果是处理HTTP,HTTPS 还是用Fiddler, 其他协议比如TCP,UDP就用wireshark.</strong></p>
+<h6 id="1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考："><a href="#1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：" class="headerlink" title="1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考："></a>1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：</h6><ul>
+<li><code>http://blog.csdn.net/lina_acm/article/details/53404429</code></li>
+<li><code>http://www.cnblogs.com/dragonir/p/6219541.html</code></li>
+<li><code>http://www.9upk.com/article/2537.html</code></li>
+<li><code>http://www.cnblogs.com/TankXiao/archive/2012/10/10/2711777.html</code></li>
+<li><code>http://blog.jobbole.com/70907/</code>(一站式学习系列文章可以参考)</li>
+</ul>
+<a id="more"></a>
+<h6 id="2-比较详细的wireshark过滤规则"><a href="#2-比较详细的wireshark过滤规则" class="headerlink" title="2.比较详细的wireshark过滤规则"></a>2.比较详细的wireshark过滤规则</h6><ul>
+<li><code>http://blog.csdn.net/hzhsan/article/details/43453251</code></li>
+</ul>
+<h6 id="3-比较详细的wireshark使用教程文档"><a href="#3-比较详细的wireshark使用教程文档" class="headerlink" title="3.比较详细的wireshark使用教程文档"></a>3.比较详细的wireshark使用教程文档</h6><ul>
+<li><code>链接：http://pan.baidu.com/s/1nvCv52p 密码：s1vd</code></li>
+</ul>
+<h6 id="4-以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下："><a href="#4-以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下：" class="headerlink" title="4.以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下："></a>4.以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下：</h6><ul>
+<li><code>http://edu.51cto.com/lesson/id-62644.html</code></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PBC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Wireshark</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">密码学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">VC6.0</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">抓包分析</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://harmansecurity.cn/2017/02/14/Http抓包与调试(Wireshark)/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/02/10/解决端口被占用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">解决端口被占用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Http抓包与调试(Wireshark)" data-title="Http抓包与调试(Wireshark)" data-url="http://harmansecurity.cn/2017/02/14/Http抓包与调试(Wireshark)/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"harmansecurity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
 
+<!---->
 
           </div>
         </div>
@@ -241,9 +345,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

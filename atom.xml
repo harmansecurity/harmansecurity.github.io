@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-02-10T13:09:34.114Z</updated>
+  <updated>2017-02-14T06:54:06.770Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Http抓包与调试(Wireshark)</title>
+    <link href="http://harmansecurity.cn/2017/02/14/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95(Wireshark)/"/>
+    <id>http://harmansecurity.cn/2017/02/14/Http抓包与调试(Wireshark)/</id>
+    <published>2017-02-14T06:23:27.000Z</published>
+    <updated>2017-02-14T06:54:06.770Z</updated>
+    
+    <content type="html"><![CDATA[<p> 　 　wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容，总结，<strong>如果是处理HTTP,HTTPS 还是用Fiddler, 其他协议比如TCP,UDP就用wireshark.</strong></p>
+<h6 id="1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考："><a href="#1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：" class="headerlink" title="1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考："></a>1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：</h6><ul>
+<li><code>http://blog.csdn.net/lina_acm/article/details/53404429</code></li>
+<li><code>http://www.cnblogs.com/dragonir/p/6219541.html</code></li>
+<li><code>http://www.9upk.com/article/2537.html</code></li>
+<li><code>http://www.cnblogs.com/TankXiao/archive/2012/10/10/2711777.html</code></li>
+<li><code>http://blog.jobbole.com/70907/</code>(一站式学习系列文章可以参考)</li>
+</ul>
+<a id="more"></a>
+<h6 id="2-比较详细的wireshark过滤规则"><a href="#2-比较详细的wireshark过滤规则" class="headerlink" title="2.比较详细的wireshark过滤规则"></a>2.比较详细的wireshark过滤规则</h6><ul>
+<li><code>http://blog.csdn.net/hzhsan/article/details/43453251</code></li>
+</ul>
+<h6 id="3-比较详细的wireshark使用教程文档"><a href="#3-比较详细的wireshark使用教程文档" class="headerlink" title="3.比较详细的wireshark使用教程文档"></a>3.比较详细的wireshark使用教程文档</h6><ul>
+<li><code>链接：http://pan.baidu.com/s/1nvCv52p 密码：s1vd</code></li>
+</ul>
+<h6 id="4-以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下："><a href="#4-以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下：" class="headerlink" title="4.以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下："></a>4.以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下：</h6><ul>
+<li><code>http://edu.51cto.com/lesson/id-62644.html</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 　 　wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容，总结，&lt;strong&gt;如果是处理HTTP,HTTPS 还是用Fiddler, 其他协议比如TCP,UDP就用wireshark.&lt;/strong&gt;&lt;/p&gt;
+&lt;h6 id=&quot;1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：&quot;&gt;&lt;a href=&quot;#1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：&quot; class=&quot;headerlink&quot; title=&quot;1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：&quot;&gt;&lt;/a&gt;1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：&lt;/h6&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;http://blog.csdn.net/lina_acm/article/details/53404429&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://www.cnblogs.com/dragonir/p/6219541.html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://www.9upk.com/article/2537.html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://www.cnblogs.com/TankXiao/archive/2012/10/10/2711777.html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://blog.jobbole.com/70907/&lt;/code&gt;(一站式学习系列文章可以参考)&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Wireshark" scheme="http://harmansecurity.cn/tags/Wireshark/"/>
+    
+      <category term="抓包分析" scheme="http://harmansecurity.cn/tags/%E6%8A%93%E5%8C%85%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
   
   <entry>
     <title>解决端口被占用</title>

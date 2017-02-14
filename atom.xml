@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-02-14T06:54:06.770Z</updated>
+  <updated>2017-02-14T14:22:50.605Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://harmansecurity.cn/2017/02/14/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95(Wireshark)/"/>
     <id>http://harmansecurity.cn/2017/02/14/Http抓包与调试(Wireshark)/</id>
     <published>2017-02-14T06:23:27.000Z</published>
-    <updated>2017-02-14T06:54:06.770Z</updated>
+    <updated>2017-02-14T14:22:50.605Z</updated>
     
     <content type="html"><![CDATA[<p> 　 　wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容，总结，<strong>如果是处理HTTP,HTTPS 还是用Fiddler, 其他协议比如TCP,UDP就用wireshark.</strong></p>
 <h6 id="1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考："><a href="#1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：" class="headerlink" title="1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考："></a>1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：</h6><ul>
@@ -37,7 +37,7 @@
 <h6 id="3-比较详细的wireshark使用教程文档"><a href="#3-比较详细的wireshark使用教程文档" class="headerlink" title="3.比较详细的wireshark使用教程文档"></a>3.比较详细的wireshark使用教程文档</h6><ul>
 <li><code>链接：http://pan.baidu.com/s/1nvCv52p 密码：s1vd</code></li>
 </ul>
-<h6 id="4-以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下："><a href="#4-以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下：" class="headerlink" title="4.以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下："></a>4.以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲了wireshark在实际中的应用，有时间的话可以学习下：</h6><ul>
+<h6 id="4-以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲解wireshark更加的详细，有时间的话可以学习下："><a href="#4-以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲解wireshark更加的详细，有时间的话可以学习下：" class="headerlink" title="4.以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲解wireshark更加的详细，有时间的话可以学习下："></a>4.以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲解wireshark更加的详细，有时间的话可以学习下：</h6><ul>
 <li><code>http://edu.51cto.com/lesson/id-62644.html</code></li>
 </ul>
 ]]></content>

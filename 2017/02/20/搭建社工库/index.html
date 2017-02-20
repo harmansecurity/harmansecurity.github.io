@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%934.png">
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%935.png">
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%936.png">
-<meta property="og:updated_time" content="2017-02-20T14:31:49.685Z">
+<meta property="og:updated_time" content="2017-02-20T14:56:01.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建社工库">
 <meta name="twitter:description" content="社工库顾名思义就是社工数据库查询工具。网站自称可帮助您判断您的密码或个人信息是否已经被公开或泄漏，即如果您输入自己密码可以在社工库上查到，就意味着你的账号已被盗（过）。这两天正好得到了一些数据，简单做一个社工库。
@@ -222,8 +222,10 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 根据用户名或者邮箱查询数据</div><div class="line"> * <span class="doctag">@param</span> data</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">queryData</span><span class="params">(String data)</span></span>&#123;</div><div class="line">	    String userName=<span class="keyword">null</span>;</div><div class="line">        ConnDB cdb = <span class="keyword">new</span> ConnDB();</div><div class="line">		ResultSet rs = cdb.getSelect(<span class="string">"select * from userinfo where userName='"</span>+data+<span class="string">"' or userMail='"</span>+data+<span class="string">"';"</span>);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">while</span>(rs.next())&#123;</div><div class="line">				userName=rs.getString(<span class="string">"userName"</span>);</div><div class="line">				System.out.print(rs.getString(<span class="string">"userName"</span>)+<span class="string">"\t"</span>);</div><div class="line">				System.out.print(rs.getString(<span class="string">"userPwd"</span>)+<span class="string">"\t"</span>);</div><div class="line">				System.out.println(rs.getString(<span class="string">"userMail"</span>));</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;<span class="keyword">finally</span>&#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">if</span>(userName==<span class="keyword">null</span>)&#123;</div><div class="line">					System.out.println(<span class="string">"对不起，您查找的用户不存在！"</span>);</div><div class="line">				&#125;</div><div class="line">				cdb.closeResultSet(rs);</div><div class="line">			&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">				<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
-<li>Eclipse控制台运行效果<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%936.png" alt=""><br></div>
-
+<li><p>Eclipse控制台运行效果</p>
+<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%936.png" alt=""><br></div>
+</li>
+<li><p>该项目地址<br>GitHUB：<a href="https://github.com/harmansecurity/SocilaLibrary" target="_blank" rel="external">https://github.com/harmansecurity/SocilaLibrary</a></p>
 </li>
 </ul>
 <p>　 　还是个小白，要学的东西还有很多，待会儿我把代码上传到我的GitHub中，等明天电脑到之后准备搭一个渗透环境，多实践。提到电脑还是很感动的，因为实验室到现在还没有配台式机(这里我就不吐槽这件事了)，跟朋友说了下目前的情况，立马把她的旧电脑寄给我做实验了，满满的感动，感激。时间的原因，我先暂时不做一个网页了，做一个搜索的网页无非就是一个搜索栏然后连接数据库查询数据，实现起来不是很难。如果对数据感兴趣的朋友可以私聊我或者留言，到时候转发给你，如果做违法犯罪行为，本人概不负责任。</p>
@@ -490,22 +492,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PBC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">密码学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">社工库</a>
               </li>
              
@@ -518,11 +504,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PBC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">密码学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
               </li>
             
             <div class="clearfix"></div>

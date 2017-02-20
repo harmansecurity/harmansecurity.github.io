@@ -159,6 +159,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PBC库的常用函数解释" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/18/PBC库的常用函数解释/">PBC库的常用函数解释</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/18/PBC库的常用函数解释/" class="archive-article-date">
+  	<time datetime="2017-01-18T10:59:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-18</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　 　PBC库使用G1、G2和GT分别表示双线性映射:<code>e:G1xG2-&gt;GT</code>中的G1、G2和GT，他们的阶都为r。Zr表示模r的整数环。配对运算输入两个元素，一个元素来自群G1，另一个元素来自群G2，输出结果是GT中的一个元素。G1和G2也可以是同一个群，即是一个对称配对，这种情况下它们的元素可以相互混淆使用。</p>
+<hr>
+<h4 id="1-配对的初始化方式"><a href="#1-配对的初始化方式" class="headerlink" title="1.配对的初始化方式"></a>1.配对的初始化方式</h4><h5 id="1-以标准的方式初始化配对"><a href="#1-以标准的方式初始化配对" class="headerlink" title="1) 以标准的方式初始化配对"></a>1) 以标准的方式初始化配对</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">pairing_t</span> pairing;<span class="comment">//声明一个配对类型的变量pairing</span></div><div class="line">pairing_init_inp_str(pairing,<span class="built_in">stdin</span>);<span class="comment">//参数stdin表示配对的输入参数方式为标准输入</span></div></pre></td></tr></table></figure>
+<h5 id="2-指定类型的方式初始化配对"><a href="#2-指定类型的方式初始化配对" class="headerlink" title="2) 指定类型的方式初始化配对"></a>2) 指定类型的方式初始化配对</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a_param_input(pairing);<span class="comment">//将配对变量pairing初始化为类型A的配对</span></div><div class="line">d_param_input(pairing);<span class="comment">//将配对变量pairing初始化为类型D的配对</span></div><div class="line">f_param_input(pairing);<span class="comment">//将配对变量pairing初始化为类型F的配对</span></div><div class="line">pairing_clear(pairing);<span class="comment">//调用该函数释放pairing占用的资源</span></div></pre></td></tr></table></figure>
+<hr>
+<h4 id="2-元素的初始化"><a href="#2-元素的初始化" class="headerlink" title="2.元素的初始化"></a>2.元素的初始化</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init</span><span class="params">(<span class="keyword">element_t</span> e,field_ptr f)</span></span>;<span class="comment">//将元素变量e初始化为代数结构f中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init_G1</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">pairing_t</span> pairing)</span></span>;<span class="comment">//将元素变量e初始化为群G1中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init_G2</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">pairing_t</span> pairing)</span></span>;<span class="comment">//将元素变量e初始化为群G2中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init_GT</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">pairing_t</span> pairing)</span></span>;<span class="comment">//将元素变量e初始化为群GT中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init_Zr</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">pairing_t</span> pairing)</span></span>;<span class="comment">//将元素变量e初始化为群Zr中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init_same_as</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">element_t</span> e2)</span></span>;<span class="comment">//将元素变量e初始化为元素变量e2所在的代数结构中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_clear</span><span class="params">(<span class="keyword">element_t</span> e)</span></span>;<span class="comment">//清楚元素变量e并释放其所占用的资源</span></div></pre></td></tr></table></figure>
+<hr>
+        
+          <a class="article-more-a" href="/2017/01/18/PBC库的常用函数解释/#more">Read More >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PBC</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">密码学</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">双线性配对</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/18/PBC库的常用函数解释/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<!---->
+
+  
     <article id="post-VC6.0插件安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -443,6 +522,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
               </li>
              
@@ -463,15 +546,23 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">社工库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -483,15 +574,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
+                <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
               </li>
             
             <div class="clearfix"></div>

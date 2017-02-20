@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%934.png">
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%935.png">
 <meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%936.png">
-<meta property="og:updated_time" content="2017-02-20T14:26:49.503Z">
+<meta property="og:updated_time" content="2017-02-20T14:31:49.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建社工库">
 <meta name="twitter:description" content="社工库顾名思义就是社工数据库查询工具。网站自称可帮助您判断您的密码或个人信息是否已经被公开或泄漏，即如果您输入自己密码可以在社工库上查到，就意味着你的账号已被盗（过）。这两天正好得到了一些数据，简单做一个社工库。
@@ -196,11 +196,15 @@
 <h5 id="简单介绍下MySql的使用"><a href="#简单介绍下MySql的使用" class="headerlink" title="简单介绍下MySql的使用"></a>简单介绍下MySql的使用</h5><p>　 　由于我之前的数据库中已经有数据为了方便演示，我把数据删掉，正好也回顾一下MySql的使用。我使用的是Navicat这个支持MySql的可视化工具，由于数据比较多，我直接从CMD终端进行操作删除。</p>
 <ul>
 <li>很多时候我们电脑的MySQL服务没有开启，<code>net start mysql</code>开启MySQL服务。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png" alt=""><br></div></li>
-<li>进入MySQL数据库,在终端中输入<code>mysql -u root -p</code>,根据提示输入密码。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png" alt=""><br></div></li>
+<li>进入MySQL数据库,在终端中输入<code>mysql -u root -p</code>,根据提示输入密码。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png" alt=""><br></div>
+
+</li>
+</ul>
+<a id="more"></a>
+<ul>
 <li>查看所有的数据库，<code>show databases;</code>我们会看到之前新建的数据库。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%933.png" alt=""><br></div></li>
 <li>使用之前的数据库<code>use &lt;库名&gt;;</code>,然后查看当前数据库下面的表,<code>show tables;</code>。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%934.png" alt=""><br></div></li>
-<li>删除表里面的所有数据<code>delete from &lt;表名&gt;;</code>。</li>
-<li><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%935.png" alt=""><br></div>
+<li>删除表里面的所有数据<code>delete from &lt;表名&gt;;</code>。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%935.png" alt=""><br></div>
 
 </li>
 </ul>
@@ -458,10 +462,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
               </li>
              
@@ -482,18 +482,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">社工库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
               </li>
              
@@ -510,15 +498,31 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">社工库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总结</a>
               </li>
             
             <div class="clearfix"></div>

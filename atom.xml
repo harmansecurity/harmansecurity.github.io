@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-02-20T14:26:49.503Z</updated>
+  <updated>2017-02-20T14:31:49.685Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -20,17 +20,21 @@
     <link href="http://harmansecurity.cn/2017/02/20/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%93/"/>
     <id>http://harmansecurity.cn/2017/02/20/搭建社工库/</id>
     <published>2017-02-20T12:53:12.000Z</published>
-    <updated>2017-02-20T14:26:49.503Z</updated>
+    <updated>2017-02-20T14:31:49.685Z</updated>
     
     <content type="html"><![CDATA[<p>　 　社工库顾名思义就是社工数据库查询工具。网站自称可帮助您判断您的密码或个人信息是否已经被公开或泄漏，即如果您输入自己密码可以在社工库上查到，就意味着你的账号已被盗（过）。这两天正好得到了一些数据，简单做一个社工库。</p>
 <h5 id="简单介绍下MySql的使用"><a href="#简单介绍下MySql的使用" class="headerlink" title="简单介绍下MySql的使用"></a>简单介绍下MySql的使用</h5><p>　 　由于我之前的数据库中已经有数据为了方便演示，我把数据删掉，正好也回顾一下MySql的使用。我使用的是Navicat这个支持MySql的可视化工具，由于数据比较多，我直接从CMD终端进行操作删除。</p>
 <ul>
 <li>很多时候我们电脑的MySQL服务没有开启，<code>net start mysql</code>开启MySQL服务。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png" alt=""><br></div></li>
-<li>进入MySQL数据库,在终端中输入<code>mysql -u root -p</code>,根据提示输入密码。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png" alt=""><br></div></li>
+<li>进入MySQL数据库,在终端中输入<code>mysql -u root -p</code>,根据提示输入密码。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png" alt=""><br></div>
+
+</li>
+</ul>
+<a id="more"></a>
+<ul>
 <li>查看所有的数据库，<code>show databases;</code>我们会看到之前新建的数据库。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%933.png" alt=""><br></div></li>
 <li>使用之前的数据库<code>use &lt;库名&gt;;</code>,然后查看当前数据库下面的表,<code>show tables;</code>。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%934.png" alt=""><br></div></li>
-<li>删除表里面的所有数据<code>delete from &lt;表名&gt;;</code>。</li>
-<li><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%935.png" alt=""><br></div>
+<li>删除表里面的所有数据<code>delete from &lt;表名&gt;;</code>。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%935.png" alt=""><br></div>
 
 </li>
 </ul>
@@ -58,7 +62,13 @@
     <summary type="html">
     
       &lt;p&gt;　 　社工库顾名思义就是社工数据库查询工具。网站自称可帮助您判断您的密码或个人信息是否已经被公开或泄漏，即如果您输入自己密码可以在社工库上查到，就意味着你的账号已被盗（过）。这两天正好得到了一些数据，简单做一个社工库。&lt;/p&gt;
-&lt;h5 id=&quot;简单介绍下MySql的使用&quot;&gt;
+&lt;h5 id=&quot;简单介绍下MySql的使用&quot;&gt;&lt;a href=&quot;#简单介绍下MySql的使用&quot; class=&quot;headerlink&quot; title=&quot;简单介绍下MySql的使用&quot;&gt;&lt;/a&gt;简单介绍下MySql的使用&lt;/h5&gt;&lt;p&gt;　 　由于我之前的数据库中已经有数据为了方便演示，我把数据删掉，正好也回顾一下MySql的使用。我使用的是Navicat这个支持MySql的可视化工具，由于数据比较多，我直接从CMD终端进行操作删除。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;很多时候我们电脑的MySQL服务没有开启，&lt;code&gt;net start mysql&lt;/code&gt;开启MySQL服务。&lt;div align=center&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;进入MySQL数据库,在终端中输入&lt;code&gt;mysql -u root -p&lt;/code&gt;,根据提示输入密码。&lt;div align=center&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     

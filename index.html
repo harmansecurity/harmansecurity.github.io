@@ -183,35 +183,14 @@
         <p>　 　社工库顾名思义就是社工数据库查询工具。网站自称可帮助您判断您的密码或个人信息是否已经被公开或泄漏，即如果您输入自己密码可以在社工库上查到，就意味着你的账号已被盗（过）。这两天正好得到了一些数据，简单做一个社工库。</p>
 <h5 id="简单介绍下MySql的使用"><a href="#简单介绍下MySql的使用" class="headerlink" title="简单介绍下MySql的使用"></a>简单介绍下MySql的使用</h5><p>　 　由于我之前的数据库中已经有数据为了方便演示，我把数据删掉，正好也回顾一下MySql的使用。我使用的是Navicat这个支持MySql的可视化工具，由于数据比较多，我直接从CMD终端进行操作删除。</p>
 <ul>
-<li>很多时候我们电脑的MySQL服务没有开启，<code>net start mysql</code>开启MySQL服务。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png" alt=""><br></div></li>
-<li>进入MySQL数据库,在终端中输入<code>mysql -u root -p</code>,根据提示输入密码。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png" alt=""><br></div></li>
-<li>查看所有的数据库，<code>show databases;</code>我们会看到之前新建的数据库。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%933.png" alt=""><br></div></li>
-<li>使用之前的数据库<code>use &lt;库名&gt;;</code>,然后查看当前数据库下面的表,<code>show tables;</code>。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%934.png" alt=""><br></div></li>
-<li>删除表里面的所有数据<code>delete from &lt;表名&gt;;</code>。</li>
-<li><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%935.png" alt=""><br></div>
+<li>很多时候我们电脑的MySQL服务没有开启，<code>net start mysql</code>开启MySQL服务。<div align=center><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png" alt=""><br></div></li>
+<li>进入MySQL数据库,在终端中输入<code>mysql -u root -p</code>,根据提示输入密码。<div align=center><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png" alt=""><br></div>
 
 </li>
 </ul>
-<h5 id="处理数据，实现保存和查询的功能"><a href="#处理数据，实现保存和查询的功能" class="headerlink" title="处理数据，实现保存和查询的功能"></a>处理数据，实现保存和查询的功能</h5><p>　 　我得到的数据是txt格式，每一行是用户名，密码，邮箱，由于这一行数据可能是以多个空格或者分号或者只有用户名没有密码，所以还需要对每一行的数据进行适当的处理然后保存到数据库中。我读取了一下txt文件，txt中有二百多万条数据，大概花了40秒左右，但是将数据存储到数据库中花的时间太长了，由于时间的原因，只向数据库中插入了十万多条数据。</p>
-<ul>
-<li><p>对txt文件数据进行处理</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">readFileByLines</span><span class="params">(String fileName)</span></span>&#123;</div><div class="line">	File file = <span class="keyword">new</span> File(fileName);</div><div class="line">	<span class="comment">//用户名</span></div><div class="line">	String  userName=<span class="keyword">null</span>;</div><div class="line">	<span class="comment">//用户密码</span></div><div class="line">	String  userPwd=<span class="keyword">null</span>;</div><div class="line">	<span class="comment">//用户邮箱</span></div><div class="line">	String  userMail=<span class="keyword">null</span>;</div><div class="line">	BufferedReader reader = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		System.out.println(<span class="string">"以行为单位读取文件内容，一次读一整行："</span>);</div><div class="line">		reader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line">		String tempString=<span class="keyword">null</span>;</div><div class="line">		<span class="keyword">int</span> line=<span class="number">1</span>;</div><div class="line">	    <span class="comment">//开始时间</span></div><div class="line">		<span class="keyword">long</span> startTime=System.currentTimeMillis();</div><div class="line">		<span class="comment">// 一次读入一行，直到读入null为文件结束</span></div><div class="line">		<span class="keyword">while</span>((tempString=reader.readLine())!=<span class="keyword">null</span>)&#123;</div><div class="line">               <span class="comment">// 显示每行的数据</span></div><div class="line">              System.out.println(<span class="string">"line "</span> + line + <span class="string">": "</span> + tempString);</div><div class="line">               <span class="comment">//因为txt文件里每行数据可能是以多个空格或者;来分隔</span></div><div class="line">               String[]  tempArray = tempString.split(<span class="string">"\\s+|;"</span>);</div><div class="line">               <span class="comment">//有的数据里面只有用户名或者密码，缺少邮箱，不这样处理的话溢出</span></div><div class="line">               <span class="comment">//如果字符串只有用户名和密码，那么字符数组的长度为2</span></div><div class="line">               <span class="comment">//那么插入数据到数据库的时候，如果直接赋值tempArray[2]肯定会报错</span></div><div class="line">               <span class="keyword">if</span>(tempArray.length==<span class="number">2</span>)&#123;</div><div class="line">               	tempArray=(String[]) Arrays.copyOf(tempArray, tempArray.length+<span class="number">1</span>);</div><div class="line">               	tempArray[tempArray.length-<span class="number">1</span>]=<span class="string">" "</span>;</div><div class="line">               &#125;</div><div class="line">               <span class="comment">//System.out.println(tempArray[0]);</span></div><div class="line">               <span class="comment">//System.out.println(tempArray[1]);</span></div><div class="line">              <span class="comment">// System.out.println(tempArray[2]);</span></div><div class="line">               <span class="comment">//把拆分的数据分别赋值然后保存到数据库中</span></div><div class="line">               userName=tempArray[<span class="number">0</span>];</div><div class="line">               userPwd=tempArray[<span class="number">1</span>];</div><div class="line">               userMail=tempArray[<span class="number">2</span>];</div><div class="line">               <span class="comment">//把数据插入到数据库中</span></div><div class="line">               operateData.insertData(userName, userPwd, userMail);</div><div class="line">               line++;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//结束时间</span></div><div class="line">		<span class="keyword">long</span> endTime=System.currentTimeMillis();</div><div class="line">		<span class="comment">//程序运行的时间</span></div><div class="line">		<span class="keyword">double</span> seconds=(endTime-startTime)/<span class="number">1000.0</span>;</div><div class="line">		System.out.println(<span class="string">"程序运行的时间是："</span>+seconds+<span class="string">"s"</span>);</div><div class="line">		<span class="comment">//总共数据量</span></div><div class="line">		System.out.println(<span class="string">"总共数据量是："</span>+(line-<span class="number">1</span>));</div><div class="line">		reader.close();</div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;<span class="keyword">finally</span>&#123;</div><div class="line">		<span class="keyword">if</span>(reader!=<span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				reader.close();</div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e1) &#123;</div><div class="line">				<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>将处理完的数据保存到数据库中(插入操作)</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 将文本中的数据插入到数据库中</div><div class="line"> * <span class="doctag">@param</span> userName</div><div class="line"> * <span class="doctag">@param</span> userPwd</div><div class="line"> * <span class="doctag">@param</span> userMail</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertData</span><span class="params">(String userName,String userPwd,String userMail)</span></span>&#123;</div><div class="line">	ConnDB cdb = <span class="keyword">new</span> ConnDB();</div><div class="line">	String sql = <span class="string">"insert into userInfo (userName,userPwd,userMail) values ('"</span>+userName+<span class="string">"','"</span>+userPwd+<span class="string">"','"</span>+userMail+<span class="string">"')"</span>;</div><div class="line">	<span class="comment">//执行增删改</span></div><div class="line">	cdb.getModify(sql);</div><div class="line">	<span class="comment">//不知道是否插入成功，可通过下面的代码来判断</span></div><div class="line">	<span class="comment">/*	int i=cdb.getModify(sql);</span></div><div class="line">	  if(i==1)</div><div class="line">		System.out.println("添加成功");</div><div class="line">	else</div><div class="line">		System.out.println("添加失败");*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>对数据库中的数据进行查询(查询操作)</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 根据用户名或者邮箱查询数据</div><div class="line"> * <span class="doctag">@param</span> data</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">queryData</span><span class="params">(String data)</span></span>&#123;</div><div class="line">	    String userName=<span class="keyword">null</span>;</div><div class="line">        ConnDB cdb = <span class="keyword">new</span> ConnDB();</div><div class="line">		ResultSet rs = cdb.getSelect(<span class="string">"select * from userinfo where userName='"</span>+data+<span class="string">"' or userMail='"</span>+data+<span class="string">"';"</span>);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">while</span>(rs.next())&#123;</div><div class="line">				userName=rs.getString(<span class="string">"userName"</span>);</div><div class="line">				System.out.print(rs.getString(<span class="string">"userName"</span>)+<span class="string">"\t"</span>);</div><div class="line">				System.out.print(rs.getString(<span class="string">"userPwd"</span>)+<span class="string">"\t"</span>);</div><div class="line">				System.out.println(rs.getString(<span class="string">"userMail"</span>));</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;<span class="keyword">finally</span>&#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">if</span>(userName==<span class="keyword">null</span>)&#123;</div><div class="line">					System.out.println(<span class="string">"对不起，您查找的用户不存在！"</span>);</div><div class="line">				&#125;</div><div class="line">				cdb.closeResultSet(rs);</div><div class="line">			&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">				<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>Eclipse控制台运行效果<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%936.png" alt=""><br></div>
-
-</li>
-</ul>
-<p>　 　还是个小白，要学的东西还有很多，待会儿我把代码上传到我的GitHub中，等明天电脑到之后准备搭一个渗透环境，多实践。提到电脑还是很感动的，因为实验室到现在还没有配台式机(这里我就不吐槽这件事了)，跟朋友说了下目前的情况，立马把她的旧电脑寄给我做实验了，满满的感动，感激。时间的原因，我先暂时不做一个网页了，做一个搜索的网页无非就是一个搜索栏然后连接数据库查询数据，实现起来不是很难。如果对数据感兴趣的朋友可以私聊我或者留言，到时候转发给你，如果做违法犯罪行为，本人概不负责任。</p>
-
+        
+          <a class="article-more-a" href="/2017/02/20/搭建社工库/#more">Read More >></a>
+        
       
 
       
@@ -688,10 +667,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
               </li>
              
@@ -712,18 +687,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">社工库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
               </li>
              
@@ -740,15 +703,31 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">社工库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总结</a>
               </li>
             
             <div class="clearfix"></div>

@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>http://harmansecurity.cn/2017/02/25/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%93/</loc>
+    <lastmod>2017-02-25T08:13:13.359Z</lastmod>
+    <data>
+        <display>
+        <title>ELK搭建社工库</title>
+        <pubTime>2017-02-25T07:07:21.000Z</pubTime>
+        
+        <tag>社工库</tag>
+         
+        <tag>Elasticsearch</tag>
+         
+        <tag>Logstash</tag>
+         
+        <tag>Kinaba</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://harmansecurity.cn/2017/02/20/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%93/</loc>
     <lastmod>2017-02-20T14:56:01.654Z</lastmod>
     <data>

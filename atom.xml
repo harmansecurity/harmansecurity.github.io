@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-02-20T14:56:01.654Z</updated>
+  <updated>2017-02-25T08:13:13.359Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -14,6 +14,104 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ELK搭建社工库</title>
+    <link href="http://harmansecurity.cn/2017/02/25/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%93/"/>
+    <id>http://harmansecurity.cn/2017/02/25/ELK搭建社工库/</id>
+    <published>2017-02-25T07:07:21.000Z</published>
+    <updated>2017-02-25T08:13:13.359Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h4><h5 id="1-核心组成"><a href="#1-核心组成" class="headerlink" title="1.核心组成"></a>1.核心组成</h5><p>ELK由Elasticsearch、Logstash和Kibana三部分组件组成；</p>
+<ul>
+<li>Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。</li>
+<li>Logstash是一个完全开源的工具，他可以对你的日志进行收集、过滤，并将其存储供以后使用（如，搜索）。</li>
+<li>Kibana 也是一个开源和免费的工具，它Kibana可以为 Logstash 和 ElasticSearch 提供的日志分析友好的 Web 界面，可以帮助您汇总、分析和搜索重要数据日志。</li>
+</ul>
+<h5 id="2-三大组件"><a href="#2-三大组件" class="headerlink" title="2.三大组件"></a>2.三大组件</h5><ul>
+<li>Logstash: logstash server端用来搜集数据；</li>
+<li>Elasticsearch: 存储各类数据；</li>
+<li>Kibana: web化接口用作查寻和可视化数据；</li>
+</ul>
+<h5 id="3-工作流程"><a href="#3-工作流程" class="headerlink" title="3.工作流程"></a>3.工作流程</h5><p>　 　以日志分析为例：Logstash收集AppServer产生的Log，并存放到ElasticSearch集群中，而Kibana则从ES集群中查询数据生成图表，再返回给Browser。</p>
+<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png" alt=""><br></div>
+
+<a id="more"></a>
+<h4 id="二、ELK搭建"><a href="#二、ELK搭建" class="headerlink" title="二、ELK搭建"></a>二、ELK搭建</h4><h5 id="1-系统环境"><a href="#1-系统环境" class="headerlink" title="1.系统环境"></a>1.系统环境</h5><ul>
+<li>win7(X86)</li>
+<li>ElasticSearch: 2.1.1</li>
+<li>Logstash: 1.5.1</li>
+<li>Kibana: 5.2.1</li>
+<li>JDK1.8(安装java至少7以上的版本,并且配置JAVA_HOME环境变量)</li>
+</ul>
+<h5 id="2-安装Elasticsearch"><a href="#2-安装Elasticsearch" class="headerlink" title="2.安装Elasticsearch"></a>2.安装Elasticsearch</h5><ul>
+<li>下载地址：<a href="https://www.elastic.co/downloads/" target="_blank" rel="external">https://www.elastic.co/downloads/</a></li>
+<li><p>解压即可，配置文件elasticsearch.yml,默认也行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#按照自己的需求修改也行，我选择的是默认，没有修改。</div><div class="line">cluster.name: esdemo #(集群的描述信息)</div><div class="line">node.name: 63 #(节点名称)</div><div class="line">network.host: 192.168.1.5 #(绑定的IP地址)</div><div class="line">http.port: 9200 #(端口号 默认9200)</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行elasticsearch.bat即可启动</p>
+</li>
+</ul>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png" alt=""></p>
+<ul>
+<li>访问<code>http://localhost:9200</code>可查看是否正常运行，运行成功效果如下：</li>
+</ul>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%933.png" alt=""></p>
+<h5 id="3-安装Kibana"><a href="#3-安装Kibana" class="headerlink" title="3.安装Kibana"></a>3.安装Kibana</h5><ul>
+<li>下载地址：<a href="https://www.elastic.co/downloads/" target="_blank" rel="external">https://www.elastic.co/downloads/</a></li>
+<li>解压即可，执行kibana.bat启动即可启动</li>
+<li>访问<code>http://localhost:5601</code>可查看是否正常运行，运行成功效果如下：<br><img src="http://ojto7c1rw.bkt.clouddn.com/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%934.png" alt=""></li>
+</ul>
+<h5 id="4-安装logstash"><a href="#4-安装logstash" class="headerlink" title="4.安装logstash"></a>4.安装logstash</h5><ul>
+<li>下载地址：<a href="https://www.elastic.co/downloads/" target="_blank" rel="external">https://www.elastic.co/downloads/</a></li>
+<li>解压即可。</li>
+</ul>
+<h4 id="三、社工库搭建"><a href="#三、社工库搭建" class="headerlink" title="三、社工库搭建"></a>三、社工库搭建</h4><p>　 　因为是.sql文件，所以先导入mysql,然后再导出csv文件。也就是说不同的网站数据库最终全部是csv文件，并且是格式相同的csv。有字段不存在的则使用空字符替代。这样的话,可以在不更改logstash配置文件的情况下直接导入ES，也方便进行迁移。</p>
+<ul>
+<li><p>数据库中的文件导出csv文件格式。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> md5_sgk <span class="keyword">into</span> <span class="keyword">outfile</span> <span class="string">'f://scolib.csv'</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span><span class="keyword">optionally</span> <span class="keyword">enclosed</span> <span class="keyword">by</span> <span class="string">''</span><span class="keyword">lines</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">'/n'</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>新建logstash.config并进行配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">input&#123;</div><div class="line">	file&#123;</div><div class="line">	    #需要被导入的数据库文件路径</div><div class="line">		path =&gt;&quot;f:/soclib.csv&quot;</div><div class="line">		start_position =&gt;beginning</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">filter&#123;</div><div class="line">	grok&#123;</div><div class="line">	    #表达式路径，这里自定义了一行内容S \s用来匹配换行符</div><div class="line">		patterns_dir =&gt;&quot;f:/test.txt&quot;</div><div class="line">		#写入ES的字段名</div><div class="line">		match =&gt;&#123;&quot;message&quot;=&gt;&quot;%&#123;DATA:id&#125;,%&#123;DATA:username&#125;,%&#123;DATA:password&#125;,%&#123;DATA:email&#125;,%&#123;DATA:salt&#125;,%&#123;DATA:order&#125;&quot;&#125;</div><div class="line">	&#125;</div><div class="line">	grok&#123;</div><div class="line">		#提取文件名</div><div class="line">		match =&gt;[&quot;path&quot;,&quot;f:/%&#123;GREEDYDATA:from&#125;\.csv&quot;]</div><div class="line">	&#125;</div><div class="line">	mutate&#123;</div><div class="line">		#删除一些ES自带的字段很占用空间</div><div class="line">		remove_field =&gt;[&quot;host&quot;,&quot;path&quot;,&quot;message&quot;]</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">output&#123;</div><div class="line">	elasticsearch&#123;</div><div class="line">		#ES地址</div><div class="line">		hosts =&gt; &quot;localhost:9200&quot;</div><div class="line">		#索引名称</div><div class="line">		index =&gt;&quot;sdb&quot;</div><div class="line">		document_type =&gt;&quot;sdb&quot;</div><div class="line">		#如果启用了shield则需要配置用户名和密码</div><div class="line">		#user =&gt;&quot;填写密码&quot;</div><div class="line">		#password =&gt;&quot;填写用户名&quot;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	stdout&#123;</div><div class="line">		codec=&gt;rubydebug</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在logstash bin目录下面执行logstash.bat -f logstash.config</p>
+</li>
+</ul>
+<h4 id="四、参考文献"><a href="#四、参考文献" class="headerlink" title="四、参考文献"></a>四、参考文献</h4><ul>
+<li><code>http://www.tuicool.com/articles/uuaqeyf</code></li>
+<li>百度搜索ELK，对原理有大概的了解。</li>
+</ul>
+<h4 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h4><p>　 　上一篇文章没有做任何的处理，直接通过sql语句进行查询，数据库中大概有九千万的数据，查询一次需要四分钟左右，速度还是很慢的，之前在论坛里听有人说用ELK搭建，所以这次就试了下。ELK处理数据应该是特别快的，不过真的很迟内存，按照我上面的步骤没有错，不过执行到最后一步，电脑内存耗尽直接有点死了，由于装的是32位的系统，占用内存本来就比较小，所以我就终止了程序。如果有人感兴趣的话电脑配置也比较高可以按照我的步骤执行下，一起交流。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;一、简介&quot;&gt;&lt;a href=&quot;#一、简介&quot; class=&quot;headerlink&quot; title=&quot;一、简介&quot;&gt;&lt;/a&gt;一、简介&lt;/h4&gt;&lt;h5 id=&quot;1-核心组成&quot;&gt;&lt;a href=&quot;#1-核心组成&quot; class=&quot;headerlink&quot; title=&quot;1.核心组成&quot;&gt;&lt;/a&gt;1.核心组成&lt;/h5&gt;&lt;p&gt;ELK由Elasticsearch、Logstash和Kibana三部分组件组成；&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。&lt;/li&gt;
+&lt;li&gt;Logstash是一个完全开源的工具，他可以对你的日志进行收集、过滤，并将其存储供以后使用（如，搜索）。&lt;/li&gt;
+&lt;li&gt;Kibana 也是一个开源和免费的工具，它Kibana可以为 Logstash 和 ElasticSearch 提供的日志分析友好的 Web 界面，可以帮助您汇总、分析和搜索重要数据日志。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&quot;2-三大组件&quot;&gt;&lt;a href=&quot;#2-三大组件&quot; class=&quot;headerlink&quot; title=&quot;2.三大组件&quot;&gt;&lt;/a&gt;2.三大组件&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;Logstash: logstash server端用来搜集数据；&lt;/li&gt;
+&lt;li&gt;Elasticsearch: 存储各类数据；&lt;/li&gt;
+&lt;li&gt;Kibana: web化接口用作查寻和可视化数据；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&quot;3-工作流程&quot;&gt;&lt;a href=&quot;#3-工作流程&quot; class=&quot;headerlink&quot; title=&quot;3.工作流程&quot;&gt;&lt;/a&gt;3.工作流程&lt;/h5&gt;&lt;p&gt;　 　以日志分析为例：Logstash收集AppServer产生的Log，并存放到ElasticSearch集群中，而Kibana则从ES集群中查询数据生成图表，再返回给Browser。&lt;/p&gt;
+&lt;div align=center&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="社工库" scheme="http://harmansecurity.cn/tags/%E7%A4%BE%E5%B7%A5%E5%BA%93/"/>
+    
+      <category term="Elasticsearch" scheme="http://harmansecurity.cn/tags/Elasticsearch/"/>
+    
+      <category term="Logstash" scheme="http://harmansecurity.cn/tags/Logstash/"/>
+    
+      <category term="Kinaba" scheme="http://harmansecurity.cn/tags/Kinaba/"/>
+    
+  </entry>
   
   <entry>
     <title>搭建社工库</title>

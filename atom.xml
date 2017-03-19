@@ -1043,6 +1043,30 @@ Teacher
   </entry>
   
   <entry>
+    <title>Java基础学习笔记(五)</title>
+    <link href="http://harmansecurity.cn/2017/03/19/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)/"/>
+    <id>http://harmansecurity.cn/2017/03/19/Java基础学习笔记(五)/</id>
+    <published>2017-03-19T14:39:22.000Z</published>
+    <updated>2017-03-19T15:27:14.582Z</updated>
+    
+    <content type="html"><![CDATA[<p>参考链接：<code>http://bbs.itheima.com/thread-270882-1-1.html</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考链接：&lt;code&gt;http://bbs.itheima.com/thread-270882-1-1.html&lt;/code&gt;&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+      <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="数组操作" scheme="http://harmansecurity.cn/tags/%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java基础学习笔记(四)</title>
     <link href="http://harmansecurity.cn/2017/03/19/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%9B%9B)/"/>
     <id>http://harmansecurity.cn/2017/03/19/Java基础学习笔记(四)/</id>
@@ -2954,9 +2978,9 @@ System.out.println(&quot;y=&quot;+y);
     </summary>
     
     
-      <category term="计算机基础知识" scheme="http://harmansecurity.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
       <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="计算机基础知识" scheme="http://harmansecurity.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
   </entry>
   

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-03-19T14:59:19.130Z</updated>
+  <updated>2017-03-19T15:09:43.421Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -14,6 +14,999 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java基础学习笔记(三)</title>
+    <link href="http://harmansecurity.cn/2017/03/19/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%89)/"/>
+    <id>http://harmansecurity.cn/2017/03/19/Java基础学习笔记(三)/</id>
+    <published>2017-03-19T14:36:21.000Z</published>
+    <updated>2017-03-19T15:09:43.421Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="03-01-Java语言基础-逻辑运算符的基本用法-掌握"><a href="#03-01-Java语言基础-逻辑运算符的基本用法-掌握" class="headerlink" title="03.01_Java语言基础(逻辑运算符的基本用法)(掌握)"></a>03.01_Java语言基础(逻辑运算符的基本用法)(掌握)</h3><ul>
+<li>A:逻辑运算符有哪些<ul>
+<li>&amp;,|,^,!</li>
+<li>&amp;&amp;,|| </li>
+</ul>
+</li>
+<li>B:案例演示</li>
+<li><p>逻辑运算符的基本用法</p>
+</li>
+<li><p>注意事项：</p>
+<ul>
+<li>a:逻辑运算符一般用于连接boolean类型的表达式或者值。</li>
+<li>b:表达式：就是用运算符把常量或者变量连接起来的符合java语法的式子。<ul>
+<li>算术表达式：a + b</li>
+<li>比较表达式：a == b(条件表达式)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C:结论：</li>
+<li>&amp;逻辑与:有false则false。</li>
+<li>|逻辑或:有true则true。</li>
+<li>^逻辑异或:相同为false，不同为true。</li>
+<li>!逻辑非:非false则true，非true则false。<ul>
+<li>特点：偶数个不改变本身。</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="03-02-Java语言基础-逻辑运算符-amp-amp-和-amp-的区别-掌握"><a href="#03-02-Java语言基础-逻辑运算符-amp-amp-和-amp-的区别-掌握" class="headerlink" title="03.02_Java语言基础(逻辑运算符&amp;&amp;和&amp;的区别)(掌握)"></a>03.02_Java语言基础(逻辑运算符&amp;&amp;和&amp;的区别)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>&amp;&amp;和&amp;的区别?<ul>
+<li>a:最终结果一样。</li>
+<li>b:&amp;&amp;具有短路效果。左边是false，右边不执行。</li>
+<li>&amp;是无论左边是false还是true,右边都会执行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B:同理||和|的区别?(学生自学)</li>
+<li>C:开发中常用谁?<ul>
+<li>&amp;&amp;,||,!</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-03-Java语言基础-位运算符的基本用法1-了解"><a href="#03-03-Java语言基础-位运算符的基本用法1-了解" class="headerlink" title="03.03_Java语言基础(位运算符的基本用法1)(了解)"></a>03.03_Java语言基础(位运算符的基本用法1)(了解)</h3><ul>
+<li>A:位运算符有哪些<ul>
+<li>&amp;,|,^,~ ,&gt;&gt;,&gt;&gt;&gt;,&lt;&lt;</li>
+</ul>
+</li>
+<li><p>B:案例演示</p>
+<ul>
+<li><p>位运算符的基本用法1</p>
+</li>
+<li><p>&amp;,|,^,~ 的用法</p>
+</li>
+<li>&amp;:有0则0</li>
+<li>|:有1则1</li>
+<li>^:相同则0，不同则1</li>
+<li>~:按位取反</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-04-Java语言基础-位异或运算符的特点及面试题-掌握"><a href="#03-04-Java语言基础-位异或运算符的特点及面试题-掌握" class="headerlink" title="03.04_Java语言基础(位异或运算符的特点及面试题)(掌握)"></a>03.04_Java语言基础(位异或运算符的特点及面试题)(掌握)</h3><ul>
+<li><p>A:案例演示</p>
+<ul>
+<li><p>位异或运算符的特点</p>
+</li>
+<li><p>^的特点：一个数据对另一个数据位异或两次，该数本身不变。</p>
+</li>
+</ul>
+</li>
+<li><p>B:面试题：</p>
+<ul>
+<li>请自己实现两个整数变量的交换</li>
+<li>注意：以后讲课的过程中，我没有明确指定数据的类型，默认int类型。</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-05-Java语言基础-位运算符的基本用法2及面试题-了解"><a href="#03-05-Java语言基础-位运算符的基本用法2及面试题-了解" class="headerlink" title="03.05_Java语言基础(位运算符的基本用法2及面试题)(了解)"></a>03.05_Java语言基础(位运算符的基本用法2及面试题)(了解)</h3><ul>
+<li>A:案例演示 &gt;&gt;,&gt;&gt;&gt;,&lt;&lt;的用法:<ul>
+<li>&lt;&lt;:左移    左边最高位丢弃，右边补齐0</li>
+<li><blockquote>
+<blockquote>
+<p>:右移    最高位是0，左边补齐0;最高为是1，左边补齐1</p>
+</blockquote>
+</blockquote>
+</li>
+<li><blockquote>
+<blockquote>
+<blockquote>
+<p>:无符号右移 无论最高位是0还是1，左边补齐0</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>最有效率的算出2 * 8的结果</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-06-Java语言基础-三元运算符的基本用法-掌握"><a href="#03-06-Java语言基础-三元运算符的基本用法-掌握" class="headerlink" title="03.06_Java语言基础(三元运算符的基本用法)(掌握)"></a>03.06_Java语言基础(三元运算符的基本用法)(掌握)</h3><ul>
+<li>A:三元运算符的格式</li>
+<li>(关系表达式) ? 表达式1 : 表达式2;</li>
+<li>B:三元运算符的执行流程 </li>
+<li>C:案例演示<ul>
+<li>获取两个数中的最大值</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-07-Java语言基础-三元运算符的练习-掌握"><a href="#03-07-Java语言基础-三元运算符的练习-掌握" class="headerlink" title="03.07_Java语言基础(三元运算符的练习)(掌握)"></a>03.07_Java语言基础(三元运算符的练习)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>比较两个整数是否相同</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>获取三个整数中的最大值</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-08-Java语言基础-键盘录入的基本格式讲解-掌握"><a href="#03-08-Java语言基础-键盘录入的基本格式讲解-掌握" class="headerlink" title="03.08_Java语言基础(键盘录入的基本格式讲解)(掌握)"></a>03.08_Java语言基础(键盘录入的基本格式讲解)(掌握)</h3><ul>
+<li>A:为什么要使用键盘录入数据<ul>
+<li>a:为了让程序的数据更符合开发的数据</li>
+<li>b:让程序更灵活一下</li>
+</ul>
+</li>
+<li>B:如何实现键盘录入呢?<ul>
+<li>先照格式来。</li>
+<li>a:导包<ul>
+<li>格式：<ul>
+<li>import java.util.Scanner; </li>
+</ul>
+</li>
+<li>位置：<ul>
+<li>在class上面。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>b:创建键盘录入对象<ul>
+<li>格式：<ul>
+<li>Scanner sc = new Scanner(System.in);</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>c:通过对象获取数据    <ul>
+<li>格式：<ul>
+<li>int x = sc.nextInt();</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>键盘录入1个整数，并输出到控制台。</li>
+<li>键盘录入2个整数，并输出到控制台。</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-09-Java语言基础-键盘录入的练习1-掌握"><a href="#03-09-Java语言基础-键盘录入的练习1-掌握" class="headerlink" title="03.09_Java语言基础(键盘录入的练习1)(掌握)"></a>03.09_Java语言基础(键盘录入的练习1)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>键盘录入练习：键盘录入两个数据，并对这两个数据求和，输出其结果</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>键盘录入练习：键盘录入两个数据，获取这两个数据中的最大值</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-10-Java语言基础-键盘录入的练习2-掌握"><a href="#03-10-Java语言基础-键盘录入的练习2-掌握" class="headerlink" title="03.10_Java语言基础(键盘录入的练习2)(掌握)"></a>03.10_Java语言基础(键盘录入的练习2)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>键盘录入练习：键盘录入两个数据，比较这两个数据是否相等</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>键盘录入练习：键盘录入三个数据，获取这三个数据中的最大值</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-11-Java语言基础-顺序结构语句-了解"><a href="#03-11-Java语言基础-顺序结构语句-了解" class="headerlink" title="03.11_Java语言基础(顺序结构语句)(了解)"></a>03.11_Java语言基础(顺序结构语句)(了解)</h3><ul>
+<li>A:什么是流程控制语句<ul>
+<li>流程控制语句：可以控制程序的执行流程。</li>
+</ul>
+</li>
+<li>B:流程控制语句的分类<ul>
+<li>顺序结构</li>
+<li>选择结构</li>
+<li>循环结构</li>
+</ul>
+</li>
+<li>C:执行流程：<ul>
+<li>从上往下，依次执行。</li>
+</ul>
+</li>
+<li>D:案例演示<ul>
+<li>输出几句话看效果即可</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-12-Java语言基础-选择结构if语句格式1及其使用-掌握"><a href="#03-12-Java语言基础-选择结构if语句格式1及其使用-掌握" class="headerlink" title="03.12_Java语言基础(选择结构if语句格式1及其使用)(掌握)"></a>03.12_Java语言基础(选择结构if语句格式1及其使用)(掌握)</h3><ul>
+<li>A:选择结构的分类<ul>
+<li>if语句</li>
+<li>switch语句</li>
+</ul>
+</li>
+<li>B:if语句有几种格式<ul>
+<li>格式1</li>
+<li>格式2</li>
+<li>格式3</li>
+</ul>
+</li>
+<li>C:if语句的格式1</li>
+<li><pre><code>if(比较表达式) {
+    语句体;
+}
+</code></pre></li>
+<li>D:执行流程：<ul>
+<li>先计算比较表达式的值，看其返回值是true还是false。</li>
+<li>如果是true，就执行语句体；</li>
+<li>如果是false，就不执行语句体；</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-13-Java语言基础-选择结构if语句注意事项-掌握"><a href="#03-13-Java语言基础-选择结构if语句注意事项-掌握" class="headerlink" title="03.13_Java语言基础(选择结构if语句注意事项)(掌握)"></a>03.13_Java语言基础(选择结构if语句注意事项)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>a:比较表达式无论简单还是复杂，结果必须是boolean类型</li>
+<li>b:if语句控制的语句体如果是一条语句，大括号可以省略；<ul>
+<li>如果是多条语句，就不能省略。建议永远不要省略。</li>
+</ul>
+</li>
+<li>c:一般来说：有左大括号就没有分号，有分号就没有左大括号</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-14-Java语言基础-选择结构if语句格式2及其使用-掌握"><a href="#03-14-Java语言基础-选择结构if语句格式2及其使用-掌握" class="headerlink" title="03.14_Java语言基础(选择结构if语句格式2及其使用)(掌握)"></a>03.14_Java语言基础(选择结构if语句格式2及其使用)(掌握)</h3><ul>
+<li>A:if语句的格式2</li>
+<li><pre><code>if(比较表达式) {
+    语句体1;
+}else {
+    语句体2;
+}
+</code></pre></li>
+<li>B:执行流程：<ul>
+<li>首先计算比较表达式的值，看其返回值是true还是false。</li>
+<li>如果是true，就执行语句体1；</li>
+<li>如果是false，就执行语句体2；</li>
+</ul>
+</li>
+<li><p>C:案例演示</p>
+<ul>
+<li>a:获取两个数据中较大的值</li>
+<li><p>b:判断一个数据是奇数还是偶数,并输出是奇数还是偶数</p>
+</li>
+<li><p>注意事项：else后面是没有比较表达式的，只有if后面有。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-15-Java语言基础-if语句的格式2和三元的相互转换问题-掌握"><a href="#03-15-Java语言基础-if语句的格式2和三元的相互转换问题-掌握" class="headerlink" title="03.15_Java语言基础(if语句的格式2和三元的相互转换问题)(掌握)"></a>03.15_Java语言基础(if语句的格式2和三元的相互转换问题)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>if语句和三元运算符完成同一个效果</li>
+</ul>
+</li>
+<li><p>B:案例演示</p>
+<ul>
+<li><p>if语句和三元运算符的区别</p>
+</li>
+<li><p>三元运算符实现的，都可以采用if语句实现。反之不成立。</p>
+</li>
+<li><p>什么时候if语句实现不能用三元改进呢?</p>
+<ul>
+<li>当if语句控制的操作是一个输出语句的时候就不能。</li>
+<li>为什么呢?因为三元运算符是一个运算符，运算符操作完毕就应该有一个结果，而不是一个输出。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-16-Java语言基础-选择结构if语句格式3及其使用-掌握"><a href="#03-16-Java语言基础-选择结构if语句格式3及其使用-掌握" class="headerlink" title="03.16_Java语言基础(选择结构if语句格式3及其使用)(掌握)"></a>03.16_Java语言基础(选择结构if语句格式3及其使用)(掌握)</h3><ul>
+<li>A:if语句的格式3：</li>
+<li><pre><code>if(比较表达式1) {
+    语句体1;
+}else if(比较表达式2) {
+    语句体2;
+}else if(比较表达式3) {
+    语句体3;
+}
+...
+else {
+    语句体n+1;
+}
+</code></pre></li>
+<li><p>B:执行流程：</p>
+<ul>
+<li>首先计算比较表达式1看其返回值是true还是false，</li>
+<li>如果是true，就执行语句体1，if语句结束。</li>
+<li><p>如果是false，接着计算比较表达式2看其返回值是true还是false，</p>
+</li>
+<li><p>如果是true，就执行语句体2，if语句结束。</p>
+</li>
+<li><p>如果是false，接着计算比较表达式3看其返回值是true还是false，</p>
+</li>
+<li><p>如果都是false，就执行语句体n+1。</p>
+</li>
+</ul>
+</li>
+<li>C:注意事项:最后一个else可以省略,但是建议不要省略,可以对范围外的错误值提示 </li>
+</ul>
+<h3 id="03-17-Java语言基础-选择结构if语句格式3练习-掌握"><a href="#03-17-Java语言基础-选择结构if语句格式3练习-掌握" class="headerlink" title="03.17_Java语言基础(选择结构if语句格式3练习)(掌握)"></a>03.17_Java语言基础(选择结构if语句格式3练习)(掌握)</h3><ul>
+<li>A:练习1</li>
+<li><pre><code>需求：键盘录入一个成绩，判断并输出成绩的等级。
+90-100 优
+80-89  良
+70-79  中
+60-69  及
+0-59   差
+</code></pre></li>
+<li><p>B:练习2</p>
+<ul>
+<li><p>需求：</p>
+<ul>
+<li><p>键盘录入x的值，计算出y的并输出。</p>
+</li>
+<li><p>x&gt;=3    y = 2 * x + 1;</p>
+</li>
+<li>-1&lt;x&lt;3    y = 2 * x;</li>
+<li>x&lt;=-1    y = 2 * x - 1;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-18-Java语言基础-选择结构if语句的嵌套使用-掌握"><a href="#03-18-Java语言基础-选择结构if语句的嵌套使用-掌握" class="headerlink" title="03.18_Java语言基础(选择结构if语句的嵌套使用)(掌握)"></a>03.18_Java语言基础(选择结构if语句的嵌套使用)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>需求：获取三个数据中的最大值</li>
+<li>if语句的嵌套使用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-19-Java语言基础-选择结构switch语句的格式及其解释-掌握"><a href="#03-19-Java语言基础-选择结构switch语句的格式及其解释-掌握" class="headerlink" title="03.19_Java语言基础(选择结构switch语句的格式及其解释)(掌握)"></a>03.19_Java语言基础(选择结构switch语句的格式及其解释)(掌握)</h3><ul>
+<li>A:switch语句的格式</li>
+<li><pre><code>switch(表达式) {
+      case 值1：
+        语句体1;
+        break;
+        case 值2：
+        语句体2;
+        break;
+        …
+        default：    
+        语句体n+1;
+        break;
+}
+</code></pre></li>
+<li><p>B:switch语句的格式解释</p>
+</li>
+<li>C:面试题<ul>
+<li>byte可以作为switch的表达式吗?</li>
+<li>long可以作为switch的表达式吗?</li>
+<li>String可以作为switch的表达式吗?</li>
+</ul>
+</li>
+<li>C:执行流程<ul>
+<li>先计算表达式的值</li>
+<li>然后和case后面的匹配，如果有就执行对应的语句，否则执行default控制的语句</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-20-Java语言基础-选择结构switch语句的练习-掌握"><a href="#03-20-Java语言基础-选择结构switch语句的练习-掌握" class="headerlink" title="03.20_Java语言基础(选择结构switch语句的练习)(掌握)"></a>03.20_Java语言基础(选择结构switch语句的练习)(掌握)</h3><ul>
+<li>A:整数(给定一个值,输出对应星期几)</li>
+</ul>
+<h3 id="03-21-Java语言基础-选择结构switch语句的注意事项-掌握"><a href="#03-21-Java语言基础-选择结构switch语句的注意事项-掌握" class="headerlink" title="03.21_Java语言基础(选择结构switch语句的注意事项)(掌握)"></a>03.21_Java语言基础(选择结构switch语句的注意事项)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>a:case后面只能是常量，不能是变量，而且，多个case后面的值不能出现相同的</li>
+<li>b:default可以省略吗?<ul>
+<li>可以省略，但是不建议，因为它的作用是对不正确的情况给出提示。</li>
+<li>特殊情况：<ul>
+<li>case就可以把值固定。</li>
+<li>A,B,C,D</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>c:break可以省略吗?<ul>
+<li>最后一个可以省略,其他最好不要省略</li>
+<li>会出现一个现象：case穿透。</li>
+<li>最终我们建议不要省略</li>
+</ul>
+</li>
+<li>d:default一定要在最后吗?<ul>
+<li>不是，可以在任意位置。但是建议在最后。</li>
+</ul>
+</li>
+<li>e:switch语句的结束条件<ul>
+<li>a:遇到break就结束了</li>
+<li>b:执行到switch的右大括号就结束了</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-22-Java语言基础-选择结构switch语句练习-掌握"><a href="#03-22-Java语言基础-选择结构switch语句练习-掌握" class="headerlink" title="03.22_Java语言基础(选择结构switch语句练习)(掌握)"></a>03.22_Java语言基础(选择结构switch语句练习)(掌握)</h3><ul>
+<li>A:看程序写结果：</li>
+<li><pre><code>int x = 2;
+int y = 3;
+switch(x){
+    default:
+        y++;
+        break;
+    case 3:
+        y++;
+    case 4:
+        y++;
+}
+System.out.println(&quot;y=&quot;+y);
+</code></pre></li>
+<li><p>B:看程序写结果：</p>
+</li>
+<li><pre><code>int x = 2;
+int y = 3;
+switch(x){
+    default:
+        y++;
+    case 3:
+        y++;
+    case 4:
+        y++;
+}
+System.out.println(&quot;y=&quot;+y);
+</code></pre></li>
+</ul>
+<h3 id="03-23-Java语言基础-选择结构if语句和switch语句的区别-掌握"><a href="#03-23-Java语言基础-选择结构if语句和switch语句的区别-掌握" class="headerlink" title="03.23_Java语言基础(选择结构if语句和switch语句的区别)(掌握)"></a>03.23_Java语言基础(选择结构if语句和switch语句的区别)(掌握)</h3><ul>
+<li>A:总结switch语句和if语句的各自使用场景</li>
+<li>switch建议判断固定值的时候用</li>
+<li>if建议判断区间或范围的时候用</li>
+<li>B:案例演示<ul>
+<li>分别用switch语句和if语句实现下列需求：<ul>
+<li>键盘录入月份，输出对应的季节</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-24-day03总结"><a href="#03-24-day03总结" class="headerlink" title="03.24_day03总结"></a>03.24_day03总结</h3><p>把今天的知识点总结一遍。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;03-01-Java语言基础-逻辑运算符的基本用法-掌握&quot;&gt;&lt;a href=&quot;#03-01-Java语言基础-逻辑运算符的基本用法-掌握&quot; class=&quot;headerlink&quot; title=&quot;03.01_Java语言基础(逻辑运算符的基本用法)(掌握)&quot;&gt;&lt;/a&gt;03.01_Java语言基础(逻辑运算符的基本用法)(掌握)&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;A:逻辑运算符有哪些&lt;ul&gt;
+&lt;li&gt;&amp;amp;,|,^,!&lt;/li&gt;
+&lt;li&gt;&amp;amp;&amp;amp;,|| &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;B:案例演示&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;逻辑运算符的基本用法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;注意事项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a:逻辑运算符一般用于连接boolean类型的表达式或者值。&lt;/li&gt;
+&lt;li&gt;b:表达式：就是用运算符把常量或者变量连接起来的符合java语法的式子。&lt;ul&gt;
+&lt;li&gt;算术表达式：a + b&lt;/li&gt;
+&lt;li&gt;比较表达式：a == b(条件表达式)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;C:结论：&lt;/li&gt;
+&lt;li&gt;&amp;amp;逻辑与:有false则false。&lt;/li&gt;
+&lt;li&gt;|逻辑或:有true则true。&lt;/li&gt;
+&lt;li&gt;^逻辑异或:相同为false，不同为true。&lt;/li&gt;
+&lt;li&gt;!逻辑非:非false则true，非true则false。&lt;ul&gt;
+&lt;li&gt;特点：偶数个不改变本身。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="流程控制语句" scheme="http://harmansecurity.cn/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
+    
+      <category term="逻辑运算符" scheme="http://harmansecurity.cn/tags/%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java基础学习笔记(二)</title>
+    <link href="http://harmansecurity.cn/2017/03/19/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)/"/>
+    <id>http://harmansecurity.cn/2017/03/19/Java基础学习笔记(二)/</id>
+    <published>2017-03-19T14:35:21.000Z</published>
+    <updated>2017-03-19T15:08:49.606Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="02-01-Java语言基础-常量的概述和使用-掌握"><a href="#02-01-Java语言基础-常量的概述和使用-掌握" class="headerlink" title="02.01_Java语言基础(常量的概述和使用)(掌握)"></a>02.01_Java语言基础(常量的概述和使用)(掌握)</h3><ul>
+<li>A:什么是常量<ul>
+<li>在程序执行的过程中其值不可以发生改变 </li>
+</ul>
+</li>
+<li>B:Java中常量的分类<ul>
+<li>字面值常量</li>
+<li>自定义常量(面向对象部分讲) </li>
+</ul>
+</li>
+<li><p>C:字面值常量的分类</p>
+<ul>
+<li>字符串常量    用双引号括起来的内容</li>
+<li>整数常量        所有整数</li>
+<li>小数常量        所有小数</li>
+<li>字符常量        用单引号括起来的内容,里面只能放单个数字,单个字母或单个符号</li>
+<li>布尔常量        较为特殊，只有true和false</li>
+<li>空常量            null(数组部分讲解)</li>
+</ul>
+</li>
+<li><p>D:案例演示</p>
+<ul>
+<li>用输出语句输出各种常量。null不演示</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="02-02-Java语言基础-进制概述和二-八-十六进制图解-了解"><a href="#02-02-Java语言基础-进制概述和二-八-十六进制图解-了解" class="headerlink" title="02.02_Java语言基础(进制概述和二,八,十六进制图解)(了解)"></a>02.02_Java语言基础(进制概述和二,八,十六进制图解)(了解)</h3><ul>
+<li>A:什么是进制<ul>
+<li>进制：就是进位制，是人们规定的一种进位方法。 对于任何一种进制–X进制，就表示某一位置上的数运算时是逢X进一位。二进制就是逢二进一，八进制是逢八进一，十进制是逢十进一，十六进制是逢十六进一。</li>
+<li>例如一周有七天,七进制,一年有十二个月,十二进制</li>
+</ul>
+</li>
+<li>B:十进制的由来 <ul>
+<li>十进制的由来是因为人类有十个手指 </li>
+</ul>
+</li>
+<li>C:二进制的由来<ul>
+<li>其实二进制来源与中国,请看史料记载</li>
+<li>18世纪德国数理哲学大师莱布尼兹从他的传教士朋友鲍威特寄给他的拉丁文译本《易经》中，读到了八卦的组成结构，惊奇地发现其基本素数（0）（1），即《易经》的阴爻yao- -和__阳爻，其进位制就是二进制，并认为这是世界上数学进制中最先进的。20世纪被称作第三次科技革命的重要标志之一的计算机的发明与应用，其运算模式正是二进制。它不但证明了莱布尼兹的原理是正确的，同时也证明了《易经》数理学是很了不起的。</li>
+</ul>
+</li>
+<li>D:八进制的由来<ul>
+<li>任何数据在计算机中都是以二进制的形式存在的。二进制早期由电信号开关演变而来。一个整数在内存中一样也是二进制的，但是使用一大串的1或者0组成的数值进行使用很麻烦。 </li>
+<li>所以就想把一大串缩短点，将二进制中的三位用一位表示。这三位可以取到的最大值就是7.超过7就进位了，这就是八进制。 </li>
+</ul>
+</li>
+<li>E:十六进制的由来<ul>
+<li>但是对于过长的二进制变成八进制还是较长，所以出现的用4个二进制位表示一位的情况，四个二进制位最大是15，这就是十六进制。</li>
+</ul>
+</li>
+<li>F:不同进制表现同一个数据的形式特点<ul>
+<li>进制越大，表现形式越短</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-03-Java语言基础-不同进制数据的表现形式-掌握"><a href="#02-03-Java语言基础-不同进制数据的表现形式-掌握" class="headerlink" title="02.03_Java语言基础(不同进制数据的表现形式)(掌握)"></a>02.03_Java语言基础(不同进制数据的表现形式)(掌握)</h3><ul>
+<li>A:二进制的数据表现形式<ul>
+<li>由0,1组成。以0b(b可以大写也可以小写)开头(JDK1.7版本可以表示二进制了)</li>
+</ul>
+</li>
+<li>B:八进制的数据表现形式<ul>
+<li>由0,1,…7组成。以0开头</li>
+</ul>
+</li>
+<li>C:十进制的数据表现形式<ul>
+<li>由0,1,…9组成。整数默认是十进制的 </li>
+</ul>
+</li>
+<li>D:十六进制的数据表现形式<ul>
+<li>由0,1,…9,a,b,c,d,e,f(大小写均可)。以0x开头 </li>
+</ul>
+</li>
+<li>E:案例演示<ul>
+<li>输出不同进制表现100的数据。</li>
+<li>0b100</li>
+<li>0100</li>
+<li>100</li>
+<li>0x100</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-04-Java语言基础-任意进制到十进制的转换图解-了解"><a href="#02-04-Java语言基础-任意进制到十进制的转换图解-了解" class="headerlink" title="02.04_Java语言基础(任意进制到十进制的转换图解)(了解)"></a>02.04_Java语言基础(任意进制到十进制的转换图解)(了解)</h3><ul>
+<li>A:任意进制到十进制的转换原理<ul>
+<li>系数：就是每一位上的数据。</li>
+<li>基数：X进制，基数就是X。</li>
+<li>权：在右边，从0开始编号，对应位上的编号即为该位的权。</li>
+<li>结果：把系数*基数的权次幂相加即可。 </li>
+</ul>
+</li>
+<li>B:画图练习<ul>
+<li>二进制–十进制</li>
+<li>八进制–十进制</li>
+<li>十六进制–十进制</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-05-Java语言基础-十进制到任意进制的转换图解-了解"><a href="#02-05-Java语言基础-十进制到任意进制的转换图解-了解" class="headerlink" title="02.05_Java语言基础(十进制到任意进制的转换图解)(了解)"></a>02.05_Java语言基础(十进制到任意进制的转换图解)(了解)</h3><ul>
+<li>A:十进制到任意进制的转换原理<ul>
+<li>除积倒取余 </li>
+</ul>
+</li>
+<li>B:画图练习<ul>
+<li>十进制–二进制</li>
+<li>十进制–八进制</li>
+<li>十进制–十六进制</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-06-Java语言基础-快速的进制转换法-了解"><a href="#02-06-Java语言基础-快速的进制转换法-了解" class="headerlink" title="02.06_Java语言基础(快速的进制转换法)(了解)"></a>02.06_Java语言基础(快速的进制转换法)(了解)</h3><ul>
+<li>A:8421码及特点<ul>
+<li>8421码是中国大陆的叫法，8421码是BCD代码中最常用的一种。在这种编码方式中每一位二值代码的1都是代表一个固定数值，把每一位的1代表的十进制数加起来，得到的结果就是它所代表的十进制数码。 </li>
+</ul>
+</li>
+<li>B:通过8421码的方式进行二进制和十进制的相互转换</li>
+<li>C:二进制到八进制的简易方式</li>
+<li>D:二进制到十六进制的简易方式</li>
+</ul>
+<h3 id="02-07-Java语言基础-原码反码补码-了解"><a href="#02-07-Java语言基础-原码反码补码-了解" class="headerlink" title="02.07_Java语言基础(原码反码补码)(了解)"></a>02.07_Java语言基础(原码反码补码)(了解)</h3><ul>
+<li>A:为什么要学习原码反码补码?<ul>
+<li>后面要学习强制类型转换,如果不知道有原反补会看不懂结果 </li>
+</ul>
+</li>
+<li>B:有符号数据表示法的几种方式<ul>
+<li>原码<ul>
+<li>就是二进制定点表示法，即最高位为符号位，“0”表示正，“1”表示负，其余位表示数值的大小。</li>
+<li>通过一个字节,也就是8个二进制位表示+7和-7</li>
+<li>0(符号位)    0000111</li>
+<li>1(符号位)    0000111</li>
+</ul>
+</li>
+<li>反码<ul>
+<li>正数的反码与其原码相同；负数的反码是对其原码逐位取反，但符号位除外。</li>
+</ul>
+</li>
+<li>补码<ul>
+<li>正数的补码与其原码相同；负数的补码是在其反码的末位加1。 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-08-Java语言基础-原码反码补码的练习-了解"><a href="#02-08-Java语言基础-原码反码补码的练习-了解" class="headerlink" title="02.08_Java语言基础(原码反码补码的练习)(了解)"></a>02.08_Java语言基础(原码反码补码的练习)(了解)</h3><ul>
+<li>A:已知原码求补码<ul>
+<li>0b10110100 </li>
+</ul>
+</li>
+<li>B:已知补码求原码<ul>
+<li>0b11101110 </li>
+</ul>
+</li>
+</ul>
+<h3 id="02-09-Java语言基础-变量的概述及格式-掌握"><a href="#02-09-Java语言基础-变量的概述及格式-掌握" class="headerlink" title="02.09_Java语言基础(变量的概述及格式)(掌握)"></a>02.09_Java语言基础(变量的概述及格式)(掌握)</h3><ul>
+<li>A:什么是变量<ul>
+<li>在程序执行的过程中，在某个范围内其值可以发生改变的量</li>
+</ul>
+</li>
+<li>B:变量的定义格式<ul>
+<li>数据类型 变量名 = 变量值;</li>
+</ul>
+</li>
+<li>C:为什么要定义变量<ul>
+<li>用来不断的存放同一类型的常量，并可以重复使用 </li>
+</ul>
+</li>
+</ul>
+<h3 id="02-10-Java语言基础-数据类型的概述和分类-掌握"><a href="#02-10-Java语言基础-数据类型的概述和分类-掌握" class="headerlink" title="02.10_Java语言基础(数据类型的概述和分类)(掌握)"></a>02.10_Java语言基础(数据类型的概述和分类)(掌握)</h3><ul>
+<li>A:为什么有数据类型<ul>
+<li>Java语言是强类型语言，对于每一种数据都定义了明确的具体数据类型，在内存中分配了不同大小的内存空间</li>
+</ul>
+</li>
+<li>B:Java中数据类型的分类<ul>
+<li>基本数据类型</li>
+<li>引用数据类型 <ul>
+<li>面向对象部分讲解 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C:基本数据类型分类(4类8种) <ul>
+<li>整数型<ul>
+<li>byte 占一个字节  -128到127</li>
+<li>short 占两个字  -2^15~2^15-1</li>
+<li>int 占四个字节 -2^31~2^31-1</li>
+<li>long 占八个字节 -2^63~2^63-1</li>
+</ul>
+</li>
+<li>浮点型<ul>
+<li>float 占四个字节 -3.403E38~3.403E38  单精度</li>
+<li>double 占八个字节-1.798E308~1.798E308 双精度</li>
+</ul>
+</li>
+<li>字符型<ul>
+<li>char 占两个字节 0~65535</li>
+</ul>
+</li>
+<li>布尔型<ul>
+<li>boolean   <ul>
+<li>boolean理论上是占八分之一个字节,因为一个开关就可以决定是true和false了,但是java中boolean类型没有明确指定他的大小      </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-11-Java语言基础-定义不同数据类型的变量-掌握"><a href="#02-11-Java语言基础-定义不同数据类型的变量-掌握" class="headerlink" title="02.11_Java语言基础(定义不同数据类型的变量)(掌握)"></a>02.11_Java语言基础(定义不同数据类型的变量)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>定义不同基本数据类型的变量，并输出</li>
+<li>赋值时候注意float类型,long类型</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-12-Java语言基础-使用变量的注意事项-掌握"><a href="#02-12-Java语言基础-使用变量的注意事项-掌握" class="headerlink" title="02.12_Java语言基础(使用变量的注意事项)(掌握)"></a>02.12_Java语言基础(使用变量的注意事项)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>a:作用域问题<ul>
+<li>同一个区域不能使用相同的变量名 </li>
+</ul>
+</li>
+<li>b:初始化值问题<ul>
+<li>局部变量在使用之前必须赋值 </li>
+</ul>
+</li>
+<li>c:一条语句可以定义几个变量<ul>
+<li>int a,b,c…; </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-13-Java语言基础-数据类型转换之隐式转换-掌握"><a href="#02-13-Java语言基础-数据类型转换之隐式转换-掌握" class="headerlink" title="02.13_Java语言基础(数据类型转换之隐式转换)(掌握)"></a>02.13_Java语言基础(数据类型转换之隐式转换)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>a:int + int</li>
+<li>b:byte + int </li>
+</ul>
+</li>
+<li>B:Java中的默认转换规则<ul>
+<li>取值范围小的数据类型与取值范围大的数据类型进行运算,会先将小的数据类型提升为大的,再运算 </li>
+</ul>
+</li>
+<li>C:画图解释byte+int类型的问题</li>
+</ul>
+<h3 id="02-14-Java语言基础-数据类型转换之强制转换-掌握"><a href="#02-14-Java语言基础-数据类型转换之强制转换-掌握" class="headerlink" title="02.14_Java语言基础(数据类型转换之强制转换)(掌握)"></a>02.14_Java语言基础(数据类型转换之强制转换)(掌握)</h3><ul>
+<li>A:强制转换问题<ul>
+<li>int a = 10;</li>
+<li>byte b = 20; </li>
+<li>b = a + b;</li>
+</ul>
+</li>
+<li>B:强制转换的格式<ul>
+<li>b = (byte)(a + b); </li>
+</ul>
+</li>
+<li>C:强制转换的注意事项<ul>
+<li>如果超出了被赋值的数据类型的取值范围得到的结果会与你期望的结果不同 </li>
+</ul>
+</li>
+</ul>
+<h3 id="02-15-Java语言基础-面试题之变量相加和常量相加的区别-掌握"><a href="#02-15-Java语言基础-面试题之变量相加和常量相加的区别-掌握" class="headerlink" title="02.15_Java语言基础(面试题之变量相加和常量相加的区别)(掌握)"></a>02.15_Java语言基础(面试题之变量相加和常量相加的区别)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>面试题:看下面的程序是否有问题，如果有问题，请指出并说明理由。</li>
+<li>byte b1 = 3;</li>
+<li>byte b2 = 4;</li>
+<li>byte b3 = b1 + b2;<ul>
+<li>从两方面去回答这个题</li>
+<li>b1和b2是两个变量,变量里面存储的值都是变化的,所以在程序运行中JVM是无法判断里面具体的值</li>
+<li>byte类型的变量在进行运算的时候,会自动类型提升为int类型 </li>
+</ul>
+</li>
+<li>byte b4 = 3 + 4;<ul>
+<li>3和4都是常量,java有常量优化机制,就是在编译的的时候直接把3和4的结果赋值给b4了 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-16-Java语言基础-long与float的取值范围谁大谁小-了解"><a href="#02-16-Java语言基础-long与float的取值范围谁大谁小-了解" class="headerlink" title="02.16_Java语言基础(long与float的取值范围谁大谁小)(了解)"></a>02.16_Java语言基础(long与float的取值范围谁大谁小)(了解)</h3><ul>
+<li><p>进行混合运算的时候,byte,short,char不会相互转换,都会自动类型提升为int类型,其他类型进行混合运算的是小的数据类型提升为大的</p>
+<ul>
+<li><p>byte,short,char – int – long – float – double</p>
+</li>
+<li><p>long: 8个字节</p>
+</li>
+<li>float：4个字节</li>
+<li>IEEE754</li>
+<li>4个字节是32个二进制位</li>
+<li>1位是符号位</li>
+<li>8位是指数位</li>
+<li>00000000   11111111</li>
+<li>0到255</li>
+<li>1到254</li>
+<li>-126到127</li>
+<li>23位是尾数位</li>
+<li><p>每个指数位减去127</p>
+</li>
+<li><p>A:它们底层的存储结构不同。</p>
+</li>
+<li>B:float表示的数据范围比long的范围要大<ul>
+<li>long：2^63-1</li>
+<li><code>float：3.4*10^38 &gt; 2*10^38 &gt; 2*8^38 = 2*2^3^38 = 2*2^114 &gt; 2^63-1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-17-Java语言基础-字符和字符串参与运算-掌握"><a href="#02-17-Java语言基础-字符和字符串参与运算-掌握" class="headerlink" title="02.17_Java语言基础(字符和字符串参与运算)(掌握)"></a>02.17_Java语言基础(字符和字符串参与运算)(掌握)</h3><ul>
+<li><p>A:案例演示</p>
+<ul>
+<li>System.out.println(‘a’);</li>
+<li><p>System.out.println(‘a’+1);</p>
+</li>
+<li><p>通过看结果知道’a’的值是多少,由此引出ASCII码表</p>
+</li>
+</ul>
+</li>
+<li>B:ASCII码表的概述<ul>
+<li>记住三个值：<ul>
+<li>‘0’  48</li>
+<li>‘A’  65</li>
+<li>‘a’  97</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>System.out.println(“hello”+’a’+1);</li>
+<li>System.out.println(‘a’+1+”hello”);</li>
+</ul>
+</li>
+<li>D:+在有字符串参与中被称为字符串连接符<ul>
+<li>System.out.println(“5+5=”+5+5);</li>
+<li>System.out.println(5+5+”=5+5”);</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-18-Java语言基础-char数据类型-掌握"><a href="#02-18-Java语言基础-char数据类型-掌握" class="headerlink" title="02.18_Java语言基础(char数据类型)(掌握)"></a>02.18_Java语言基础(char数据类型)(掌握)</h3><ul>
+<li>A:char c = 97;    0到65535</li>
+<li>B:Java语言中的字符char可以存储一个中文汉字吗?为什么呢?<ul>
+<li>可以。因为Java语言采用的是Unicode编码。Unicode编码中的每个字符占用两个字节。中文也是占的两个字节</li>
+<li>所以，Java中的字符可以存储一个中文汉字</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-19-Java语言基础-算术运算符的基本用法-掌握"><a href="#02-19-Java语言基础-算术运算符的基本用法-掌握" class="headerlink" title="02.19_Java语言基础(算术运算符的基本用法)(掌握)"></a>02.19_Java语言基础(算术运算符的基本用法)(掌握)</h3><ul>
+<li>A:什么是运算符<ul>
+<li>就是对常量和变量进行操作的符号。</li>
+</ul>
+</li>
+<li>B:运算符的分类<ul>
+<li>算术运算符，赋值运算符，比较(关系或条件)运算符，逻辑运算符，位运算符，三目(元)运算符 </li>
+</ul>
+</li>
+<li>C:算数运算符有哪些<ul>
+<li>+,-,*,/,%,++,– </li>
+</ul>
+</li>
+<li>D:注意事项：<ul>
+<li>a:+号在java中有三种作用,代表正号,做加法运算,字符串的连接符</li>
+<li>b:整数相除只能得到整数。如果想得到小数，必须把数据变化为浮点数类型</li>
+<li>c:/获取的是除法操作的商，%获取的是除法操作的余数</li>
+<li>%运算符<ul>
+<li>当左边的绝对值小于右边绝对值时,结果是左边</li>
+<li>当左边的绝对值等于右边或是右边的倍数时,结果是0</li>
+<li>当左边的绝对值大于右边绝对值时,结果是余数</li>
+<li>%运算符结果的符号只和左边有关系,与右边无关</li>
+<li>任何一个正整数%2结果不是0就是1可以用来当作切换条件 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-20-Java语言基础-算术运算符-和–的用法-掌握"><a href="#02-20-Java语言基础-算术运算符-和–的用法-掌握" class="headerlink" title="02.20_Java语言基础(算术运算符++和–的用法)(掌握)"></a>02.20_Java语言基础(算术运算符++和–的用法)(掌握)</h3><ul>
+<li>A:++,–运算符的作用<ul>
+<li>自加（++）自减（–）运算</li>
+<li>++:自加。对原有的数据进行+1</li>
+<li>–:自减。对原有的数据进行-1</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>a:单独使用：<ul>
+<li>放在操作数的前面和后面效果一样。(这种用法是我们比较常见的)</li>
+</ul>
+</li>
+<li>b:参与运算使用：<ul>
+<li>放在操作数的前面，先自增或者自减，然后再参与运算。</li>
+<li>放在操作数的后面，先参与运算，再自增或者自减。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-21-Java语言基础-算术运算符-和–的练习-掌握"><a href="#02-21-Java语言基础-算术运算符-和–的练习-掌握" class="headerlink" title="02.21_Java语言基础(算术运算符++和–的练习)(掌握)"></a>02.21_Java语言基础(算术运算符++和–的练习)(掌握)</h3><ul>
+<li><p>A:案例演示</p>
+<ul>
+<li>请分别计算出a,b,c的值?<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</div><div class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</div><div class="line">	<span class="keyword">int</span> c = <span class="number">10</span>;</div><div class="line"></div><div class="line">	a = b++;		</div><div class="line">	c = --a;			</div><div class="line">	b = ++a;		</div><div class="line">	a = c--;	</div><div class="line">```		</div><div class="line">* B:案例演示</div><div class="line">	* 请分别计算出x,y的值?</div><div class="line">```java</div><div class="line">			<span class="keyword">int</span> x = <span class="number">4</span>;</div><div class="line">			<span class="keyword">int</span> y = (x++)+(++x)+(x*<span class="number">10</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>C:面试题</p>
+<ul>
+<li>byte b = 10;</li>
+<li>b++;</li>
+<li>b = b + 1;</li>
+<li>问哪句会报错,为什么 </li>
+</ul>
+</li>
+</ul>
+<h3 id="02-22-Java语言基础-赋值运算符的基本用法-掌握"><a href="#02-22-Java语言基础-赋值运算符的基本用法-掌握" class="headerlink" title="02.22_Java语言基础(赋值运算符的基本用法)(掌握)"></a>02.22_Java语言基础(赋值运算符的基本用法)(掌握)</h3><ul>
+<li><p>A:赋值运算符有哪些</p>
+<ul>
+<li><p>a:基本的赋值运算符：=</p>
+<ul>
+<li>把=右边的数据赋值给左边。</li>
+</ul>
+</li>
+<li><p>b:扩展的赋值运算符：+=,-=,*=,/=,%=</p>
+<ul>
+<li>+= 把左边和右边做加法，然后赋值给左边。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-23-Java语言基础-赋值运算符的面试题-掌握"><a href="#02-23-Java语言基础-赋值运算符的面试题-掌握" class="headerlink" title="02.23_Java语言基础(赋值运算符的面试题)(掌握)"></a>02.23_Java语言基础(赋值运算符的面试题)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>面试题:看下面的程序是否有问题，如果有问题，请指出并说明理由。</li>
+<li>short s=1;s = s+1;</li>
+<li>short s=1;s+=1;</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-24-Java语言基础-关系运算符的基本用法及其注意事项-掌握"><a href="#02-24-Java语言基础-关系运算符的基本用法及其注意事项-掌握" class="headerlink" title="02.24_Java语言基础(关系运算符的基本用法及其注意事项)(掌握)"></a>02.24_Java语言基础(关系运算符的基本用法及其注意事项)(掌握)</h3><ul>
+<li>A:关系运算符有哪些(比较运算符,条件运算符)<ul>
+<li>==,!=,&gt;,&gt;=,&lt;,&lt;= </li>
+</ul>
+</li>
+<li><p>注意事项：</p>
+<ul>
+<li><p>无论你的操作是简单还是复杂，结果是boolean类型。</p>
+</li>
+<li><p>“==”不能写成”=”。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-25-day02总结"><a href="#02-25-day02总结" class="headerlink" title="02.25_day02总结"></a>02.25_day02总结</h3><ul>
+<li>把今天的知识点总结一遍。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;02-01-Java语言基础-常量的概述和使用-掌握&quot;&gt;&lt;a href=&quot;#02-01-Java语言基础-常量的概述和使用-掌握&quot; class=&quot;headerlink&quot; title=&quot;02.01_Java语言基础(常量的概述和使用)(掌握)&quot;&gt;&lt;/a&gt;02.01_Java语言基础(常量的概述和使用)(掌握)&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;A:什么是常量&lt;ul&gt;
+&lt;li&gt;在程序执行的过程中其值不可以发生改变 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;B:Java中常量的分类&lt;ul&gt;
+&lt;li&gt;字面值常量&lt;/li&gt;
+&lt;li&gt;自定义常量(面向对象部分讲) &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;C:字面值常量的分类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字符串常量    用双引号括起来的内容&lt;/li&gt;
+&lt;li&gt;整数常量        所有整数&lt;/li&gt;
+&lt;li&gt;小数常量        所有小数&lt;/li&gt;
+&lt;li&gt;字符常量        用单引号括起来的内容,里面只能放单个数字,单个字母或单个符号&lt;/li&gt;
+&lt;li&gt;布尔常量        较为特殊，只有true和false&lt;/li&gt;
+&lt;li&gt;空常量            null(数组部分讲解)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;D:案例演示&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用输出语句输出各种常量。null不演示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="数据类型" scheme="http://harmansecurity.cn/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    
+      <category term="运算符" scheme="http://harmansecurity.cn/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>Java基础学习笔记(一)</title>
@@ -530,519 +1523,6 @@
       <category term="计算机基础知识" scheme="http://harmansecurity.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
       <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java基础学习笔记(二)</title>
-    <link href="http://harmansecurity.cn/2017/03/19/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)/"/>
-    <id>http://harmansecurity.cn/2017/03/19/Java基础学习笔记(二)/</id>
-    <published>2017-03-19T14:34:21.000Z</published>
-    <updated>2017-03-19T15:03:46.544Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="02-01-Java语言基础-常量的概述和使用-掌握"><a href="#02-01-Java语言基础-常量的概述和使用-掌握" class="headerlink" title="02.01_Java语言基础(常量的概述和使用)(掌握)"></a>02.01_Java语言基础(常量的概述和使用)(掌握)</h3><ul>
-<li>A:什么是常量<ul>
-<li>在程序执行的过程中其值不可以发生改变 </li>
-</ul>
-</li>
-<li>B:Java中常量的分类<ul>
-<li>字面值常量</li>
-<li>自定义常量(面向对象部分讲) </li>
-</ul>
-</li>
-<li><p>C:字面值常量的分类</p>
-<ul>
-<li>字符串常量    用双引号括起来的内容</li>
-<li>整数常量        所有整数</li>
-<li>小数常量        所有小数</li>
-<li>字符常量        用单引号括起来的内容,里面只能放单个数字,单个字母或单个符号</li>
-<li>布尔常量        较为特殊，只有true和false</li>
-<li>空常量            null(数组部分讲解)</li>
-</ul>
-</li>
-<li><p>D:案例演示</p>
-<ul>
-<li>用输出语句输出各种常量。null不演示</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h3 id="02-02-Java语言基础-进制概述和二-八-十六进制图解-了解"><a href="#02-02-Java语言基础-进制概述和二-八-十六进制图解-了解" class="headerlink" title="02.02_Java语言基础(进制概述和二,八,十六进制图解)(了解)"></a>02.02_Java语言基础(进制概述和二,八,十六进制图解)(了解)</h3><ul>
-<li>A:什么是进制<ul>
-<li>进制：就是进位制，是人们规定的一种进位方法。 对于任何一种进制–X进制，就表示某一位置上的数运算时是逢X进一位。二进制就是逢二进一，八进制是逢八进一，十进制是逢十进一，十六进制是逢十六进一。</li>
-<li>例如一周有七天,七进制,一年有十二个月,十二进制</li>
-</ul>
-</li>
-<li>B:十进制的由来 <ul>
-<li>十进制的由来是因为人类有十个手指 </li>
-</ul>
-</li>
-<li>C:二进制的由来<ul>
-<li>其实二进制来源与中国,请看史料记载</li>
-<li>18世纪德国数理哲学大师莱布尼兹从他的传教士朋友鲍威特寄给他的拉丁文译本《易经》中，读到了八卦的组成结构，惊奇地发现其基本素数（0）（1），即《易经》的阴爻yao- -和__阳爻，其进位制就是二进制，并认为这是世界上数学进制中最先进的。20世纪被称作第三次科技革命的重要标志之一的计算机的发明与应用，其运算模式正是二进制。它不但证明了莱布尼兹的原理是正确的，同时也证明了《易经》数理学是很了不起的。</li>
-</ul>
-</li>
-<li>D:八进制的由来<ul>
-<li>任何数据在计算机中都是以二进制的形式存在的。二进制早期由电信号开关演变而来。一个整数在内存中一样也是二进制的，但是使用一大串的1或者0组成的数值进行使用很麻烦。 </li>
-<li>所以就想把一大串缩短点，将二进制中的三位用一位表示。这三位可以取到的最大值就是7.超过7就进位了，这就是八进制。 </li>
-</ul>
-</li>
-<li>E:十六进制的由来<ul>
-<li>但是对于过长的二进制变成八进制还是较长，所以出现的用4个二进制位表示一位的情况，四个二进制位最大是15，这就是十六进制。</li>
-</ul>
-</li>
-<li>F:不同进制表现同一个数据的形式特点<ul>
-<li>进制越大，表现形式越短</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-03-Java语言基础-不同进制数据的表现形式-掌握"><a href="#02-03-Java语言基础-不同进制数据的表现形式-掌握" class="headerlink" title="02.03_Java语言基础(不同进制数据的表现形式)(掌握)"></a>02.03_Java语言基础(不同进制数据的表现形式)(掌握)</h3><ul>
-<li>A:二进制的数据表现形式<ul>
-<li>由0,1组成。以0b(b可以大写也可以小写)开头(JDK1.7版本可以表示二进制了)</li>
-</ul>
-</li>
-<li>B:八进制的数据表现形式<ul>
-<li>由0,1,…7组成。以0开头</li>
-</ul>
-</li>
-<li>C:十进制的数据表现形式<ul>
-<li>由0,1,…9组成。整数默认是十进制的 </li>
-</ul>
-</li>
-<li>D:十六进制的数据表现形式<ul>
-<li>由0,1,…9,a,b,c,d,e,f(大小写均可)。以0x开头 </li>
-</ul>
-</li>
-<li>E:案例演示<ul>
-<li>输出不同进制表现100的数据。</li>
-<li>0b100</li>
-<li>0100</li>
-<li>100</li>
-<li>0x100</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-04-Java语言基础-任意进制到十进制的转换图解-了解"><a href="#02-04-Java语言基础-任意进制到十进制的转换图解-了解" class="headerlink" title="02.04_Java语言基础(任意进制到十进制的转换图解)(了解)"></a>02.04_Java语言基础(任意进制到十进制的转换图解)(了解)</h3><ul>
-<li>A:任意进制到十进制的转换原理<ul>
-<li>系数：就是每一位上的数据。</li>
-<li>基数：X进制，基数就是X。</li>
-<li>权：在右边，从0开始编号，对应位上的编号即为该位的权。</li>
-<li>结果：把系数*基数的权次幂相加即可。 </li>
-</ul>
-</li>
-<li>B:画图练习<ul>
-<li>二进制–十进制</li>
-<li>八进制–十进制</li>
-<li>十六进制–十进制</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-05-Java语言基础-十进制到任意进制的转换图解-了解"><a href="#02-05-Java语言基础-十进制到任意进制的转换图解-了解" class="headerlink" title="02.05_Java语言基础(十进制到任意进制的转换图解)(了解)"></a>02.05_Java语言基础(十进制到任意进制的转换图解)(了解)</h3><ul>
-<li>A:十进制到任意进制的转换原理<ul>
-<li>除积倒取余 </li>
-</ul>
-</li>
-<li>B:画图练习<ul>
-<li>十进制–二进制</li>
-<li>十进制–八进制</li>
-<li>十进制–十六进制</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-06-Java语言基础-快速的进制转换法-了解"><a href="#02-06-Java语言基础-快速的进制转换法-了解" class="headerlink" title="02.06_Java语言基础(快速的进制转换法)(了解)"></a>02.06_Java语言基础(快速的进制转换法)(了解)</h3><ul>
-<li>A:8421码及特点<ul>
-<li>8421码是中国大陆的叫法，8421码是BCD代码中最常用的一种。在这种编码方式中每一位二值代码的1都是代表一个固定数值，把每一位的1代表的十进制数加起来，得到的结果就是它所代表的十进制数码。 </li>
-</ul>
-</li>
-<li>B:通过8421码的方式进行二进制和十进制的相互转换</li>
-<li>C:二进制到八进制的简易方式</li>
-<li>D:二进制到十六进制的简易方式</li>
-</ul>
-<h3 id="02-07-Java语言基础-原码反码补码-了解"><a href="#02-07-Java语言基础-原码反码补码-了解" class="headerlink" title="02.07_Java语言基础(原码反码补码)(了解)"></a>02.07_Java语言基础(原码反码补码)(了解)</h3><ul>
-<li>A:为什么要学习原码反码补码?<ul>
-<li>后面要学习强制类型转换,如果不知道有原反补会看不懂结果 </li>
-</ul>
-</li>
-<li>B:有符号数据表示法的几种方式<ul>
-<li>原码<ul>
-<li>就是二进制定点表示法，即最高位为符号位，“0”表示正，“1”表示负，其余位表示数值的大小。</li>
-<li>通过一个字节,也就是8个二进制位表示+7和-7</li>
-<li>0(符号位)    0000111</li>
-<li>1(符号位)    0000111</li>
-</ul>
-</li>
-<li>反码<ul>
-<li>正数的反码与其原码相同；负数的反码是对其原码逐位取反，但符号位除外。</li>
-</ul>
-</li>
-<li>补码<ul>
-<li>正数的补码与其原码相同；负数的补码是在其反码的末位加1。 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-08-Java语言基础-原码反码补码的练习-了解"><a href="#02-08-Java语言基础-原码反码补码的练习-了解" class="headerlink" title="02.08_Java语言基础(原码反码补码的练习)(了解)"></a>02.08_Java语言基础(原码反码补码的练习)(了解)</h3><ul>
-<li>A:已知原码求补码<ul>
-<li>0b10110100 </li>
-</ul>
-</li>
-<li>B:已知补码求原码<ul>
-<li>0b11101110 </li>
-</ul>
-</li>
-</ul>
-<h3 id="02-09-Java语言基础-变量的概述及格式-掌握"><a href="#02-09-Java语言基础-变量的概述及格式-掌握" class="headerlink" title="02.09_Java语言基础(变量的概述及格式)(掌握)"></a>02.09_Java语言基础(变量的概述及格式)(掌握)</h3><ul>
-<li>A:什么是变量<ul>
-<li>在程序执行的过程中，在某个范围内其值可以发生改变的量</li>
-</ul>
-</li>
-<li>B:变量的定义格式<ul>
-<li>数据类型 变量名 = 变量值;</li>
-</ul>
-</li>
-<li>C:为什么要定义变量<ul>
-<li>用来不断的存放同一类型的常量，并可以重复使用 </li>
-</ul>
-</li>
-</ul>
-<h3 id="02-10-Java语言基础-数据类型的概述和分类-掌握"><a href="#02-10-Java语言基础-数据类型的概述和分类-掌握" class="headerlink" title="02.10_Java语言基础(数据类型的概述和分类)(掌握)"></a>02.10_Java语言基础(数据类型的概述和分类)(掌握)</h3><ul>
-<li>A:为什么有数据类型<ul>
-<li>Java语言是强类型语言，对于每一种数据都定义了明确的具体数据类型，在内存中分配了不同大小的内存空间</li>
-</ul>
-</li>
-<li>B:Java中数据类型的分类<ul>
-<li>基本数据类型</li>
-<li>引用数据类型 <ul>
-<li>面向对象部分讲解 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>C:基本数据类型分类(4类8种) <ul>
-<li>整数型<ul>
-<li>byte 占一个字节  -128到127</li>
-<li>short 占两个字  -2^15~2^15-1</li>
-<li>int 占四个字节 -2^31~2^31-1</li>
-<li>long 占八个字节 -2^63~2^63-1</li>
-</ul>
-</li>
-<li>浮点型<ul>
-<li>float 占四个字节 -3.403E38~3.403E38  单精度</li>
-<li>double 占八个字节-1.798E308~1.798E308 双精度</li>
-</ul>
-</li>
-<li>字符型<ul>
-<li>char 占两个字节 0~65535</li>
-</ul>
-</li>
-<li>布尔型<ul>
-<li>boolean   <ul>
-<li>boolean理论上是占八分之一个字节,因为一个开关就可以决定是true和false了,但是java中boolean类型没有明确指定他的大小      </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-11-Java语言基础-定义不同数据类型的变量-掌握"><a href="#02-11-Java语言基础-定义不同数据类型的变量-掌握" class="headerlink" title="02.11_Java语言基础(定义不同数据类型的变量)(掌握)"></a>02.11_Java语言基础(定义不同数据类型的变量)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>定义不同基本数据类型的变量，并输出</li>
-<li>赋值时候注意float类型,long类型</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-12-Java语言基础-使用变量的注意事项-掌握"><a href="#02-12-Java语言基础-使用变量的注意事项-掌握" class="headerlink" title="02.12_Java语言基础(使用变量的注意事项)(掌握)"></a>02.12_Java语言基础(使用变量的注意事项)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>a:作用域问题<ul>
-<li>同一个区域不能使用相同的变量名 </li>
-</ul>
-</li>
-<li>b:初始化值问题<ul>
-<li>局部变量在使用之前必须赋值 </li>
-</ul>
-</li>
-<li>c:一条语句可以定义几个变量<ul>
-<li>int a,b,c…; </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-13-Java语言基础-数据类型转换之隐式转换-掌握"><a href="#02-13-Java语言基础-数据类型转换之隐式转换-掌握" class="headerlink" title="02.13_Java语言基础(数据类型转换之隐式转换)(掌握)"></a>02.13_Java语言基础(数据类型转换之隐式转换)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>a:int + int</li>
-<li>b:byte + int </li>
-</ul>
-</li>
-<li>B:Java中的默认转换规则<ul>
-<li>取值范围小的数据类型与取值范围大的数据类型进行运算,会先将小的数据类型提升为大的,再运算 </li>
-</ul>
-</li>
-<li>C:画图解释byte+int类型的问题</li>
-</ul>
-<h3 id="02-14-Java语言基础-数据类型转换之强制转换-掌握"><a href="#02-14-Java语言基础-数据类型转换之强制转换-掌握" class="headerlink" title="02.14_Java语言基础(数据类型转换之强制转换)(掌握)"></a>02.14_Java语言基础(数据类型转换之强制转换)(掌握)</h3><ul>
-<li>A:强制转换问题<ul>
-<li>int a = 10;</li>
-<li>byte b = 20; </li>
-<li>b = a + b;</li>
-</ul>
-</li>
-<li>B:强制转换的格式<ul>
-<li>b = (byte)(a + b); </li>
-</ul>
-</li>
-<li>C:强制转换的注意事项<ul>
-<li>如果超出了被赋值的数据类型的取值范围得到的结果会与你期望的结果不同 </li>
-</ul>
-</li>
-</ul>
-<h3 id="02-15-Java语言基础-面试题之变量相加和常量相加的区别-掌握"><a href="#02-15-Java语言基础-面试题之变量相加和常量相加的区别-掌握" class="headerlink" title="02.15_Java语言基础(面试题之变量相加和常量相加的区别)(掌握)"></a>02.15_Java语言基础(面试题之变量相加和常量相加的区别)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>面试题:看下面的程序是否有问题，如果有问题，请指出并说明理由。</li>
-<li>byte b1 = 3;</li>
-<li>byte b2 = 4;</li>
-<li>byte b3 = b1 + b2;<ul>
-<li>从两方面去回答这个题</li>
-<li>b1和b2是两个变量,变量里面存储的值都是变化的,所以在程序运行中JVM是无法判断里面具体的值</li>
-<li>byte类型的变量在进行运算的时候,会自动类型提升为int类型 </li>
-</ul>
-</li>
-<li>byte b4 = 3 + 4;<ul>
-<li>3和4都是常量,java有常量优化机制,就是在编译的的时候直接把3和4的结果赋值给b4了 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-16-Java语言基础-long与float的取值范围谁大谁小-了解"><a href="#02-16-Java语言基础-long与float的取值范围谁大谁小-了解" class="headerlink" title="02.16_Java语言基础(long与float的取值范围谁大谁小)(了解)"></a>02.16_Java语言基础(long与float的取值范围谁大谁小)(了解)</h3><ul>
-<li><p>进行混合运算的时候,byte,short,char不会相互转换,都会自动类型提升为int类型,其他类型进行混合运算的是小的数据类型提升为大的</p>
-<ul>
-<li><p>byte,short,char – int – long – float – double</p>
-</li>
-<li><p>long: 8个字节</p>
-</li>
-<li>float：4个字节</li>
-<li>IEEE754</li>
-<li>4个字节是32个二进制位</li>
-<li>1位是符号位</li>
-<li>8位是指数位</li>
-<li>00000000   11111111</li>
-<li>0到255</li>
-<li>1到254</li>
-<li>-126到127</li>
-<li>23位是尾数位</li>
-<li><p>每个指数位减去127</p>
-</li>
-<li><p>A:它们底层的存储结构不同。</p>
-</li>
-<li>B:float表示的数据范围比long的范围要大<ul>
-<li>long：2^63-1</li>
-<li><code>float：3.4*10^38 &gt; 2*10^38 &gt; 2*8^38 = 2*2^3^38 = 2*2^114 &gt; 2^63-1</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-17-Java语言基础-字符和字符串参与运算-掌握"><a href="#02-17-Java语言基础-字符和字符串参与运算-掌握" class="headerlink" title="02.17_Java语言基础(字符和字符串参与运算)(掌握)"></a>02.17_Java语言基础(字符和字符串参与运算)(掌握)</h3><ul>
-<li><p>A:案例演示</p>
-<ul>
-<li>System.out.println(‘a’);</li>
-<li><p>System.out.println(‘a’+1);</p>
-</li>
-<li><p>通过看结果知道’a’的值是多少,由此引出ASCII码表</p>
-</li>
-</ul>
-</li>
-<li>B:ASCII码表的概述<ul>
-<li>记住三个值：<ul>
-<li>‘0’  48</li>
-<li>‘A’  65</li>
-<li>‘a’  97</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>C:案例演示<ul>
-<li>System.out.println(“hello”+’a’+1);</li>
-<li>System.out.println(‘a’+1+”hello”);</li>
-</ul>
-</li>
-<li>D:+在有字符串参与中被称为字符串连接符<ul>
-<li>System.out.println(“5+5=”+5+5);</li>
-<li>System.out.println(5+5+”=5+5”);</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-18-Java语言基础-char数据类型-掌握"><a href="#02-18-Java语言基础-char数据类型-掌握" class="headerlink" title="02.18_Java语言基础(char数据类型)(掌握)"></a>02.18_Java语言基础(char数据类型)(掌握)</h3><ul>
-<li>A:char c = 97;    0到65535</li>
-<li>B:Java语言中的字符char可以存储一个中文汉字吗?为什么呢?<ul>
-<li>可以。因为Java语言采用的是Unicode编码。Unicode编码中的每个字符占用两个字节。中文也是占的两个字节</li>
-<li>所以，Java中的字符可以存储一个中文汉字</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-19-Java语言基础-算术运算符的基本用法-掌握"><a href="#02-19-Java语言基础-算术运算符的基本用法-掌握" class="headerlink" title="02.19_Java语言基础(算术运算符的基本用法)(掌握)"></a>02.19_Java语言基础(算术运算符的基本用法)(掌握)</h3><ul>
-<li>A:什么是运算符<ul>
-<li>就是对常量和变量进行操作的符号。</li>
-</ul>
-</li>
-<li>B:运算符的分类<ul>
-<li>算术运算符，赋值运算符，比较(关系或条件)运算符，逻辑运算符，位运算符，三目(元)运算符 </li>
-</ul>
-</li>
-<li>C:算数运算符有哪些<ul>
-<li>+,-,*,/,%,++,– </li>
-</ul>
-</li>
-<li>D:注意事项：<ul>
-<li>a:+号在java中有三种作用,代表正号,做加法运算,字符串的连接符</li>
-<li>b:整数相除只能得到整数。如果想得到小数，必须把数据变化为浮点数类型</li>
-<li>c:/获取的是除法操作的商，%获取的是除法操作的余数</li>
-<li>%运算符<ul>
-<li>当左边的绝对值小于右边绝对值时,结果是左边</li>
-<li>当左边的绝对值等于右边或是右边的倍数时,结果是0</li>
-<li>当左边的绝对值大于右边绝对值时,结果是余数</li>
-<li>%运算符结果的符号只和左边有关系,与右边无关</li>
-<li>任何一个正整数%2结果不是0就是1可以用来当作切换条件 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-20-Java语言基础-算术运算符-和–的用法-掌握"><a href="#02-20-Java语言基础-算术运算符-和–的用法-掌握" class="headerlink" title="02.20_Java语言基础(算术运算符++和–的用法)(掌握)"></a>02.20_Java语言基础(算术运算符++和–的用法)(掌握)</h3><ul>
-<li>A:++,–运算符的作用<ul>
-<li>自加（++）自减（–）运算</li>
-<li>++:自加。对原有的数据进行+1</li>
-<li>–:自减。对原有的数据进行-1</li>
-</ul>
-</li>
-<li>B:案例演示<ul>
-<li>a:单独使用：<ul>
-<li>放在操作数的前面和后面效果一样。(这种用法是我们比较常见的)</li>
-</ul>
-</li>
-<li>b:参与运算使用：<ul>
-<li>放在操作数的前面，先自增或者自减，然后再参与运算。</li>
-<li>放在操作数的后面，先参与运算，再自增或者自减。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-21-Java语言基础-算术运算符-和–的练习-掌握"><a href="#02-21-Java语言基础-算术运算符-和–的练习-掌握" class="headerlink" title="02.21_Java语言基础(算术运算符++和–的练习)(掌握)"></a>02.21_Java语言基础(算术运算符++和–的练习)(掌握)</h3><ul>
-<li><p>A:案例演示</p>
-<ul>
-<li><p>请分别计算出a,b,c的值?</p>
-<pre><code class="java"><span class="keyword">int</span> a = <span class="number">10</span>;
-<span class="keyword">int</span> b = <span class="number">10</span>;
-<span class="keyword">int</span> c = <span class="number">10</span>;
-
-a = b++;        
-c = --a;            
-b = ++a;        
-a = c--;
-</code></pre>
-</li>
-</ul>
-</li>
-<li><p>B:案例演示</p>
-<ul>
-<li><p>请分别计算出x,y的值?</p>
-<pre><code>int x = 4;
-int y = (x++)+(++x)+(x*10);
-</code></pre></li>
-</ul>
-</li>
-<li>C:面试题<ul>
-<li>byte b = 10;</li>
-<li>b++;</li>
-<li>b = b + 1;</li>
-<li>问哪句会报错,为什么 </li>
-</ul>
-</li>
-</ul>
-<h3 id="02-22-Java语言基础-赋值运算符的基本用法-掌握"><a href="#02-22-Java语言基础-赋值运算符的基本用法-掌握" class="headerlink" title="02.22_Java语言基础(赋值运算符的基本用法)(掌握)"></a>02.22_Java语言基础(赋值运算符的基本用法)(掌握)</h3><ul>
-<li><p>A:赋值运算符有哪些</p>
-<ul>
-<li><p>a:基本的赋值运算符：=</p>
-<ul>
-<li>把=右边的数据赋值给左边。</li>
-</ul>
-</li>
-<li><p>b:扩展的赋值运算符：+=,-=,*=,/=,%=</p>
-<ul>
-<li>+= 把左边和右边做加法，然后赋值给左边。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-23-Java语言基础-赋值运算符的面试题-掌握"><a href="#02-23-Java语言基础-赋值运算符的面试题-掌握" class="headerlink" title="02.23_Java语言基础(赋值运算符的面试题)(掌握)"></a>02.23_Java语言基础(赋值运算符的面试题)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>面试题:看下面的程序是否有问题，如果有问题，请指出并说明理由。</li>
-<li>short s=1;s = s+1;</li>
-<li>short s=1;s+=1;</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-24-Java语言基础-关系运算符的基本用法及其注意事项-掌握"><a href="#02-24-Java语言基础-关系运算符的基本用法及其注意事项-掌握" class="headerlink" title="02.24_Java语言基础(关系运算符的基本用法及其注意事项)(掌握)"></a>02.24_Java语言基础(关系运算符的基本用法及其注意事项)(掌握)</h3><ul>
-<li>A:关系运算符有哪些(比较运算符,条件运算符)<ul>
-<li>==,!=,&gt;,&gt;=,&lt;,&lt;= </li>
-</ul>
-</li>
-<li><p>注意事项：</p>
-<ul>
-<li><p>无论你的操作是简单还是复杂，结果是boolean类型。</p>
-</li>
-<li><p>“==”不能写成”=”。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-25-day02总结"><a href="#02-25-day02总结" class="headerlink" title="02.25_day02总结"></a>02.25_day02总结</h3><ul>
-<li>把今天的知识点总结一遍。</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;02-01-Java语言基础-常量的概述和使用-掌握&quot;&gt;&lt;a href=&quot;#02-01-Java语言基础-常量的概述和使用-掌握&quot; class=&quot;headerlink&quot; title=&quot;02.01_Java语言基础(常量的概述和使用)(掌握)&quot;&gt;&lt;/a&gt;02.01_Java语言基础(常量的概述和使用)(掌握)&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;A:什么是常量&lt;ul&gt;
-&lt;li&gt;在程序执行的过程中其值不可以发生改变 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;B:Java中常量的分类&lt;ul&gt;
-&lt;li&gt;字面值常量&lt;/li&gt;
-&lt;li&gt;自定义常量(面向对象部分讲) &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;C:字面值常量的分类&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;字符串常量    用双引号括起来的内容&lt;/li&gt;
-&lt;li&gt;整数常量        所有整数&lt;/li&gt;
-&lt;li&gt;小数常量        所有小数&lt;/li&gt;
-&lt;li&gt;字符常量        用单引号括起来的内容,里面只能放单个数字,单个字母或单个符号&lt;/li&gt;
-&lt;li&gt;布尔常量        较为特殊，只有true和false&lt;/li&gt;
-&lt;li&gt;空常量            null(数组部分讲解)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;D:案例演示&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;用输出语句输出各种常量。null不演示&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
-    
-      <category term="数据类型" scheme="http://harmansecurity.cn/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
-    
-      <category term="运算符" scheme="http://harmansecurity.cn/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
     
   </entry>
   

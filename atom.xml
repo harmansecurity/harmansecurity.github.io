@@ -1,19 +1,421 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>骑士安全</title>
+  <title>Harman&#39;s Homepage</title>
   <subtitle>Standing on the shoulders of giants.</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-05-04T04:48:48.785Z</updated>
+  <updated>2017-05-19T11:29:25.177Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
-    <name>如梦星影坠</name>
+    <name>Harman</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ARM Linux2.6.37中获取系统调用号</title>
+    <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7/"/>
+    <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37中获取系统调用号/</id>
+    <published>2017-05-19T10:40:11.000Z</published>
+    <updated>2017-05-19T11:29:25.177Z</updated>
+    
+    <content type="html"><![CDATA[<p> 　 　这个过程的实现基本原理是和Linux0.11差别不大的，不过一些汇编指令和系统架构还是有略微却别的，毕竟版本差异较大。Linux0.11主要是在system_call函数中实现获取系统调用号，而ARM Linux2.6.37是在软中断（vector_swi）中获取系统调用号的。下面主要说一下实现的步骤和遇到的问题。</p>
+<h4 id="一、实验步骤"><a href="#一、实验步骤" class="headerlink" title="一、实验步骤"></a>一、实验步骤</h4><ul>
+<li>1.在linux-2.6.37/arch/arm/kernel文件下找到entry-common.S修改源码，在软中断里面添加实现获取调用号的函数<code>bl get_syscall_num</code>。</li>
+</ul>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.jpg" alt=""></p>
+<a id="more"></a>
+<ul>
+<li>2.<code>get_scno.c</code>是用来实现<code>get_syscall_num</code>函数的。该文件主要是放在linux-2.6.37/arch/arm/kernel文件下。</li>
+</ul>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B72.png" alt=""></p>
+<ul>
+<li>3.修改linux-2.6.37/arch/arm/kernel文件下的Makefile，如图所示。</li>
+</ul>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B73.png" alt=""></p>
+<h4 id="二、实验小结"><a href="#二、实验小结" class="headerlink" title="二、实验小结"></a>二、实验小结</h4><p> 　 　如果真正的想修改内核还是需要话功夫去研读源码的，可以先从Linux0.11开始学习。此实验的源码地址是：<code>https://github.com/harmansecurity/Linux0.11-ARMLinux2.67_learning/tree/master/ARMLinux2.6.37%E8%8E%B7%E5%8F%96%E8%B0%83%E7%94%A8%E5%8F%B7</code>。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 　 　这个过程的实现基本原理是和Linux0.11差别不大的，不过一些汇编指令和系统架构还是有略微却别的，毕竟版本差异较大。Linux0.11主要是在system_call函数中实现获取系统调用号，而ARM Linux2.6.37是在软中断（vector_swi）中获取系统调用号的。下面主要说一下实现的步骤和遇到的问题。&lt;/p&gt;
+&lt;h4 id=&quot;一、实验步骤&quot;&gt;&lt;a href=&quot;#一、实验步骤&quot; class=&quot;headerlink&quot; title=&quot;一、实验步骤&quot;&gt;&lt;/a&gt;一、实验步骤&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;1.在linux-2.6.37/arch/arm/kernel文件下找到entry-common.S修改源码，在软中断里面添加实现获取调用号的函数&lt;code&gt;bl get_syscall_num&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    
+      <category term="ARM Linux2.6.37" scheme="http://harmansecurity.cn/tags/ARM-Linux2-6-37/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ARM Linux2.6.37系统调用原理</title>
+    <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
+    <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37系统调用原理/</id>
+    <published>2017-05-19T10:40:11.000Z</published>
+    <updated>2017-05-19T10:47:32.378Z</updated>
+    
+    <content type="html"><![CDATA[<p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
+<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
+<a id="more"></a>
+<p><strong>2.调转到entry-common.S中执行vector_swi软中断指令</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%862.png" alt=""></p>
+<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
+<li><code>http://www.linuxidc.com/Linux/2015-04/116546.htm</code></li>
+<li><code>http://blog.csdn.net/tommy_wxie/article/details/7610118</code></li>
+<li><code>http://blog.csdn.net/myarrow/article/details/7036266</code></li>
+<li><code>http://blog.chinaunix.net/uid-28236237-id-3404140.html</code></li>
+<li><code>http://blog.csdn.net/liduxun/article/details/48119849</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。&lt;/p&gt;
+&lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.entry-armv.S里面有switch软件中断的入口&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    
+      <category term="ARM Linux2.6.37" scheme="http://harmansecurity.cn/tags/ARM-Linux2-6-37/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>QEMU安装和调试运行Linux0.11</title>
+    <link href="http://harmansecurity.cn/2017/05/19/QEMU%E5%AE%89%E8%A3%85%E5%92%8C%E8%B0%83%E8%AF%95%E8%BF%90%E8%A1%8CLinux0.11/"/>
+    <id>http://harmansecurity.cn/2017/05/19/QEMU安装和调试运行Linux0.11/</id>
+    <published>2017-05-19T06:33:12.000Z</published>
+    <updated>2017-05-19T06:59:36.396Z</updated>
+    
+    <content type="html"><![CDATA[<p> 　 　首先遇到的一个问题就是虚拟机装了VMaretools还是得用Ctrl+Alt和Ctrl+G切入切出特别麻烦，而且虚拟机和物理机不能进行复制粘贴。重新安装了VMare tools也没有用，至少能让我复制粘贴，其他倒无所谓啊。试了不少办法都没解决问题，最后发现我虚拟机和物理机不是在一个网段，我物理机的ip是：192.168.115.23。我把我虚拟机的ip也设置成一个网段，命令式：<code>sudo ifconfig eth0 192.168.115.150</code>。</p>
+<h4 id="一、QEMU安装"><a href="#一、QEMU安装" class="headerlink" title="一、QEMU安装"></a>一、QEMU安装</h4><ul>
+<li><p>1.<code>sudo apt-get install libsdl1.2-dev</code> (安装一些必要的库，并不只是这个，可以根据参考资料的第二个链接)</p>
+</li>
+<li><p>2.<code>git clone git://git.qemu-project.org/qemu.git</code></p>
+</li>
+<li><p>3.进入qemu的目录下面：<code>./configure --enable-debug --enable-tcg-interpreter --enable-sdl --enable-gtk --enable-debug-info --enable-kvm --enable-vnc --enable-curses --prefix=/home/wlwaq/qemu</code>（prefix如果不配置默认是usr/local/bin，配置完的话运行就需要加前缀/home/wlwaq/qemu/bin如第六步）</p>
+</li>
+<li><p>4.<code>sudo make -j4</code></p>
+</li>
+<li><p>5.<code>sudo make install</code></p>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>6.<code>/home/wlwaq/qemu/bin/qemu-system-x86_64  -m 16M -L /home/wlwaq/qemu/pc-bios/ -boot a -fda Image -hda hdc-0.11.img -s -S -sdl -monitor stdio</code>(qemu-system-x86_64 –help可以知道“-s -S -sdl -monitor stdio ”代表什么意思）</li>
+</ul>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/QEMU%E5%AE%89%E8%A3%85%E5%92%8C%E8%B0%83%E8%AF%95%E8%BF%90%E8%A1%8CLinux0.111.png" alt=""></p>
+<ul>
+<li>7.（qemu）c 就可以启动Linux0.11了<br>如果需要用gdb调试，可见第四个参考资料链接。调试工具有：emacs(相当于gdb的图形化界面) Trace32 insight gdb<br>安装emacs的命令：<code>sudo apt-get install emacs</code>。</li>
+</ul>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/QEMU%E5%AE%89%E8%A3%85%E5%92%8C%E8%B0%83%E8%AF%95%E8%BF%90%E8%A1%8CLinux0.112.png" alt=""></p>
+<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
+<li><code>http://blog.chinaunix.net/uid-27117600-id-4148061.html</code></li>
+<li><code>http://blog.csdn.net/liwugang43210/article/details/44155143</code></li>
+<li><code>http://qemu-project.org/Hosts/Linux</code></li>
+<li><code>http://blog.chinaunix.net/uid-26299634-id-4943500.html</code>(主要参考资料)</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 　 　首先遇到的一个问题就是虚拟机装了VMaretools还是得用Ctrl+Alt和Ctrl+G切入切出特别麻烦，而且虚拟机和物理机不能进行复制粘贴。重新安装了VMare tools也没有用，至少能让我复制粘贴，其他倒无所谓啊。试了不少办法都没解决问题，最后发现我虚拟机和物理机不是在一个网段，我物理机的ip是：192.168.115.23。我把我虚拟机的ip也设置成一个网段，命令式：&lt;code&gt;sudo ifconfig eth0 192.168.115.150&lt;/code&gt;。&lt;/p&gt;
+&lt;h4 id=&quot;一、QEMU安装&quot;&gt;&lt;a href=&quot;#一、QEMU安装&quot; class=&quot;headerlink&quot; title=&quot;一、QEMU安装&quot;&gt;&lt;/a&gt;一、QEMU安装&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;1.&lt;code&gt;sudo apt-get install libsdl1.2-dev&lt;/code&gt; (安装一些必要的库，并不只是这个，可以根据参考资料的第二个链接)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;2.&lt;code&gt;git clone git://git.qemu-project.org/qemu.git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;3.进入qemu的目录下面：&lt;code&gt;./configure --enable-debug --enable-tcg-interpreter --enable-sdl --enable-gtk --enable-debug-info --enable-kvm --enable-vnc --enable-curses --prefix=/home/wlwaq/qemu&lt;/code&gt;（prefix如果不配置默认是usr/local/bin，配置完的话运行就需要加前缀/home/wlwaq/qemu/bin如第六步）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;4.&lt;code&gt;sudo make -j4&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;5.&lt;code&gt;sudo make install&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux0.11" scheme="http://harmansecurity.cn/tags/Linux0-11/"/>
+    
+      <category term="QEMU" scheme="http://harmansecurity.cn/tags/QEMU/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux0.11系统调用原理</title>
+    <link href="http://harmansecurity.cn/2017/05/19/Linux0.11%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
+    <id>http://harmansecurity.cn/2017/05/19/Linux0.11系统调用原理/</id>
+    <published>2017-05-19T06:20:11.000Z</published>
+    <updated>2017-05-19T06:33:21.729Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p>1.sys_call.s程序的功能描述：在Linux中，用户使用中断调用int 0x80和放在寄存器eax中的功能号来使用内核提供的各种功能服务，这些操作系统提供的功能被称为系统调用功能。通常用户并不是直接使用系统调用中断，而是通过函数库(例如 libc)中提供的接口函数来调用的。例如创建进程的系统调用fork可直接使用函数fork()即可。函数库libc中的fork()函数会实现对中断int 0x80的调用过程并把调用结果返回给用户程序。</p>
+<p>由上可知：用户程序-&gt;libc.so-&gt;syscall-&gt;内核提供的各种服务</p>
+<p>2.对于所有系统调用的实现函数，内核把他们按照系统调用功能号顺序排列成一张函数指针（地址）表（在include/linux/sys.h文件中）。然后在中断int 0x80的处理过程中根据用户提供的功能号调用对应系统调用函数进行处理。</p>
+<a id="more"></a>
+<p>3.程序在执行的时候首先会检查eax中的功能号是否有效(在给定的范围内)，如果无效中断返回，有效的话通过一个地址跳转表<code>(sys_call_table)</code>调用相应系统调用的函数。</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%862.png" alt=""></p>
+<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
+<li><code>http://blog.csdn.net/sun20082567/article/details/38729561</code></li>
+<li><code>http://blog.csdn.net/yhf19881015/article/details/7570354</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;1.sys_call.s程序的功能描述：在Linux中，用户使用中断调用int 0x80和放在寄存器eax中的功能号来使用内核提供的各种功能服务，这些操作系统提供的功能被称为系统调用功能。通常用户并不是直接使用系统调用中断，而是通过函数库(例如 libc)中提供的接口函数来调用的。例如创建进程的系统调用fork可直接使用函数fork()即可。函数库libc中的fork()函数会实现对中断int 0x80的调用过程并把调用结果返回给用户程序。&lt;/p&gt;
+&lt;p&gt;由上可知：用户程序-&amp;gt;libc.so-&amp;gt;syscall-&amp;gt;内核提供的各种服务&lt;/p&gt;
+&lt;p&gt;2.对于所有系统调用的实现函数，内核把他们按照系统调用功能号顺序排列成一张函数指针（地址）表（在include/linux/sys.h文件中）。然后在中断int 0x80的处理过程中根据用户提供的功能号调用对应系统调用函数进行处理。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    
+      <category term="Linux0.11" scheme="http://harmansecurity.cn/tags/Linux0-11/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用户态和内核态</title>
+    <link href="http://harmansecurity.cn/2017/05/19/%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81/"/>
+    <id>http://harmansecurity.cn/2017/05/19/用户态和内核态/</id>
+    <published>2017-05-19T04:32:28.000Z</published>
+    <updated>2017-05-19T04:39:28.808Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、用户态和内核态的区别"><a href="#一、用户态和内核态的区别" class="headerlink" title="一、用户态和内核态的区别"></a>一、用户态和内核态的区别</h4><p>　 　当一个任务（进程）执行系统调用而陷入内核代码中执行时，我们就称进程处于内核运行态（或简称为内核态）。此时处理器处于特权级最高的（0级）内核 代码中执行。当进程处于内核态时，执行的内核代码会使用当前进程的内核栈。每个进程都有自己的内核栈。当进程在执行用户自己的代码时，则称其处于用户运行 态（用户态）。即此时处理器在特权级最低的（3级）用户代码中运行。当正在执行用户程序而突然被中断程序中断时，此时用户程序也可以象征性地称为处于进程 的内核态。因为中断处理程序将使用当前进程的内核栈。这与处于内核态的进程的状态有些类似。</p>
+<p>　 　内核态与用户态是操作系统的两种运行级别, 跟intel cpu没有必然的联系, intel cpu提供Ring0-Ring3三种级别的运行模式，Ring0级别高，Ring3最低。Linux使用了Ring3级别运行用户态，Ring0作为 内核态，没有使用Ring1和Ring2。Ring3状态不能访问Ring0的地址空间，包括代码和数据。Linux进程的4GB地址空间，3G-4G部 分大家是共享的，是内核态的地址空间，这里存放在整个内核的代码和所有的内核模块，以及内核所维护的数据。用户运行一个程序，该程序所创建的进程开始是运 行在用户态的，如果要执行文件操作，网络数据发送等操作，必须通过write，send等系统调用，这些系统调用会调用内核中的代码来完成操作，这时，必 须切换到Ring0，然后进入3GB-4GB中的内核地址空间去执行这些代码完成操作，完成后，切换回Ring3，回到用户态。这样，用户态的程序就不能随意操作内核地址空间，具有一定的安全保护作用。</p>
+<p>　 　至于说保护模式，是说通过内存页表操作等机制，保证进程间的地址空间不会互相冲突，一个进程的操作不会修改另一个进程的地址空间中的数据。</p>
+<a id="more"></a>
+<h4 id="二、用户态和内核态的转换"><a href="#二、用户态和内核态的转换" class="headerlink" title="二、用户态和内核态的转换"></a>二、用户态和内核态的转换</h4><p><strong>用户态切换到内核态的3种方式</strong></p>
+<ul>
+<li><p>a. 系统调用<br>　 　这是用户态进程主动要求切换到内核态的一种方式，用户态进程通过系统调用申请使 用操作系统提供的服务程序完成工作，比如前例中fork()实际上就是执行了一个创建新进程的系统调用。而系统调用的机制其核心还是使用了操作系统为用户 特别开放的一个中断来实现，例如Linux的int 80h中断。</p>
+</li>
+<li><p>b. 异常<br>　 　当CPU在执行运行在用户态下的程序时，发生了某些事先不可知的异常，这时会触发由当前运行进程切换到处理此异常的内核相关程序中，也就转到了内核态，比如缺页异常。</p>
+</li>
+<li><p>c. 外围设备的中断<br>　 　当外围设备完成用户请求的操作后，会向CPU发出相应的中断信号，这时CPU会 暂停执行下一条即将要执行的指令转而去执行与中断信号对应的处理程序，如果先前执行的指令是用户态下的程序，那么这个转换的过程自然也就发生了由用户态到 内核态的切换。比如硬盘读写操作完成，系统会切换到硬盘读写的中断处理程序中执行后续操作等。</p>
+</li>
+</ul>
+<p>　 　这3种方式是系统在运行时由用户态转到内核态的最主要方式，其中系统调用可以认为是用户进程主动发起的，异常和外围设备中断则是被动的。</p>
+<h4 id="三、参考资料"><a href="#三、参考资料" class="headerlink" title="三、参考资料"></a>三、参考资料</h4><ul>
+<li><code>http://www.cnblogs.com/viviwind/archive/2012/09/22/2698450.html</code></li>
+<li><code>http://blog.csdn.net/tommy_wxie/article/details/17122923/</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;一、用户态和内核态的区别&quot;&gt;&lt;a href=&quot;#一、用户态和内核态的区别&quot; class=&quot;headerlink&quot; title=&quot;一、用户态和内核态的区别&quot;&gt;&lt;/a&gt;一、用户态和内核态的区别&lt;/h4&gt;&lt;p&gt;　 　当一个任务（进程）执行系统调用而陷入内核代码中执行时，我们就称进程处于内核运行态（或简称为内核态）。此时处理器处于特权级最高的（0级）内核 代码中执行。当进程处于内核态时，执行的内核代码会使用当前进程的内核栈。每个进程都有自己的内核栈。当进程在执行用户自己的代码时，则称其处于用户运行 态（用户态）。即此时处理器在特权级最低的（3级）用户代码中运行。当正在执行用户程序而突然被中断程序中断时，此时用户程序也可以象征性地称为处于进程 的内核态。因为中断处理程序将使用当前进程的内核栈。这与处于内核态的进程的状态有些类似。&lt;/p&gt;
+&lt;p&gt;　 　内核态与用户态是操作系统的两种运行级别, 跟intel cpu没有必然的联系, intel cpu提供Ring0-Ring3三种级别的运行模式，Ring0级别高，Ring3最低。Linux使用了Ring3级别运行用户态，Ring0作为 内核态，没有使用Ring1和Ring2。Ring3状态不能访问Ring0的地址空间，包括代码和数据。Linux进程的4GB地址空间，3G-4G部 分大家是共享的，是内核态的地址空间，这里存放在整个内核的代码和所有的内核模块，以及内核所维护的数据。用户运行一个程序，该程序所创建的进程开始是运 行在用户态的，如果要执行文件操作，网络数据发送等操作，必须通过write，send等系统调用，这些系统调用会调用内核中的代码来完成操作，这时，必 须切换到Ring0，然后进入3GB-4GB中的内核地址空间去执行这些代码完成操作，完成后，切换回Ring3，回到用户态。这样，用户态的程序就不能随意操作内核地址空间，具有一定的安全保护作用。&lt;/p&gt;
+&lt;p&gt;　 　至于说保护模式，是说通过内存页表操作等机制，保证进程间的地址空间不会互相冲突，一个进程的操作不会修改另一个进程的地址空间中的数据。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="用户态" scheme="http://harmansecurity.cn/tags/%E7%94%A8%E6%88%B7%E6%80%81/"/>
+    
+      <category term="内核态" scheme="http://harmansecurity.cn/tags/%E5%86%85%E6%A0%B8%E6%80%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux0.11内核添加系统调用</title>
+    <link href="http://harmansecurity.cn/2017/05/19/Linux0.11%E5%86%85%E6%A0%B8%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    <id>http://harmansecurity.cn/2017/05/19/Linux0.11内核添加系统调用/</id>
+    <published>2017-05-19T03:18:32.000Z</published>
+    <updated>2017-05-19T03:37:12.521Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、实验步骤"><a href="#一、实验步骤" class="headerlink" title="一、实验步骤"></a>一、实验步骤</h4><p><strong>1.首先在linux0.11/lib下添加两个文件：writeeax.c,readeax.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> __LIBRARY__     !一边是两个下滑线</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line">_syscall0(<span class="keyword">int</span>,writeeax)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> __LIBRARY__     !一边是两个下滑线</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line">_syscall0(<span class="keyword">int</span>,readeax)</div></pre></td></tr></table></figure>
+<p><strong>2.接下来修改linux0.11/include下的unistd.h，添加两个系统调用号</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> __NR_writeeax 72   !NR前面2个_，72是比里面最大的调用号大1个数</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> __NR_readeax 73</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">writeeax</span><span class="params">(<span class="keyword">void</span>)</span></span>;    !在linux/include/unistd.h文件最下面添加</div><div class="line"><span class="function">Int <span class="title">readeax</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong>3.接着在linux/include/linux下的sys.h添加</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">sys_writeeax</span><span class="params">()</span></span>;</div><div class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">sys_readeax</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">!Sys.h下面的sys_call_table[]里面到末尾按顺序添加：</div><div class="line"></div><div class="line">sys_writeeax,sys_readeax</div></pre></td></tr></table></figure>
+<p><strong>4.到linux/kernel下编写一个mysys.c文件实现添加的两个系统调用函数</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E5%86%85%E6%A0%B8%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A81.png" alt=""></p>
+<p><strong>5.修改linux/kernel/Makefile最后面添加mysys.o</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E5%86%85%E6%A0%B8%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A83.png" alt=""></p>
+<p><strong>6.编写测试函数test.c</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E5%86%85%E6%A0%B8%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A82.png" alt=""></p>
+<h4 id="二、实验总结"><a href="#二、实验总结" class="headerlink" title="二、实验总结"></a>二、实验总结</h4><p>　 　在内核里面添加系统调用的基本步骤就是上面这几步，如果需要更深的了解还是需要好好找本内核的书《Linux内核完全剖析》来阅读，了解其中的原理。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;一、实验步骤&quot;&gt;&lt;a href=&quot;#一、实验步骤&quot; class=&quot;headerlink&quot; title=&quot;一、实验步骤&quot;&gt;&lt;/a&gt;一、实验步骤&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.首先在linux0.11/lib下添加两个文件：writeeax.c,readeax.c&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;define&lt;/span&gt; __LIBRARY__     !一边是两个下滑线&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;meta-string&quot;&gt;&amp;lt;unistd.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;_syscall0(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;,writeeax)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;define&lt;/span&gt; __LIBRARY__     !一边是两个下滑线&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;meta-string&quot;&gt;&amp;lt;unistd.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;_syscall0(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;,readeax)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;2.接下来修改linux0.11/include下的unistd.h，添加两个系统调用号&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;define&lt;/span&gt; __NR_writeeax 72   !NR前面2个_，72是比里面最大的调用号大1个数&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#&lt;span class=&quot;meta-keyword&quot;&gt;define&lt;/span&gt; __NR_readeax 73&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;writeeax&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;;    !在linux/include/unistd.h文件最下面添加&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;Int &lt;span class=&quot;title&quot;&gt;readeax&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    
+      <category term="Linux0.11" scheme="http://harmansecurity.cn/tags/Linux0-11/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux0.11获取系统调用号</title>
+    <link href="http://harmansecurity.cn/2017/05/19/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7/"/>
+    <id>http://harmansecurity.cn/2017/05/19/Linux0.11获取系统调用号/</id>
+    <published>2017-05-19T03:02:21.000Z</published>
+    <updated>2017-05-19T11:28:51.562Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、实验步骤"><a href="#一、实验步骤" class="headerlink" title="一、实验步骤"></a>一、实验步骤</h4><p><strong>1.修改linux0.11/kernel/sys_call.s添加call achieveEax</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.png" alt=""></p>
+<p><strong>2.在linux0.11/kernel底下添加achieveEax.c文件</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B72.png" alt=""></p>
+<a id="more"></a>
+<p><strong>3.修改linux0.11/kernel/Makefile添加achieveEax.o</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B73.png" alt=""></p>
+<p><strong>4.最后的运行结果</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B74.png" alt=""></p>
+<h4 id="二、实验平台"><a href="#二、实验平台" class="headerlink" title="二、实验平台"></a>二、实验平台</h4><ul>
+<li>1.实验平台源码：<code>https://github.com/harmansecurity/Linux0.11-ARMLinux2.67_learning/tree/master/hit-oslab-linux-20110823/oslab</code></li>
+<li>2.获取调用号源码：<code>https://github.com/harmansecurity/Linux0.11-ARMLinux2.67_learning/tree/master/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7</code></li>
+<li>3.实验平台使用：到“实验楼”搜索“操作系统原理与实践”：<code>https://www.shiyanlou.com/courses/115</code>,将第一个实验做一下就知道该如何使用平台了，这里不再赘述。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;一、实验步骤&quot;&gt;&lt;a href=&quot;#一、实验步骤&quot; class=&quot;headerlink&quot; title=&quot;一、实验步骤&quot;&gt;&lt;/a&gt;一、实验步骤&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.修改linux0.11/kernel/sys_call.s添加call achieveEax&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.在linux0.11/kernel底下添加achieveEax.c文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B72.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux0.11" scheme="http://harmansecurity.cn/tags/Linux0-11/"/>
+    
+      <category term="系统调用号" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Bochs运行Linux0.11内核</title>
+    <link href="http://harmansecurity.cn/2017/05/19/Bochs%E8%BF%90%E8%A1%8CLinux0.11%E5%86%85%E6%A0%B8/"/>
+    <id>http://harmansecurity.cn/2017/05/19/Bochs运行Linux0.11内核/</id>
+    <published>2017-05-19T02:36:21.000Z</published>
+    <updated>2017-05-19T11:32:08.383Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、Bochs安装"><a href="#一、Bochs安装" class="headerlink" title="一、Bochs安装"></a>一、Bochs安装</h4><p><strong>1.手动安装</strong></p>
+<p>具体的安装步骤可以参考这篇博客，很详细：<code>http://os.51cto.com/art/201407/446838_all.htm</code></p>
+<p>安装过程中遇到的一个小问题：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Bochs%E8%BF%90%E8%A1%8CLinux0.11%E5%86%85%E6%A0%B8.png" alt=""></p>
+<p>解决方法：我的解决方法与博客里面提到的不一样：打开Makefile文件，找到<code>X_LIBS=</code> 添加“-lpthread” 即 <code>X_LIBS=-lpthread.S</code></p>
+<p><strong>2.源安装</strong></p>
+<p>安装本身源里面的bochs:<code>sudo apt-get install bochs</code></p>
+<a id="more"></a>
+<h4 id="二、编译Linux0-11内核"><a href="#二、编译Linux0-11内核" class="headerlink" title="二、编译Linux0.11内核"></a>二、编译Linux0.11内核</h4><ul>
+<li>1.进入linux-0.11目录下：make 会提示: make：as86:命令未找到。解决办法是：<code>sudo apt-get install bin86</code></li>
+<li>2.因为我是64位的机器所以会报这样的错误：<code>boot/head.s :Error...........</code>。解决方法：在Makefile的as后面加 <code>--32</code>，注意“–”前面有空格；CFLAGS中加-m32，注意这个无空格。</li>
+</ul>
+<h4 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h4><p>　 　在Linux0.11编译的过程中会遇到很多问题，再加上Ubuntu各版本不同，需要耐心的解决。可编译成功的源码：<code>https://github.com/harmansecurity/Linux0.11-ARMLinux2.67_learning/tree/master/Linux-0.11-master</code>。与bochs集成的Linux0.11编译开发环境：<code>https://github.com/harmansecurity/Linux0.11-ARMLinux2.67_learning/tree/master/linux-0.11-devel-040809</code>。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;一、Bochs安装&quot;&gt;&lt;a href=&quot;#一、Bochs安装&quot; class=&quot;headerlink&quot; title=&quot;一、Bochs安装&quot;&gt;&lt;/a&gt;一、Bochs安装&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.手动安装&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;具体的安装步骤可以参考这篇博客，很详细：&lt;code&gt;http://os.51cto.com/art/201407/446838_all.htm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;安装过程中遇到的一个小问题：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/Bochs%E8%BF%90%E8%A1%8CLinux0.11%E5%86%85%E6%A0%B8.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;解决方法：我的解决方法与博客里面提到的不一样：打开Makefile文件，找到&lt;code&gt;X_LIBS=&lt;/code&gt; 添加“-lpthread” 即 &lt;code&gt;X_LIBS=-lpthread.S&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.源安装&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;安装本身源里面的bochs:&lt;code&gt;sudo apt-get install bochs&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Bochs" scheme="http://harmansecurity.cn/tags/Bochs/"/>
+    
+      <category term="Linux0.11" scheme="http://harmansecurity.cn/tags/Linux0-11/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>系统调用hook技术总结</title>
+    <link href="http://harmansecurity.cn/2017/05/19/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8Hook%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/"/>
+    <id>http://harmansecurity.cn/2017/05/19/系统调用Hook技术总结/</id>
+    <published>2017-05-19T02:13:21.000Z</published>
+    <updated>2017-05-19T11:25:37.538Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p>　 　Linux中实现系统调用时是利用了i386体系结构中的软中断，通过产生0x80中 断，使程序由用户态进入内核态执行系统调用函数。当系统调用发生时，产生0x80中断，CPU被切换到内核态执行中断向量表IDT对应的0x80中断处理函数，即跳转到了system_call()的入口，system_call()函数检查系统调用号，到系统调用表sys_call_table中找到该 系统调用（号）对应的内核函数入口，接着调用这个内核函数，然后返回。</p>
+<p>终端输入：<code>sudo cat /proc/kallsyms | grep sys_call_table</code></p>
+<p>终端输出：<code>ffffffff81a001c0 R sys_call_table</code></p>
+<p>由上面可发现其中 R 直接显示了这段内存是只读的性质，这就引出了第二步骤“取消页读写保护”。</p>
+<p><strong>整理出来的系统调用hook参考链接：</strong>(对hook感兴趣的可以了解下)</p>
+<ul>
+<li><code>http://www.tuicool.com/articles/nEnm2u</code></li>
+<li><code>http://blog.csdn.net/maochengtao/article/details/23598433</code></li>
+<li><code>http://blog.csdn.net/force_eagle/article/details/3938150</code></li>
+<li><code>http://blog.chinaunix.net/uid-9164976-id-2435342.html</code></li>
+<li><code>http://blog.chinaunix.net/uid-7330656-id-2644670.html</code></li>
+<li><code>http://www.oschina.net/code/snippet_54100_1509</code></li>
+<li><code>http://blog.sina.com.cn/s/blog_a2acdfc70100zqa7.html</code></li>
+<li><code>http://blog.csdn.net/sun20082567/article/details/38729561</code></li>
+</ul>
+<a id="more"></a>
+<h4 id="二、相关技术学习-C语言内联汇编的学习"><a href="#二、相关技术学习-C语言内联汇编的学习" class="headerlink" title="二、相关技术学习(C语言内联汇编的学习)"></a>二、相关技术学习(C语言内联汇编的学习)</h4><ul>
+<li><code>http://www.nagain.com/activity/article/18/</code></li>
+<li><code>http://blog.csdn.net/liuqiaoyu080512/article/details/8457528</code></li>
+<li><code>http://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html</code></li>
+</ul>
+<h4 id="三、naked函数"><a href="#三、naked函数" class="headerlink" title="三、naked函数"></a>三、naked函数</h4><p>　 　naked函数，即所谓的“裸函数”，对于这种函数，编译器不会生成任何函数入口代码和退出代码。这种函数一般应用在与操作系统内核相关的代码中，如中断处理函数、钩子函数等。 naked 特性仅适用于 x86和ARM，并不用于 x64 。</p>
+<p><code>__attribute__((naked)) void  test()</code></p>
+<p><strong>参考资料：</strong></p>
+<ul>
+<li><code>http://blog.atelier39.org/compiler_disasm/94.html</code></li>
+<li><code>http://www.cnblogs.com/jiu0821/p/4507281.html</code>  </li>
+</ul>
+<h4 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h4><p>　 　上面的参考链接对我当时学习系统调用hook技术有很大帮助，这里整理出来分享给大家。</p>
+<p>　 　<strong>源码地址是：<code>https://github.com/harmansecurity/Linux0.11-ARMLinux2.67_learning/tree/master/hookdemo</code></strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;　 　Linux中实现系统调用时是利用了i386体系结构中的软中断，通过产生0x80中 断，使程序由用户态进入内核态执行系统调用函数。当系统调用发生时，产生0x80中断，CPU被切换到内核态执行中断向量表IDT对应的0x80中断处理函数，即跳转到了system_call()的入口，system_call()函数检查系统调用号，到系统调用表sys_call_table中找到该 系统调用（号）对应的内核函数入口，接着调用这个内核函数，然后返回。&lt;/p&gt;
+&lt;p&gt;终端输入：&lt;code&gt;sudo cat /proc/kallsyms | grep sys_call_table&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;终端输出：&lt;code&gt;ffffffff81a001c0 R sys_call_table&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;由上面可发现其中 R 直接显示了这段内存是只读的性质，这就引出了第二步骤“取消页读写保护”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;整理出来的系统调用hook参考链接：&lt;/strong&gt;(对hook感兴趣的可以了解下)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;http://www.tuicool.com/articles/nEnm2u&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://blog.csdn.net/maochengtao/article/details/23598433&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://blog.csdn.net/force_eagle/article/details/3938150&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://blog.chinaunix.net/uid-9164976-id-2435342.html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://blog.chinaunix.net/uid-7330656-id-2644670.html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://www.oschina.net/code/snippet_54100_1509&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://blog.sina.com.cn/s/blog_a2acdfc70100zqa7.html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://blog.csdn.net/sun20082567/article/details/38729561&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    
+      <category term="hook" scheme="http://harmansecurity.cn/tags/hook/"/>
+    
+  </entry>
   
   <entry>
     <title>2017年4月小结</title>
@@ -3015,9 +3417,9 @@ System.out.println(&quot;y=&quot;+y);
     </summary>
     
     
-      <category term="计算机基础知识" scheme="http://harmansecurity.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
       <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="计算机基础知识" scheme="http://harmansecurity.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
   </entry>
   
@@ -3046,577 +3448,6 @@ System.out.println(&quot;y=&quot;+y);
     
     
       <category term="小记" scheme="http://harmansecurity.cn/tags/%E5%B0%8F%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ELK搭建社工库</title>
-    <link href="http://harmansecurity.cn/2017/02/25/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%93/"/>
-    <id>http://harmansecurity.cn/2017/02/25/ELK搭建社工库/</id>
-    <published>2017-02-25T07:07:21.000Z</published>
-    <updated>2017-02-25T08:13:13.359Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h4><h5 id="1-核心组成"><a href="#1-核心组成" class="headerlink" title="1.核心组成"></a>1.核心组成</h5><p>ELK由Elasticsearch、Logstash和Kibana三部分组件组成；</p>
-<ul>
-<li>Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。</li>
-<li>Logstash是一个完全开源的工具，他可以对你的日志进行收集、过滤，并将其存储供以后使用（如，搜索）。</li>
-<li>Kibana 也是一个开源和免费的工具，它Kibana可以为 Logstash 和 ElasticSearch 提供的日志分析友好的 Web 界面，可以帮助您汇总、分析和搜索重要数据日志。</li>
-</ul>
-<h5 id="2-三大组件"><a href="#2-三大组件" class="headerlink" title="2.三大组件"></a>2.三大组件</h5><ul>
-<li>Logstash: logstash server端用来搜集数据；</li>
-<li>Elasticsearch: 存储各类数据；</li>
-<li>Kibana: web化接口用作查寻和可视化数据；</li>
-</ul>
-<h5 id="3-工作流程"><a href="#3-工作流程" class="headerlink" title="3.工作流程"></a>3.工作流程</h5><p>　 　以日志分析为例：Logstash收集AppServer产生的Log，并存放到ElasticSearch集群中，而Kibana则从ES集群中查询数据生成图表，再返回给Browser。</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png" alt=""><br></div>
-
-<a id="more"></a>
-<h4 id="二、ELK搭建"><a href="#二、ELK搭建" class="headerlink" title="二、ELK搭建"></a>二、ELK搭建</h4><h5 id="1-系统环境"><a href="#1-系统环境" class="headerlink" title="1.系统环境"></a>1.系统环境</h5><ul>
-<li>win7(X86)</li>
-<li>ElasticSearch: 2.1.1</li>
-<li>Logstash: 1.5.1</li>
-<li>Kibana: 5.2.1</li>
-<li>JDK1.8(安装java至少7以上的版本,并且配置JAVA_HOME环境变量)</li>
-</ul>
-<h5 id="2-安装Elasticsearch"><a href="#2-安装Elasticsearch" class="headerlink" title="2.安装Elasticsearch"></a>2.安装Elasticsearch</h5><ul>
-<li>下载地址：<a href="https://www.elastic.co/downloads/" target="_blank" rel="external">https://www.elastic.co/downloads/</a></li>
-<li><p>解压即可，配置文件elasticsearch.yml,默认也行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#按照自己的需求修改也行，我选择的是默认，没有修改。</div><div class="line">cluster.name: esdemo #(集群的描述信息)</div><div class="line">node.name: 63 #(节点名称)</div><div class="line">network.host: 192.168.1.5 #(绑定的IP地址)</div><div class="line">http.port: 9200 #(端口号 默认9200)</div></pre></td></tr></table></figure>
-</li>
-<li><p>执行elasticsearch.bat即可启动</p>
-</li>
-</ul>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png" alt=""></p>
-<ul>
-<li>访问<code>http://localhost:9200</code>可查看是否正常运行，运行成功效果如下：</li>
-</ul>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%933.png" alt=""></p>
-<h5 id="3-安装Kibana"><a href="#3-安装Kibana" class="headerlink" title="3.安装Kibana"></a>3.安装Kibana</h5><ul>
-<li>下载地址：<a href="https://www.elastic.co/downloads/" target="_blank" rel="external">https://www.elastic.co/downloads/</a></li>
-<li>解压即可，执行kibana.bat启动即可启动</li>
-<li>访问<code>http://localhost:5601</code>可查看是否正常运行，运行成功效果如下：<br><img src="http://ojto7c1rw.bkt.clouddn.com/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%934.png" alt=""></li>
-</ul>
-<h5 id="4-安装logstash"><a href="#4-安装logstash" class="headerlink" title="4.安装logstash"></a>4.安装logstash</h5><ul>
-<li>下载地址：<a href="https://www.elastic.co/downloads/" target="_blank" rel="external">https://www.elastic.co/downloads/</a></li>
-<li>解压即可。</li>
-</ul>
-<h4 id="三、社工库搭建"><a href="#三、社工库搭建" class="headerlink" title="三、社工库搭建"></a>三、社工库搭建</h4><p>　 　因为是.sql文件，所以先导入mysql,然后再导出csv文件。也就是说不同的网站数据库最终全部是csv文件，并且是格式相同的csv。有字段不存在的则使用空字符替代。这样的话,可以在不更改logstash配置文件的情况下直接导入ES，也方便进行迁移。</p>
-<ul>
-<li><p>数据库中的文件导出csv文件格式。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> md5_sgk <span class="keyword">into</span> <span class="keyword">outfile</span> <span class="string">'f://scolib.csv'</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span><span class="keyword">optionally</span> <span class="keyword">enclosed</span> <span class="keyword">by</span> <span class="string">''</span><span class="keyword">lines</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">'/n'</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><p>新建logstash.config并进行配置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">input&#123;</div><div class="line">	file&#123;</div><div class="line">	    #需要被导入的数据库文件路径</div><div class="line">		path =&gt;&quot;f:/soclib.csv&quot;</div><div class="line">		start_position =&gt;beginning</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">filter&#123;</div><div class="line">	grok&#123;</div><div class="line">	    #表达式路径，这里自定义了一行内容S \s用来匹配换行符</div><div class="line">		patterns_dir =&gt;&quot;f:/test.txt&quot;</div><div class="line">		#写入ES的字段名</div><div class="line">		match =&gt;&#123;&quot;message&quot;=&gt;&quot;%&#123;DATA:id&#125;,%&#123;DATA:username&#125;,%&#123;DATA:password&#125;,%&#123;DATA:email&#125;,%&#123;DATA:salt&#125;,%&#123;DATA:order&#125;&quot;&#125;</div><div class="line">	&#125;</div><div class="line">	grok&#123;</div><div class="line">		#提取文件名</div><div class="line">		match =&gt;[&quot;path&quot;,&quot;f:/%&#123;GREEDYDATA:from&#125;\.csv&quot;]</div><div class="line">	&#125;</div><div class="line">	mutate&#123;</div><div class="line">		#删除一些ES自带的字段很占用空间</div><div class="line">		remove_field =&gt;[&quot;host&quot;,&quot;path&quot;,&quot;message&quot;]</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">output&#123;</div><div class="line">	elasticsearch&#123;</div><div class="line">		#ES地址</div><div class="line">		hosts =&gt; &quot;localhost:9200&quot;</div><div class="line">		#索引名称</div><div class="line">		index =&gt;&quot;sdb&quot;</div><div class="line">		document_type =&gt;&quot;sdb&quot;</div><div class="line">		#如果启用了shield则需要配置用户名和密码</div><div class="line">		#user =&gt;&quot;填写密码&quot;</div><div class="line">		#password =&gt;&quot;填写用户名&quot;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	stdout&#123;</div><div class="line">		codec=&gt;rubydebug</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>在logstash bin目录下面执行logstash.bat -f logstash.config</p>
-</li>
-</ul>
-<h4 id="四、参考文献"><a href="#四、参考文献" class="headerlink" title="四、参考文献"></a>四、参考文献</h4><ul>
-<li><code>http://www.tuicool.com/articles/uuaqeyf</code></li>
-<li>百度搜索ELK，对原理有大概的了解。</li>
-</ul>
-<h4 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h4><p>　 　上一篇文章没有做任何的处理，直接通过sql语句进行查询，数据库中大概有九千万的数据，查询一次需要四分钟左右，速度还是很慢的，之前在论坛里听有人说用ELK搭建，所以这次就试了下。ELK处理数据应该是特别快的，不过真的很迟内存，按照我上面的步骤没有错，不过执行到最后一步，电脑内存耗尽直接有点死了，由于装的是32位的系统，占用内存本来就比较小，所以我就终止了程序。如果有人感兴趣的话电脑配置也比较高可以按照我的步骤执行下，一起交流。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;一、简介&quot;&gt;&lt;a href=&quot;#一、简介&quot; class=&quot;headerlink&quot; title=&quot;一、简介&quot;&gt;&lt;/a&gt;一、简介&lt;/h4&gt;&lt;h5 id=&quot;1-核心组成&quot;&gt;&lt;a href=&quot;#1-核心组成&quot; class=&quot;headerlink&quot; title=&quot;1.核心组成&quot;&gt;&lt;/a&gt;1.核心组成&lt;/h5&gt;&lt;p&gt;ELK由Elasticsearch、Logstash和Kibana三部分组件组成；&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。&lt;/li&gt;
-&lt;li&gt;Logstash是一个完全开源的工具，他可以对你的日志进行收集、过滤，并将其存储供以后使用（如，搜索）。&lt;/li&gt;
-&lt;li&gt;Kibana 也是一个开源和免费的工具，它Kibana可以为 Logstash 和 ElasticSearch 提供的日志分析友好的 Web 界面，可以帮助您汇总、分析和搜索重要数据日志。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&quot;2-三大组件&quot;&gt;&lt;a href=&quot;#2-三大组件&quot; class=&quot;headerlink&quot; title=&quot;2.三大组件&quot;&gt;&lt;/a&gt;2.三大组件&lt;/h5&gt;&lt;ul&gt;
-&lt;li&gt;Logstash: logstash server端用来搜集数据；&lt;/li&gt;
-&lt;li&gt;Elasticsearch: 存储各类数据；&lt;/li&gt;
-&lt;li&gt;Kibana: web化接口用作查寻和可视化数据；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&quot;3-工作流程&quot;&gt;&lt;a href=&quot;#3-工作流程&quot; class=&quot;headerlink&quot; title=&quot;3.工作流程&quot;&gt;&lt;/a&gt;3.工作流程&lt;/h5&gt;&lt;p&gt;　 　以日志分析为例：Logstash收集AppServer产生的Log，并存放到ElasticSearch集群中，而Kibana则从ES集群中查询数据生成图表，再返回给Browser。&lt;/p&gt;
-&lt;div align=center&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ELK%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;
-    
-    </summary>
-    
-    
-      <category term="社工库" scheme="http://harmansecurity.cn/tags/%E7%A4%BE%E5%B7%A5%E5%BA%93/"/>
-    
-      <category term="Elasticsearch" scheme="http://harmansecurity.cn/tags/Elasticsearch/"/>
-    
-      <category term="Logstash" scheme="http://harmansecurity.cn/tags/Logstash/"/>
-    
-      <category term="Kinaba" scheme="http://harmansecurity.cn/tags/Kinaba/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>搭建社工库</title>
-    <link href="http://harmansecurity.cn/2017/02/20/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%93/"/>
-    <id>http://harmansecurity.cn/2017/02/20/搭建社工库/</id>
-    <published>2017-02-20T12:53:12.000Z</published>
-    <updated>2017-02-20T14:56:01.654Z</updated>
-    
-    <content type="html"><![CDATA[<p>　 　社工库顾名思义就是社工数据库查询工具。网站自称可帮助您判断您的密码或个人信息是否已经被公开或泄漏，即如果您输入自己密码可以在社工库上查到，就意味着你的账号已被盗（过）。这两天正好得到了一些数据，简单做一个社工库。</p>
-<h5 id="简单介绍下MySql的使用"><a href="#简单介绍下MySql的使用" class="headerlink" title="简单介绍下MySql的使用"></a>简单介绍下MySql的使用</h5><p>　 　由于我之前的数据库中已经有数据为了方便演示，我把数据删掉，正好也回顾一下MySql的使用。我使用的是Navicat这个支持MySql的可视化工具，由于数据比较多，我直接从CMD终端进行操作删除。</p>
-<ul>
-<li>很多时候我们电脑的MySQL服务没有开启，<code>net start mysql</code>开启MySQL服务。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png" alt=""><br></div></li>
-<li>进入MySQL数据库,在终端中输入<code>mysql -u root -p</code>,根据提示输入密码。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png" alt=""><br></div>
-
-</li>
-</ul>
-<a id="more"></a>
-<ul>
-<li>查看所有的数据库，<code>show databases;</code>我们会看到之前新建的数据库。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%933.png" alt=""><br></div></li>
-<li>使用之前的数据库<code>use &lt;库名&gt;;</code>,然后查看当前数据库下面的表,<code>show tables;</code>。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%934.png" alt=""><br></div></li>
-<li>删除表里面的所有数据<code>delete from &lt;表名&gt;;</code>。<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%935.png" alt=""><br></div>
-
-</li>
-</ul>
-<h5 id="处理数据，实现保存和查询的功能"><a href="#处理数据，实现保存和查询的功能" class="headerlink" title="处理数据，实现保存和查询的功能"></a>处理数据，实现保存和查询的功能</h5><p>　 　我得到的数据是txt格式，每一行是用户名，密码，邮箱，由于这一行数据可能是以多个空格或者分号或者只有用户名没有密码，所以还需要对每一行的数据进行适当的处理然后保存到数据库中。我读取了一下txt文件，txt中有二百多万条数据，大概花了40秒左右，但是将数据存储到数据库中花的时间太长了，由于时间的原因，只向数据库中插入了十万多条数据。</p>
-<ul>
-<li><p>对txt文件数据进行处理</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">readFileByLines</span><span class="params">(String fileName)</span></span>&#123;</div><div class="line">	File file = <span class="keyword">new</span> File(fileName);</div><div class="line">	<span class="comment">//用户名</span></div><div class="line">	String  userName=<span class="keyword">null</span>;</div><div class="line">	<span class="comment">//用户密码</span></div><div class="line">	String  userPwd=<span class="keyword">null</span>;</div><div class="line">	<span class="comment">//用户邮箱</span></div><div class="line">	String  userMail=<span class="keyword">null</span>;</div><div class="line">	BufferedReader reader = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		System.out.println(<span class="string">"以行为单位读取文件内容，一次读一整行："</span>);</div><div class="line">		reader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line">		String tempString=<span class="keyword">null</span>;</div><div class="line">		<span class="keyword">int</span> line=<span class="number">1</span>;</div><div class="line">	    <span class="comment">//开始时间</span></div><div class="line">		<span class="keyword">long</span> startTime=System.currentTimeMillis();</div><div class="line">		<span class="comment">// 一次读入一行，直到读入null为文件结束</span></div><div class="line">		<span class="keyword">while</span>((tempString=reader.readLine())!=<span class="keyword">null</span>)&#123;</div><div class="line">               <span class="comment">// 显示每行的数据</span></div><div class="line">              System.out.println(<span class="string">"line "</span> + line + <span class="string">": "</span> + tempString);</div><div class="line">               <span class="comment">//因为txt文件里每行数据可能是以多个空格或者;来分隔</span></div><div class="line">               String[]  tempArray = tempString.split(<span class="string">"\\s+|;"</span>);</div><div class="line">               <span class="comment">//有的数据里面只有用户名或者密码，缺少邮箱，不这样处理的话溢出</span></div><div class="line">               <span class="comment">//如果字符串只有用户名和密码，那么字符数组的长度为2</span></div><div class="line">               <span class="comment">//那么插入数据到数据库的时候，如果直接赋值tempArray[2]肯定会报错</span></div><div class="line">               <span class="keyword">if</span>(tempArray.length==<span class="number">2</span>)&#123;</div><div class="line">               	tempArray=(String[]) Arrays.copyOf(tempArray, tempArray.length+<span class="number">1</span>);</div><div class="line">               	tempArray[tempArray.length-<span class="number">1</span>]=<span class="string">" "</span>;</div><div class="line">               &#125;</div><div class="line">               <span class="comment">//System.out.println(tempArray[0]);</span></div><div class="line">               <span class="comment">//System.out.println(tempArray[1]);</span></div><div class="line">              <span class="comment">// System.out.println(tempArray[2]);</span></div><div class="line">               <span class="comment">//把拆分的数据分别赋值然后保存到数据库中</span></div><div class="line">               userName=tempArray[<span class="number">0</span>];</div><div class="line">               userPwd=tempArray[<span class="number">1</span>];</div><div class="line">               userMail=tempArray[<span class="number">2</span>];</div><div class="line">               <span class="comment">//把数据插入到数据库中</span></div><div class="line">               operateData.insertData(userName, userPwd, userMail);</div><div class="line">               line++;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//结束时间</span></div><div class="line">		<span class="keyword">long</span> endTime=System.currentTimeMillis();</div><div class="line">		<span class="comment">//程序运行的时间</span></div><div class="line">		<span class="keyword">double</span> seconds=(endTime-startTime)/<span class="number">1000.0</span>;</div><div class="line">		System.out.println(<span class="string">"程序运行的时间是："</span>+seconds+<span class="string">"s"</span>);</div><div class="line">		<span class="comment">//总共数据量</span></div><div class="line">		System.out.println(<span class="string">"总共数据量是："</span>+(line-<span class="number">1</span>));</div><div class="line">		reader.close();</div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;<span class="keyword">finally</span>&#123;</div><div class="line">		<span class="keyword">if</span>(reader!=<span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				reader.close();</div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e1) &#123;</div><div class="line">				<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>将处理完的数据保存到数据库中(插入操作)</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 将文本中的数据插入到数据库中</div><div class="line"> * <span class="doctag">@param</span> userName</div><div class="line"> * <span class="doctag">@param</span> userPwd</div><div class="line"> * <span class="doctag">@param</span> userMail</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertData</span><span class="params">(String userName,String userPwd,String userMail)</span></span>&#123;</div><div class="line">	ConnDB cdb = <span class="keyword">new</span> ConnDB();</div><div class="line">	String sql = <span class="string">"insert into userInfo (userName,userPwd,userMail) values ('"</span>+userName+<span class="string">"','"</span>+userPwd+<span class="string">"','"</span>+userMail+<span class="string">"')"</span>;</div><div class="line">	<span class="comment">//执行增删改</span></div><div class="line">	cdb.getModify(sql);</div><div class="line">	<span class="comment">//不知道是否插入成功，可通过下面的代码来判断</span></div><div class="line">	<span class="comment">/*	int i=cdb.getModify(sql);</span></div><div class="line">	  if(i==1)</div><div class="line">		System.out.println("添加成功");</div><div class="line">	else</div><div class="line">		System.out.println("添加失败");*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>对数据库中的数据进行查询(查询操作)</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 根据用户名或者邮箱查询数据</div><div class="line"> * <span class="doctag">@param</span> data</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">queryData</span><span class="params">(String data)</span></span>&#123;</div><div class="line">	    String userName=<span class="keyword">null</span>;</div><div class="line">        ConnDB cdb = <span class="keyword">new</span> ConnDB();</div><div class="line">		ResultSet rs = cdb.getSelect(<span class="string">"select * from userinfo where userName='"</span>+data+<span class="string">"' or userMail='"</span>+data+<span class="string">"';"</span>);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">while</span>(rs.next())&#123;</div><div class="line">				userName=rs.getString(<span class="string">"userName"</span>);</div><div class="line">				System.out.print(rs.getString(<span class="string">"userName"</span>)+<span class="string">"\t"</span>);</div><div class="line">				System.out.print(rs.getString(<span class="string">"userPwd"</span>)+<span class="string">"\t"</span>);</div><div class="line">				System.out.println(rs.getString(<span class="string">"userMail"</span>));</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;<span class="keyword">finally</span>&#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">if</span>(userName==<span class="keyword">null</span>)&#123;</div><div class="line">					System.out.println(<span class="string">"对不起，您查找的用户不存在！"</span>);</div><div class="line">				&#125;</div><div class="line">				cdb.closeResultSet(rs);</div><div class="line">			&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">				<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>Eclipse控制台运行效果</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%936.png" alt=""><br></div>
-</li>
-<li><p>该项目地址<br>GitHUB：<a href="https://github.com/harmansecurity/SocilaLibrary" target="_blank" rel="external">https://github.com/harmansecurity/SocilaLibrary</a></p>
-</li>
-</ul>
-<p>　 　还是个小白，要学的东西还有很多，待会儿我把代码上传到我的GitHub中，等明天电脑到之后准备搭一个渗透环境，多实践。提到电脑还是很感动的，因为实验室到现在还没有配台式机(这里我就不吐槽这件事了)，跟朋友说了下目前的情况，立马把她的旧电脑寄给我做实验了，满满的感动，感激。时间的原因，我先暂时不做一个网页了，做一个搜索的网页无非就是一个搜索栏然后连接数据库查询数据，实现起来不是很难。如果对数据感兴趣的朋友可以私聊我或者留言，到时候转发给你，如果做违法犯罪行为，本人概不负责任。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;　 　社工库顾名思义就是社工数据库查询工具。网站自称可帮助您判断您的密码或个人信息是否已经被公开或泄漏，即如果您输入自己密码可以在社工库上查到，就意味着你的账号已被盗（过）。这两天正好得到了一些数据，简单做一个社工库。&lt;/p&gt;
-&lt;h5 id=&quot;简单介绍下MySql的使用&quot;&gt;&lt;a href=&quot;#简单介绍下MySql的使用&quot; class=&quot;headerlink&quot; title=&quot;简单介绍下MySql的使用&quot;&gt;&lt;/a&gt;简单介绍下MySql的使用&lt;/h5&gt;&lt;p&gt;　 　由于我之前的数据库中已经有数据为了方便演示，我把数据删掉，正好也回顾一下MySql的使用。我使用的是Navicat这个支持MySql的可视化工具，由于数据比较多，我直接从CMD终端进行操作删除。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;很多时候我们电脑的MySQL服务没有开启，&lt;code&gt;net start mysql&lt;/code&gt;开启MySQL服务。&lt;div align=center&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%931.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;进入MySQL数据库,在终端中输入&lt;code&gt;mysql -u root -p&lt;/code&gt;,根据提示输入密码。&lt;div align=center&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/%E6%90%AD%E5%BB%BA%E7%A4%BE%E5%B7%A5%E5%BA%932.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;
-
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="社工库" scheme="http://harmansecurity.cn/tags/%E7%A4%BE%E5%B7%A5%E5%BA%93/"/>
-    
-      <category term="Java" scheme="http://harmansecurity.cn/tags/Java/"/>
-    
-      <category term="MySql" scheme="http://harmansecurity.cn/tags/MySql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Http抓包与调试(Wireshark)</title>
-    <link href="http://harmansecurity.cn/2017/02/14/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95(Wireshark)/"/>
-    <id>http://harmansecurity.cn/2017/02/14/Http抓包与调试(Wireshark)/</id>
-    <published>2017-02-14T06:23:27.000Z</published>
-    <updated>2017-02-14T14:22:50.605Z</updated>
-    
-    <content type="html"><![CDATA[<p> 　 　wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容，总结，<strong>如果是处理HTTP,HTTPS 还是用Fiddler, 其他协议比如TCP,UDP就用wireshark.</strong></p>
-<h6 id="1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考："><a href="#1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：" class="headerlink" title="1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考："></a>1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：</h6><ul>
-<li><code>http://blog.csdn.net/lina_acm/article/details/53404429</code></li>
-<li><code>http://www.cnblogs.com/dragonir/p/6219541.html</code></li>
-<li><code>http://www.9upk.com/article/2537.html</code></li>
-<li><code>http://www.cnblogs.com/TankXiao/archive/2012/10/10/2711777.html</code></li>
-<li><code>http://blog.jobbole.com/70907/</code>(一站式学习系列文章可以参考)</li>
-</ul>
-<a id="more"></a>
-<h6 id="2-比较详细的wireshark过滤规则"><a href="#2-比较详细的wireshark过滤规则" class="headerlink" title="2.比较详细的wireshark过滤规则"></a>2.比较详细的wireshark过滤规则</h6><ul>
-<li><code>http://blog.csdn.net/hzhsan/article/details/43453251</code></li>
-</ul>
-<h6 id="3-比较详细的wireshark使用教程文档"><a href="#3-比较详细的wireshark使用教程文档" class="headerlink" title="3.比较详细的wireshark使用教程文档"></a>3.比较详细的wireshark使用教程文档</h6><ul>
-<li><code>链接：http://pan.baidu.com/s/1nvCv52p 密码：s1vd</code></li>
-</ul>
-<h6 id="4-以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲解wireshark更加的详细，有时间的话可以学习下："><a href="#4-以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲解wireshark更加的详细，有时间的话可以学习下：" class="headerlink" title="4.以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲解wireshark更加的详细，有时间的话可以学习下："></a>4.以上的资料就是介绍了wireshark的基本用法，下面的视频教程讲解wireshark更加的详细，有时间的话可以学习下：</h6><ul>
-<li><code>http://edu.51cto.com/lesson/id-62644.html</code></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt; 　 　wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容，总结，&lt;strong&gt;如果是处理HTTP,HTTPS 还是用Fiddler, 其他协议比如TCP,UDP就用wireshark.&lt;/strong&gt;&lt;/p&gt;
-&lt;h6 id=&quot;1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：&quot;&gt;&lt;a href=&quot;#1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：&quot; class=&quot;headerlink&quot; title=&quot;1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：&quot;&gt;&lt;/a&gt;1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：&lt;/h6&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;http://blog.csdn.net/lina_acm/article/details/53404429&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;http://www.cnblogs.com/dragonir/p/6219541.html&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;http://www.9upk.com/article/2537.html&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;http://www.cnblogs.com/TankXiao/archive/2012/10/10/2711777.html&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;http://blog.jobbole.com/70907/&lt;/code&gt;(一站式学习系列文章可以参考)&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="Wireshark" scheme="http://harmansecurity.cn/tags/Wireshark/"/>
-    
-      <category term="抓包分析" scheme="http://harmansecurity.cn/tags/%E6%8A%93%E5%8C%85%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决端口被占用</title>
-    <link href="http://harmansecurity.cn/2017/02/10/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A8/"/>
-    <id>http://harmansecurity.cn/2017/02/10/解决端口被占用/</id>
-    <published>2017-02-10T12:45:13.000Z</published>
-    <updated>2017-02-10T13:09:34.114Z</updated>
-    
-    <content type="html"><![CDATA[<h5 id="1-开始—-gt-运行—-gt-cmd，调出命令窗口"><a href="#1-开始—-gt-运行—-gt-cmd，调出命令窗口" class="headerlink" title="1.开始—-&gt;运行—-&gt;cmd，调出命令窗口"></a>1.开始—-&gt;运行—-&gt;cmd，调出命令窗口</h5><h5 id="2-输入命令：netstat-ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。"><a href="#2-输入命令：netstat-ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。" class="headerlink" title="2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。"></a>2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。</h5><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A81.png" alt=""><br></div>
-
-<h5 id="3-查看被占用端口对应的PID，输入命令：netstat-aon-findstr-“4000”，回车，记下最后一位数字，即PID-这里是372"><a href="#3-查看被占用端口对应的PID，输入命令：netstat-aon-findstr-“4000”，回车，记下最后一位数字，即PID-这里是372" class="headerlink" title="3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372"></a>3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372</h5><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A82.png" alt=""><br></div>
-
-<a id="more"></a>
-<h5 id="4-继续输入tasklist-findstr-“372”，回车，查看是哪个进程或者程序占用了372端口"><a href="#4-继续输入tasklist-findstr-“372”，回车，查看是哪个进程或者程序占用了372端口" class="headerlink" title="4.继续输入tasklist|findstr “372”，回车，查看是哪个进程或者程序占用了372端口"></a>4.继续输入tasklist|findstr “372”，回车，查看是哪个进程或者程序占用了372端口</h5><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A83.png" alt=""><br></div>
-
-<h5 id="5-结束该进程：在任务管理器中选中该进程点击”结束进程“按钮，或者是在cmd的命令窗口中输入：taskkill-f-t-im-nvvsvc-exe"><a href="#5-结束该进程：在任务管理器中选中该进程点击”结束进程“按钮，或者是在cmd的命令窗口中输入：taskkill-f-t-im-nvvsvc-exe" class="headerlink" title="5.结束该进程：在任务管理器中选中该进程点击”结束进程“按钮，或者是在cmd的命令窗口中输入：taskkill /f /t /im nvvsvc.exe"></a>5.结束该进程：在任务管理器中选中该进程点击”结束进程“按钮，或者是在cmd的命令窗口中输入：taskkill /f /t /im nvvsvc.exe</h5><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A84.png" alt=""><br></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h5 id=&quot;1-开始—-gt-运行—-gt-cmd，调出命令窗口&quot;&gt;&lt;a href=&quot;#1-开始—-gt-运行—-gt-cmd，调出命令窗口&quot; class=&quot;headerlink&quot; title=&quot;1.开始—-&amp;gt;运行—-&amp;gt;cmd，调出命令窗口&quot;&gt;&lt;/a&gt;1.开始—-&amp;gt;运行—-&amp;gt;cmd，调出命令窗口&lt;/h5&gt;&lt;h5 id=&quot;2-输入命令：netstat-ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。&quot;&gt;&lt;a href=&quot;#2-输入命令：netstat-ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。&quot; class=&quot;headerlink&quot; title=&quot;2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。&quot;&gt;&lt;/a&gt;2.输入命令：netstat -ano，列出所有端口的情况。在列表中我们观察被占用的端口，比如是4000，首先找到它。&lt;/h5&gt;&lt;div align=center&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A81.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;3-查看被占用端口对应的PID，输入命令：netstat-aon-findstr-“4000”，回车，记下最后一位数字，即PID-这里是372&quot;&gt;&lt;a href=&quot;#3-查看被占用端口对应的PID，输入命令：netstat-aon-findstr-“4000”，回车，记下最后一位数字，即PID-这里是372&quot; class=&quot;headerlink&quot; title=&quot;3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372&quot;&gt;&lt;/a&gt;3.查看被占用端口对应的PID，输入命令：netstat -aon|findstr “4000”，回车，记下最后一位数字，即PID,这里是372&lt;/h5&gt;&lt;div align=center&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/%E8%A7%A3%E5%86%B3%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A82.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;
-    
-    </summary>
-    
-    
-      <category term="端口占用" scheme="http://harmansecurity.cn/tags/%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Http抓包与调试(Fiddler)</title>
-    <link href="http://harmansecurity.cn/2017/02/09/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95(Fiddler)/"/>
-    <id>http://harmansecurity.cn/2017/02/09/Http抓包与调试(Fiddler)/</id>
-    <published>2017-02-09T13:19:07.000Z</published>
-    <updated>2017-02-10T09:10:30.869Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="一、什么是Fiddler？"><a href="#一、什么是Fiddler？" class="headerlink" title="一、什么是Fiddler？"></a>一、什么是Fiddler？</h4><p>　 　1.Fiddler是位于客户端和服务器端的HTTP代理，也是目前最常用的http抓包工具之一。它能够记录客户端和服务器之间的所有HTTP请求，可以针对特定的HTTP请求，分析请求数据、设置断点、调试web应用、修改请求的数据，甚至可以修改服务器返回的数据，功能非常强大，是web调试的利器。既然是代理，也就是说：客户端的所有请求都要先经过Fiddler，然后转发到相应的服务器，反之，服务器端的所有响应，也都会先经过Fiddler然后发送到客户端，基于这个原因，Fiddler支持所有可以设置http代理为 127.0.0.1:8888 的浏览器和应用程序。<br>使用了Fiddler之后，web客户端和服务器的请求如下所示:</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%291.png" alt=""><br></div><br>　 　2.Fiddler 作为系统代理，当启用Fiddler时，IE的PROXY设定会变成 127.0.0.1:8888，因此如果你的浏览器在开启fiddler之后没有设置相应的代理，则fiddler是无法捕获到HTTP请求的。如下是启动Fiddler之后，IE浏览器的代理设置：<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%292.png" alt=""><br></div><br><a id="more"></a><br>　 　3.以Firefox为例，默认情况下，firefox是没有启用代理的（如果你安装了proxy等代理工具或插件，是另外一种情况），在firefox中配置http代理的步骤如下：工具-&gt;选项-&gt;高级-&gt;网络-&gt;设置。并配置相应的代理如下就可以使用Fiddler抓取Firefox的HTTP请求了。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%293.png" alt=""><br></div>
-
-<hr>
-<h4 id="二、Fiddler使用界面简介"><a href="#二、Fiddler使用界面简介" class="headerlink" title="二、Fiddler使用界面简介"></a>二、Fiddler使用界面简介</h4><p>Fiddler主界面的布局如下：</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%294.png" alt=""><br></div>
-
-<h6 id="主界面中主要包括四个常用的块："><a href="#主界面中主要包括四个常用的块：" class="headerlink" title="主界面中主要包括四个常用的块："></a>主界面中主要包括四个常用的块：</h6><ul>
-<li>Fiddler的菜单栏，上图绿色部分。包括捕获http请求，停止捕获请求，保存http请求，载入本地session、设置捕获规则等功能。</li>
-<li>Fiddler的工具栏,上图红色部分。<code>Replay：回放按钮;</code> <code>X：清空监控面板；</code> <code>Go：调试Debug；</code> <code>Stream：模式切换；（流模式与缓冲模式）</code> <code>Decode：解压请求；</code> <code>Keep session：保持会话；</code> <code>Any Process：过滤请求；（如只查看Chrome的请求）</code> <code>Find：查找；</code> <code>Save：保存会话；</code> <code>保存截图；</code> <code>计时器；</code> <code>Browser：快速启动浏览器；</code> <code>TextWizard：编码/解码；（非常常用）</code> <code>Tearoff：分离面板；</code> <code>MSDN Search：MSDN搜索；</code></li>
-<li>web Session面板，上图黄色区域，主要是Fiddler抓取到的每条http请求（每一条称为一个session）,主要包含了请求的url，协议，状态码，body等信息，详细的字段含义如下图所示：<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%295.png" alt=""><br></div></li>
-<li>详情和数据统计面板。针对每条http请求的具体统计（例如发送/接受字节数，发送/接收时间，还有粗略统计世界各地访问该服务器所花费的时间）和数据包分析。如inspector面板下，提供headers、textview、hexview,Raw等多种方式查看单条http请求的请求报文的信息：<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%296.png" alt=""><br></div><br>而composer面板下，则可以模拟向相应的服务器发送数据的过程（这就是灌水机器人的基本原理,也可以是部分http flood的一种方式）。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%297.png" alt=""><br></div><br>也可以粘贴一次请求的raw http headers,达到模拟请求的目的：<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%298.png" alt=""><br></div>
-
-</li>
-</ul>
-<hr>
-<h4 id="三、Fiddler内置命令"><a href="#三、Fiddler内置命令" class="headerlink" title="三、Fiddler内置命令"></a>三、Fiddler内置命令</h4><p>　 　为了更加方便的管理所有的session, Fiddler提供了一系列内置的函数用于筛选和操作这些session.输入命令的位置在websession管理面板的下方（通过快捷键alt+q可以focus到命令行）.<br>Fiddler内置的命令有如下几种：</p>
-<h6 id="1-select命令。"><a href="#1-select命令。" class="headerlink" title="1. select命令。"></a>1. select命令。</h6><p>选择所有相应类型（指content-type）为指定类型的HTTP请求，如选择图片，使用命令<code>select image</code>.而<code>select css</code>则可以选择所有相应类型为css的请求，<code>select html</code>则选择所有响应为HTML的请求（怎么样，是不是跟SQL语句很像？）。如图是执行<code>select image</code>之后的结果：</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%299.png" alt=""><br></div>
-
-<h6 id="2-allbut命令。"><a href="#2-allbut命令。" class="headerlink" title="2. allbut命令。"></a>2. allbut命令。</h6><p>allbut命令用于选择所有响应类型不是给定类型的HTTP请求。如allbut image用于选择所有相应类型不是图片的session(HTTP请求)，该命令还有一个别名keeponly.需要注意的是，keeponly和allbut命令是将不是该类型的session删除，留下的都是该类型的响应。因此，如果你执行allbut xxxx（不存在的类型），实际上类似与执行cls命令（删除所有的session, ctrl+x快捷键也是这个作用）</p>
-<h6 id="3-text命令"><a href="#3-text命令" class="headerlink" title="3. ?text命令"></a>3. ?text命令</h6><p>选择所有 URL 匹配问号后的字符的全部 session</p>
-<h6 id="4-gt-size-和-lt-size命令"><a href="#4-gt-size-和-lt-size命令" class="headerlink" title="4. &gt;size 和 &lt;size命令"></a>4. &gt;size 和 &lt;size命令</h6><p>选择响应大小大于某个大小（单位是b）或者小于某个大小的所有HTTP请求</p>
-<h6 id="5-status命令"><a href="#5-status命令" class="headerlink" title="5. =status命令"></a>5. =status命令</h6><p>选择响应状态等于给定状态的所有HTTP请求。<br><br>例如，选择所有状态为200的HTTP请求：=200<br></p>
-<h6 id="6-host命令"><a href="#6-host命令" class="headerlink" title="6. @host命令"></a>6. @host命令</h6><p>选择包含指定 HOST 的全部 HTTP请求。例如：@csdn.net<br><br>选择所有host包含csdn.net的请求<br></p>
-<h6 id="7-Bpafter，-Bps-bpv-bpm-bpu"><a href="#7-Bpafter，-Bps-bpv-bpm-bpu" class="headerlink" title="7. Bpafter， Bps, bpv, bpm, bpu"></a>7. Bpafter， Bps, bpv, bpm, bpu</h6><p>这几个命令主要用于批量设置断点：<br><br>Bpafter xxx: 中断 URL 包含指定字符的全部 session 响应<br><br>Bps xxx: 中断 HTTP 响应状态为指定字符的全部 session 响应。<br><br>Bpv xxx: 中断指定请求方式的全部 session 响应<br><br>Bpm xxx: 中断指定请求方式的全部 session 响应。等同于bpv xxx<br><br>Bpu xxx:与bpafter类似。<br><br>当这些命令没有加参数时，会清空所有设置了断点的HTTP请求。<br></p>
-<hr>
-<h4 id="四、Fiddler抓包分析"><a href="#四、Fiddler抓包分析" class="headerlink" title="四、Fiddler抓包分析"></a>四、Fiddler抓包分析</h4><p>　 　抓包是Fiddler的最基本的应用，在Fiddler的web session界面捕获到HTTP请求。各字段的详细说明已经解释过，这里不再说明。需要注意的是#号列中的图标，每种图标代表不同的相应类型，具体的类型包括：</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2910.png" alt=""><br></div><br>另外，注意请求的host字段。可以看到有来自多个www.csdn.net的子域名的响应，说明在大型网站的架构中，大多需要多个子域名，这些子域名可能是单独用于缓存静态资源的，也可能是专门负责媒体资源的，或者是专门负责数据统计的（如pingback）。<br><em>右键单击其中的一条请求。可以选择的操作有：save(保存请求的报文信息，可以是请求报文，可以是响应报文)。</em><br><em>如果想要重新发送某些请求，可以选中这些请求，然后点击工具栏中的reply.就可以重新发送选中的这些请求。</em><br><strong>左键点击单条HTTP请求，可以在右侧的tab面板中看到如下信息：</strong><br><br><strong>(1). Statistic。</strong><br>关于HTTP请求的性能和其他数据分析，使用Statistics页签，用户可以通过选择多个会话来得来这几个会话的总的信息统计，比如多个请求和传输的字节数。选择第一个请求和最后一个请求，可获得整个页面加载所消耗的总体时间。从条形图表中还可以分别出哪些请求耗时最多，从而对页面的访问进行访问速度优化。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2911.png" alt=""><br></div>
-
-<p><strong>(2). Inspectors。</strong><br>分为上下两个部分，上半部分是请求头部分，下半部分是响应头部分。对于每一部分，提供了多种不同格式查看每个请求和响应的内容。JPG 格式使用 ImageView 就可以看到图片，HTML/JS/CSS 使用 TextView可以看到响应的内容。Raw标签可以查看原始的符合HTTP标准的请求和响应头。Auth则可以查看授权Proxy-Authorization和Authorization的相关信息。Cookies标签可以看到请求的cookie和响应的set-cookie头信息。</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2912.png" alt=""><br></div>
-
-<ul>
-<li>Http Request Header<h6 id="Cache-头域"><a href="#Cache-头域" class="headerlink" title="Cache 头域"></a>Cache 头域</h6>If-Modified-Since作用：把浏览器端缓存页面的最后修改时间发送到服务器去，服务器会把这个时间与服务器上实际文件的最后修改时间进行对比。如果时间一致，那么返回304，客户端 就直接使用本地缓存文件。如果时间不一致，就会返回200和新的文件内容。客户端接到之后，会丢弃旧文件，把新文件缓存起来，并显示在浏览器中。例如：If-Modified-Since: Thu, 09 Feb 2012 09:07:57 GMT<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2913.png" alt=""><br></div><br>If-None-Match作用: If-None-Match和ETag一起工作，工作原理是在HTTP Response中添加ETag信息。 当用户再次请求该资源时，将在HTTP Request 中加入If-None-Match信息(ETag的值)。如果服务器验证资源的ETag没有改变（该资源没有更新），将返回一个304状态告诉客户端使用 本地缓存文件。否则将返回200状态和新的资源和Etag.  使用这样的机制将提高网站的性能例如: If-None-Match: “03f2b33c0bfcc1:0”<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2914.png" alt=""><br></div><br>Pragma作用：防止页面被缓存， 在HTTP/1.1版本中，它和Cache-Control:no-cache作用一模一样。Pargma只有一个用法，例如：Pragma: no-cache.<br>注意: 在HTTP/1.0版本中，只实现了Pragema:no-cache, 没有实现Cache-Control。Cache-Control作用: 这个是非常重要的规则。 这个用来指定Response-Request遵循的缓存机制。各个指令含义如下</li>
-</ul>
-<p>Cache-Control:Public   可以被任何缓存所缓存（）</p>
-<p>Cache-Control:Private     内容只缓存到私有缓存中</p>
-<p>Cache-Control:no-cache  所有内容都不会被缓存</p>
-<h4 id="Client-头域"><a href="#Client-头域" class="headerlink" title="Client 头域"></a>Client 头域</h4><p> Accept: text/html代表浏览器可以接受服务器回发的类型为 text/html  也就是我们常说的html文档,如果服务器无法返回text/html类型的数据，服务器应该返回一个406错误(non acceptable)。</p>
-<p> Accept: <em>/</em>  代表浏览器可以处理所有类型，(一般浏览器发给服务器都是发这个)。</p>
-<p> Accept-Encoding：作用：浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法（gzip，deflate），（注意：这不是只字符编码）。</p>
-<p>Accept-Language作用： 浏览器申明自己接收的语言。 </p>
-<p>User-Agent作用：告诉HTTP服务器， 客户端使用的操作系统和浏览器的名称和版本.我们上网登陆论坛的时候，往往会看到一些欢迎信息，其中列出了你的操作系统的名称和版本，你所使用的浏览器的名称和版本，这往往让很多人感到很神奇，实际上，服务器应用程序就是从User-Agent这个请求报头域中获取到这些信息User-Agent请求报头域允许客户端将它的操作系统、浏览 器和其它属性告诉服务器。</p>
-<p>Accept-Charset作用：浏览器申明自己接收的字符集，这就是本文前面介绍的各种字符集和字符编码，如gb2312，utf-8（通常我们说Charset包括了相应的字符编码方案）</p>
-<h6 id="Cookie-Login-头域"><a href="#Cookie-Login-头域" class="headerlink" title="Cookie/Login 头域"></a>Cookie/Login 头域</h6><p>Cookie:作用：最重要的header, 将cookie的值发送给HTTP 服务器</p>
-<h6 id="Entity头域"><a href="#Entity头域" class="headerlink" title="Entity头域"></a>Entity头域</h6><p>Content-Length作用：发送给HTTP服务器数据的长度。</p>
-<p>Content-Type: application/x-www-form-urlencoded</p>
-<h6 id="Miscellaneous-头域"><a href="#Miscellaneous-头域" class="headerlink" title="Miscellaneous 头域"></a>Miscellaneous 头域</h6><p>Referer:作用：提供了Request的上下文信息的服务器，告诉服务器我是从哪个链接过来的，比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p>
-<h6 id="Transport-头域"><a href="#Transport-头域" class="headerlink" title="Transport 头域"></a>Transport 头域</h6><p>Connection</p>
-<p>例如：Connection: keep-alive   当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接</p>
-<p>例如：Connection: close  代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭， 当客户端再次发送Request，需要重新建立TCP连接。</p>
-<p>Host（发送请求时，该报头域是必需的）作用: 请求报头域主要用于指定被请求资源的Internet主机和端口号，它通常从HTTP URL中提取出来的。例如: 我们在浏览器中输入：<code>http://www.guet.edu.cn/index.html</code>。浏览器发送的请求消息中，就会包含Host请求报头域，如下：<code>Host：http://www.guet.edu.cn</code>此处使用缺省端口号80，若指定了端口号，则变成：Host：指定端口号</p>
-<p><strong>(3). AutoResponder。</strong><br>Fiddler比较重要且比较强大的功能之一。可用于拦截某一请求，并重定向到本地的资源，或者使用Fiddler的内置响应。可用于调试服务器端代码而无需修改服务器端的代码和配置，因为拦截和重定向后，实际上访问的是本地的文件或者得到的是Fiddler的内置响应。当勾选EnableRules并设置相应的规则后（本例中的规则是将<code>http://www.cnblogs.com/HYanqing/p/5294968.html</code>的请求拦截到本地的文件）,如下图所示:</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2915.png" alt=""><br></div><br>然后在浏览器中访问<code>http://www.cnblogs.com/HYanqing/p/5294968.html</code>，得到的结果实际为本地的网页。说明请求已经成功被拦截到本地.当然也可以使用Fiddler的内置响应。因此如果要调试服务器的某个脚本文件，可以将该脚本拦截到本地，在本地修改完脚本之后，再修改服务器端的内容，这可以保证，尽量在真实的环境下去调试，从而最大限度的减少bug发生的可能性。<br><br>不仅是单个url，Fiddler支持多种url匹配的方式：<br><br>I. 字符匹配<br><br>如 example可以匹配 <code>http://www.example.com</code>和<code>http://example.com.cn</code><br><br>II. 完全匹配<br><br>以EXACT开头表示完全匹配，如上边的例子<br><br>EXACT:<code>http://www.cnblogs.com/HYanqing/p/5294968.html</code><br><br>III. 正则表达式匹配<br><br>以regex: 开头，使用正则表达式来匹配URL.如：<code>regex:(?insx).*\.(css|js|php)$</code>  表示匹配所有以css,js,php结尾的请求url<br><br><strong>(4). Composer。（模拟请求）</strong><br>老版本的fiddler中叫request-builder.顾名思义，可以构建相应的请求，有两种常用的方式构建请求:<br><br>(1)Parsed 输入请求的url之后executed即可，也可以修改相应的头信息（如添加常用的accept, host, referrer, cookie，cache-control等头部）后execute.这个功能的常见应用是：“刷票”（不是火车票！！），如刷新页面的访问量。<br><br>(2)Raw。使用HTTP头部信息构建http请求。与上类似。不多叙述<br><br><strong>(5). Filter。</strong><br>Fiddler另一个比较强大的功能。Fiddler提供了多维度的过滤规则，足以满足日常开发调试的需求。<br><br>过滤规则有：<br><br>a. host和zone过滤。可以过滤只显示intranet或则internet的HTTP请求。也可以选择特定域名的HTTP请求。<br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2916.png" alt=""><br></div><br>b. client process:可以捕获指定进程的请求。这对于调试单个应用的请求很有帮助。<br><br><strong>五、Fiddler中设置断点修改Request</strong><br>　 　Fiddler最强大的功能莫过于设置断点了，设置好断点后，你可以修改httpRequest的任何信息包括host,cookie或者表单中的数据。设置断点有两种方法：<br><br>第一种：打开Fiddler 点击Rules-&gt; Automatic Breakpoint  -&gt;Before Requests(这种方法会中断所有的会话)<br><br>如何消除命令呢？  点击Rules-&gt; Automatic Breakpoint  -&gt;Disabled<br><br>第二种:  在命令行中输入命令:  bpu www.baidu.com   (这种方法只会中断www.baidu.com)<br><br>如何消除命令呢？  在命令行中输入命令 bpu<br><br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2917.jpg" alt=""><br></div><br>看个实例，模拟麦子学院的登录，在火狐中打开麦子学院的登录页面，输入错误的用户名和密码，用Fiddler中断会话，修改成正确的用户名密码。这样就能成功登录：<br><br>1. 用火狐打开麦子学院的登录界面  <code>http://www.maiziedu.com/</code><br><br>2. 打开Fiddler,  在命令行中输入bpu <code>http://www.maiziedu.com/</code><br><br>3. 输入错误的用户名和密码，点击登录<br><br>4. Fiddler 能中断这次会话，选择被中断的会话，点击Inspectors tab下的WebForms tab 修改用户名密码，然后点击Run to Completion 如下图所示:<br><br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2918.png" alt=""><br></div><br>5. 结果是正确地登录了麦子学院<br><br><strong>六、Fiddler中设置断点修改Response</strong><br>当然Fiddler中也能修改Response：<br><br>第一种：打开Fiddler 点击Rules-&gt; Automatic Breakpoint  -&gt;After Response  (这种方法会中断所有的会话)<br><br>如何消除命令呢？  点击Rules-&gt; Automatic Breakpoint  -&gt;Disabled<br><br>第二种:  在命令行中输入命令:  bpuafter www.baidu.com   (这种方法只会中断www.baidu.com)<br><br>如何消除命令呢？  在命令行中输入命令 bpuafter<br><br><div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2919.jpg" alt=""><br></div>
-
-<hr>
-<h4 id="七、Watcher-安全扫描工具，第三方扩展"><a href="#七、Watcher-安全扫描工具，第三方扩展" class="headerlink" title="七、Watcher(安全扫描工具，第三方扩展)"></a>七、Watcher(安全扫描工具，第三方扩展)</h4><p>　 　Watcher是一个实时的，被动分析基于HTTP协议的Web应用程序的安全工具(Fiddler插件)。所谓被动分析就是指它不会对现有系统产生任何破坏。Watcher可以被安全的用于分布式网络，共享式网络和专用宿主网络。Watcher能够自动检查这些问题：cookie设置、SSL配置、信息泄露等。另外，Watcher是一个非常好的HTTP协议调试工具，不过，它的HTTP调试功能是以Fiddler插件方式工作的。总之，Watcher是一个很好的渗透测试工具，有助于渗透测试人员的渗透测试工作。</p>
-<div align="center"><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%2920.png" alt=""><br></div>
-
-<hr>
-<h4 id="八、参考文献"><a href="#八、参考文献" class="headerlink" title="八、参考文献"></a>八、参考文献</h4><ul>
-<li><code>http://www.cnblogs.com/HYanqing/p/5294968.html</code></li>
-<li><code>http://blog.csdn.net/ohmygirl/article/details/17846199</code></li>
-<li><code>http://blog.csdn.net/ohmygirl/article/details/17849983</code></li>
-<li><code>http://www.imooc.com/course/note/id/37?sort=last&amp;page=1</code></li>
-<li><code>http://www.freebuf.com/sectool/6770.html</code></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;一、什么是Fiddler？&quot;&gt;&lt;a href=&quot;#一、什么是Fiddler？&quot; class=&quot;headerlink&quot; title=&quot;一、什么是Fiddler？&quot;&gt;&lt;/a&gt;一、什么是Fiddler？&lt;/h4&gt;&lt;p&gt;　 　1.Fiddler是位于客户端和服务器端的HTTP代理，也是目前最常用的http抓包工具之一。它能够记录客户端和服务器之间的所有HTTP请求，可以针对特定的HTTP请求，分析请求数据、设置断点、调试web应用、修改请求的数据，甚至可以修改服务器返回的数据，功能非常强大，是web调试的利器。既然是代理，也就是说：客户端的所有请求都要先经过Fiddler，然后转发到相应的服务器，反之，服务器端的所有响应，也都会先经过Fiddler然后发送到客户端，基于这个原因，Fiddler支持所有可以设置http代理为 127.0.0.1:8888 的浏览器和应用程序。&lt;br&gt;使用了Fiddler之后，web客户端和服务器的请求如下所示:&lt;/p&gt;
-&lt;div align=center&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%291.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;br&gt;　 　2.Fiddler 作为系统代理，当启用Fiddler时，IE的PROXY设定会变成 127.0.0.1:8888，因此如果你的浏览器在开启fiddler之后没有设置相应的代理，则fiddler是无法捕获到HTTP请求的。如下是启动Fiddler之后，IE浏览器的代理设置：&lt;br&gt;&lt;div align=center&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%292.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Http抓包与调试" scheme="http://harmansecurity.cn/tags/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95/"/>
-    
-      <category term="Fiddler" scheme="http://harmansecurity.cn/tags/Fiddler/"/>
-    
-      <category term="浏览器代理" scheme="http://harmansecurity.cn/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BB%A3%E7%90%86/"/>
-    
-      <category term="拦截请求或响应" scheme="http://harmansecurity.cn/tags/%E6%8B%A6%E6%88%AA%E8%AF%B7%E6%B1%82%E6%88%96%E5%93%8D%E5%BA%94/"/>
-    
-      <category term="抓包和重放" scheme="http://harmansecurity.cn/tags/%E6%8A%93%E5%8C%85%E5%92%8C%E9%87%8D%E6%94%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Http抓包与调试(Firefox插件)</title>
-    <link href="http://harmansecurity.cn/2017/01/19/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95(Firefox%E6%8F%92%E4%BB%B6)/"/>
-    <id>http://harmansecurity.cn/2017/01/19/Http抓包与调试(Firefox插件)/</id>
-    <published>2017-01-19T08:22:55.000Z</published>
-    <updated>2017-01-19T12:45:56.850Z</updated>
-    
-    <content type="html"><![CDATA[<p>　 　这边主要介绍火狐的几款插件工具分别是Firebug、TamperData、LiveHttpHeaders、Hackbar和ModifyHeaders，它们可以用来测试和发掘Web应用程序中的跨站漏洞。</p>
-<hr>
-<h4 id="1-Firebug-抓包与各种调试"><a href="#1-Firebug-抓包与各种调试" class="headerlink" title="1.Firebug(抓包与各种调试)"></a>1.Firebug(抓包与各种调试)</h4><p>　 　Firebug是Firefox浏览器的一个扩展插件，可以动态修改html代码、探索DOM结构、监视网络请求和响应、调试和监测任何页面的CSS、HTML和JavaScript等等。</p>
-<h5 id="1-安装城成功后按F12启动Firebug"><a href="#1-安装城成功后按F12启动Firebug" class="headerlink" title="1)安装城成功后按F12启动Firebug"></a>1)安装城成功后按F12启动Firebug</h5><p>　 　打开Firebug后，看到六个标签按钮分别是（控制台、HTML查看器、CSS查看器、脚本调试器、DOM查看器、网络状况监视器）。</p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%951.png" alt=""></p>
-<h5 id="2-控制台"><a href="#2-控制台" class="headerlink" title="2)控制台"></a>2)控制台</h5><p>　 　控制台能够显示当前页面中的JavaScript错误以及警告，并提示出错的文件和行号，使用控制台可以测试一段代码或者函数的执行时间。启用控制台，在窗口的底部能看到命令行输入，以“&gt;”开头，在这里输入JavaScript代码后按Enter键即可执行。<br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%952.png" alt=""><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%953.png" alt=""><br><a id="more"></a></p>
-<h5 id="3-动态修改HTML元素"><a href="#3-动态修改HTML元素" class="headerlink" title="3)动态修改HTML元素"></a>3)动态修改HTML元素</h5><p>　 　Frebug可以显示脚本输出的最终源代码，而html查看器只能显示页面本身的源代码。单击查看页面元素按钮，当光标停留在某个元素上时，浏览器会高亮显示对应元素，可以对页面文本节点进行修改，其修改结果马上回反映到浏览器窗口。<br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%954.png" alt=""></p>
-<h5 id="4-查看网络状况"><a href="#4-查看网络状况" class="headerlink" title="4)查看网络状况"></a>4)查看网络状况</h5><p>　 　将Frebug的当前标签切换到“网络”，该标签用来监控网络流量。如果通过XMLHttpRequest对象向服务器端发出一个请求，Firebug会记录该请求的GET或者POST内容，以及回应的头信息和内容。Firebug也能将页面中的CSS、JavaScript以及网页中引用的图片载入所消耗的时间以矩状图显示出来，通过右键就可以复制文件地址、HTTP请求头的信息和响应头信息等等。以登录麦子学院网站为例，惊奇的发现它的账号和密码都是明文传输。:)<br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%955.png" alt=""><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%956.png" alt=""><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%957.png" alt=""></p>
-<h5 id="5-DOM查看器"><a href="#5-DOM查看器" class="headerlink" title="5)DOM查看器"></a>5)DOM查看器</h5><p>　 　DOM包含了大量的对象以及函数，事件，通过使用Firebug可以检查当前打开程序的各个部分。<br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%958.png" alt=""></p>
-<hr>
-<h4 id="2-Tamper-Data-拦截修改"><a href="#2-Tamper-Data-拦截修改" class="headerlink" title="2.Tamper Data(拦截修改)"></a>2.Tamper Data(拦截修改)</h4><p>　 　当测试Web应用程序的安全性的时候，经常会需要对HTTP流量进行分析和动态的修改，这时就需要用到这款工具。安装成功后，在Firefox的工具栏打开，随后在浏览网页的时候发出的每一个Http请求及其对应的响应都会被Tamper Data记录下来。</p>
-<h5 id="1-Tamper-Data界面主要是由三部分组成"><a href="#1-Tamper-Data界面主要是由三部分组成" class="headerlink" title="1)Tamper Data界面主要是由三部分组成"></a>1)Tamper Data界面主要是由三部分组成</h5><ul>
-<li>第一部分：（上方）HTTP请求概要信息</li>
-<li>第二部分：（左下方）显示出对应的HTTP请求的头部信息</li>
-<li>第三部分：（右下方）显示出对应的HTTP响应</li>
-</ul>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%959.png" alt=""></p>
-<h5 id="2-查看细节、源码信息以及网页打开时间"><a href="#2-查看细节、源码信息以及网页打开时间" class="headerlink" title="2)查看细节、源码信息以及网页打开时间"></a>2)查看细节、源码信息以及网页打开时间</h5><p>　 　在主窗口的第一部分单击鼠标右键，此时可以查看细节、源代码信息，单击【GraphAll】按钮，会以图形的方式直观地显示每个页面元素及其打开它们所花的时间。</p>
-<h5 id="3-Http请求截取"><a href="#3-Http请求截取" class="headerlink" title="3)Http请求截取"></a>3)Http请求截取</h5><p>　 　在Tamper Data中选择StartTamper菜单项，便开启了对HTTP请求的截取，此时浏览器发出的每一个请求，TamperData都会截取。在开启该功能后单击网页上的任意超链接，便可以看到浏览器弹出一个对话框，然后单击【Tamper】按钮，会弹出一个“TamperPopup”窗口，这个窗口显示了HTTP请求的各种头信息，可以在此随意修改或者添加其他合法的HTTP请求头部字段或POST参数。</p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%9510.png" alt=""></p>
-<hr>
-<h4 id="3-Live-HTTP-Headers-重放功能"><a href="#3-Live-HTTP-Headers-重放功能" class="headerlink" title="3.Live HTTP Headers(重放功能)"></a>3.Live HTTP Headers(重放功能)</h4><p>　 　Live HTTP Headers是一款用来分析HTTP流量的Firefox扩展插件，直接在火狐浏览器里面搜索即可安装。</p>
-<ul>
-<li>窗口底部有一个“capture”复选框，选中后可以使LIVE HTTP Headers 停止向下滚动，以便对已经产生的通信流量进行分析<br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%9511.png" alt=""></li>
-<li>在主窗口选择其中一段请求，然后单击窗口底部的“Replay”按钮会弹出窗口，可对请求进行各种修改，修改后再次单击“replay”可重放请求。<br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%9512.png" alt=""></li>
-</ul>
-<hr>
-<h4 id="4-Hackbar-编码解码-POST提交"><a href="#4-Hackbar-编码解码-POST提交" class="headerlink" title="4.Hackbar(编码解码/POST提交)"></a>4.Hackbar(编码解码/POST提交)</h4><p>　 　HackBar是firefox浏览器上的一个插件,安装方法跟之前的几个插件一样。HackBar其实是一个小工具包，包含一些黑客常用的工具。比如SQL injection,XSS,加密等!功能很多可以下载下来去尝试一下。</p>
-<ul>
-<li>load url是将地址栏中的网络复制到hackbar中</li>
-<li>在sql注入中有一个联合查询，比如字段数是11要是手工的话我们打出union select 1,2,3,4,5,6,7,8,9,10,11这样感觉有点麻烦。通过hackbar的sql选项里面的unionselectstatement在其中输入字段数，hackbar会自动的帮助我们输入那一大串文字。</li>
-<li>我们可以对url进行各种编码操作，我们可以在endoding选项下进行url、16进制、base64进行编码解码，可以在xss选项下进行html实体编码，在sql选项下进行空格编码。</li>
-<li>在encryption选项中我们可以进行md5,sha1，sha256，rot13加密，单击里面的选项，在弹出的对话框中输入要加密的数据。<br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%9513.png" alt=""></li>
-</ul>
-<hr>
-<h4 id="5-Modify-Headers-修改头部"><a href="#5-Modify-Headers-修改头部" class="headerlink" title="5.Modify Headers(修改头部)"></a>5.Modify Headers(修改头部)</h4><p>　 　这个插件的主要作用是对Firefox的HTTP request headers进行添加、修改和过滤等操作。当我们访问网站的时候，某些网站服务器会对访问网站的浏览器Header信息进行判断，然后决定用什么方式把网站内容呈现给浏览器。服务器也会根据浏览器的header中包含的其他信息（譬如浏览器所在的IP地址）判断是否要讲某一特定的信息呈现给浏览器。</p>
-<ul>
-<li>选择Add，右边的HeaderName,HeaderValue和DescriptiveComment等字段都会变得可编辑。由于我们要模拟不同地域的IP对网站进行访问(伪造IP地址)，所以HeaderName字段中，我们填入<code>X-Forwarded-For</code>。Header value中，填入你要模拟的地域IP地址，然后在Descriptive comment中填上备注就好。</li>
-<li>User Agent中文名为用户代理，简称 UA，它是一个特殊字符串头，使得服务器能够识别客户使用的操作系统及版本、CPU类型、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等。修改User-Agent来模拟用iPhone访问网站。<br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%9514.png" alt=""></li>
-<li>伪造IP地址和修改了User Agent，看一下访问百度的请求头信息发生了什么变化。<br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%9515.png" alt=""></li>
-</ul>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;　 　这边主要介绍火狐的几款插件工具分别是Firebug、TamperData、LiveHttpHeaders、Hackbar和ModifyHeaders，它们可以用来测试和发掘Web应用程序中的跨站漏洞。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h4 id=&quot;1-Firebug-抓包与各种调试&quot;&gt;&lt;a href=&quot;#1-Firebug-抓包与各种调试&quot; class=&quot;headerlink&quot; title=&quot;1.Firebug(抓包与各种调试)&quot;&gt;&lt;/a&gt;1.Firebug(抓包与各种调试)&lt;/h4&gt;&lt;p&gt;　 　Firebug是Firefox浏览器的一个扩展插件，可以动态修改html代码、探索DOM结构、监视网络请求和响应、调试和监测任何页面的CSS、HTML和JavaScript等等。&lt;/p&gt;
-&lt;h5 id=&quot;1-安装城成功后按F12启动Firebug&quot;&gt;&lt;a href=&quot;#1-安装城成功后按F12启动Firebug&quot; class=&quot;headerlink&quot; title=&quot;1)安装城成功后按F12启动Firebug&quot;&gt;&lt;/a&gt;1)安装城成功后按F12启动Firebug&lt;/h5&gt;&lt;p&gt;　 　打开Firebug后，看到六个标签按钮分别是（控制台、HTML查看器、CSS查看器、脚本调试器、DOM查看器、网络状况监视器）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%951.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h5 id=&quot;2-控制台&quot;&gt;&lt;a href=&quot;#2-控制台&quot; class=&quot;headerlink&quot; title=&quot;2)控制台&quot;&gt;&lt;/a&gt;2)控制台&lt;/h5&gt;&lt;p&gt;　 　控制台能够显示当前页面中的JavaScript错误以及警告，并提示出错的文件和行号，使用控制台可以测试一段代码或者函数的执行时间。启用控制台，在窗口的底部能看到命令行输入，以“&amp;gt;”开头，在这里输入JavaScript代码后按Enter键即可执行。&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%952.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%953.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Http抓包与调试" scheme="http://harmansecurity.cn/tags/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95/"/>
-    
-      <category term="Firebug" scheme="http://harmansecurity.cn/tags/Firebug/"/>
-    
-      <category term="Tamper Data" scheme="http://harmansecurity.cn/tags/Tamper-Data/"/>
-    
-      <category term="LiveHttpHeaders" scheme="http://harmansecurity.cn/tags/LiveHttpHeaders/"/>
-    
-      <category term="Hackbar" scheme="http://harmansecurity.cn/tags/Hackbar/"/>
-    
-      <category term="Modify Headers" scheme="http://harmansecurity.cn/tags/Modify-Headers/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PBC库的常用函数解释</title>
-    <link href="http://harmansecurity.cn/2017/01/18/PBC%E5%BA%93%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%A7%A3%E9%87%8A/"/>
-    <id>http://harmansecurity.cn/2017/01/18/PBC库的常用函数解释/</id>
-    <published>2017-01-18T10:59:57.000Z</published>
-    <updated>2017-01-18T11:01:33.657Z</updated>
-    
-    <content type="html"><![CDATA[<p>　 　PBC库使用G1、G2和GT分别表示双线性映射:<code>e:G1xG2-&gt;GT</code>中的G1、G2和GT，他们的阶都为r。Zr表示模r的整数环。配对运算输入两个元素，一个元素来自群G1，另一个元素来自群G2，输出结果是GT中的一个元素。G1和G2也可以是同一个群，即是一个对称配对，这种情况下它们的元素可以相互混淆使用。</p>
-<hr>
-<h4 id="1-配对的初始化方式"><a href="#1-配对的初始化方式" class="headerlink" title="1.配对的初始化方式"></a>1.配对的初始化方式</h4><h5 id="1-以标准的方式初始化配对"><a href="#1-以标准的方式初始化配对" class="headerlink" title="1) 以标准的方式初始化配对"></a>1) 以标准的方式初始化配对</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">pairing_t</span> pairing;<span class="comment">//声明一个配对类型的变量pairing</span></div><div class="line">pairing_init_inp_str(pairing,<span class="built_in">stdin</span>);<span class="comment">//参数stdin表示配对的输入参数方式为标准输入</span></div></pre></td></tr></table></figure>
-<h5 id="2-指定类型的方式初始化配对"><a href="#2-指定类型的方式初始化配对" class="headerlink" title="2) 指定类型的方式初始化配对"></a>2) 指定类型的方式初始化配对</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a_param_input(pairing);<span class="comment">//将配对变量pairing初始化为类型A的配对</span></div><div class="line">d_param_input(pairing);<span class="comment">//将配对变量pairing初始化为类型D的配对</span></div><div class="line">f_param_input(pairing);<span class="comment">//将配对变量pairing初始化为类型F的配对</span></div><div class="line">pairing_clear(pairing);<span class="comment">//调用该函数释放pairing占用的资源</span></div></pre></td></tr></table></figure>
-<hr>
-<h4 id="2-元素的初始化"><a href="#2-元素的初始化" class="headerlink" title="2.元素的初始化"></a>2.元素的初始化</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init</span><span class="params">(<span class="keyword">element_t</span> e,field_ptr f)</span></span>;<span class="comment">//将元素变量e初始化为代数结构f中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init_G1</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">pairing_t</span> pairing)</span></span>;<span class="comment">//将元素变量e初始化为群G1中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init_G2</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">pairing_t</span> pairing)</span></span>;<span class="comment">//将元素变量e初始化为群G2中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init_GT</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">pairing_t</span> pairing)</span></span>;<span class="comment">//将元素变量e初始化为群GT中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init_Zr</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">pairing_t</span> pairing)</span></span>;<span class="comment">//将元素变量e初始化为群Zr中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_init_same_as</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">element_t</span> e2)</span></span>;<span class="comment">//将元素变量e初始化为元素变量e2所在的代数结构中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_clear</span><span class="params">(<span class="keyword">element_t</span> e)</span></span>;<span class="comment">//清楚元素变量e并释放其所占用的资源</span></div></pre></td></tr></table></figure>
-<hr>
-<a id="more"></a>
-<h4 id="3-运算函数"><a href="#3-运算函数" class="headerlink" title="3.运算函数"></a>3.运算函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_add</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a,<span class="keyword">element_t</span> b)</span></span>;<span class="comment">//输入a和b，输出n=a+b</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_sub</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a,<span class="keyword">element_t</span> b)</span></span>;<span class="comment">//输入a和b，输出n=a-b</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_mul</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a,<span class="keyword">element_t</span> b)</span></span>;<span class="comment">//输入a和b，输出n=axb</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_mul_si</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a,<span class="keyword">signed</span> <span class="keyword">long</span> <span class="keyword">int</span> z)</span></span>;<span class="comment">//输入a和z，输出n=axz,z是一个长整型数据</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_mul_zn</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a,<span class="keyword">element_t</span> z)</span></span>;<span class="comment">//输入a和z，输出n=axz,z是整数环中的一个元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_div</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a,<span class="keyword">element_t</span> b)</span></span>;<span class="comment">//输入a和b，输出n=a/b</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_double</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a)</span></span>;<span class="comment">//输入a，输出n=a+a</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_halve</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a)</span></span>;<span class="comment">//输入a，输出n=a/2</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_square</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a)</span></span>;<span class="comment">//输入a，输出n=a^2</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_neg</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a)</span></span>;<span class="comment">//输入a，输出n=-a</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_invert</span><span class="params">(<span class="keyword">element_t</span> n,<span class="keyword">element_t</span> a)</span></span>;<span class="comment">//输入a，输出a的逆元n</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_pow_mpz</span><span class="params">(<span class="keyword">element_t</span> x,<span class="keyword">element_t</span> a,<span class="keyword">mpz_t</span> n)</span></span>;<span class="comment">//输入a和n，输出x=a^n</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_pow_zn</span><span class="params">(<span class="keyword">element_t</span> x,<span class="keyword">element_t</span> a,<span class="keyword">element_t</span> n)</span></span>;<span class="comment">//输入a和n，输出x=a^n，n是整数环中的元素</span></div><div class="line"><span class="comment">//输入a1,a2和n1,n2，输出x=a1^n1xa2^n2</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_pow2_mpz</span><span class="params">(<span class="keyword">element_t</span> x,<span class="keyword">element_t</span> a1,<span class="keyword">mpz_t</span> n1,<span class="keyword">element_t</span> a2,<span class="keyword">mpz_t</span> n2)</span></span>;</div><div class="line"><span class="comment">//输入a1,a2和n1,n2，输出x=a1^n1xa2^n2,n1,n2是整数环中的元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_pow2_zn</span><span class="params">(<span class="keyword">element_t</span> x,<span class="keyword">element_t</span> a1,<span class="keyword">element_t</span> n1,<span class="keyword">element_t</span> a2,<span class="keyword">element_t</span> n2)</span></span>;</div></pre></td></tr></table></figure>
-<hr>
-<h4 id="4-其它函数"><a href="#4-其它函数" class="headerlink" title="4.其它函数"></a>4.其它函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">element_length_in_bytes</span><span class="params">(<span class="keyword">element_t</span> e)</span></span>;<span class="comment">//获得元素变量e的字节数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_random</span><span class="params">(<span class="keyword">element_t</span> e)</span></span>;<span class="comment">//函数从这个代数结构中均匀随机选择一个元素并赋值给e</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">element_cmp</span><span class="params">(<span class="keyword">element_t</span> a,<span class="keyword">element_t</span> b)</span></span>;<span class="comment">//若变量a和b相等，则函数返回0否则返回1</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_to_mpz</span><span class="params">(<span class="keyword">mpz_t</span> z,<span class="keyword">element_t</span> e)</span></span>;<span class="comment">//将元素e转换为一个GMP整数并存储在mpz_t类型的变量z中</span></div><div class="line"><span class="comment">//PBC库中没有提供计算Hash值的函数，这里只是以获得的Hash值作为输入，从中截取一部分表示域中的某个元素</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">element_from_hash</span><span class="params">(<span class="keyword">element_t</span> e,<span class="keyword">void</span> * data,<span class="keyword">int</span> len)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">element_printf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> * format,...)</span></span>;<span class="comment">//格式化打印元素值</span></div></pre></td></tr></table></figure>
-<hr>
-<p><em>以上列举了PBC库中的一些常用函数及其代表的意思，如有特殊需求可查阅PBC官方文档。</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;　 　PBC库使用G1、G2和GT分别表示双线性映射:&lt;code&gt;e:G1xG2-&amp;gt;GT&lt;/code&gt;中的G1、G2和GT，他们的阶都为r。Zr表示模r的整数环。配对运算输入两个元素，一个元素来自群G1，另一个元素来自群G2，输出结果是GT中的一个元素。G1和G2也可以是同一个群，即是一个对称配对，这种情况下它们的元素可以相互混淆使用。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h4 id=&quot;1-配对的初始化方式&quot;&gt;&lt;a href=&quot;#1-配对的初始化方式&quot; class=&quot;headerlink&quot; title=&quot;1.配对的初始化方式&quot;&gt;&lt;/a&gt;1.配对的初始化方式&lt;/h4&gt;&lt;h5 id=&quot;1-以标准的方式初始化配对&quot;&gt;&lt;a href=&quot;#1-以标准的方式初始化配对&quot; class=&quot;headerlink&quot; title=&quot;1) 以标准的方式初始化配对&quot;&gt;&lt;/a&gt;1) 以标准的方式初始化配对&lt;/h5&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;pairing_t&lt;/span&gt; pairing;&lt;span class=&quot;comment&quot;&gt;//声明一个配对类型的变量pairing&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;pairing_init_inp_str(pairing,&lt;span class=&quot;built_in&quot;&gt;stdin&lt;/span&gt;);&lt;span class=&quot;comment&quot;&gt;//参数stdin表示配对的输入参数方式为标准输入&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h5 id=&quot;2-指定类型的方式初始化配对&quot;&gt;&lt;a href=&quot;#2-指定类型的方式初始化配对&quot; class=&quot;headerlink&quot; title=&quot;2) 指定类型的方式初始化配对&quot;&gt;&lt;/a&gt;2) 指定类型的方式初始化配对&lt;/h5&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;a_param_input(pairing);&lt;span class=&quot;comment&quot;&gt;//将配对变量pairing初始化为类型A的配对&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;d_param_input(pairing);&lt;span class=&quot;comment&quot;&gt;//将配对变量pairing初始化为类型D的配对&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;f_param_input(pairing);&lt;span class=&quot;comment&quot;&gt;//将配对变量pairing初始化为类型F的配对&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;pairing_clear(pairing);&lt;span class=&quot;comment&quot;&gt;//调用该函数释放pairing占用的资源&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;hr&gt;
-&lt;h4 id=&quot;2-元素的初始化&quot;&gt;&lt;a href=&quot;#2-元素的初始化&quot; class=&quot;headerlink&quot; title=&quot;2.元素的初始化&quot;&gt;&lt;/a&gt;2.元素的初始化&lt;/h4&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;element_init&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;element_t&lt;/span&gt; e,field_ptr f)&lt;/span&gt;&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//将元素变量e初始化为代数结构f中的元素&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;element_init_G1&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;element_t&lt;/span&gt; e,&lt;span class=&quot;keyword&quot;&gt;pairing_t&lt;/span&gt; pairing)&lt;/span&gt;&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//将元素变量e初始化为群G1中的元素&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;element_init_G2&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;element_t&lt;/span&gt; e,&lt;span class=&quot;keyword&quot;&gt;pairing_t&lt;/span&gt; pairing)&lt;/span&gt;&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//将元素变量e初始化为群G2中的元素&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;element_init_GT&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;element_t&lt;/span&gt; e,&lt;span class=&quot;keyword&quot;&gt;pairing_t&lt;/span&gt; pairing)&lt;/span&gt;&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//将元素变量e初始化为群GT中的元素&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;element_init_Zr&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;element_t&lt;/span&gt; e,&lt;span class=&quot;keyword&quot;&gt;pairing_t&lt;/span&gt; pairing)&lt;/span&gt;&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//将元素变量e初始化为群Zr中的元素&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;element_init_same_as&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;element_t&lt;/span&gt; e,&lt;span class=&quot;keyword&quot;&gt;element_t&lt;/span&gt; e2)&lt;/span&gt;&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//将元素变量e初始化为元素变量e2所在的代数结构中的元素&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;element_clear&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;element_t&lt;/span&gt; e)&lt;/span&gt;&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//清楚元素变量e并释放其所占用的资源&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;hr&gt;
-    
-    </summary>
-    
-    
-      <category term="PBC" scheme="http://harmansecurity.cn/tags/PBC/"/>
-    
-      <category term="密码学" scheme="http://harmansecurity.cn/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
-    
-      <category term="双线性配对" scheme="http://harmansecurity.cn/tags/%E5%8F%8C%E7%BA%BF%E6%80%A7%E9%85%8D%E5%AF%B9/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VC6.0插件安装</title>
-    <link href="http://harmansecurity.cn/2017/01/17/VC6.0%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
-    <id>http://harmansecurity.cn/2017/01/17/VC6.0插件安装/</id>
-    <published>2017-01-17T06:49:04.000Z</published>
-    <updated>2017-01-17T15:33:44.823Z</updated>
-    
-    <content type="html"><![CDATA[<p>　 　因为PBC源码库的一些函数不是很全，导致用VS写了几个程序只好放弃，而支持VC6.0的PBC库比较全，绕了一圈所以只好转战VC++6.0。VC++6.0是一款很老的工具，不是很人性化，对于我这个深度完美主义者肯定是不能接受的，想方设法使它更适合开发，所以安装了一些插件，使开发效率更高。</p>
-<p>我主要安装的插件是:<br>1.Visual studio Boosteer;(源码窗口管理)</p>
-<ul>
-<li>下载地址:<code>http://pan.baidu.com/s/1pJAZApP</code>.</li>
-<li>功能:方便查看源码，一页里面可以打开多个C文件。</li>
-</ul>
-<p>2.Visual assist Options;(强烈推荐)</p>
-<ul>
-<li>下载地址:<code>http://pan.baidu.com/s/1dDh7Mtb</code>.</li>
-<li>功能:自动识别各种关键字，系统函数，成员变量，自动给出输入提示，自动更正大小写错误，自动标示错误等等。</li>
-</ul>
-<p>3.为了解决VC++6.0不能添加和打开文件的功能安装了FileTool。</p>
-<ul>
-<li>下载地址:<code>http://download.csdn.net/detail/ttfy1234/9696351</code>.</li>
-<li>功能:VC6.0在添加和打开文件时经常会崩掉，这个插件就是为了解决这个问题。  </li>
-</ul>
-<p>4.VC6LineNumberAddin;</p>
-<ul>
-<li>下载地址:<code>http://pan.baidu.com/s/1dD8CfGd</code></li>
-<li>功能:VC6.0不自带行号，不方便阅读查找，这个是行号插件。</li>
-</ul>
-<a id="more"></a>
-<p>5.Comment Wizard;</p>
-<ul>
-<li>下载地址:<code>http://www.cppblog.com/fwxjj/</code>.</li>
-<li>功能:Visual C++插件，提供了VC源代码注解标准化与自动化功能。在它的帮助下，您可快速创建标头文件信息注解，文件中模块注解， C++处理方式，以及Ｃ语言功能与历史校正功能注解等等。</li>
-</ul>
-<p>6.WndTabs+3.20 实现窗口tab效果。</p>
-<ul>
-<li>下载地址:<code>http://www.wndtabs.com/</code>.</li>
-<li>功能:WndTabs主要是在编辑窗口中显示了所有已经打开的文件，在VC中能够更方便的操作这些文件，比如修改文件属性，copy文件路径、文件名等,与第一个VS Booster的功能相近。</li>
-</ul>
-<p>参考的资料:</p>
-<ul>
-<li><code>http://blog.csdn.net/cooljun618/article/details/6866798</code></li>
-<li><code>http://bbs.csdn.net/topics/390776572</code></li>
-</ul>
-<p>　 　一个人性化的环境搭好了,下面就是导入项目，官网给的支持VC的PBC源码直接打开有点问题，这边我直接把调通好的源码放在GitHub上面，有需要的人可以去下载，地址是:<code>https://github.com/harmansecurity/PBC-0.4.7-vc6.0</code>.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;　 　因为PBC源码库的一些函数不是很全，导致用VS写了几个程序只好放弃，而支持VC6.0的PBC库比较全，绕了一圈所以只好转战VC++6.0。VC++6.0是一款很老的工具，不是很人性化，对于我这个深度完美主义者肯定是不能接受的，想方设法使它更适合开发，所以安装了一些插件，使开发效率更高。&lt;/p&gt;
-&lt;p&gt;我主要安装的插件是:&lt;br&gt;1.Visual studio Boosteer;(源码窗口管理)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;下载地址:&lt;code&gt;http://pan.baidu.com/s/1pJAZApP&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;功能:方便查看源码，一页里面可以打开多个C文件。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;2.Visual assist Options;(强烈推荐)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;下载地址:&lt;code&gt;http://pan.baidu.com/s/1dDh7Mtb&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;功能:自动识别各种关键字，系统函数，成员变量，自动给出输入提示，自动更正大小写错误，自动标示错误等等。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;3.为了解决VC++6.0不能添加和打开文件的功能安装了FileTool。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;下载地址:&lt;code&gt;http://download.csdn.net/detail/ttfy1234/9696351&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;功能:VC6.0在添加和打开文件时经常会崩掉，这个插件就是为了解决这个问题。  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;4.VC6LineNumberAddin;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;下载地址:&lt;code&gt;http://pan.baidu.com/s/1dD8CfGd&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;功能:VC6.0不自带行号，不方便阅读查找，这个是行号插件。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="PBC" scheme="http://harmansecurity.cn/tags/PBC/"/>
-    
-      <category term="密码学" scheme="http://harmansecurity.cn/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
-    
-      <category term="VC6.0" scheme="http://harmansecurity.cn/tags/VC6-0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>这半年为什么止步不前？</title>
-    <link href="http://harmansecurity.cn/2017/01/15/2016%E6%80%BB%E7%BB%93/"/>
-    <id>http://harmansecurity.cn/2017/01/15/2016总结/</id>
-    <published>2017-01-15T14:42:06.000Z</published>
-    <updated>2017-01-16T14:49:55.381Z</updated>
-    
-    <content type="html"><![CDATA[<!--<img src="/diaryImages/diary-1.jpg" width = "700" height = "400"/>-->
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/diary-1.jpg" alt=""><br>　　时间过得很快，读研已半年，这半年来我一直都没好好想过这个问题，这半年我到底做了什么？我试着给自己答案——积累、沉淀，但是却有种莫名的心虚。</p>
-<p>　　回顾2016年下半年的历程。七月份，在中科院信工所的物联网安全研发中心实习。去之前，本以为是朝九晚五的上班场景，心里还是忐忑的，结果与我想的截然相反，这里都是研究生，学习氛围很浓厚。那段日子应该就是我研究生阶段的预备期，或许是因为仰慕那些学姐学长基础扎实，编码能力强，为了缩短差距，我坚持每天早晨八点打卡，每晚坚持跑步回去到宿舍已基本十二点，从未给过自己一天的休息时间。当时我的任务是“如何检测内存异常访问”，因为项目的需求，需要了解Linux内核，期间泛读了《Python核心编程》、《鸟哥的Linux私房菜》、《Linux内核完全注释》(强烈推荐)，这三本书可以当做字典来用，没有必要全部读完。也重温了《计算机操作系统》、《计算机组成原理》、《深入理解计算机系统》。在这次实习中，最大的感受就是理论知识的缺乏，大学里面的基础课程在日后还是有很大作用的，于是决定利用接下来的三年时间多积累沉淀，多看些书。<br><a id="more"></a><br>　　入学的那段时间还是比较空闲的，我的计划是先看两本自己研究领域的书籍，虽然导师这边是偏理论，但其实自己对应用还是很热衷的，所以决定再看两本WEB安全的入门书籍。所看的密码学书：《图解密码技术》、《深入浅出密码学》、《基于配对的密码学》；WEB安全相关的书：《WEB安全前端黑客技术解密》、《XSS跨站脚本》(未读完)、《SQL注入攻击与防御》(未读)，此外对余弦发布的技能表做了相应的对照学习。</p>
-<p>　　写到这里，也差不多能知道问题出在哪了：在理论上没有多大的进展，仍处于连门都没入的阶段，程序写的不多，没有学习太多的新技术，这就是莫名心虚的原因。最初的想法是先偏理论，不管是否选择继续走学术这条路都要发论文，研一暑假再决定最终是否工作。可能是心急了，要是很多东西一下子就能见成果，那就没多大意义了。或许临近期末的原因，躁动不安，扰乱了情绪，胡思乱想。  —2016.1.5 by LiangHui</p>
-<hr>
-<p>　　最近也在思考，当初为什么会有读博的想法？“因为之前做的一些东西，只知道如何去实现而不知道机制和原理，想在博士期间好好深入研究。”通过这半年的了解,很多其实并不是当初所想的那样，博士是在一个很小的方向上进行研究并能作出自己的突破。如果读现在的方向的博士达不到当初想要的效果，所以必须明确到底想要什么！接下来的一年将会把重心放在web安全技术上，利用空余的时间多读点书，多去实践。早做决定，早做打算。 —2016.1.15</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;!--&lt;img src=&quot;/diaryImages/diary-1.jpg&quot; width = &quot;700&quot; height = &quot;400&quot;/&gt;--&gt;
-&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/diary-1.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;　　时间过得很快，读研已半年，这半年来我一直都没好好想过这个问题，这半年我到底做了什么？我试着给自己答案——积累、沉淀，但是却有种莫名的心虚。&lt;/p&gt;
-&lt;p&gt;　　回顾2016年下半年的历程。七月份，在中科院信工所的物联网安全研发中心实习。去之前，本以为是朝九晚五的上班场景，心里还是忐忑的，结果与我想的截然相反，这里都是研究生，学习氛围很浓厚。那段日子应该就是我研究生阶段的预备期，或许是因为仰慕那些学姐学长基础扎实，编码能力强，为了缩短差距，我坚持每天早晨八点打卡，每晚坚持跑步回去到宿舍已基本十二点，从未给过自己一天的休息时间。当时我的任务是“如何检测内存异常访问”，因为项目的需求，需要了解Linux内核，期间泛读了《Python核心编程》、《鸟哥的Linux私房菜》、《Linux内核完全注释》(强烈推荐)，这三本书可以当做字典来用，没有必要全部读完。也重温了《计算机操作系统》、《计算机组成原理》、《深入理解计算机系统》。在这次实习中，最大的感受就是理论知识的缺乏，大学里面的基础课程在日后还是有很大作用的，于是决定利用接下来的三年时间多积累沉淀，多看些书。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="随笔" scheme="http://harmansecurity.cn/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-      <category term="总结" scheme="http://harmansecurity.cn/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   

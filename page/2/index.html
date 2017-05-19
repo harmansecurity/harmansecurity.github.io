@@ -6,16 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://harmansecurity.cn">
-  <title>骑士安全</title>
+  <title>Harman&#39;s Homepage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="骑士安全">
+<meta property="og:title" content="Harman's Homepage">
 <meta property="og:url" content="http://harmansecurity.cn/page/2/index.html">
-<meta property="og:site_name" content="骑士安全">
+<meta property="og:site_name" content="Harman's Homepage">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="骑士安全">
+<meta name="twitter:title" content="Harman's Homepage">
   
-    <link rel="alternative" href="/atom.xml" title="骑士安全" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Harman&#39;s Homepage" type="application/atom+xml">
   
   
     <link rel="icon" href="http://ojto7c1rw.bkt.clouddn.com/swords.ico">
@@ -45,7 +45,7 @@
 			<img src="http://ojto7c1rw.bkt.clouddn.com/%E5%A4%B4%E5%83%8F.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">如梦星影坠</a></h1>
+		  <h1 class="header-author"><a href="/">Harman</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">Standing on the shoulders of giants.</p>
@@ -80,8 +80,6 @@
 				
 					<a class="github" target="_blank" href="https://github.com/harmansecurity" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weibo" target="_blank" href="http://weibo.com/u/3951448486?refer_flag=1005055013_" title="weibo"><i class="icon-weibo"></i></a>
-		        
 					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
 		        
 					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/ru-meng-xing-ying-zhui" title="zhihu"><i class="icon-zhihu"></i></a>
@@ -107,7 +105,7 @@
 				<img src="http://ojto7c1rw.bkt.clouddn.com/%E5%A4%B4%E5%83%8F.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">如梦星影坠</h1>
+			  <h1 class="header-author js-header-author">Harman</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Standing on the shoulders of giants.<i class="icon icon-quo-right"></i></p>
@@ -124,8 +122,6 @@
 				<div class="social">
 					
 						<a class="github" target="_blank" href="https://github.com/harmansecurity" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="weibo" target="_blank" href="http://weibo.com/u/3951448486?refer_flag=1005055013_" title="weibo"><i class="icon-weibo"></i></a>
 			        
 						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
 			        
@@ -159,20 +155,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Java基础学习笔记(五)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Linux0.11内核添加系统调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/19/Java基础学习笔记(五)/">Java基础学习笔记(五)</a>
+      <a class="article-title" href="/2017/05/19/Linux0.11内核添加系统调用/">Linux0.11内核添加系统调用</a>
     </h1>
   
 
         
-        <a href="/2017/03/19/Java基础学习笔记(五)/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:39:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
+        <a href="/2017/05/19/Linux0.11内核添加系统调用/" class="archive-article-date">
+  	<time datetime="2017-05-19T03:18:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
 </a>
         
       </header>
@@ -180,8 +176,13 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>参考链接：<code>http://bbs.itheima.com/thread-270882-1-1.html</code></p>
-
+        <h4 id="一、实验步骤"><a href="#一、实验步骤" class="headerlink" title="一、实验步骤"></a>一、实验步骤</h4><p><strong>1.首先在linux0.11/lib下添加两个文件：writeeax.c,readeax.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> __LIBRARY__     !一边是两个下滑线</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line">_syscall0(<span class="keyword">int</span>,writeeax)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> __LIBRARY__     !一边是两个下滑线</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line">_syscall0(<span class="keyword">int</span>,readeax)</div></pre></td></tr></table></figure>
+<p><strong>2.接下来修改linux0.11/include下的unistd.h，添加两个系统调用号</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> __NR_writeeax 72   !NR前面2个_，72是比里面最大的调用号大1个数</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> __NR_readeax 73</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">writeeax</span><span class="params">(<span class="keyword">void</span>)</span></span>;    !在linux/include/unistd.h文件最下面添加</div><div class="line"><span class="function">Int <span class="title">readeax</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/05/19/Linux0.11内核添加系统调用/#more">Read More >></a>
+        
       
 
       
@@ -194,11 +195,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">系统调用</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数组操作</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Linux0.11</a>
         		</li>
       		
 		</ul>
@@ -208,7 +209,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(五)/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/05/19/Linux0.11内核添加系统调用/">展开全文 >></a>
         </p>
       
 
@@ -226,20 +227,20 @@
 <!---->
 
   
-    <article id="post-Java基础学习笔记(四)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Linux0.11获取系统调用号" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/19/Java基础学习笔记(四)/">Java基础学习笔记(四)</a>
+      <a class="article-title" href="/2017/05/19/Linux0.11获取系统调用号/">Linux0.11获取系统调用号</a>
     </h1>
   
 
         
-        <a href="/2017/03/19/Java基础学习笔记(四)/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:38:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
+        <a href="/2017/05/19/Linux0.11获取系统调用号/" class="archive-article-date">
+  	<time datetime="2017-05-19T03:02:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
 </a>
         
       </header>
@@ -247,35 +248,12 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="04-01-Java语言基础-循环结构概述和for语句的格式及其使用"><a href="#04-01-Java语言基础-循环结构概述和for语句的格式及其使用" class="headerlink" title="04.01_Java语言基础(循环结构概述和for语句的格式及其使用)"></a>04.01_Java语言基础(循环结构概述和for语句的格式及其使用)</h3><ul>
-<li>A:循环结构的分类<ul>
-<li>for,while,do…while </li>
-</ul>
-</li>
-<li>B:循环结构for语句的格式：</li>
-<li><pre><code>for(初始化表达式;条件表达式;循环后的操作表达式) {
-    循环体;
-}
-</code></pre></li>
-<li>C执行流程：<ul>
-<li>a:执行初始化语句</li>
-<li>b:执行判断条件语句,看其返回值是true还是false<ul>
-<li>如果是true，就继续执行</li>
-<li>如果是false，就结束循环</li>
-</ul>
-</li>
-<li>c:执行循环体语句;</li>
-<li>d:执行循环后的操作表达式</li>
-<li>e:回到B继续。</li>
-</ul>
-</li>
-<li>D:案例演示<ul>
-<li>在控制台输出10次”helloworld”</li>
-</ul>
-</li>
-</ul>
+        <h4 id="一、实验步骤"><a href="#一、实验步骤" class="headerlink" title="一、实验步骤"></a>一、实验步骤</h4><p><strong>1.修改linux0.11/kernel/sys_call.s添加call achieveEax</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.png" alt=""></p>
+<p><strong>2.在linux0.11/kernel底下添加achieveEax.c文件</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B72.png" alt=""></p>
         
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(四)/#more">Read More >></a>
+          <a class="article-more-a" href="/2017/05/19/Linux0.11获取系统调用号/#more">Read More >></a>
         
       
 
@@ -289,11 +267,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Linux0.11</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">循环结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统调用号</a>
         		</li>
       		
 		</ul>
@@ -303,7 +281,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(四)/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/05/19/Linux0.11获取系统调用号/">展开全文 >></a>
         </p>
       
 
@@ -321,20 +299,20 @@
 <!---->
 
   
-    <article id="post-Java基础学习笔记(三)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Bochs运行Linux0.11内核" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/19/Java基础学习笔记(三)/">Java基础学习笔记(三)</a>
+      <a class="article-title" href="/2017/05/19/Bochs运行Linux0.11内核/">Bochs运行Linux0.11内核</a>
     </h1>
   
 
         
-        <a href="/2017/03/19/Java基础学习笔记(三)/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:36:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
+        <a href="/2017/05/19/Bochs运行Linux0.11内核/" class="archive-article-date">
+  	<time datetime="2017-05-19T02:36:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
 </a>
         
       </header>
@@ -342,36 +320,15 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="03-01-Java语言基础-逻辑运算符的基本用法-掌握"><a href="#03-01-Java语言基础-逻辑运算符的基本用法-掌握" class="headerlink" title="03.01_Java语言基础(逻辑运算符的基本用法)(掌握)"></a>03.01_Java语言基础(逻辑运算符的基本用法)(掌握)</h3><ul>
-<li>A:逻辑运算符有哪些<ul>
-<li>&amp;,|,^,!</li>
-<li>&amp;&amp;,|| </li>
-</ul>
-</li>
-<li>B:案例演示</li>
-<li><p>逻辑运算符的基本用法</p>
-</li>
-<li><p>注意事项：</p>
-<ul>
-<li>a:逻辑运算符一般用于连接boolean类型的表达式或者值。</li>
-<li>b:表达式：就是用运算符把常量或者变量连接起来的符合java语法的式子。<ul>
-<li>算术表达式：a + b</li>
-<li>比较表达式：a == b(条件表达式)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>C:结论：</li>
-<li>&amp;逻辑与:有false则false。</li>
-<li>|逻辑或:有true则true。</li>
-<li>^逻辑异或:相同为false，不同为true。</li>
-<li>!逻辑非:非false则true，非true则false。<ul>
-<li>特点：偶数个不改变本身。</li>
-</ul>
-</li>
-</ul>
+        <h4 id="一、Bochs安装"><a href="#一、Bochs安装" class="headerlink" title="一、Bochs安装"></a>一、Bochs安装</h4><p><strong>1.手动安装</strong></p>
+<p>具体的安装步骤可以参考这篇博客，很详细：<code>http://os.51cto.com/art/201407/446838_all.htm</code></p>
+<p>安装过程中遇到的一个小问题：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Bochs%E8%BF%90%E8%A1%8CLinux0.11%E5%86%85%E6%A0%B8.png" alt=""></p>
+<p>解决方法：我的解决方法与博客里面提到的不一样：打开Makefile文件，找到<code>X_LIBS=</code> 添加“-lpthread” 即 <code>X_LIBS=-lpthread.S</code></p>
+<p><strong>2.源安装</strong></p>
+<p>安装本身源里面的bochs:<code>sudo apt-get install bochs</code></p>
         
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(三)/#more">Read More >></a>
+          <a class="article-more-a" href="/2017/05/19/Bochs运行Linux0.11内核/#more">Read More >></a>
         
       
 
@@ -385,15 +342,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Bochs</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">流程控制语句</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">逻辑运算符</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Linux0.11</a>
         		</li>
       		
 		</ul>
@@ -403,7 +356,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(三)/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/05/19/Bochs运行Linux0.11内核/">展开全文 >></a>
         </p>
       
 
@@ -421,20 +374,20 @@
 <!---->
 
   
-    <article id="post-Java基础学习笔记(二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-系统调用Hook技术总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/19/Java基础学习笔记(二)/">Java基础学习笔记(二)</a>
+      <a class="article-title" href="/2017/05/19/系统调用Hook技术总结/">系统调用hook技术总结</a>
     </h1>
   
 
         
-        <a href="/2017/03/19/Java基础学习笔记(二)/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:35:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
+        <a href="/2017/05/19/系统调用Hook技术总结/" class="archive-article-date">
+  	<time datetime="2017-05-19T02:13:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
 </a>
         
       </header>
@@ -442,34 +395,23 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="02-01-Java语言基础-常量的概述和使用-掌握"><a href="#02-01-Java语言基础-常量的概述和使用-掌握" class="headerlink" title="02.01_Java语言基础(常量的概述和使用)(掌握)"></a>02.01_Java语言基础(常量的概述和使用)(掌握)</h3><ul>
-<li>A:什么是常量<ul>
-<li>在程序执行的过程中其值不可以发生改变 </li>
-</ul>
-</li>
-<li>B:Java中常量的分类<ul>
-<li>字面值常量</li>
-<li>自定义常量(面向对象部分讲) </li>
-</ul>
-</li>
-<li><p>C:字面值常量的分类</p>
+        <h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p>　 　Linux中实现系统调用时是利用了i386体系结构中的软中断，通过产生0x80中 断，使程序由用户态进入内核态执行系统调用函数。当系统调用发生时，产生0x80中断，CPU被切换到内核态执行中断向量表IDT对应的0x80中断处理函数，即跳转到了system_call()的入口，system_call()函数检查系统调用号，到系统调用表sys_call_table中找到该 系统调用（号）对应的内核函数入口，接着调用这个内核函数，然后返回。</p>
+<p>终端输入：<code>sudo cat /proc/kallsyms | grep sys_call_table</code></p>
+<p>终端输出：<code>ffffffff81a001c0 R sys_call_table</code></p>
+<p>由上面可发现其中 R 直接显示了这段内存是只读的性质，这就引出了第二步骤“取消页读写保护”。</p>
+<p><strong>整理出来的系统调用hook参考链接：</strong>(对hook感兴趣的可以了解下)</p>
 <ul>
-<li>字符串常量    用双引号括起来的内容</li>
-<li>整数常量        所有整数</li>
-<li>小数常量        所有小数</li>
-<li>字符常量        用单引号括起来的内容,里面只能放单个数字,单个字母或单个符号</li>
-<li>布尔常量        较为特殊，只有true和false</li>
-<li>空常量            null(数组部分讲解)</li>
-</ul>
-</li>
-<li><p>D:案例演示</p>
-<ul>
-<li>用输出语句输出各种常量。null不演示</li>
-</ul>
-</li>
+<li><code>http://www.tuicool.com/articles/nEnm2u</code></li>
+<li><code>http://blog.csdn.net/maochengtao/article/details/23598433</code></li>
+<li><code>http://blog.csdn.net/force_eagle/article/details/3938150</code></li>
+<li><code>http://blog.chinaunix.net/uid-9164976-id-2435342.html</code></li>
+<li><code>http://blog.chinaunix.net/uid-7330656-id-2644670.html</code></li>
+<li><code>http://www.oschina.net/code/snippet_54100_1509</code></li>
+<li><code>http://blog.sina.com.cn/s/blog_a2acdfc70100zqa7.html</code></li>
+<li><code>http://blog.csdn.net/sun20082567/article/details/38729561</code></li>
 </ul>
         
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(二)/#more">Read More >></a>
+          <a class="article-more-a" href="/2017/05/19/系统调用Hook技术总结/#more">Read More >></a>
         
       
 
@@ -483,15 +425,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">系统调用</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据类型</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">运算符</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hook</a>
         		</li>
       		
 		</ul>
@@ -501,7 +439,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(二)/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/05/19/系统调用Hook技术总结/">展开全文 >></a>
         </p>
       
 
@@ -519,20 +457,20 @@
 <!---->
 
   
-    <article id="post-Java基础学习笔记(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-2017年4月小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/19/Java基础学习笔记(一)/">Java基础学习笔记(一)</a>
+      <a class="article-title" href="/2017/05/03/2017年4月小结/">2017年4月小结</a>
     </h1>
   
 
         
-        <a href="/2017/03/19/Java基础学习笔记(一)/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:34:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
+        <a href="/2017/05/03/2017年4月小结/" class="archive-article-date">
+  	<time datetime="2017-05-03T13:19:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-03</time>
 </a>
         
       </header>
@@ -540,38 +478,14 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="01-01-计算机基础知识-计算机概述-了解"><a href="#01-01-计算机基础知识-计算机概述-了解" class="headerlink" title="01.01_计算机基础知识(计算机概述)(了解)"></a>01.01_计算机基础知识(计算机概述)(了解)</h3><ul>
-<li>A:什么是计算机?计算机在生活中的应用举例<ul>
-<li>计算机（Computer）全称：电子计算机，俗称电脑。是一种能够按照程序运行，自动、高速处理海量数据的现代化智能电子设备。由硬件和软件所组成，没有安装任何软件的计算机称为裸机。常见的形式有台式计算机、笔记本计算机、大型计算机等。</li>
-<li>应用举例<ul>
-<li>1：科学计算</li>
-<li>2、数据处理</li>
-<li>3、自动控制</li>
-<li>4、计算机辅助设计</li>
-<li>5、人工智能</li>
-<li>6、多媒体应用</li>
-<li>7、计算机网络</li>
-<li>… </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>B:什么是硬件?硬件举例</p>
+        <p>　　最近一直在忙于看书和完成自己制定计划的第二阶段，没时间写博客。刚刚参加完“感动师大”的晚会，内心思绪万千，也对上个月做个小结。三月份的时候，对自己未来想要做什么有了一个大概的认识，制定了接下来要完成的相关计划。</p>
 <ul>
-<li>计算机硬件（Computer Hardware）是指计算机系统中由电子，机械和光电元件等组成的各种物理装置的总称。这些物理装置按系统结构的要求构成一个有机整体为计算机软件运行提供物质基础。</li>
-<li>冯.诺依曼体系结构</li>
-<li><p>计算机的硬件分成5大组成部件：运算器、控制器、存储器、输入设备和输出设备。</p>
-<ul>
-<li>运算器和控制器是计算机的核心，合称中央处理单元（Central Processing Unit，CPU）或处理器。CPU的内部还有一些高速存储单元，被称为寄存器。其中运算器执行所有的算术和逻辑运算；控制器负责把指令逐条从存储器中取出，经译码后向计算机发出各种控制命令；而寄存器为处理单元提供操作所需要的数据。</li>
-<li>存储器是计算机的记忆部分，用来存放程序以及程序中涉及的数据。它分为内部存储器和外部存储器。内部存储器用于存放正在执行的程序和使用的数据，其成本高、容量小，但速度快。外部存储器可用于长期保存大量程序和数据，其成本低、容量大，但速度较慢。</li>
-<li>输入设备和输出设备统称为外部设备，简称外设或I/O设备，用来实现人机交互和机间通信。微型机中常用的输入设备有键盘、鼠标等，输出设备有显示器、打印机等。</li>
-</ul>
-</li>
-</ul>
+<li>第一阶段(2017.3.19-2017.4.10)：Java基础学习(深入),将某马的Java基础视频教程撸了一遍，记满了一个笔记本。对“反射”、“并发”、“多线程”、“IO流”、“序列化”、“集合泛型”等知识点又有了一个新的认识。期间也阅读了&lt;&lt;重构&gt;&gt;以及电子版的&lt;&lt; head first Java &gt;&gt;。原本想对每节基础课都写个博客，只是时间不允许，所以相关知识点都记在了笔记本上，这里直接放图啦啊，字写的有点潦草(⊙o⊙)。<div align=center><br><img src="http://ojto7c1rw.bkt.clouddn.com/2017%E5%B9%B44%E6%9C%88%E5%B0%8F%E7%BB%931.jpg" alt=""><br></div>
+
 </li>
 </ul>
         
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(一)/#more">Read More >></a>
+          <a class="article-more-a" href="/2017/05/03/2017年4月小结/#more">Read More >></a>
         
       
 
@@ -585,21 +499,28 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">计算机基础知识</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">小结</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/随笔/" class="article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(一)/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/05/03/2017年4月小结/">展开全文 >></a>
         </p>
       
 
@@ -619,7 +540,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -631,7 +552,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 如梦星影坠
+    		&copy; 2017 Harman
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -710,10 +631,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">小记</a>
               </li>
              
@@ -722,19 +639,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">社工库</a>
+                <a href="javascript:void(0)" class="js-tag color5">系统调用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+                <a href="javascript:void(0)" class="js-tag color1">ARM Linux2.6.37</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Logstash</a>
+                <a href="javascript:void(0)" class="js-tag color1">Bochs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Kinaba</a>
+                <a href="javascript:void(0)" class="js-tag color5">Linux0.11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -758,6 +675,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
               </li>
              
@@ -778,18 +707,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">计算机基础知识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java语言基础</a>
               </li>
              
@@ -802,11 +719,23 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">流程控制语句</a>
+                <a href="javascript:void(0)" class="js-tag color3">计算机基础知识</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">逻辑运算符</a>
+                <a href="javascript:void(0)" class="js-tag color4">社工库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Logstash</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Kinaba</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -822,35 +751,31 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
+                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">运算符</a>
+                <a href="javascript:void(0)" class="js-tag color2">流程控制语句</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">继承</a>
+                <a href="javascript:void(0)" class="js-tag color1">逻辑运算符</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">循环结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PBC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">密码学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -862,15 +787,47 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">继承</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">用户态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">内核态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hook</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PBC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">密码学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">循环结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
+                <a href="javascript:void(0)" class="js-tag color4">运算符</a>
               </li>
             
             <div class="clearfix"></div>
@@ -957,7 +914,7 @@
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">如梦星影坠，&lt;br&gt;现就读于华东女子学校计软院，&lt;br&gt;密码学初学者，安全门外汉。&lt;br&gt;多读书，多思考，多实践，&lt;br&gt;慎言慎行。</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">Harman，&lt;br&gt;现就读于华东女子学校计软院，&lt;br&gt;密码学初学者，不入流Java开发。&lt;br&gt;多读书，多思考，多实践，&lt;br&gt;慎言慎行。</div>
   	  	
     	</section>
     

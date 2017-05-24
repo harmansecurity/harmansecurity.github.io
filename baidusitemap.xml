@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E6%B3%9B%E5%9E%8B/</loc>
+    <lastmod>2017-05-24T13:55:40.116Z</lastmod>
+    <data>
+        <display>
+        <title>深入理解Java泛型</title>
+        <pubTime>2017-05-24T12:46:21.000Z</pubTime>
+        
+        <tag>泛型</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E6%B3%A8%E8%A7%A3/</loc>
     <lastmod>2017-05-24T12:23:23.907Z</lastmod>
     <data>
@@ -398,9 +415,9 @@
         <title>Java基础学习笔记(一)</title>
         <pubTime>2017-03-19T14:34:21.000Z</pubTime>
         
-        <tag>Java语言基础</tag>
-         
         <tag>计算机基础知识</tag>
+         
+        <tag>Java语言基础</tag>
          
          
            

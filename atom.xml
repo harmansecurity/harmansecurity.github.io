@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-05-24T12:23:23.907Z</updated>
+  <updated>2017-05-24T13:55:40.116Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -14,6 +14,73 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深入理解Java泛型</title>
+    <link href="http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E6%B3%9B%E5%9E%8B/"/>
+    <id>http://harmansecurity.cn/2017/05/24/深入理解Java泛型/</id>
+    <published>2017-05-24T12:46:21.000Z</published>
+    <updated>2017-05-24T13:55:40.116Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一-泛型概念的提出"><a href="#一-泛型概念的提出" class="headerlink" title="一. 泛型概念的提出"></a>一. 泛型概念的提出</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        List list = <span class="keyword">new</span> ArrayList();</div><div class="line">        list.add(<span class="string">"qqyumidi"</span>);</div><div class="line">        list.add(<span class="string">"corn"</span>);</div><div class="line">        list.add(<span class="number">100</span>);</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</div><div class="line">            String name = (String) list.get(i); <span class="comment">// 1</span></div><div class="line">            System.out.println(<span class="string">"name:"</span> + name);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　 　定义了一个List类型的集合，先向其中加入了两个字符串类型的值，随后加入一个Integer类型的值。这是完全允许的，因为此时list默认的类型为Object类型。在之后的循环中，由于忘记了之前在list中也加入了Integer类型的值或其他编码原因，很容易出现类似于//1中的错误。因为编译阶段正常，而运行时会出现“java.lang.ClassCastException”异常。因此，导致此类错误编码过程中不易发现。</p>
+<p>在如上的编码过程中，我们发现主要存在两个问题：</p>
+<ul>
+<li>当我们将一个对象放入集合中，集合不会记住此对象的类型，当再次从集合中取出此对象时，改对象的编译类型变成了Object类型，但其运行时类型任然为其本身类型。</li>
+<li>因此，//1处取出集合元素时需要人为的强制类型转化到具体目标类型，且很容易出现“java.lang.ClassCastException”异常。</li>
+</ul>
+<p><strong>那么有没有什么办法可以使集合能够记住集合内元素各类型，且能够达到只要编译时不出现问题，运行时就不会出现“java.lang.ClassCastException”异常呢？答案就是使用泛型。</strong></p>
+<a id="more"></a>
+<h4 id="二-什么是泛型"><a href="#二-什么是泛型" class="headerlink" title="二.什么是泛型"></a>二.什么是泛型</h4><p>　 　<strong>泛型，即“参数化类型”。一提到参数，最熟悉的就是定义方法时有形参，然后调用此方法时传递实参。那么参数化类型怎么理解呢？顾名思义，就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（可以称之为类型形参），然后在使用/调用时传入具体的类型（类型实参）。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">        List list = new ArrayList();</div><div class="line">        list.add("qqyumidi");</div><div class="line">        list.add("corn");</div><div class="line">        list.add(100);</div><div class="line">        */</div><div class="line"></div><div class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">        list.add(<span class="string">"qqyumidi"</span>);</div><div class="line">        list.add(<span class="string">"corn"</span>);</div><div class="line">        <span class="comment">//list.add(100);   // 1  提示编译错误</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</div><div class="line">            String name = list.get(i); <span class="comment">// 2</span></div><div class="line">            System.out.println(<span class="string">"name:"</span> + name);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　 　采用泛型写法后，在//1处想加入一个Integer类型的对象时会出现编译错误，通过List<string>，直接限定了list集合中只能含有String类型的元素，从而在//2处无须进行强制类型转换，因为此时，集合能够记住元素的类型信息，编译器已经能够确认它是String类型了。</string></p>
+<p>　 　结合上面的泛型定义，我们知道在List<string>中，String是类型实参，也就是说，相应的List接口中肯定含有类型形参。且get()方法的返回结果也直接是此形参类型（也就是对应的传入的类型实参）。下面就来看看List接口的的具体定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span></span>;</div><div class="line"></div><div class="line">    <span class="function">Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    Object[] toArray();</div><div class="line"></div><div class="line">    &lt;T&gt; T[] toArray(T[] a);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">containsAll</span><span class="params">(Collection&lt;?&gt; c)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; c)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(<span class="keyword">int</span> index, Collection&lt;? extends E&gt; c)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; c)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">retainAll</span><span class="params">(Collection&lt;?&gt; c)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function">E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</div><div class="line"></div><div class="line">    <span class="function">E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, E element)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span></span>;</div><div class="line"></div><div class="line">    <span class="function">E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(Object o)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lastIndexOf</span><span class="params">(Object o)</span></span>;</div><div class="line"></div><div class="line">    <span class="function">ListIterator&lt;E&gt; <span class="title">listIterator</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function">ListIterator&lt;E&gt; <span class="title">listIterator</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</div><div class="line"></div><div class="line">    <span class="function">List&lt;E&gt; <span class="title">subList</span><span class="params">(<span class="keyword">int</span> fromIndex, <span class="keyword">int</span> toIndex)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></string></p>
+<p>　 　我们可以看到，在List接口中采用泛型化定义之后，<e>中的E表示类型形参，可以接收具体的类型实参，并且此接口定义中，凡是出现E的地方均表示相同的接受自外部的类型实参。<br>自然的，ArrayList作为List接口的实现类，其定义形式是：</e></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt; </span></div><div class="line">        <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> &#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">        ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></div><div class="line">        elementData[size++] = e;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        rangeCheck(index);</div><div class="line">        checkForComodification();</div><div class="line">        <span class="keyword">return</span> ArrayList.<span class="keyword">this</span>.elementData(offset + index);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//...省略掉其他具体的定义过程</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由此，我们从源代码角度明白了为什么//1处加入Integer类型对象编译错误，且//2处get()到的类型直接就是String类型了。</p>
+<h4 id="三、自定义泛型接口、泛型类和泛型方法"><a href="#三、自定义泛型接口、泛型类和泛型方法" class="headerlink" title="三、自定义泛型接口、泛型类和泛型方法"></a>三、自定义泛型接口、泛型类和泛型方法</h4><p>　 　从上面的内容中，大家已经明白了泛型的具体运作过程。也知道了接口、类和方法也都可以使用泛型去定义，以及相应的使用。是的，在具体使用时，可以分为泛型接口、泛型类和泛型方法。</p>
+<p>　 　自定义泛型接口、泛型类和泛型方法与上述Java源码中的List、ArrayList类似。如下，我们看一个最简单的泛型类和方法定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Box&lt;String&gt; name = <span class="keyword">new</span> Box&lt;String&gt;(<span class="string">"corn"</span>);</div><div class="line">        System.out.println(<span class="string">"name:"</span> + name.getData());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> T data;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Box</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Box</span><span class="params">(T data)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.data = data;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> data;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>　 　在泛型接口、泛型类和泛型方法的定义过程中，我们常见的如T、E、K、V等形式的参数常用于表示泛型形参，由于接收来自外部使用时候传入的类型实参。<strong>那么对于不同传入的类型实参，生成的相应对象实例的类型是不是一样的呢？</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        Box&lt;String&gt; name = <span class="keyword">new</span> Box&lt;String&gt;(<span class="string">"corn"</span>);</div><div class="line">        Box&lt;Integer&gt; age = <span class="keyword">new</span> Box&lt;Integer&gt;(<span class="number">712</span>);</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"name class:"</span> + name.getClass());      <span class="comment">// com.qqyumidi.Box</span></div><div class="line">        System.out.println(<span class="string">"age class:"</span> + age.getClass());        <span class="comment">// com.qqyumidi.Box</span></div><div class="line">        System.out.println(name.getClass() == age.getClass());    <span class="comment">// true</span></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>　 　由此，我们发现，在使用泛型类时，虽然传入了不同的泛型实参，但并没有真正意义上生成不同的类型，传入不同泛型实参的泛型类在内存上只有一个，即还是原来的最基本的类型（本实例中为Box），当然，在逻辑上我们可以理解成多个不同的泛型类型。</p>
+<p>　 　究其原因，在于Java中的泛型这一概念提出的目的，导致其只是作用于代码编译阶段，在编译过程中，对于正确检验泛型结果后，会将泛型的相关信息擦出，也就是说，成功编译过后的class文件中是不包含任何泛型信息的。泛型信息不会进入到运行时阶段。</p>
+<p><strong>对此总结成一句话：泛型类型在逻辑上看以看成是多个不同的类型，实际上都是相同的基本类型。</strong></p>
+<h4 id="四、类型通配符"><a href="#四、类型通配符" class="headerlink" title="四、类型通配符"></a>四、类型通配符</h4><p>　 　接着上面的结论，我们知道，Box<number>和Box<integer>实际上都是Box类型，现在需要继续探讨一个问题，那么在逻辑上，类似于Box<number>和Box<integer>是否可以看成具有父子关系的泛型类型呢？为了弄清这个问题，我们继续看下下面这个例子:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        Box&lt;Number&gt; name = <span class="keyword">new</span> Box&lt;Number&gt;(<span class="number">99</span>);</div><div class="line">        Box&lt;Integer&gt; age = <span class="keyword">new</span> Box&lt;Integer&gt;(<span class="number">712</span>);</div><div class="line"></div><div class="line">        getData(name);</div><div class="line">        </div><div class="line">        <span class="comment">//The method getData(Box&lt;Number&gt;) in the type GenericTest is </span></div><div class="line">        <span class="comment">//not applicable for the arguments (Box&lt;Integer&gt;)</span></div><div class="line">        getData(age);   <span class="comment">// 1</span></div><div class="line"></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getData</span><span class="params">(Box&lt;Number&gt; data)</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"data :"</span> + data.getData());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></integer></number></integer></number></p>
+<p>　 　我们发现，在代码//1处出现了错误提示信息：The method getData(Box<number>) in the t ype GenericTest is not applicable for the arguments (Box<integer>)。显然，通过提示信息，我们知道Box<number>在逻辑上不能视为Box<integer>的父类。那么，原因何在呢？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        Box&lt;Integer&gt; a = <span class="keyword">new</span> Box&lt;Integer&gt;(<span class="number">712</span>);</div><div class="line">        Box&lt;Number&gt; b = a;  <span class="comment">// 1</span></div><div class="line">        Box&lt;Float&gt; f = <span class="keyword">new</span> Box&lt;Float&gt;(<span class="number">3.14f</span>);</div><div class="line">        b.setData(f);        <span class="comment">// 2</span></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getData</span><span class="params">(Box&lt;Number&gt; data)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"data :"</span> + data.getData());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> T data;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Box</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Box</span><span class="params">(T data)</span> </span>&#123;</div><div class="line">        setData(data);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> data;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(T data)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.data = data;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></integer></number></integer></number></p>
+<p>　 　这个例子中，显然//1和//2处肯定会出现错误提示的。在此我们可以使用反证法来进行说明。</p>
+<p>　 　假设Box<number>在逻辑上可以视为Box<integer>的父类，那么//1和//2处将不会有错误提示了，那么问题就出来了，通过getData()方法取出数据时到底是什么类型呢？Integer? Float? 还是Number？且由于在编程过程中的顺序不可控性，导致在必要的时候必须要进行类型判断，且进行强制类型转换。显然，这与泛型的理念矛盾，因此，在逻辑上Box<number>不能视为Box<integer>的父类。</integer></number></integer></number></p>
+<p>　 　好，那我们回过头来继续看“类型通配符”中的第一个例子，我们知道其具体的错误提示的深层次原因了。那么如何解决呢？总部能再定义一个新的函数吧。这和Java中的多态理念显然是违背的，因此，我们需要一个在逻辑上可以用来表示同时是Box<integer>和Box<number>的父类的一个引用类型，由此，类型通配符应运而生。</number></integer></p>
+<p>　 　<strong>类型通配符一般是使用 ? 代替具体的类型实参。注意了，此处是类型实参，而不是类型形参！且Box&lt;?&gt;在逻辑上是Box<integer>、Box<number>…等所有Box&lt;具体类型实参&gt;的父类。由此，我们依然可以定义泛型方法，来完成此类需求。</number></integer></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        Box&lt;String&gt; name = <span class="keyword">new</span> Box&lt;String&gt;(<span class="string">"corn"</span>);</div><div class="line">        Box&lt;Integer&gt; age = <span class="keyword">new</span> Box&lt;Integer&gt;(<span class="number">712</span>);</div><div class="line">        Box&lt;Number&gt; number = <span class="keyword">new</span> Box&lt;Number&gt;(<span class="number">314</span>);</div><div class="line"></div><div class="line">        getData(name);</div><div class="line">        getData(age);</div><div class="line">        getData(number);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getData</span><span class="params">(Box&lt;?&gt; data)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"data :"</span> + data.getData());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>　 　有时候，我们还可能听到类型通配符上限和类型通配符下限。具体有是怎么样的呢？</p>
+<p>　 　在上面的例子中，如果需要定义一个功能类似于getData()的方法，但对类型实参又有进一步的限制：只能是Number类及其子类。此时，需要用到类型通配符上限。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        Box&lt;String&gt; name = <span class="keyword">new</span> Box&lt;String&gt;(<span class="string">"corn"</span>);</div><div class="line">        Box&lt;Integer&gt; age = <span class="keyword">new</span> Box&lt;Integer&gt;(<span class="number">712</span>);</div><div class="line">        Box&lt;Number&gt; number = <span class="keyword">new</span> Box&lt;Number&gt;(<span class="number">314</span>);</div><div class="line"></div><div class="line">        getData(name);</div><div class="line">        getData(age);</div><div class="line">        getData(number);</div><div class="line">        </div><div class="line">        <span class="comment">//getUpperNumberData(name); // 1</span></div><div class="line">        getUpperNumberData(age);    <span class="comment">// 2</span></div><div class="line">        getUpperNumberData(number); <span class="comment">// 3</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getData</span><span class="params">(Box&lt;?&gt; data)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"data :"</span> + data.getData());</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getUpperNumberData</span><span class="params">(Box&lt;? extends Number&gt; data)</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"data :"</span> + data.getData());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　 　此时，显然，在代码//1处调用将出现错误提示，而//2 //3处调用正常。</p>
+<p>　 　<strong>类型通配符上限通过形如Box&lt;? extends Number&gt;形式定义，相对应的，类型通配符下限为Box&lt;? super Number&gt;形式，其含义与类型通配符上限正好相反。</strong></p>
+<h4 id="五、通过反射获得泛型的实际类型参数"><a href="#五、通过反射获得泛型的实际类型参数" class="headerlink" title="五、通过反射获得泛型的实际类型参数"></a>五、通过反射获得泛型的实际类型参数</h4><p>　 　java 的泛型，只是编译时作为类型检查，一旦编译完成，泛型就会被擦除，在运行期间是得不到泛型的信息的，包括它的类型参数。有时候我们需要用到泛型的类型参数，反射看起来是取不到的，因反射在运行期间执行，但那时已无泛型的信息。一些构架却办到了，那么它们是怎么实现的呢？请看下面代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.*;  </div><div class="line"><span class="keyword">import</span> java.util.*;  </div><div class="line">  </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> <span class="keyword">throws</span> Exception </span>&#123;  </div><div class="line">        Method applyMethod=Test.class.getMethod(<span class="string">"applyVector"</span>, Vector.class);  </div><div class="line">        Type[] types=applyMethod.getGenericParameterTypes();  </div><div class="line">        System.out.println(types[<span class="number">0</span>].toString());  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">applyVector</span><span class="params">(Vector&lt;Date&gt; v1)</span></span>&#123;  </div><div class="line">          </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>　 　看到了，实际上是通过获得方法，再取得方法的类型参数，这样泛型的实际类型参数就出来了。上面代码输出：java.util.Vector<java.util.date>，如果不只一个参数，要具体的类型参数呢？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.*;  </div><div class="line"><span class="keyword">import</span> java.util.*;  </div><div class="line">  </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> <span class="keyword">throws</span> Exception </span>&#123;  </div><div class="line">        Method applyMethod=Test.class.getMethod(<span class="string">"applyVector"</span>, Vector.class);  </div><div class="line">        Type[] types=applyMethod.getGenericParameterTypes();  </div><div class="line">        ParameterizedType pType=(ParameterizedType)types[<span class="number">0</span>];  </div><div class="line">        System.out.println(pType.getActualTypeArguments()[<span class="number">0</span>]);  </div><div class="line">        System.out.println(pType.getRawType());  </div><div class="line">  </div><div class="line">    &#125;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">applyVector</span><span class="params">(Vector&lt;Date&gt; v1)</span></span>&#123;  </div><div class="line">          </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="comment">//输出：</span></div><div class="line"><span class="comment">//class java.util.Date</span></div><div class="line"><span class="comment">//class java.util.Vector</span></div></pre></td></tr></table></figure></java.util.date></p>
+<h4 id="三、参考文献"><a href="#三、参考文献" class="headerlink" title="三、参考文献"></a>三、参考文献</h4><ul>
+<li><code>http://www.cnblogs.com/lwbqqyumidi/p/3837629.html</code></li>
+<li><code>http://jisonami.iteye.com/blog/2282650</code></li>
+<li><code>http://blog.csdn.net/hq333/article/details/7455328</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;一-泛型概念的提出&quot;&gt;&lt;a href=&quot;#一-泛型概念的提出&quot; class=&quot;headerlink&quot; title=&quot;一. 泛型概念的提出&quot;&gt;&lt;/a&gt;一. 泛型概念的提出&lt;/h4&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;GenericTest&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String[] args)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        List list = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ArrayList();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        list.add(&lt;span class=&quot;string&quot;&gt;&quot;qqyumidi&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        list.add(&lt;span class=&quot;string&quot;&gt;&quot;corn&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        list.add(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; list.size(); i++) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            String name = (String) list.get(i); &lt;span class=&quot;comment&quot;&gt;// 1&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            System.out.println(&lt;span class=&quot;string&quot;&gt;&quot;name:&quot;&lt;/span&gt; + name);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;　 　定义了一个List类型的集合，先向其中加入了两个字符串类型的值，随后加入一个Integer类型的值。这是完全允许的，因为此时list默认的类型为Object类型。在之后的循环中，由于忘记了之前在list中也加入了Integer类型的值或其他编码原因，很容易出现类似于//1中的错误。因为编译阶段正常，而运行时会出现“java.lang.ClassCastException”异常。因此，导致此类错误编码过程中不易发现。&lt;/p&gt;
+&lt;p&gt;在如上的编码过程中，我们发现主要存在两个问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当我们将一个对象放入集合中，集合不会记住此对象的类型，当再次从集合中取出此对象时，改对象的编译类型变成了Object类型，但其运行时类型任然为其本身类型。&lt;/li&gt;
+&lt;li&gt;因此，//1处取出集合元素时需要人为的强制类型转化到具体目标类型，且很容易出现“java.lang.ClassCastException”异常。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;那么有没有什么办法可以使集合能够记住集合内元素各类型，且能够达到只要编译时不出现问题，运行时就不会出现“java.lang.ClassCastException”异常呢？答案就是使用泛型。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="泛型" scheme="http://harmansecurity.cn/tags/%E6%B3%9B%E5%9E%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>深入理解Java注解</title>
@@ -206,6 +273,43 @@
   </entry>
   
   <entry>
+    <title>ARM Linux2.6.37系统调用原理</title>
+    <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
+    <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37系统调用原理/</id>
+    <published>2017-05-19T10:40:11.000Z</published>
+    <updated>2017-05-19T10:47:32.378Z</updated>
+    
+    <content type="html"><![CDATA[<p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
+<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
+<a id="more"></a>
+<p><strong>2.调转到entry-common.S中执行vector_swi软中断指令</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%862.png" alt=""></p>
+<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
+<li><code>http://www.linuxidc.com/Linux/2015-04/116546.htm</code></li>
+<li><code>http://blog.csdn.net/tommy_wxie/article/details/7610118</code></li>
+<li><code>http://blog.csdn.net/myarrow/article/details/7036266</code></li>
+<li><code>http://blog.chinaunix.net/uid-28236237-id-3404140.html</code></li>
+<li><code>http://blog.csdn.net/liduxun/article/details/48119849</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。&lt;/p&gt;
+&lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.entry-armv.S里面有switch软件中断的入口&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    
+      <category term="ARM Linux2.6.37" scheme="http://harmansecurity.cn/tags/ARM-Linux2-6-37/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ARM Linux2.6.37中获取系统调用号</title>
     <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7/"/>
     <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37中获取系统调用号/</id>
@@ -236,43 +340,6 @@
 &lt;li&gt;1.在linux-2.6.37/arch/arm/kernel文件下找到entry-common.S修改源码，在软中断里面添加实现获取调用号的函数&lt;code&gt;bl get_syscall_num&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
-    
-      <category term="ARM Linux2.6.37" scheme="http://harmansecurity.cn/tags/ARM-Linux2-6-37/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ARM Linux2.6.37系统调用原理</title>
-    <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
-    <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37系统调用原理/</id>
-    <published>2017-05-19T10:40:11.000Z</published>
-    <updated>2017-05-19T10:47:32.378Z</updated>
-    
-    <content type="html"><![CDATA[<p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
-<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
-<a id="more"></a>
-<p><strong>2.调转到entry-common.S中执行vector_swi软中断指令</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%862.png" alt=""></p>
-<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
-<li><code>http://www.linuxidc.com/Linux/2015-04/116546.htm</code></li>
-<li><code>http://blog.csdn.net/tommy_wxie/article/details/7610118</code></li>
-<li><code>http://blog.csdn.net/myarrow/article/details/7036266</code></li>
-<li><code>http://blog.chinaunix.net/uid-28236237-id-3404140.html</code></li>
-<li><code>http://blog.csdn.net/liduxun/article/details/48119849</code></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt; 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。&lt;/p&gt;
-&lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.entry-armv.S里面有switch软件中断的入口&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -2595,503 +2662,6 @@ System.out.println(&quot;y=&quot;+y);
       <category term="流程控制语句" scheme="http://harmansecurity.cn/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
     
       <category term="逻辑运算符" scheme="http://harmansecurity.cn/tags/%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java基础学习笔记(二)</title>
-    <link href="http://harmansecurity.cn/2017/03/19/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)/"/>
-    <id>http://harmansecurity.cn/2017/03/19/Java基础学习笔记(二)/</id>
-    <published>2017-03-19T14:35:21.000Z</published>
-    <updated>2017-03-19T15:08:49.606Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="02-01-Java语言基础-常量的概述和使用-掌握"><a href="#02-01-Java语言基础-常量的概述和使用-掌握" class="headerlink" title="02.01_Java语言基础(常量的概述和使用)(掌握)"></a>02.01_Java语言基础(常量的概述和使用)(掌握)</h3><ul>
-<li>A:什么是常量<ul>
-<li>在程序执行的过程中其值不可以发生改变 </li>
-</ul>
-</li>
-<li>B:Java中常量的分类<ul>
-<li>字面值常量</li>
-<li>自定义常量(面向对象部分讲) </li>
-</ul>
-</li>
-<li><p>C:字面值常量的分类</p>
-<ul>
-<li>字符串常量    用双引号括起来的内容</li>
-<li>整数常量        所有整数</li>
-<li>小数常量        所有小数</li>
-<li>字符常量        用单引号括起来的内容,里面只能放单个数字,单个字母或单个符号</li>
-<li>布尔常量        较为特殊，只有true和false</li>
-<li>空常量            null(数组部分讲解)</li>
-</ul>
-</li>
-<li><p>D:案例演示</p>
-<ul>
-<li>用输出语句输出各种常量。null不演示</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h3 id="02-02-Java语言基础-进制概述和二-八-十六进制图解-了解"><a href="#02-02-Java语言基础-进制概述和二-八-十六进制图解-了解" class="headerlink" title="02.02_Java语言基础(进制概述和二,八,十六进制图解)(了解)"></a>02.02_Java语言基础(进制概述和二,八,十六进制图解)(了解)</h3><ul>
-<li>A:什么是进制<ul>
-<li>进制：就是进位制，是人们规定的一种进位方法。 对于任何一种进制–X进制，就表示某一位置上的数运算时是逢X进一位。二进制就是逢二进一，八进制是逢八进一，十进制是逢十进一，十六进制是逢十六进一。</li>
-<li>例如一周有七天,七进制,一年有十二个月,十二进制</li>
-</ul>
-</li>
-<li>B:十进制的由来 <ul>
-<li>十进制的由来是因为人类有十个手指 </li>
-</ul>
-</li>
-<li>C:二进制的由来<ul>
-<li>其实二进制来源与中国,请看史料记载</li>
-<li>18世纪德国数理哲学大师莱布尼兹从他的传教士朋友鲍威特寄给他的拉丁文译本《易经》中，读到了八卦的组成结构，惊奇地发现其基本素数（0）（1），即《易经》的阴爻yao- -和__阳爻，其进位制就是二进制，并认为这是世界上数学进制中最先进的。20世纪被称作第三次科技革命的重要标志之一的计算机的发明与应用，其运算模式正是二进制。它不但证明了莱布尼兹的原理是正确的，同时也证明了《易经》数理学是很了不起的。</li>
-</ul>
-</li>
-<li>D:八进制的由来<ul>
-<li>任何数据在计算机中都是以二进制的形式存在的。二进制早期由电信号开关演变而来。一个整数在内存中一样也是二进制的，但是使用一大串的1或者0组成的数值进行使用很麻烦。 </li>
-<li>所以就想把一大串缩短点，将二进制中的三位用一位表示。这三位可以取到的最大值就是7.超过7就进位了，这就是八进制。 </li>
-</ul>
-</li>
-<li>E:十六进制的由来<ul>
-<li>但是对于过长的二进制变成八进制还是较长，所以出现的用4个二进制位表示一位的情况，四个二进制位最大是15，这就是十六进制。</li>
-</ul>
-</li>
-<li>F:不同进制表现同一个数据的形式特点<ul>
-<li>进制越大，表现形式越短</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-03-Java语言基础-不同进制数据的表现形式-掌握"><a href="#02-03-Java语言基础-不同进制数据的表现形式-掌握" class="headerlink" title="02.03_Java语言基础(不同进制数据的表现形式)(掌握)"></a>02.03_Java语言基础(不同进制数据的表现形式)(掌握)</h3><ul>
-<li>A:二进制的数据表现形式<ul>
-<li>由0,1组成。以0b(b可以大写也可以小写)开头(JDK1.7版本可以表示二进制了)</li>
-</ul>
-</li>
-<li>B:八进制的数据表现形式<ul>
-<li>由0,1,…7组成。以0开头</li>
-</ul>
-</li>
-<li>C:十进制的数据表现形式<ul>
-<li>由0,1,…9组成。整数默认是十进制的 </li>
-</ul>
-</li>
-<li>D:十六进制的数据表现形式<ul>
-<li>由0,1,…9,a,b,c,d,e,f(大小写均可)。以0x开头 </li>
-</ul>
-</li>
-<li>E:案例演示<ul>
-<li>输出不同进制表现100的数据。</li>
-<li>0b100</li>
-<li>0100</li>
-<li>100</li>
-<li>0x100</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-04-Java语言基础-任意进制到十进制的转换图解-了解"><a href="#02-04-Java语言基础-任意进制到十进制的转换图解-了解" class="headerlink" title="02.04_Java语言基础(任意进制到十进制的转换图解)(了解)"></a>02.04_Java语言基础(任意进制到十进制的转换图解)(了解)</h3><ul>
-<li>A:任意进制到十进制的转换原理<ul>
-<li>系数：就是每一位上的数据。</li>
-<li>基数：X进制，基数就是X。</li>
-<li>权：在右边，从0开始编号，对应位上的编号即为该位的权。</li>
-<li>结果：把系数*基数的权次幂相加即可。 </li>
-</ul>
-</li>
-<li>B:画图练习<ul>
-<li>二进制–十进制</li>
-<li>八进制–十进制</li>
-<li>十六进制–十进制</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-05-Java语言基础-十进制到任意进制的转换图解-了解"><a href="#02-05-Java语言基础-十进制到任意进制的转换图解-了解" class="headerlink" title="02.05_Java语言基础(十进制到任意进制的转换图解)(了解)"></a>02.05_Java语言基础(十进制到任意进制的转换图解)(了解)</h3><ul>
-<li>A:十进制到任意进制的转换原理<ul>
-<li>除积倒取余 </li>
-</ul>
-</li>
-<li>B:画图练习<ul>
-<li>十进制–二进制</li>
-<li>十进制–八进制</li>
-<li>十进制–十六进制</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-06-Java语言基础-快速的进制转换法-了解"><a href="#02-06-Java语言基础-快速的进制转换法-了解" class="headerlink" title="02.06_Java语言基础(快速的进制转换法)(了解)"></a>02.06_Java语言基础(快速的进制转换法)(了解)</h3><ul>
-<li>A:8421码及特点<ul>
-<li>8421码是中国大陆的叫法，8421码是BCD代码中最常用的一种。在这种编码方式中每一位二值代码的1都是代表一个固定数值，把每一位的1代表的十进制数加起来，得到的结果就是它所代表的十进制数码。 </li>
-</ul>
-</li>
-<li>B:通过8421码的方式进行二进制和十进制的相互转换</li>
-<li>C:二进制到八进制的简易方式</li>
-<li>D:二进制到十六进制的简易方式</li>
-</ul>
-<h3 id="02-07-Java语言基础-原码反码补码-了解"><a href="#02-07-Java语言基础-原码反码补码-了解" class="headerlink" title="02.07_Java语言基础(原码反码补码)(了解)"></a>02.07_Java语言基础(原码反码补码)(了解)</h3><ul>
-<li>A:为什么要学习原码反码补码?<ul>
-<li>后面要学习强制类型转换,如果不知道有原反补会看不懂结果 </li>
-</ul>
-</li>
-<li>B:有符号数据表示法的几种方式<ul>
-<li>原码<ul>
-<li>就是二进制定点表示法，即最高位为符号位，“0”表示正，“1”表示负，其余位表示数值的大小。</li>
-<li>通过一个字节,也就是8个二进制位表示+7和-7</li>
-<li>0(符号位)    0000111</li>
-<li>1(符号位)    0000111</li>
-</ul>
-</li>
-<li>反码<ul>
-<li>正数的反码与其原码相同；负数的反码是对其原码逐位取反，但符号位除外。</li>
-</ul>
-</li>
-<li>补码<ul>
-<li>正数的补码与其原码相同；负数的补码是在其反码的末位加1。 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-08-Java语言基础-原码反码补码的练习-了解"><a href="#02-08-Java语言基础-原码反码补码的练习-了解" class="headerlink" title="02.08_Java语言基础(原码反码补码的练习)(了解)"></a>02.08_Java语言基础(原码反码补码的练习)(了解)</h3><ul>
-<li>A:已知原码求补码<ul>
-<li>0b10110100 </li>
-</ul>
-</li>
-<li>B:已知补码求原码<ul>
-<li>0b11101110 </li>
-</ul>
-</li>
-</ul>
-<h3 id="02-09-Java语言基础-变量的概述及格式-掌握"><a href="#02-09-Java语言基础-变量的概述及格式-掌握" class="headerlink" title="02.09_Java语言基础(变量的概述及格式)(掌握)"></a>02.09_Java语言基础(变量的概述及格式)(掌握)</h3><ul>
-<li>A:什么是变量<ul>
-<li>在程序执行的过程中，在某个范围内其值可以发生改变的量</li>
-</ul>
-</li>
-<li>B:变量的定义格式<ul>
-<li>数据类型 变量名 = 变量值;</li>
-</ul>
-</li>
-<li>C:为什么要定义变量<ul>
-<li>用来不断的存放同一类型的常量，并可以重复使用 </li>
-</ul>
-</li>
-</ul>
-<h3 id="02-10-Java语言基础-数据类型的概述和分类-掌握"><a href="#02-10-Java语言基础-数据类型的概述和分类-掌握" class="headerlink" title="02.10_Java语言基础(数据类型的概述和分类)(掌握)"></a>02.10_Java语言基础(数据类型的概述和分类)(掌握)</h3><ul>
-<li>A:为什么有数据类型<ul>
-<li>Java语言是强类型语言，对于每一种数据都定义了明确的具体数据类型，在内存中分配了不同大小的内存空间</li>
-</ul>
-</li>
-<li>B:Java中数据类型的分类<ul>
-<li>基本数据类型</li>
-<li>引用数据类型 <ul>
-<li>面向对象部分讲解 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>C:基本数据类型分类(4类8种) <ul>
-<li>整数型<ul>
-<li>byte 占一个字节  -128到127</li>
-<li>short 占两个字  -2^15~2^15-1</li>
-<li>int 占四个字节 -2^31~2^31-1</li>
-<li>long 占八个字节 -2^63~2^63-1</li>
-</ul>
-</li>
-<li>浮点型<ul>
-<li>float 占四个字节 -3.403E38~3.403E38  单精度</li>
-<li>double 占八个字节-1.798E308~1.798E308 双精度</li>
-</ul>
-</li>
-<li>字符型<ul>
-<li>char 占两个字节 0~65535</li>
-</ul>
-</li>
-<li>布尔型<ul>
-<li>boolean   <ul>
-<li>boolean理论上是占八分之一个字节,因为一个开关就可以决定是true和false了,但是java中boolean类型没有明确指定他的大小      </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-11-Java语言基础-定义不同数据类型的变量-掌握"><a href="#02-11-Java语言基础-定义不同数据类型的变量-掌握" class="headerlink" title="02.11_Java语言基础(定义不同数据类型的变量)(掌握)"></a>02.11_Java语言基础(定义不同数据类型的变量)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>定义不同基本数据类型的变量，并输出</li>
-<li>赋值时候注意float类型,long类型</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-12-Java语言基础-使用变量的注意事项-掌握"><a href="#02-12-Java语言基础-使用变量的注意事项-掌握" class="headerlink" title="02.12_Java语言基础(使用变量的注意事项)(掌握)"></a>02.12_Java语言基础(使用变量的注意事项)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>a:作用域问题<ul>
-<li>同一个区域不能使用相同的变量名 </li>
-</ul>
-</li>
-<li>b:初始化值问题<ul>
-<li>局部变量在使用之前必须赋值 </li>
-</ul>
-</li>
-<li>c:一条语句可以定义几个变量<ul>
-<li>int a,b,c…; </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-13-Java语言基础-数据类型转换之隐式转换-掌握"><a href="#02-13-Java语言基础-数据类型转换之隐式转换-掌握" class="headerlink" title="02.13_Java语言基础(数据类型转换之隐式转换)(掌握)"></a>02.13_Java语言基础(数据类型转换之隐式转换)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>a:int + int</li>
-<li>b:byte + int </li>
-</ul>
-</li>
-<li>B:Java中的默认转换规则<ul>
-<li>取值范围小的数据类型与取值范围大的数据类型进行运算,会先将小的数据类型提升为大的,再运算 </li>
-</ul>
-</li>
-<li>C:画图解释byte+int类型的问题</li>
-</ul>
-<h3 id="02-14-Java语言基础-数据类型转换之强制转换-掌握"><a href="#02-14-Java语言基础-数据类型转换之强制转换-掌握" class="headerlink" title="02.14_Java语言基础(数据类型转换之强制转换)(掌握)"></a>02.14_Java语言基础(数据类型转换之强制转换)(掌握)</h3><ul>
-<li>A:强制转换问题<ul>
-<li>int a = 10;</li>
-<li>byte b = 20; </li>
-<li>b = a + b;</li>
-</ul>
-</li>
-<li>B:强制转换的格式<ul>
-<li>b = (byte)(a + b); </li>
-</ul>
-</li>
-<li>C:强制转换的注意事项<ul>
-<li>如果超出了被赋值的数据类型的取值范围得到的结果会与你期望的结果不同 </li>
-</ul>
-</li>
-</ul>
-<h3 id="02-15-Java语言基础-面试题之变量相加和常量相加的区别-掌握"><a href="#02-15-Java语言基础-面试题之变量相加和常量相加的区别-掌握" class="headerlink" title="02.15_Java语言基础(面试题之变量相加和常量相加的区别)(掌握)"></a>02.15_Java语言基础(面试题之变量相加和常量相加的区别)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>面试题:看下面的程序是否有问题，如果有问题，请指出并说明理由。</li>
-<li>byte b1 = 3;</li>
-<li>byte b2 = 4;</li>
-<li>byte b3 = b1 + b2;<ul>
-<li>从两方面去回答这个题</li>
-<li>b1和b2是两个变量,变量里面存储的值都是变化的,所以在程序运行中JVM是无法判断里面具体的值</li>
-<li>byte类型的变量在进行运算的时候,会自动类型提升为int类型 </li>
-</ul>
-</li>
-<li>byte b4 = 3 + 4;<ul>
-<li>3和4都是常量,java有常量优化机制,就是在编译的的时候直接把3和4的结果赋值给b4了 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-16-Java语言基础-long与float的取值范围谁大谁小-了解"><a href="#02-16-Java语言基础-long与float的取值范围谁大谁小-了解" class="headerlink" title="02.16_Java语言基础(long与float的取值范围谁大谁小)(了解)"></a>02.16_Java语言基础(long与float的取值范围谁大谁小)(了解)</h3><ul>
-<li><p>进行混合运算的时候,byte,short,char不会相互转换,都会自动类型提升为int类型,其他类型进行混合运算的是小的数据类型提升为大的</p>
-<ul>
-<li><p>byte,short,char – int – long – float – double</p>
-</li>
-<li><p>long: 8个字节</p>
-</li>
-<li>float：4个字节</li>
-<li>IEEE754</li>
-<li>4个字节是32个二进制位</li>
-<li>1位是符号位</li>
-<li>8位是指数位</li>
-<li>00000000   11111111</li>
-<li>0到255</li>
-<li>1到254</li>
-<li>-126到127</li>
-<li>23位是尾数位</li>
-<li><p>每个指数位减去127</p>
-</li>
-<li><p>A:它们底层的存储结构不同。</p>
-</li>
-<li>B:float表示的数据范围比long的范围要大<ul>
-<li>long：2^63-1</li>
-<li><code>float：3.4*10^38 &gt; 2*10^38 &gt; 2*8^38 = 2*2^3^38 = 2*2^114 &gt; 2^63-1</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-17-Java语言基础-字符和字符串参与运算-掌握"><a href="#02-17-Java语言基础-字符和字符串参与运算-掌握" class="headerlink" title="02.17_Java语言基础(字符和字符串参与运算)(掌握)"></a>02.17_Java语言基础(字符和字符串参与运算)(掌握)</h3><ul>
-<li><p>A:案例演示</p>
-<ul>
-<li>System.out.println(‘a’);</li>
-<li><p>System.out.println(‘a’+1);</p>
-</li>
-<li><p>通过看结果知道’a’的值是多少,由此引出ASCII码表</p>
-</li>
-</ul>
-</li>
-<li>B:ASCII码表的概述<ul>
-<li>记住三个值：<ul>
-<li>‘0’  48</li>
-<li>‘A’  65</li>
-<li>‘a’  97</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>C:案例演示<ul>
-<li>System.out.println(“hello”+’a’+1);</li>
-<li>System.out.println(‘a’+1+”hello”);</li>
-</ul>
-</li>
-<li>D:+在有字符串参与中被称为字符串连接符<ul>
-<li>System.out.println(“5+5=”+5+5);</li>
-<li>System.out.println(5+5+”=5+5”);</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-18-Java语言基础-char数据类型-掌握"><a href="#02-18-Java语言基础-char数据类型-掌握" class="headerlink" title="02.18_Java语言基础(char数据类型)(掌握)"></a>02.18_Java语言基础(char数据类型)(掌握)</h3><ul>
-<li>A:char c = 97;    0到65535</li>
-<li>B:Java语言中的字符char可以存储一个中文汉字吗?为什么呢?<ul>
-<li>可以。因为Java语言采用的是Unicode编码。Unicode编码中的每个字符占用两个字节。中文也是占的两个字节</li>
-<li>所以，Java中的字符可以存储一个中文汉字</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-19-Java语言基础-算术运算符的基本用法-掌握"><a href="#02-19-Java语言基础-算术运算符的基本用法-掌握" class="headerlink" title="02.19_Java语言基础(算术运算符的基本用法)(掌握)"></a>02.19_Java语言基础(算术运算符的基本用法)(掌握)</h3><ul>
-<li>A:什么是运算符<ul>
-<li>就是对常量和变量进行操作的符号。</li>
-</ul>
-</li>
-<li>B:运算符的分类<ul>
-<li>算术运算符，赋值运算符，比较(关系或条件)运算符，逻辑运算符，位运算符，三目(元)运算符 </li>
-</ul>
-</li>
-<li>C:算数运算符有哪些<ul>
-<li>+,-,*,/,%,++,– </li>
-</ul>
-</li>
-<li>D:注意事项：<ul>
-<li>a:+号在java中有三种作用,代表正号,做加法运算,字符串的连接符</li>
-<li>b:整数相除只能得到整数。如果想得到小数，必须把数据变化为浮点数类型</li>
-<li>c:/获取的是除法操作的商，%获取的是除法操作的余数</li>
-<li>%运算符<ul>
-<li>当左边的绝对值小于右边绝对值时,结果是左边</li>
-<li>当左边的绝对值等于右边或是右边的倍数时,结果是0</li>
-<li>当左边的绝对值大于右边绝对值时,结果是余数</li>
-<li>%运算符结果的符号只和左边有关系,与右边无关</li>
-<li>任何一个正整数%2结果不是0就是1可以用来当作切换条件 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-20-Java语言基础-算术运算符-和–的用法-掌握"><a href="#02-20-Java语言基础-算术运算符-和–的用法-掌握" class="headerlink" title="02.20_Java语言基础(算术运算符++和–的用法)(掌握)"></a>02.20_Java语言基础(算术运算符++和–的用法)(掌握)</h3><ul>
-<li>A:++,–运算符的作用<ul>
-<li>自加（++）自减（–）运算</li>
-<li>++:自加。对原有的数据进行+1</li>
-<li>–:自减。对原有的数据进行-1</li>
-</ul>
-</li>
-<li>B:案例演示<ul>
-<li>a:单独使用：<ul>
-<li>放在操作数的前面和后面效果一样。(这种用法是我们比较常见的)</li>
-</ul>
-</li>
-<li>b:参与运算使用：<ul>
-<li>放在操作数的前面，先自增或者自减，然后再参与运算。</li>
-<li>放在操作数的后面，先参与运算，再自增或者自减。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-21-Java语言基础-算术运算符-和–的练习-掌握"><a href="#02-21-Java语言基础-算术运算符-和–的练习-掌握" class="headerlink" title="02.21_Java语言基础(算术运算符++和–的练习)(掌握)"></a>02.21_Java语言基础(算术运算符++和–的练习)(掌握)</h3><ul>
-<li><p>A:案例演示</p>
-<ul>
-<li>请分别计算出a,b,c的值?<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">	<span class="keyword">int</span> a = <span class="number">10</span>;</div><div class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</div><div class="line">	<span class="keyword">int</span> c = <span class="number">10</span>;</div><div class="line"></div><div class="line">	a = b++;		</div><div class="line">	c = --a;			</div><div class="line">	b = ++a;		</div><div class="line">	a = c--;	</div><div class="line">```		</div><div class="line">* B:案例演示</div><div class="line">	* 请分别计算出x,y的值?</div><div class="line">```java</div><div class="line">			<span class="keyword">int</span> x = <span class="number">4</span>;</div><div class="line">			<span class="keyword">int</span> y = (x++)+(++x)+(x*<span class="number">10</span>);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>C:面试题</p>
-<ul>
-<li>byte b = 10;</li>
-<li>b++;</li>
-<li>b = b + 1;</li>
-<li>问哪句会报错,为什么 </li>
-</ul>
-</li>
-</ul>
-<h3 id="02-22-Java语言基础-赋值运算符的基本用法-掌握"><a href="#02-22-Java语言基础-赋值运算符的基本用法-掌握" class="headerlink" title="02.22_Java语言基础(赋值运算符的基本用法)(掌握)"></a>02.22_Java语言基础(赋值运算符的基本用法)(掌握)</h3><ul>
-<li><p>A:赋值运算符有哪些</p>
-<ul>
-<li><p>a:基本的赋值运算符：=</p>
-<ul>
-<li>把=右边的数据赋值给左边。</li>
-</ul>
-</li>
-<li><p>b:扩展的赋值运算符：+=,-=,*=,/=,%=</p>
-<ul>
-<li>+= 把左边和右边做加法，然后赋值给左边。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-23-Java语言基础-赋值运算符的面试题-掌握"><a href="#02-23-Java语言基础-赋值运算符的面试题-掌握" class="headerlink" title="02.23_Java语言基础(赋值运算符的面试题)(掌握)"></a>02.23_Java语言基础(赋值运算符的面试题)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>面试题:看下面的程序是否有问题，如果有问题，请指出并说明理由。</li>
-<li>short s=1;s = s+1;</li>
-<li>short s=1;s+=1;</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-24-Java语言基础-关系运算符的基本用法及其注意事项-掌握"><a href="#02-24-Java语言基础-关系运算符的基本用法及其注意事项-掌握" class="headerlink" title="02.24_Java语言基础(关系运算符的基本用法及其注意事项)(掌握)"></a>02.24_Java语言基础(关系运算符的基本用法及其注意事项)(掌握)</h3><ul>
-<li>A:关系运算符有哪些(比较运算符,条件运算符)<ul>
-<li>==,!=,&gt;,&gt;=,&lt;,&lt;= </li>
-</ul>
-</li>
-<li><p>注意事项：</p>
-<ul>
-<li><p>无论你的操作是简单还是复杂，结果是boolean类型。</p>
-</li>
-<li><p>“==”不能写成”=”。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="02-25-day02总结"><a href="#02-25-day02总结" class="headerlink" title="02.25_day02总结"></a>02.25_day02总结</h3><ul>
-<li>把今天的知识点总结一遍。</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;02-01-Java语言基础-常量的概述和使用-掌握&quot;&gt;&lt;a href=&quot;#02-01-Java语言基础-常量的概述和使用-掌握&quot; class=&quot;headerlink&quot; title=&quot;02.01_Java语言基础(常量的概述和使用)(掌握)&quot;&gt;&lt;/a&gt;02.01_Java语言基础(常量的概述和使用)(掌握)&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;A:什么是常量&lt;ul&gt;
-&lt;li&gt;在程序执行的过程中其值不可以发生改变 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;B:Java中常量的分类&lt;ul&gt;
-&lt;li&gt;字面值常量&lt;/li&gt;
-&lt;li&gt;自定义常量(面向对象部分讲) &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;C:字面值常量的分类&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;字符串常量    用双引号括起来的内容&lt;/li&gt;
-&lt;li&gt;整数常量        所有整数&lt;/li&gt;
-&lt;li&gt;小数常量        所有小数&lt;/li&gt;
-&lt;li&gt;字符常量        用单引号括起来的内容,里面只能放单个数字,单个字母或单个符号&lt;/li&gt;
-&lt;li&gt;布尔常量        较为特殊，只有true和false&lt;/li&gt;
-&lt;li&gt;空常量            null(数组部分讲解)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;D:案例演示&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;用输出语句输出各种常量。null不演示&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
-    
-      <category term="数据类型" scheme="http://harmansecurity.cn/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
-    
-      <category term="运算符" scheme="http://harmansecurity.cn/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
     
   </entry>
   

@@ -155,6 +155,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-深入理解Java类加载器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/24/深入理解Java类加载器/">深入理解Java类加载器</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/24/深入理解Java类加载器/" class="archive-article-date">
+  	<time datetime="2017-05-24T14:11:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-类的加载过程"><a href="#1-类的加载过程" class="headerlink" title="1. 类的加载过程"></a>1. 类的加载过程</h4><p>　 　JVM将类加载过程分为三个步骤：装载（Load），链接（Link）和初始化(Initialize)链接又分为三个步骤：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A81.jpg" alt=""></p>
+<ul>
+<li>装载：查找并加载类的二进制数据；</li>
+<li><p>链接：</p>
+<p>  验证：确保被加载类的正确性；</p>
+<p>  准备：为类的静态变量分配内存，并将其初始化为默认值；</p>
+<p>  解析：把类中的符号引用转换为直接引用；</p>
+</li>
+<li><p>初始化：为类的静态变量赋予正确的初始值；</p>
+</li>
+</ul>
+<h4 id="2-类的初始化"><a href="#2-类的初始化" class="headerlink" title="2. 类的初始化"></a>2. 类的初始化</h4><p>类什么时候才被初始化：</p>
+<ul>
+<li>1）创建类的实例，也就是new一个对象</li>
+<li>2）访问某个类或接口的静态变量，或者对该静态变量赋值</li>
+<li>3）调用类的静态方法</li>
+<li>4）反射（Class.forName(“com.lyj.load”)）</li>
+<li>5）初始化一个类的子类（会首先初始化子类的父类）</li>
+<li>6）JVM启动时标明的启动类，即文件名和类名相同的那个类</li>
+</ul>
+<p>只有这6中情况才会导致类的类的初始化。</p>
+<p>类的初始化步骤：</p>
+<ul>
+<li><p>1）如果这个类还没有被加载和链接，那先进行加载和链接</p>
+</li>
+<li><p>2）假如这个类存在直接父类，并且这个类还没有被初始化（注意：在一个类加载器中，类只能初始化一次），那就初始化直接的父类（不适用于接口）</p>
+</li>
+<li><p>3)加入类中存在初始化语句（如static变量和static块），那就依次执行这些初始化语句。</p>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/05/24/深入理解Java类加载器/#more">Read More >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">类加载器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/24/深入理解Java类加载器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<!---->
+
+  
     <article id="post-深入理解Java泛型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -378,77 +473,6 @@
 <!---->
 
   
-    <article id="post-ARM Linux2.6.37系统调用原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/19/ARM Linux2.6.37系统调用原理/">ARM Linux2.6.37系统调用原理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/19/ARM Linux2.6.37系统调用原理/" class="archive-article-date">
-  	<time datetime="2017-05-19T10:40:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
-</a>
-        
-      </header>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
-<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/05/19/ARM Linux2.6.37系统调用原理/#more">Read More >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">系统调用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ARM Linux2.6.37</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/19/ARM Linux2.6.37系统调用原理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-<!---->
-
-  
     <article id="post-ARM Linux2.6.37中获取系统调用号" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -631,10 +655,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">小记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">社工库</a>
               </li>
              
@@ -648,6 +668,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kinaba</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">小记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -676,6 +700,26 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Linux0.11</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Tamper Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LiveHttpHeaders</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Hackbar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Modify Headers</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -723,10 +767,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
               </li>
              
@@ -743,27 +783,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
+                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Tamper Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LiveHttpHeaders</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hackbar</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Modify Headers</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
+                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -779,7 +803,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -791,11 +823,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+                <a href="javascript:void(0)" class="js-tag color5">类加载器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -807,11 +835,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hook</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -820,10 +852,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
             
             <div class="clearfix"></div>

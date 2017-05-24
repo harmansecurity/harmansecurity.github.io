@@ -155,6 +155,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux0.11获取系统调用号" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/19/Linux0.11获取系统调用号/">Linux0.11获取系统调用号</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/19/Linux0.11获取系统调用号/" class="archive-article-date">
+  	<time datetime="2017-05-19T03:02:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、实验步骤"><a href="#一、实验步骤" class="headerlink" title="一、实验步骤"></a>一、实验步骤</h4><p><strong>1.修改linux0.11/kernel/sys_call.s添加call achieveEax</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.png" alt=""></p>
+<p><strong>2.在linux0.11/kernel底下添加achieveEax.c文件</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B72.png" alt=""></p>
+        
+          <a class="article-more-a" href="/2017/05/19/Linux0.11获取系统调用号/#more">Read More >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Linux0.11</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统调用号</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/19/Linux0.11获取系统调用号/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<!---->
+
+  
     <article id="post-Bochs运行Linux0.11内核" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -469,100 +541,6 @@
 <!---->
 
   
-    <article id="post-Java基础学习笔记(八)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/19/Java基础学习笔记(八)/">Java基础学习笔记(八)</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/19/Java基础学习笔记(八)/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:45:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
-</a>
-        
-      </header>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="08-01-面向对象-代码块的概述和分类-了解-面试的时候会问-开发不用或者很少用"><a href="#08-01-面向对象-代码块的概述和分类-了解-面试的时候会问-开发不用或者很少用" class="headerlink" title="08.01_面向对象(代码块的概述和分类)(了解)(面试的时候会问,开发不用或者很少用)"></a>08.01_面向对象(代码块的概述和分类)(了解)(面试的时候会问,开发不用或者很少用)</h3><ul>
-<li>A:代码块概述<ul>
-<li>在Java中，使用{}括起来的代码被称为代码块。</li>
-</ul>
-</li>
-<li>B:代码块分类<ul>
-<li>根据其位置和声明的不同，可以分为局部代码块，构造代码块，静态代码块，同步代码块(多线程讲解)。</li>
-</ul>
-</li>
-<li>C:常见代码块的应用<ul>
-<li>a:局部代码块 <ul>
-<li>在方法中出现；限定变量生命周期，及早释放，提高内存利用率</li>
-</ul>
-</li>
-<li>b:构造代码块 (初始化块)<ul>
-<li>在类中方法外出现；多个构造方法方法中相同的代码存放到一起，每次调用构造都执行，并且在构造方法前执行</li>
-</ul>
-</li>
-<li>c:静态代码块 <ul>
-<li>在类中方法外出现，并加上static修饰；用于给类进行初始化，在加载的时候就执行，并且只执行一次。</li>
-<li>一般用于加载驱动</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(八)/#more">Read More >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/19/Java基础学习笔记(八)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-<!---->
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -672,10 +650,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">小记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">社工库</a>
               </li>
              
@@ -689,6 +663,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kinaba</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">小记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,6 +695,26 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Linux0.11</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Tamper Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LiveHttpHeaders</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Hackbar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Modify Headers</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -764,10 +762,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
               </li>
              
@@ -784,27 +778,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
+                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Tamper Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LiveHttpHeaders</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hackbar</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Modify Headers</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
+                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -820,7 +798,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -832,11 +818,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+                <a href="javascript:void(0)" class="js-tag color5">类加载器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -848,11 +830,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hook</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -861,10 +847,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
             
             <div class="clearfix"></div>

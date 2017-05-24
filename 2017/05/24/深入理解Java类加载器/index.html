@@ -6,14 +6,59 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://harmansecurity.cn">
-  <title>Tag: Java语言基础 | Harman&#39;s Homepage</title>
+  <title>深入理解Java类加载器 | Harman&#39;s Homepage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Harman's Homepage">
-<meta property="og:url" content="http://harmansecurity.cn/tags/Java语言基础/index.html">
+  <meta name="description" content="1. 类的加载过程　 　JVM将类加载过程分为三个步骤：装载（Load），链接（Link）和初始化(Initialize)链接又分为三个步骤：
+
+
+装载：查找并加载类的二进制数据；
+链接：
+  验证：确保被加载类的正确性；
+  准备：为类的静态变量分配内存，并将其初始化为默认值；
+  解析：把类中的符号引用转换为直接引用；
+
+初始化：为类的静态变量赋予正确的初始值；
+
+
+2. 类的初始化类什么时候">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解Java类加载器">
+<meta property="og:url" content="http://harmansecurity.cn/2017/05/24/深入理解Java类加载器/index.html">
 <meta property="og:site_name" content="Harman's Homepage">
+<meta property="og:description" content="1. 类的加载过程　 　JVM将类加载过程分为三个步骤：装载（Load），链接（Link）和初始化(Initialize)链接又分为三个步骤：
+
+
+装载：查找并加载类的二进制数据；
+链接：
+  验证：确保被加载类的正确性；
+  准备：为类的静态变量分配内存，并将其初始化为默认值；
+  解析：把类中的符号引用转换为直接引用；
+
+初始化：为类的静态变量赋予正确的初始值；
+
+
+2. 类的初始化类什么时候">
+<meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A81.jpg">
+<meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A82.jpg">
+<meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A84.png">
+<meta property="og:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A85.jpg">
+<meta property="og:updated_time" content="2017-05-24T15:27:50.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Harman's Homepage">
+<meta name="twitter:title" content="深入理解Java类加载器">
+<meta name="twitter:description" content="1. 类的加载过程　 　JVM将类加载过程分为三个步骤：装载（Load），链接（Link）和初始化(Initialize)链接又分为三个步骤：
+
+
+装载：查找并加载类的二进制数据；
+链接：
+  验证：确保被加载类的正确性；
+  准备：为类的静态变量分配内存，并将其初始化为默认值；
+  解析：把类中的符号引用转换为直接引用；
+
+初始化：为类的静态变量赋予正确的初始值；
+
+
+2. 类的初始化类什么时候">
+<meta name="twitter:image" content="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A81.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Harman&#39;s Homepage" type="application/atom+xml">
   
@@ -153,249 +198,221 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-深入理解Java类加载器" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入理解Java类加载器
+    </h1>
+  
+
+        
+        <a href="/2017/05/24/深入理解Java类加载器/" class="archive-article-date">
+  	<time datetime="2017-05-24T14:11:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
+</a>
+        
+      </header>
     
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-类的加载过程"><a href="#1-类的加载过程" class="headerlink" title="1. 类的加载过程"></a>1. 类的加载过程</h4><p>　 　JVM将类加载过程分为三个步骤：装载（Load），链接（Link）和初始化(Initialize)链接又分为三个步骤：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A81.jpg" alt=""></p>
+<ul>
+<li>装载：查找并加载类的二进制数据；</li>
+<li><p>链接：</p>
+<p>  验证：确保被加载类的正确性；</p>
+<p>  准备：为类的静态变量分配内存，并将其初始化为默认值；</p>
+<p>  解析：把类中的符号引用转换为直接引用；</p>
+</li>
+<li><p>初始化：为类的静态变量赋予正确的初始值；</p>
+</li>
+</ul>
+<h4 id="2-类的初始化"><a href="#2-类的初始化" class="headerlink" title="2. 类的初始化"></a>2. 类的初始化</h4><p>类什么时候才被初始化：</p>
+<ul>
+<li>1）创建类的实例，也就是new一个对象</li>
+<li>2）访问某个类或接口的静态变量，或者对该静态变量赋值</li>
+<li>3）调用类的静态方法</li>
+<li>4）反射（Class.forName(“com.lyj.load”)）</li>
+<li>5）初始化一个类的子类（会首先初始化子类的父类）</li>
+<li>6）JVM启动时标明的启动类，即文件名和类名相同的那个类</li>
+</ul>
+<p>只有这6中情况才会导致类的类的初始化。</p>
+<p>类的初始化步骤：</p>
+<ul>
+<li><p>1）如果这个类还没有被加载和链接，那先进行加载和链接</p>
+</li>
+<li><p>2）假如这个类存在直接父类，并且这个类还没有被初始化（注意：在一个类加载器中，类只能初始化一次），那就初始化直接的父类（不适用于接口）</p>
+</li>
+<li><p>3)加入类中存在初始化语句（如static变量和static块），那就依次执行这些初始化语句。</p>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="3-类的加载"><a href="#3-类的加载" class="headerlink" title="3.类的加载"></a>3.类的加载</h4><p>　 　类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个这个类的java.lang.Class对象，用来封装类在方法区类的对象。如下图：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A82.jpg" alt=""></p>
+<p>　 　类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
+<p>加载类的方式有以下几种：</p>
+<ul>
+<li>1）从本地系统直接加载</li>
+<li>2）通过网络下载.class文件</li>
+<li>3）从zip，jar等归档文件中加载.class文件</li>
+<li>4）从专有数据库中提取.class文件</li>
+<li>5）将Java源文件动态编译为.class文件（服务器）</li>
+</ul>
+<h4 id="4-加载器"><a href="#4-加载器" class="headerlink" title="4.加载器"></a>4.加载器</h4><p>JVM的类加载是通过ClassLoader及其子类来完成的，类的层次关系和加载顺序可以由下图来描述：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A84.png" alt=""></p>
+<ul>
+<li>1）Bootstrap ClassLoader：负责加载<code>$JAVA_HOME中jre/lib/rt.jar</code>里所有的class，由C++实现，不是ClassLoader子类</li>
+<li>2）Extension ClassLoader：负责加载java平台中扩展功能的一些jar包，包括<code>$JAVA_HOME中jre/lib/*.jar</code>或<code>-Djava.ext.dirs</code>指定目录下的jar包</li>
+<li>3）App ClassLoader：负责记载classpath中指定的jar包及目录中class</li>
+<li>4）Custom ClassLoader：属于应用程序根据自身需要自定义的ClassLoader，如tomcat、jboss都会根据j2ee规范自行实现ClassLoader加载过程中会先检查类是否被已加载，检查顺序是自底向上，从Custom ClassLoader到BootStrap ClassLoader逐层检查，只要某个classloader已加载就视为已加载此类，保证此类只所有ClassLoader加载一次。而加载的顺序是自顶向下，也就是由上层来逐层尝试加载此类。</li>
+</ul>
+<p>　 　类加载器也是Java类，因为Java类的类加载器本身也是要被类加载器加载的，显然必须有第一个类加载器不是Java类，这个正是<strong>BootStrap,使用C/C++代码写的，已经封装到JVM内核中了，而ExtClassLoader和AppClassLoader是Java类。</strong></p>
+<p>这边是另一张类加载器的属性结构图：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A85.jpg" alt=""></p>
+<p>Java虚拟机中的所有类加载器采用具有父子关系的树形结构进行组织，在实例化每个类加载器对象的时候，需要为其指定一个父级类加载器对象或者默认采用系统类加载器为其父级类加载。</p>
+<h4 id="5、类加载器的委托机制"><a href="#5、类加载器的委托机制" class="headerlink" title="5、类加载器的委托机制"></a>5、类加载器的委托机制</h4><p>当Java虚拟机要加载第一个类的时候，到底派出哪个类加载器去加载呢？</p>
+<ul>
+<li><p>(1). 首先当前线程的类加载器去加载线程中的第一个类(当前线程的类加载器：Thread类中有一个get/setContextClassLoader(ClassLoader cl);方法，可以获取/指定本线程中的类加载器)</p>
+</li>
+<li><p>(2). 如果类A中引用了类B,Java虚拟机将使用加载类A的类加载器来加载类B</p>
+</li>
+<li><p>(3). 还可以直接调用ClassLoader.loadClass(String className)方法来指定某个类加载器去加载某个类</p>
+</li>
+</ul>
+<p>　 　每个类加载器加载类时，又先委托给其上级类加载器当所有祖宗类加载器没有加载到类，回到发起者类加载器，还加载不了，则会抛出ClassNotFoundException,不是再去找发起者类加载器的儿子，因为没有getChild()方法。例如：如上图所示： MyClassLoader-&gt;AppClassLoader-&gt;Ext-&gt;ClassLoader-&gt;BootStrap.<strong>自定定义的MyClassLoader1首先会先委托给AppClassLoader,AppClassLoader会委托给ExtClassLoader,ExtClassLoader会委托给BootStrap，这时候BootStrap就去加载，如果加载成功，就结束了。如果加载失败，就交给ExtClassLoader去加载，如果ExtClassLoader加载成功了，就结束了，如果加载失败就交给AppClassLoader加载，如果加载成功，就结束了，如果加载失败，就交给自定义的MyClassLoader1类加载器加载，如果加载失败，就报ClassNotFoundException异常，结束。</strong></p>
+<h4 id="6、类加载器的可见性机制"><a href="#6、类加载器的可见性机制" class="headerlink" title="6、类加载器的可见性机制"></a>6、类加载器的可见性机制</h4><p>　 　根据可见性机制，子类加载器可以看到父类加载器加载的类，而反之则不行。所以下面的例子中，当Abc.class已经被Application类加载器加载过了，然后如果想要使用Extension类加载器加载这个类，将会抛出java.lang.ClassNotFoundException异常。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> java.util.logging.Level;</div><div class="line"><span class="keyword">import</span> java.util.logging.Logger;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Java program to demonstrate How ClassLoader works in Java,</div><div class="line"> * in particular about visibility principle of ClassLoader.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> Javin Paul</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;          </div><div class="line">            <span class="comment">//printing ClassLoader of this class</span></div><div class="line">            System.out.println(<span class="string">"ClassLoaderTest.getClass().getClassLoader() : "</span></div><div class="line">                                 + ClassLoaderTest.class.getClassLoader());</div><div class="line"></div><div class="line">            <span class="comment">//trying to explicitly load this class again using Extension class loader</span></div><div class="line">            Class.forName(<span class="string">"test.ClassLoaderTest"</span>, <span class="keyword">true</span></div><div class="line">                            ,  ClassLoaderTest.class.getClassLoader().getParent());</div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException ex) &#123;</div><div class="line">            Logger.getLogger(ClassLoaderTest.class.getName()).log(Level.SEVERE, <span class="keyword">null</span>, ex);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ClassLoaderTest.getClass().getClassLoader() : sun.misc.Launcher$AppClassLoader@<span class="number">601</span>bb1</div><div class="line"><span class="number">16</span>/<span class="number">08</span>/<span class="number">2012</span> <span class="number">2</span>:<span class="number">43</span>:<span class="number">48</span> AM test.ClassLoaderTest main</div><div class="line">SEVERE: <span class="keyword">null</span></div><div class="line">java.lang.ClassNotFoundException: test.ClassLoaderTest</div><div class="line">        at java.net.URLClassLoader$<span class="number">1</span>.run(URLClassLoader.java:<span class="number">202</span>)</div><div class="line">        at java.security.AccessController.doPrivileged(Native Method)</div><div class="line">        at java.net.URLClassLoader.findClass(URLClassLoader.java:<span class="number">190</span>)</div><div class="line">        at sun.misc.Launcher$ExtClassLoader.findClass(Launcher.java:<span class="number">229</span>)</div><div class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:<span class="number">306</span>)</div><div class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:<span class="number">247</span>)</div><div class="line">        at java.lang.Class.forName0(Native Method)</div><div class="line">        at java.lang.Class.forName(Class.java:<span class="number">247</span>)</div><div class="line">        at test.ClassLoaderTest.main(ClassLoaderTest.java:<span class="number">29</span>)</div></pre></td></tr></table></figure>
+<h4 id="7、类加载器的单一性机制"><a href="#7、类加载器的单一性机制" class="headerlink" title="7、类加载器的单一性机制"></a>7、类加载器的单一性机制</h4><p>　 　根据这个机制，父加载器加载过的类不能被子加载器加载第二次。虽然重写违反委托和单一性机制的类加载器是可能的，但这样做并不可取。你写自己的类加载器的时候应该严格遵守这三条机制。</p>
+<h4 id="8、参考文献"><a href="#8、参考文献" class="headerlink" title="8、参考文献"></a>8、参考文献</h4><ul>
+<li><code>http://blog.csdn.net/gjanyanlig/article/details/6818655/</code></li>
+<li><code>http://blog.csdn.net/jiangwei0910410003/article/details/17733153</code></li>
+<li><code>http://www.importnew.com/6581.html</code></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/19/Java基础学习笔记(九) /" class="archive-article-date">
-  	<time datetime="2017-03-19T14:52:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/19/Java基础学习笔记(九) /">Java基础学习笔记(九)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">多态</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">抽象类</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">接口</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">类加载器</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://harmansecurity.cn/2017/05/24/深入理解Java类加载器/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/19/Java基础学习笔记(八)/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:45:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/19/Java基础学习笔记(八)/">Java基础学习笔记(八)</a>
-    </h1>
+  
+    <a href="/2017/05/24/深入理解Java泛型/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">深入理解Java泛型</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="深入理解Java类加载器" data-title="深入理解Java类加载器" data-url="http://harmansecurity.cn/2017/05/24/深入理解Java类加载器/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"harmansecurity"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/19/Java基础学习笔记(七)/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:41:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/19/Java基础学习笔记(七)/">Java基础学习笔记(七)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">构造方法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">static</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/19/Java基础学习笔记(六)/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:40:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/19/Java基础学习笔记(六)/">Java基础学习笔记(六)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">面向对象</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/19/Java基础学习笔记(五)/" class="archive-article-date">
-  	<time datetime="2017-03-19T14:39:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/19/Java基础学习笔记(五)/">Java基础学习笔记(五)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java语言基础</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数组操作</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/tags/Java语言基础/page/2/">2</a><a class="extend next" rel="next" href="/tags/Java语言基础/page/2/">Next &raquo;</a>
-    </nav>
-  
-
+<!---->
 
           </div>
         </div>
@@ -417,9 +434,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-05-24T13:55:40.116Z</updated>
+  <updated>2017-05-24T15:27:50.313Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -14,6 +14,130 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深入理解Java类加载器</title>
+    <link href="http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/"/>
+    <id>http://harmansecurity.cn/2017/05/24/深入理解Java类加载器/</id>
+    <published>2017-05-24T14:11:21.000Z</published>
+    <updated>2017-05-24T15:27:50.313Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="1-类的加载过程"><a href="#1-类的加载过程" class="headerlink" title="1. 类的加载过程"></a>1. 类的加载过程</h4><p>　 　JVM将类加载过程分为三个步骤：装载（Load），链接（Link）和初始化(Initialize)链接又分为三个步骤：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A81.jpg" alt=""></p>
+<ul>
+<li>装载：查找并加载类的二进制数据；</li>
+<li><p>链接：</p>
+<p>  验证：确保被加载类的正确性；</p>
+<p>  准备：为类的静态变量分配内存，并将其初始化为默认值；</p>
+<p>  解析：把类中的符号引用转换为直接引用；</p>
+</li>
+<li><p>初始化：为类的静态变量赋予正确的初始值；</p>
+</li>
+</ul>
+<h4 id="2-类的初始化"><a href="#2-类的初始化" class="headerlink" title="2. 类的初始化"></a>2. 类的初始化</h4><p>类什么时候才被初始化：</p>
+<ul>
+<li>1）创建类的实例，也就是new一个对象</li>
+<li>2）访问某个类或接口的静态变量，或者对该静态变量赋值</li>
+<li>3）调用类的静态方法</li>
+<li>4）反射（Class.forName(“com.lyj.load”)）</li>
+<li>5）初始化一个类的子类（会首先初始化子类的父类）</li>
+<li>6）JVM启动时标明的启动类，即文件名和类名相同的那个类</li>
+</ul>
+<p>只有这6中情况才会导致类的类的初始化。</p>
+<p>类的初始化步骤：</p>
+<ul>
+<li><p>1）如果这个类还没有被加载和链接，那先进行加载和链接</p>
+</li>
+<li><p>2）假如这个类存在直接父类，并且这个类还没有被初始化（注意：在一个类加载器中，类只能初始化一次），那就初始化直接的父类（不适用于接口）</p>
+</li>
+<li><p>3)加入类中存在初始化语句（如static变量和static块），那就依次执行这些初始化语句。</p>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="3-类的加载"><a href="#3-类的加载" class="headerlink" title="3.类的加载"></a>3.类的加载</h4><p>　 　类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个这个类的java.lang.Class对象，用来封装类在方法区类的对象。如下图：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A82.jpg" alt=""></p>
+<p>　 　类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
+<p>加载类的方式有以下几种：</p>
+<ul>
+<li>1）从本地系统直接加载</li>
+<li>2）通过网络下载.class文件</li>
+<li>3）从zip，jar等归档文件中加载.class文件</li>
+<li>4）从专有数据库中提取.class文件</li>
+<li>5）将Java源文件动态编译为.class文件（服务器）</li>
+</ul>
+<h4 id="4-加载器"><a href="#4-加载器" class="headerlink" title="4.加载器"></a>4.加载器</h4><p>JVM的类加载是通过ClassLoader及其子类来完成的，类的层次关系和加载顺序可以由下图来描述：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A84.png" alt=""></p>
+<ul>
+<li>1）Bootstrap ClassLoader：负责加载<code>$JAVA_HOME中jre/lib/rt.jar</code>里所有的class，由C++实现，不是ClassLoader子类</li>
+<li>2）Extension ClassLoader：负责加载java平台中扩展功能的一些jar包，包括<code>$JAVA_HOME中jre/lib/*.jar</code>或<code>-Djava.ext.dirs</code>指定目录下的jar包</li>
+<li>3）App ClassLoader：负责记载classpath中指定的jar包及目录中class</li>
+<li>4）Custom ClassLoader：属于应用程序根据自身需要自定义的ClassLoader，如tomcat、jboss都会根据j2ee规范自行实现ClassLoader加载过程中会先检查类是否被已加载，检查顺序是自底向上，从Custom ClassLoader到BootStrap ClassLoader逐层检查，只要某个classloader已加载就视为已加载此类，保证此类只所有ClassLoader加载一次。而加载的顺序是自顶向下，也就是由上层来逐层尝试加载此类。</li>
+</ul>
+<p>　 　类加载器也是Java类，因为Java类的类加载器本身也是要被类加载器加载的，显然必须有第一个类加载器不是Java类，这个正是<strong>BootStrap,使用C/C++代码写的，已经封装到JVM内核中了，而ExtClassLoader和AppClassLoader是Java类。</strong></p>
+<p>这边是另一张类加载器的属性结构图：</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A85.jpg" alt=""></p>
+<p>Java虚拟机中的所有类加载器采用具有父子关系的树形结构进行组织，在实例化每个类加载器对象的时候，需要为其指定一个父级类加载器对象或者默认采用系统类加载器为其父级类加载。</p>
+<h4 id="5、类加载器的委托机制"><a href="#5、类加载器的委托机制" class="headerlink" title="5、类加载器的委托机制"></a>5、类加载器的委托机制</h4><p>当Java虚拟机要加载第一个类的时候，到底派出哪个类加载器去加载呢？</p>
+<ul>
+<li><p>(1). 首先当前线程的类加载器去加载线程中的第一个类(当前线程的类加载器：Thread类中有一个get/setContextClassLoader(ClassLoader cl);方法，可以获取/指定本线程中的类加载器)</p>
+</li>
+<li><p>(2). 如果类A中引用了类B,Java虚拟机将使用加载类A的类加载器来加载类B</p>
+</li>
+<li><p>(3). 还可以直接调用ClassLoader.loadClass(String className)方法来指定某个类加载器去加载某个类</p>
+</li>
+</ul>
+<p>　 　每个类加载器加载类时，又先委托给其上级类加载器当所有祖宗类加载器没有加载到类，回到发起者类加载器，还加载不了，则会抛出ClassNotFoundException,不是再去找发起者类加载器的儿子，因为没有getChild()方法。例如：如上图所示： MyClassLoader-&gt;AppClassLoader-&gt;Ext-&gt;ClassLoader-&gt;BootStrap.<strong>自定定义的MyClassLoader1首先会先委托给AppClassLoader,AppClassLoader会委托给ExtClassLoader,ExtClassLoader会委托给BootStrap，这时候BootStrap就去加载，如果加载成功，就结束了。如果加载失败，就交给ExtClassLoader去加载，如果ExtClassLoader加载成功了，就结束了，如果加载失败就交给AppClassLoader加载，如果加载成功，就结束了，如果加载失败，就交给自定义的MyClassLoader1类加载器加载，如果加载失败，就报ClassNotFoundException异常，结束。</strong></p>
+<h4 id="6、类加载器的可见性机制"><a href="#6、类加载器的可见性机制" class="headerlink" title="6、类加载器的可见性机制"></a>6、类加载器的可见性机制</h4><p>　 　根据可见性机制，子类加载器可以看到父类加载器加载的类，而反之则不行。所以下面的例子中，当Abc.class已经被Application类加载器加载过了，然后如果想要使用Extension类加载器加载这个类，将会抛出java.lang.ClassNotFoundException异常。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> java.util.logging.Level;</div><div class="line"><span class="keyword">import</span> java.util.logging.Logger;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Java program to demonstrate How ClassLoader works in Java,</div><div class="line"> * in particular about visibility principle of ClassLoader.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> Javin Paul</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;          </div><div class="line">            <span class="comment">//printing ClassLoader of this class</span></div><div class="line">            System.out.println(<span class="string">"ClassLoaderTest.getClass().getClassLoader() : "</span></div><div class="line">                                 + ClassLoaderTest.class.getClassLoader());</div><div class="line"></div><div class="line">            <span class="comment">//trying to explicitly load this class again using Extension class loader</span></div><div class="line">            Class.forName(<span class="string">"test.ClassLoaderTest"</span>, <span class="keyword">true</span></div><div class="line">                            ,  ClassLoaderTest.class.getClassLoader().getParent());</div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException ex) &#123;</div><div class="line">            Logger.getLogger(ClassLoaderTest.class.getName()).log(Level.SEVERE, <span class="keyword">null</span>, ex);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ClassLoaderTest.getClass().getClassLoader() : sun.misc.Launcher$AppClassLoader@<span class="number">601</span>bb1</div><div class="line"><span class="number">16</span>/<span class="number">08</span>/<span class="number">2012</span> <span class="number">2</span>:<span class="number">43</span>:<span class="number">48</span> AM test.ClassLoaderTest main</div><div class="line">SEVERE: <span class="keyword">null</span></div><div class="line">java.lang.ClassNotFoundException: test.ClassLoaderTest</div><div class="line">        at java.net.URLClassLoader$<span class="number">1</span>.run(URLClassLoader.java:<span class="number">202</span>)</div><div class="line">        at java.security.AccessController.doPrivileged(Native Method)</div><div class="line">        at java.net.URLClassLoader.findClass(URLClassLoader.java:<span class="number">190</span>)</div><div class="line">        at sun.misc.Launcher$ExtClassLoader.findClass(Launcher.java:<span class="number">229</span>)</div><div class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:<span class="number">306</span>)</div><div class="line">        at java.lang.ClassLoader.loadClass(ClassLoader.java:<span class="number">247</span>)</div><div class="line">        at java.lang.Class.forName0(Native Method)</div><div class="line">        at java.lang.Class.forName(Class.java:<span class="number">247</span>)</div><div class="line">        at test.ClassLoaderTest.main(ClassLoaderTest.java:<span class="number">29</span>)</div></pre></td></tr></table></figure>
+<h4 id="7、类加载器的单一性机制"><a href="#7、类加载器的单一性机制" class="headerlink" title="7、类加载器的单一性机制"></a>7、类加载器的单一性机制</h4><p>　 　根据这个机制，父加载器加载过的类不能被子加载器加载第二次。虽然重写违反委托和单一性机制的类加载器是可能的，但这样做并不可取。你写自己的类加载器的时候应该严格遵守这三条机制。</p>
+<h4 id="8、参考文献"><a href="#8、参考文献" class="headerlink" title="8、参考文献"></a>8、参考文献</h4><ul>
+<li><code>http://blog.csdn.net/gjanyanlig/article/details/6818655/</code></li>
+<li><code>http://blog.csdn.net/jiangwei0910410003/article/details/17733153</code></li>
+<li><code>http://www.importnew.com/6581.html</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;1-类的加载过程&quot;&gt;&lt;a href=&quot;#1-类的加载过程&quot; class=&quot;headerlink&quot; title=&quot;1. 类的加载过程&quot;&gt;&lt;/a&gt;1. 类的加载过程&lt;/h4&gt;&lt;p&gt;　 　JVM将类加载过程分为三个步骤：装载（Load），链接（Link）和初始化(Initialize)链接又分为三个步骤：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A81.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;装载：查找并加载类的二进制数据；&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;链接：&lt;/p&gt;
+&lt;p&gt;  验证：确保被加载类的正确性；&lt;/p&gt;
+&lt;p&gt;  准备：为类的静态变量分配内存，并将其初始化为默认值；&lt;/p&gt;
+&lt;p&gt;  解析：把类中的符号引用转换为直接引用；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;初始化：为类的静态变量赋予正确的初始值；&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;2-类的初始化&quot;&gt;&lt;a href=&quot;#2-类的初始化&quot; class=&quot;headerlink&quot; title=&quot;2. 类的初始化&quot;&gt;&lt;/a&gt;2. 类的初始化&lt;/h4&gt;&lt;p&gt;类什么时候才被初始化：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1）创建类的实例，也就是new一个对象&lt;/li&gt;
+&lt;li&gt;2）访问某个类或接口的静态变量，或者对该静态变量赋值&lt;/li&gt;
+&lt;li&gt;3）调用类的静态方法&lt;/li&gt;
+&lt;li&gt;4）反射（Class.forName(“com.lyj.load”)）&lt;/li&gt;
+&lt;li&gt;5）初始化一个类的子类（会首先初始化子类的父类）&lt;/li&gt;
+&lt;li&gt;6）JVM启动时标明的启动类，即文件名和类名相同的那个类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;只有这6中情况才会导致类的类的初始化。&lt;/p&gt;
+&lt;p&gt;类的初始化步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;1）如果这个类还没有被加载和链接，那先进行加载和链接&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;2）假如这个类存在直接父类，并且这个类还没有被初始化（注意：在一个类加载器中，类只能初始化一次），那就初始化直接的父类（不适用于接口）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;3)加入类中存在初始化语句（如static变量和static块），那就依次执行这些初始化语句。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="类加载器" scheme="http://harmansecurity.cn/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>深入理解Java泛型</title>
@@ -273,43 +397,6 @@
   </entry>
   
   <entry>
-    <title>ARM Linux2.6.37系统调用原理</title>
-    <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
-    <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37系统调用原理/</id>
-    <published>2017-05-19T10:40:11.000Z</published>
-    <updated>2017-05-19T10:47:32.378Z</updated>
-    
-    <content type="html"><![CDATA[<p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
-<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
-<a id="more"></a>
-<p><strong>2.调转到entry-common.S中执行vector_swi软中断指令</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%862.png" alt=""></p>
-<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
-<li><code>http://www.linuxidc.com/Linux/2015-04/116546.htm</code></li>
-<li><code>http://blog.csdn.net/tommy_wxie/article/details/7610118</code></li>
-<li><code>http://blog.csdn.net/myarrow/article/details/7036266</code></li>
-<li><code>http://blog.chinaunix.net/uid-28236237-id-3404140.html</code></li>
-<li><code>http://blog.csdn.net/liduxun/article/details/48119849</code></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt; 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。&lt;/p&gt;
-&lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.entry-armv.S里面有switch软件中断的入口&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
-    
-      <category term="ARM Linux2.6.37" scheme="http://harmansecurity.cn/tags/ARM-Linux2-6-37/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ARM Linux2.6.37中获取系统调用号</title>
     <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7/"/>
     <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37中获取系统调用号/</id>
@@ -340,6 +427,43 @@
 &lt;li&gt;1.在linux-2.6.37/arch/arm/kernel文件下找到entry-common.S修改源码，在软中断里面添加实现获取调用号的函数&lt;code&gt;bl get_syscall_num&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    
+      <category term="ARM Linux2.6.37" scheme="http://harmansecurity.cn/tags/ARM-Linux2-6-37/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ARM Linux2.6.37系统调用原理</title>
+    <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
+    <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37系统调用原理/</id>
+    <published>2017-05-19T10:40:11.000Z</published>
+    <updated>2017-05-19T10:47:32.378Z</updated>
+    
+    <content type="html"><![CDATA[<p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
+<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
+<a id="more"></a>
+<p><strong>2.调转到entry-common.S中执行vector_swi软中断指令</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%862.png" alt=""></p>
+<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
+<li><code>http://www.linuxidc.com/Linux/2015-04/116546.htm</code></li>
+<li><code>http://blog.csdn.net/tommy_wxie/article/details/7610118</code></li>
+<li><code>http://blog.csdn.net/myarrow/article/details/7036266</code></li>
+<li><code>http://blog.chinaunix.net/uid-28236237-id-3404140.html</code></li>
+<li><code>http://blog.csdn.net/liduxun/article/details/48119849</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。&lt;/p&gt;
+&lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.entry-armv.S里面有switch软件中断的入口&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -2166,502 +2290,6 @@ do {
       <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
     
       <category term="循环结构" scheme="http://harmansecurity.cn/tags/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java基础学习笔记(三)</title>
-    <link href="http://harmansecurity.cn/2017/03/19/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%89)/"/>
-    <id>http://harmansecurity.cn/2017/03/19/Java基础学习笔记(三)/</id>
-    <published>2017-03-19T14:36:21.000Z</published>
-    <updated>2017-03-19T15:09:43.421Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="03-01-Java语言基础-逻辑运算符的基本用法-掌握"><a href="#03-01-Java语言基础-逻辑运算符的基本用法-掌握" class="headerlink" title="03.01_Java语言基础(逻辑运算符的基本用法)(掌握)"></a>03.01_Java语言基础(逻辑运算符的基本用法)(掌握)</h3><ul>
-<li>A:逻辑运算符有哪些<ul>
-<li>&amp;,|,^,!</li>
-<li>&amp;&amp;,|| </li>
-</ul>
-</li>
-<li>B:案例演示</li>
-<li><p>逻辑运算符的基本用法</p>
-</li>
-<li><p>注意事项：</p>
-<ul>
-<li>a:逻辑运算符一般用于连接boolean类型的表达式或者值。</li>
-<li>b:表达式：就是用运算符把常量或者变量连接起来的符合java语法的式子。<ul>
-<li>算术表达式：a + b</li>
-<li>比较表达式：a == b(条件表达式)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>C:结论：</li>
-<li>&amp;逻辑与:有false则false。</li>
-<li>|逻辑或:有true则true。</li>
-<li>^逻辑异或:相同为false，不同为true。</li>
-<li>!逻辑非:非false则true，非true则false。<ul>
-<li>特点：偶数个不改变本身。</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h3 id="03-02-Java语言基础-逻辑运算符-amp-amp-和-amp-的区别-掌握"><a href="#03-02-Java语言基础-逻辑运算符-amp-amp-和-amp-的区别-掌握" class="headerlink" title="03.02_Java语言基础(逻辑运算符&amp;&amp;和&amp;的区别)(掌握)"></a>03.02_Java语言基础(逻辑运算符&amp;&amp;和&amp;的区别)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>&amp;&amp;和&amp;的区别?<ul>
-<li>a:最终结果一样。</li>
-<li>b:&amp;&amp;具有短路效果。左边是false，右边不执行。</li>
-<li>&amp;是无论左边是false还是true,右边都会执行</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>B:同理||和|的区别?(学生自学)</li>
-<li>C:开发中常用谁?<ul>
-<li>&amp;&amp;,||,!</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-03-Java语言基础-位运算符的基本用法1-了解"><a href="#03-03-Java语言基础-位运算符的基本用法1-了解" class="headerlink" title="03.03_Java语言基础(位运算符的基本用法1)(了解)"></a>03.03_Java语言基础(位运算符的基本用法1)(了解)</h3><ul>
-<li>A:位运算符有哪些<ul>
-<li>&amp;,|,^,~ ,&gt;&gt;,&gt;&gt;&gt;,&lt;&lt;</li>
-</ul>
-</li>
-<li><p>B:案例演示</p>
-<ul>
-<li><p>位运算符的基本用法1</p>
-</li>
-<li><p>&amp;,|,^,~ 的用法</p>
-</li>
-<li>&amp;:有0则0</li>
-<li>|:有1则1</li>
-<li>^:相同则0，不同则1</li>
-<li>~:按位取反</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-04-Java语言基础-位异或运算符的特点及面试题-掌握"><a href="#03-04-Java语言基础-位异或运算符的特点及面试题-掌握" class="headerlink" title="03.04_Java语言基础(位异或运算符的特点及面试题)(掌握)"></a>03.04_Java语言基础(位异或运算符的特点及面试题)(掌握)</h3><ul>
-<li><p>A:案例演示</p>
-<ul>
-<li><p>位异或运算符的特点</p>
-</li>
-<li><p>^的特点：一个数据对另一个数据位异或两次，该数本身不变。</p>
-</li>
-</ul>
-</li>
-<li><p>B:面试题：</p>
-<ul>
-<li>请自己实现两个整数变量的交换</li>
-<li>注意：以后讲课的过程中，我没有明确指定数据的类型，默认int类型。</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-05-Java语言基础-位运算符的基本用法2及面试题-了解"><a href="#03-05-Java语言基础-位运算符的基本用法2及面试题-了解" class="headerlink" title="03.05_Java语言基础(位运算符的基本用法2及面试题)(了解)"></a>03.05_Java语言基础(位运算符的基本用法2及面试题)(了解)</h3><ul>
-<li>A:案例演示 &gt;&gt;,&gt;&gt;&gt;,&lt;&lt;的用法:<ul>
-<li>&lt;&lt;:左移    左边最高位丢弃，右边补齐0</li>
-<li><blockquote>
-<blockquote>
-<p>:右移    最高位是0，左边补齐0;最高为是1，左边补齐1</p>
-</blockquote>
-</blockquote>
-</li>
-<li><blockquote>
-<blockquote>
-<blockquote>
-<p>:无符号右移 无论最高位是0还是1，左边补齐0</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li>最有效率的算出2 * 8的结果</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-06-Java语言基础-三元运算符的基本用法-掌握"><a href="#03-06-Java语言基础-三元运算符的基本用法-掌握" class="headerlink" title="03.06_Java语言基础(三元运算符的基本用法)(掌握)"></a>03.06_Java语言基础(三元运算符的基本用法)(掌握)</h3><ul>
-<li>A:三元运算符的格式</li>
-<li>(关系表达式) ? 表达式1 : 表达式2;</li>
-<li>B:三元运算符的执行流程 </li>
-<li>C:案例演示<ul>
-<li>获取两个数中的最大值</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-07-Java语言基础-三元运算符的练习-掌握"><a href="#03-07-Java语言基础-三元运算符的练习-掌握" class="headerlink" title="03.07_Java语言基础(三元运算符的练习)(掌握)"></a>03.07_Java语言基础(三元运算符的练习)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>比较两个整数是否相同</li>
-</ul>
-</li>
-<li>B:案例演示<ul>
-<li>获取三个整数中的最大值</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-08-Java语言基础-键盘录入的基本格式讲解-掌握"><a href="#03-08-Java语言基础-键盘录入的基本格式讲解-掌握" class="headerlink" title="03.08_Java语言基础(键盘录入的基本格式讲解)(掌握)"></a>03.08_Java语言基础(键盘录入的基本格式讲解)(掌握)</h3><ul>
-<li>A:为什么要使用键盘录入数据<ul>
-<li>a:为了让程序的数据更符合开发的数据</li>
-<li>b:让程序更灵活一下</li>
-</ul>
-</li>
-<li>B:如何实现键盘录入呢?<ul>
-<li>先照格式来。</li>
-<li>a:导包<ul>
-<li>格式：<ul>
-<li>import java.util.Scanner; </li>
-</ul>
-</li>
-<li>位置：<ul>
-<li>在class上面。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>b:创建键盘录入对象<ul>
-<li>格式：<ul>
-<li>Scanner sc = new Scanner(System.in);</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>c:通过对象获取数据    <ul>
-<li>格式：<ul>
-<li>int x = sc.nextInt();</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>C:案例演示<ul>
-<li>键盘录入1个整数，并输出到控制台。</li>
-<li>键盘录入2个整数，并输出到控制台。</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-09-Java语言基础-键盘录入的练习1-掌握"><a href="#03-09-Java语言基础-键盘录入的练习1-掌握" class="headerlink" title="03.09_Java语言基础(键盘录入的练习1)(掌握)"></a>03.09_Java语言基础(键盘录入的练习1)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>键盘录入练习：键盘录入两个数据，并对这两个数据求和，输出其结果</li>
-</ul>
-</li>
-<li>B:案例演示<ul>
-<li>键盘录入练习：键盘录入两个数据，获取这两个数据中的最大值</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-10-Java语言基础-键盘录入的练习2-掌握"><a href="#03-10-Java语言基础-键盘录入的练习2-掌握" class="headerlink" title="03.10_Java语言基础(键盘录入的练习2)(掌握)"></a>03.10_Java语言基础(键盘录入的练习2)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>键盘录入练习：键盘录入两个数据，比较这两个数据是否相等</li>
-</ul>
-</li>
-<li>B:案例演示<ul>
-<li>键盘录入练习：键盘录入三个数据，获取这三个数据中的最大值</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-11-Java语言基础-顺序结构语句-了解"><a href="#03-11-Java语言基础-顺序结构语句-了解" class="headerlink" title="03.11_Java语言基础(顺序结构语句)(了解)"></a>03.11_Java语言基础(顺序结构语句)(了解)</h3><ul>
-<li>A:什么是流程控制语句<ul>
-<li>流程控制语句：可以控制程序的执行流程。</li>
-</ul>
-</li>
-<li>B:流程控制语句的分类<ul>
-<li>顺序结构</li>
-<li>选择结构</li>
-<li>循环结构</li>
-</ul>
-</li>
-<li>C:执行流程：<ul>
-<li>从上往下，依次执行。</li>
-</ul>
-</li>
-<li>D:案例演示<ul>
-<li>输出几句话看效果即可</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-12-Java语言基础-选择结构if语句格式1及其使用-掌握"><a href="#03-12-Java语言基础-选择结构if语句格式1及其使用-掌握" class="headerlink" title="03.12_Java语言基础(选择结构if语句格式1及其使用)(掌握)"></a>03.12_Java语言基础(选择结构if语句格式1及其使用)(掌握)</h3><ul>
-<li>A:选择结构的分类<ul>
-<li>if语句</li>
-<li>switch语句</li>
-</ul>
-</li>
-<li>B:if语句有几种格式<ul>
-<li>格式1</li>
-<li>格式2</li>
-<li>格式3</li>
-</ul>
-</li>
-<li>C:if语句的格式1</li>
-<li><pre><code>if(比较表达式) {
-    语句体;
-}
-</code></pre></li>
-<li>D:执行流程：<ul>
-<li>先计算比较表达式的值，看其返回值是true还是false。</li>
-<li>如果是true，就执行语句体；</li>
-<li>如果是false，就不执行语句体；</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-13-Java语言基础-选择结构if语句注意事项-掌握"><a href="#03-13-Java语言基础-选择结构if语句注意事项-掌握" class="headerlink" title="03.13_Java语言基础(选择结构if语句注意事项)(掌握)"></a>03.13_Java语言基础(选择结构if语句注意事项)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>a:比较表达式无论简单还是复杂，结果必须是boolean类型</li>
-<li>b:if语句控制的语句体如果是一条语句，大括号可以省略；<ul>
-<li>如果是多条语句，就不能省略。建议永远不要省略。</li>
-</ul>
-</li>
-<li>c:一般来说：有左大括号就没有分号，有分号就没有左大括号</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-14-Java语言基础-选择结构if语句格式2及其使用-掌握"><a href="#03-14-Java语言基础-选择结构if语句格式2及其使用-掌握" class="headerlink" title="03.14_Java语言基础(选择结构if语句格式2及其使用)(掌握)"></a>03.14_Java语言基础(选择结构if语句格式2及其使用)(掌握)</h3><ul>
-<li>A:if语句的格式2</li>
-<li><pre><code>if(比较表达式) {
-    语句体1;
-}else {
-    语句体2;
-}
-</code></pre></li>
-<li>B:执行流程：<ul>
-<li>首先计算比较表达式的值，看其返回值是true还是false。</li>
-<li>如果是true，就执行语句体1；</li>
-<li>如果是false，就执行语句体2；</li>
-</ul>
-</li>
-<li><p>C:案例演示</p>
-<ul>
-<li>a:获取两个数据中较大的值</li>
-<li><p>b:判断一个数据是奇数还是偶数,并输出是奇数还是偶数</p>
-</li>
-<li><p>注意事项：else后面是没有比较表达式的，只有if后面有。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-15-Java语言基础-if语句的格式2和三元的相互转换问题-掌握"><a href="#03-15-Java语言基础-if语句的格式2和三元的相互转换问题-掌握" class="headerlink" title="03.15_Java语言基础(if语句的格式2和三元的相互转换问题)(掌握)"></a>03.15_Java语言基础(if语句的格式2和三元的相互转换问题)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>if语句和三元运算符完成同一个效果</li>
-</ul>
-</li>
-<li><p>B:案例演示</p>
-<ul>
-<li><p>if语句和三元运算符的区别</p>
-</li>
-<li><p>三元运算符实现的，都可以采用if语句实现。反之不成立。</p>
-</li>
-<li><p>什么时候if语句实现不能用三元改进呢?</p>
-<ul>
-<li>当if语句控制的操作是一个输出语句的时候就不能。</li>
-<li>为什么呢?因为三元运算符是一个运算符，运算符操作完毕就应该有一个结果，而不是一个输出。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-16-Java语言基础-选择结构if语句格式3及其使用-掌握"><a href="#03-16-Java语言基础-选择结构if语句格式3及其使用-掌握" class="headerlink" title="03.16_Java语言基础(选择结构if语句格式3及其使用)(掌握)"></a>03.16_Java语言基础(选择结构if语句格式3及其使用)(掌握)</h3><ul>
-<li>A:if语句的格式3：</li>
-<li><pre><code>if(比较表达式1) {
-    语句体1;
-}else if(比较表达式2) {
-    语句体2;
-}else if(比较表达式3) {
-    语句体3;
-}
-...
-else {
-    语句体n+1;
-}
-</code></pre></li>
-<li><p>B:执行流程：</p>
-<ul>
-<li>首先计算比较表达式1看其返回值是true还是false，</li>
-<li>如果是true，就执行语句体1，if语句结束。</li>
-<li><p>如果是false，接着计算比较表达式2看其返回值是true还是false，</p>
-</li>
-<li><p>如果是true，就执行语句体2，if语句结束。</p>
-</li>
-<li><p>如果是false，接着计算比较表达式3看其返回值是true还是false，</p>
-</li>
-<li><p>如果都是false，就执行语句体n+1。</p>
-</li>
-</ul>
-</li>
-<li>C:注意事项:最后一个else可以省略,但是建议不要省略,可以对范围外的错误值提示 </li>
-</ul>
-<h3 id="03-17-Java语言基础-选择结构if语句格式3练习-掌握"><a href="#03-17-Java语言基础-选择结构if语句格式3练习-掌握" class="headerlink" title="03.17_Java语言基础(选择结构if语句格式3练习)(掌握)"></a>03.17_Java语言基础(选择结构if语句格式3练习)(掌握)</h3><ul>
-<li>A:练习1</li>
-<li><pre><code>需求：键盘录入一个成绩，判断并输出成绩的等级。
-90-100 优
-80-89  良
-70-79  中
-60-69  及
-0-59   差
-</code></pre></li>
-<li><p>B:练习2</p>
-<ul>
-<li><p>需求：</p>
-<ul>
-<li><p>键盘录入x的值，计算出y的并输出。</p>
-</li>
-<li><p>x&gt;=3    y = 2 * x + 1;</p>
-</li>
-<li>-1&lt;x&lt;3    y = 2 * x;</li>
-<li>x&lt;=-1    y = 2 * x - 1;</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-18-Java语言基础-选择结构if语句的嵌套使用-掌握"><a href="#03-18-Java语言基础-选择结构if语句的嵌套使用-掌握" class="headerlink" title="03.18_Java语言基础(选择结构if语句的嵌套使用)(掌握)"></a>03.18_Java语言基础(选择结构if语句的嵌套使用)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>需求：获取三个数据中的最大值</li>
-<li>if语句的嵌套使用。</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-19-Java语言基础-选择结构switch语句的格式及其解释-掌握"><a href="#03-19-Java语言基础-选择结构switch语句的格式及其解释-掌握" class="headerlink" title="03.19_Java语言基础(选择结构switch语句的格式及其解释)(掌握)"></a>03.19_Java语言基础(选择结构switch语句的格式及其解释)(掌握)</h3><ul>
-<li>A:switch语句的格式</li>
-<li><pre><code>switch(表达式) {
-      case 值1：
-        语句体1;
-        break;
-        case 值2：
-        语句体2;
-        break;
-        …
-        default：    
-        语句体n+1;
-        break;
-}
-</code></pre></li>
-<li><p>B:switch语句的格式解释</p>
-</li>
-<li>C:面试题<ul>
-<li>byte可以作为switch的表达式吗?</li>
-<li>long可以作为switch的表达式吗?</li>
-<li>String可以作为switch的表达式吗?</li>
-</ul>
-</li>
-<li>C:执行流程<ul>
-<li>先计算表达式的值</li>
-<li>然后和case后面的匹配，如果有就执行对应的语句，否则执行default控制的语句</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-20-Java语言基础-选择结构switch语句的练习-掌握"><a href="#03-20-Java语言基础-选择结构switch语句的练习-掌握" class="headerlink" title="03.20_Java语言基础(选择结构switch语句的练习)(掌握)"></a>03.20_Java语言基础(选择结构switch语句的练习)(掌握)</h3><ul>
-<li>A:整数(给定一个值,输出对应星期几)</li>
-</ul>
-<h3 id="03-21-Java语言基础-选择结构switch语句的注意事项-掌握"><a href="#03-21-Java语言基础-选择结构switch语句的注意事项-掌握" class="headerlink" title="03.21_Java语言基础(选择结构switch语句的注意事项)(掌握)"></a>03.21_Java语言基础(选择结构switch语句的注意事项)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>a:case后面只能是常量，不能是变量，而且，多个case后面的值不能出现相同的</li>
-<li>b:default可以省略吗?<ul>
-<li>可以省略，但是不建议，因为它的作用是对不正确的情况给出提示。</li>
-<li>特殊情况：<ul>
-<li>case就可以把值固定。</li>
-<li>A,B,C,D</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>c:break可以省略吗?<ul>
-<li>最后一个可以省略,其他最好不要省略</li>
-<li>会出现一个现象：case穿透。</li>
-<li>最终我们建议不要省略</li>
-</ul>
-</li>
-<li>d:default一定要在最后吗?<ul>
-<li>不是，可以在任意位置。但是建议在最后。</li>
-</ul>
-</li>
-<li>e:switch语句的结束条件<ul>
-<li>a:遇到break就结束了</li>
-<li>b:执行到switch的右大括号就结束了</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-22-Java语言基础-选择结构switch语句练习-掌握"><a href="#03-22-Java语言基础-选择结构switch语句练习-掌握" class="headerlink" title="03.22_Java语言基础(选择结构switch语句练习)(掌握)"></a>03.22_Java语言基础(选择结构switch语句练习)(掌握)</h3><ul>
-<li>A:看程序写结果：</li>
-<li><pre><code>int x = 2;
-int y = 3;
-switch(x){
-    default:
-        y++;
-        break;
-    case 3:
-        y++;
-    case 4:
-        y++;
-}
-System.out.println(&quot;y=&quot;+y);
-</code></pre></li>
-<li><p>B:看程序写结果：</p>
-</li>
-<li><pre><code>int x = 2;
-int y = 3;
-switch(x){
-    default:
-        y++;
-    case 3:
-        y++;
-    case 4:
-        y++;
-}
-System.out.println(&quot;y=&quot;+y);
-</code></pre></li>
-</ul>
-<h3 id="03-23-Java语言基础-选择结构if语句和switch语句的区别-掌握"><a href="#03-23-Java语言基础-选择结构if语句和switch语句的区别-掌握" class="headerlink" title="03.23_Java语言基础(选择结构if语句和switch语句的区别)(掌握)"></a>03.23_Java语言基础(选择结构if语句和switch语句的区别)(掌握)</h3><ul>
-<li>A:总结switch语句和if语句的各自使用场景</li>
-<li>switch建议判断固定值的时候用</li>
-<li>if建议判断区间或范围的时候用</li>
-<li>B:案例演示<ul>
-<li>分别用switch语句和if语句实现下列需求：<ul>
-<li>键盘录入月份，输出对应的季节</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="03-24-day03总结"><a href="#03-24-day03总结" class="headerlink" title="03.24_day03总结"></a>03.24_day03总结</h3><p>把今天的知识点总结一遍。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;03-01-Java语言基础-逻辑运算符的基本用法-掌握&quot;&gt;&lt;a href=&quot;#03-01-Java语言基础-逻辑运算符的基本用法-掌握&quot; class=&quot;headerlink&quot; title=&quot;03.01_Java语言基础(逻辑运算符的基本用法)(掌握)&quot;&gt;&lt;/a&gt;03.01_Java语言基础(逻辑运算符的基本用法)(掌握)&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;A:逻辑运算符有哪些&lt;ul&gt;
-&lt;li&gt;&amp;amp;,|,^,!&lt;/li&gt;
-&lt;li&gt;&amp;amp;&amp;amp;,|| &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;B:案例演示&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;逻辑运算符的基本用法&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;注意事项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;a:逻辑运算符一般用于连接boolean类型的表达式或者值。&lt;/li&gt;
-&lt;li&gt;b:表达式：就是用运算符把常量或者变量连接起来的符合java语法的式子。&lt;ul&gt;
-&lt;li&gt;算术表达式：a + b&lt;/li&gt;
-&lt;li&gt;比较表达式：a == b(条件表达式)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;C:结论：&lt;/li&gt;
-&lt;li&gt;&amp;amp;逻辑与:有false则false。&lt;/li&gt;
-&lt;li&gt;|逻辑或:有true则true。&lt;/li&gt;
-&lt;li&gt;^逻辑异或:相同为false，不同为true。&lt;/li&gt;
-&lt;li&gt;!逻辑非:非false则true，非true则false。&lt;ul&gt;
-&lt;li&gt;特点：偶数个不改变本身。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
-    
-      <category term="流程控制语句" scheme="http://harmansecurity.cn/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
-    
-      <category term="逻辑运算符" scheme="http://harmansecurity.cn/tags/%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
     
   </entry>
   

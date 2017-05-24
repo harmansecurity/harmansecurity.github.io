@@ -155,6 +155,77 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ARM Linux2.6.37系统调用原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/19/ARM Linux2.6.37系统调用原理/">ARM Linux2.6.37系统调用原理</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/19/ARM Linux2.6.37系统调用原理/" class="archive-article-date">
+  	<time datetime="2017-05-19T10:40:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
+<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
+        
+          <a class="article-more-a" href="/2017/05/19/ARM Linux2.6.37系统调用原理/#more">Read More >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">系统调用</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ARM Linux2.6.37</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/19/ARM Linux2.6.37系统调用原理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<!---->
+
+  
     <article id="post-QEMU安装和调试运行Linux0.11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -450,78 +521,6 @@
 <!---->
 
   
-    <article id="post-Linux0.11获取系统调用号" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/19/Linux0.11获取系统调用号/">Linux0.11获取系统调用号</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/19/Linux0.11获取系统调用号/" class="archive-article-date">
-  	<time datetime="2017-05-19T03:02:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
-</a>
-        
-      </header>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="一、实验步骤"><a href="#一、实验步骤" class="headerlink" title="一、实验步骤"></a>一、实验步骤</h4><p><strong>1.修改linux0.11/kernel/sys_call.s添加call achieveEax</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.png" alt=""></p>
-<p><strong>2.在linux0.11/kernel底下添加achieveEax.c文件</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/Linux0.11%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B72.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/05/19/Linux0.11获取系统调用号/#more">Read More >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Linux0.11</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">系统调用号</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/19/Linux0.11获取系统调用号/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-<!---->
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -631,10 +630,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">小记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">社工库</a>
               </li>
              
@@ -648,6 +643,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kinaba</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">小记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -676,6 +675,26 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Linux0.11</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Tamper Data</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LiveHttpHeaders</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Hackbar</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Modify Headers</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -723,10 +742,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
               </li>
              
@@ -743,27 +758,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
+                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Tamper Data</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LiveHttpHeaders</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hackbar</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Modify Headers</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
+                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -779,7 +778,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -791,11 +798,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+                <a href="javascript:void(0)" class="js-tag color5">类加载器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -807,11 +810,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hook</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -820,10 +827,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
             
             <div class="clearfix"></div>

@@ -155,6 +155,151 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-深入理解Java多线程及并发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/25/深入理解Java多线程及并发/">深入理解Java多线程及并发</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/25/深入理解Java多线程及并发/" class="archive-article-date">
+  	<time datetime="2017-05-25T13:24:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-25</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、线程创建的两种方式及区别"><a href="#一、线程创建的两种方式及区别" class="headerlink" title="一、线程创建的两种方式及区别"></a>一、线程创建的两种方式及区别</h4><h5 id="1-扩展Thread类"><a href="#1-扩展Thread类" class="headerlink" title="1.扩展Thread类"></a>1.扩展Thread类</h5><h5 id="2-实现Runnable接口"><a href="#2-实现Runnable接口" class="headerlink" title="2.实现Runnable接口"></a>2.实现Runnable接口</h5><h5 id="3-两者区别"><a href="#3-两者区别" class="headerlink" title="3.两者区别"></a>3.两者区别</h5><ul>
+<li>采用继承Thread类方式：<br>（1）优点：编写简单，如果需要访问当前线程，无需使用Thread.currentThread()方法，直接使用this，即可获得当前线程。<br>（2）缺点：因为线程类已经继承了Thread类，所以不能再继承其他的父类。</li>
+<li>采用实现Runnable接口方式：<br>（1）优点：线程类只是实现了Runable接口，还可以继承其他的类。可以多个线程共享同一个目标对象，所以非常适合多个相同线程来处理同一份资源的情况。<br>（2）缺点：编程稍微复杂，如果需要访问当前线程，必须使用Thread.currentThread()方法。</li>
+</ul>
+<p><strong>Runnable可以实现资源共享但Thread不能原因：</strong></p>
+<p>　 　因为一个线程只能启动一次，通过Thread实现线程时，线程和线程所要执行的任务是捆绑在一起的。也就使得一个任务只能启动一个线程，不同的线程执行的任务是不相同的，所以没有必要，也不能让两个线程共享彼此任务中的资源。</p>
+<p>　 　一个任务可以启动多个线程，通过Runnable方式实现的线程，实际是开辟一个线程，将任务传递进去，由此线程执行。可以实例化多个 Thread对象，将同一任务传递进去，也就是一个任务可以启动多个线程来执行它。这些线程执行的是同一个任务，所以他们的资源是共享。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">    <span class="comment">/**</div><div class="line">     * <span class="doctag">@param</span> args</div><div class="line">     * <span class="doctag">@throws</span> IOException</div><div class="line">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">// 第一种</span></div><div class="line">        Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Test2());</div><div class="line">        t.start();</div><div class="line"></div><div class="line">        <span class="comment">// 第二种</span></div><div class="line">        Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Test3());</div><div class="line">        t1.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test2</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test3</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        
+          <a class="article-more-a" href="/2017/05/25/深入理解Java多线程及并发/#more">Read More >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并发</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/25/深入理解Java多线程及并发/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<!---->
+
+  
+    <article id="post-深入理解Java动态代理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/25/深入理解Java动态代理/">深入理解Java动态代理</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/25/深入理解Java动态代理/" class="archive-article-date">
+  	<time datetime="2017-05-25T11:34:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-25</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、静态代理"><a href="#一、静态代理" class="headerlink" title="一、静态代理"></a>一、静态代理</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> common;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">interface</span> <span class="title">Subject</span></span>&#123;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">sayHi</span><span class="params">()</span></span>;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SubjectImpl</span> <span class="keyword">implements</span> <span class="title">Subject</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHi</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"hi"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"hello"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SubjectImplProxy</span> <span class="keyword">implements</span> <span class="title">Subject</span></span>&#123;</div><div class="line">        <span class="keyword">private</span> Subject target;</div><div class="line">        </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">SubjectImplProxy</span><span class="params">(Subject target)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.target=target;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHi</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.print(<span class="string">"say:"</span>);</div><div class="line">            target.sayHi();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</div><div class="line">            System.out.print(<span class="string">"say:"</span>);</div><div class="line">            target.sayHello();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Subject subject=<span class="keyword">new</span> SubjectImpl();</div><div class="line">        Subject subjectProxy=<span class="keyword">new</span> SubjectImplProxy(subject);</div><div class="line">        subjectProxy.sayHi();</div><div class="line">        subjectProxy.sayHello();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　 　这段代码中首先定义了一个Subject接口，接口中有两个方法。然后定义了SubjectImpl类实现Subject接口并实现其中的两个方法，到这里肯定是没问题的。现在再定义一个SubjuectImplProxy类，也实现Subject接口。这个SubjectImplProxy类的作用是包装SubjectImpl类的实例，它的内部定义一个变量target来保存一个SubjectImpl的实例。SubjectImplProxy也实现了接口规定的两个方法，并且在它的实现版本中，都调用了SubjectImpl的实现，但是又添加了自己的处理逻辑。相信这段代码不难理解，它通过对SubjectImpl进行包装，达到了给输出内容添加前缀的功能。这种代理方式叫做静态代理。</p>
+        
+          <a class="article-more-a" href="/2017/05/25/深入理解Java动态代理/#more">Read More >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态代理</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">AOP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/25/深入理解Java动态代理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<!---->
+
+  
     <article id="post-深入理解Java类加载器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -399,153 +544,6 @@
 <!---->
 
   
-    <article id="post-深入理解Java反射" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/24/深入理解Java反射/">深入理解Java反射</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/24/深入理解Java反射/" class="archive-article-date">
-  	<time datetime="2017-05-24T06:07:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
-</a>
-        
-      </header>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="一、反射的概念"><a href="#一、反射的概念" class="headerlink" title="一、反射的概念"></a>一、反射的概念</h4><p>　 　反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
-<h4 id="二、反射提供的功能"><a href="#二、反射提供的功能" class="headerlink" title="二、反射提供的功能"></a>二、反射提供的功能</h4><ul>
-<li>在运行时判断任意一个对象所属的类；</li>
-<li>在运行时构造任意一个类的对象；</li>
-<li>在运行时判断任意一个类所具有的成员变量和方法；</li>
-<li>在运行时调用任意一个对象的方法；</li>
-<li>生成动态代理。</li>
-</ul>
-<h4 id="三、反射机制的相关API"><a href="#三、反射机制的相关API" class="headerlink" title="三、反射机制的相关API"></a>三、反射机制的相关API</h4><h5 id="1-通过一个对象获得完整的包名和类名"><a href="#1-通过一个对象获得完整的包名和类名" class="headerlink" title="1.通过一个对象获得完整的包名和类名"></a>1.通过一个对象获得完整的包名和类名</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> net.xsoftlab.baike;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestReflect</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        TestReflect testReflect = <span class="keyword">new</span> TestReflect();</div><div class="line">        System.out.println(testReflect.getClass().getName());</div><div class="line">        <span class="comment">// 结果 net.xsoftlab.baike.TestReflect</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h5 id="2-获取Class类三种方法"><a href="#2-获取Class类三种方法" class="headerlink" title="2.获取Class类三种方法"></a>2.获取Class类三种方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> net.xsoftlab.baike;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestReflect</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        Class&lt;?&gt; class1 = <span class="keyword">null</span>;</div><div class="line">        Class&lt;?&gt; class2 = <span class="keyword">null</span>;</div><div class="line">        Class&lt;?&gt; class3 = <span class="keyword">null</span>;</div><div class="line">        <span class="comment">// 一般采用这种形式</span></div><div class="line">        class1 = Class.forName(<span class="string">"net.xsoftlab.baike.TestReflect"</span>);</div><div class="line">        class2 = <span class="keyword">new</span> TestReflect().getClass();<span class="comment">////java语言中任何一个java对象都有getClass 方法</span></div><div class="line">        class3 = TestReflect.class;<span class="comment">//java中每个类型都有class 属性.</span></div><div class="line">        System.out.println(<span class="string">"类名称   "</span> + class1.getName());</div><div class="line">        System.out.println(<span class="string">"类名称   "</span> + class2.getName());</div><div class="line">        System.out.println(<span class="string">"类名称   "</span> + class3.getName());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/05/24/深入理解Java反射/#more">Read More >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反射</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/24/深入理解Java反射/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-<!---->
-
-  
-    <article id="post-ARM Linux2.6.37中获取系统调用号" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/19/ARM Linux2.6.37中获取系统调用号/">ARM Linux2.6.37中获取系统调用号</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/19/ARM Linux2.6.37中获取系统调用号/" class="archive-article-date">
-  	<time datetime="2017-05-19T10:40:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
-</a>
-        
-      </header>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 　 　这个过程的实现基本原理是和Linux0.11差别不大的，不过一些汇编指令和系统架构还是有略微却别的，毕竟版本差异较大。Linux0.11主要是在system_call函数中实现获取系统调用号，而ARM Linux2.6.37是在软中断（vector_swi）中获取系统调用号的。下面主要说一下实现的步骤和遇到的问题。</p>
-<h4 id="一、实验步骤"><a href="#一、实验步骤" class="headerlink" title="一、实验步骤"></a>一、实验步骤</h4><ul>
-<li>1.在linux-2.6.37/arch/arm/kernel文件下找到entry-common.S修改源码，在软中断里面添加实现获取调用号的函数<code>bl get_syscall_num</code>。</li>
-</ul>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/05/19/ARM Linux2.6.37中获取系统调用号/#more">Read More >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">系统调用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ARM Linux2.6.37</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/19/ARM Linux2.6.37中获取系统调用号/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-<!---->
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -651,6 +649,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">小记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">小结</a>
               </li>
              
@@ -668,10 +670,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kinaba</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">小记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,6 +701,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
               </li>
              
@@ -723,10 +729,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">计算机基础知识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java语言基础</a>
               </li>
              
@@ -739,11 +741,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
+                <a href="javascript:void(0)" class="js-tag color3">计算机基础知识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -767,6 +765,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
               </li>
              
@@ -775,19 +777,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">循环结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">继承</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
+                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -799,19 +797,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
+                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+                <a href="javascript:void(0)" class="js-tag color5">循环结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -823,7 +813,31 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">类加载器</a>
+                <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">AOP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -835,7 +849,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+                <a href="javascript:void(0)" class="js-tag color5">类加载器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -843,15 +861,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
+                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
             
             <div class="clearfix"></div>

@@ -155,6 +155,178 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Http抓包与调试(Fiddler)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/09/Http抓包与调试(Fiddler)/">Http抓包与调试(Fiddler)</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/09/Http抓包与调试(Fiddler)/" class="archive-article-date">
+  	<time datetime="2017-02-09T13:19:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-09</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、什么是Fiddler？"><a href="#一、什么是Fiddler？" class="headerlink" title="一、什么是Fiddler？"></a>一、什么是Fiddler？</h4><p>　 　1.Fiddler是位于客户端和服务器端的HTTP代理，也是目前最常用的http抓包工具之一。它能够记录客户端和服务器之间的所有HTTP请求，可以针对特定的HTTP请求，分析请求数据、设置断点、调试web应用、修改请求的数据，甚至可以修改服务器返回的数据，功能非常强大，是web调试的利器。既然是代理，也就是说：客户端的所有请求都要先经过Fiddler，然后转发到相应的服务器，反之，服务器端的所有响应，也都会先经过Fiddler然后发送到客户端，基于这个原因，Fiddler支持所有可以设置http代理为 127.0.0.1:8888 的浏览器和应用程序。<br>使用了Fiddler之后，web客户端和服务器的请求如下所示:</p>
+<div align=center><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%291.png" alt=""><br></div><br>　 　2.Fiddler 作为系统代理，当启用Fiddler时，IE的PROXY设定会变成 127.0.0.1:8888，因此如果你的浏览器在开启fiddler之后没有设置相应的代理，则fiddler是无法捕获到HTTP请求的。如下是启动Fiddler之后，IE浏览器的代理设置：<br><div align=center><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%95%28Fiddler%292.png" alt=""><br></div><br>
+        
+          <a class="article-more-a" href="/2017/02/09/Http抓包与调试(Fiddler)/#more">Read More >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Http抓包与调试</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Fiddler</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">浏览器代理</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">拦截请求或响应</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">抓包和重放</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/09/Http抓包与调试(Fiddler)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<!---->
+
+  
+    <article id="post-Http抓包与调试(Firefox插件)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/19/Http抓包与调试(Firefox插件)/">Http抓包与调试(Firefox插件)</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/19/Http抓包与调试(Firefox插件)/" class="archive-article-date">
+  	<time datetime="2017-01-19T08:22:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-19</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　 　这边主要介绍火狐的几款插件工具分别是Firebug、TamperData、LiveHttpHeaders、Hackbar和ModifyHeaders，它们可以用来测试和发掘Web应用程序中的跨站漏洞。</p>
+<hr>
+<h4 id="1-Firebug-抓包与各种调试"><a href="#1-Firebug-抓包与各种调试" class="headerlink" title="1.Firebug(抓包与各种调试)"></a>1.Firebug(抓包与各种调试)</h4><p>　 　Firebug是Firefox浏览器的一个扩展插件，可以动态修改html代码、探索DOM结构、监视网络请求和响应、调试和监测任何页面的CSS、HTML和JavaScript等等。</p>
+<h5 id="1-安装城成功后按F12启动Firebug"><a href="#1-安装城成功后按F12启动Firebug" class="headerlink" title="1)安装城成功后按F12启动Firebug"></a>1)安装城成功后按F12启动Firebug</h5><p>　 　打开Firebug后，看到六个标签按钮分别是（控制台、HTML查看器、CSS查看器、脚本调试器、DOM查看器、网络状况监视器）。</p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%951.png" alt=""></p>
+<h5 id="2-控制台"><a href="#2-控制台" class="headerlink" title="2)控制台"></a>2)控制台</h5><p>　 　控制台能够显示当前页面中的JavaScript错误以及警告，并提示出错的文件和行号，使用控制台可以测试一段代码或者函数的执行时间。启用控制台，在窗口的底部能看到命令行输入，以“&gt;”开头，在这里输入JavaScript代码后按Enter键即可执行。<br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%952.png" alt=""><br><img src="http://ojto7c1rw.bkt.clouddn.com/Http%E6%8A%93%E5%8C%85%E4%B8%8E%E8%B0%83%E8%AF%953.png" alt=""><br>
+        
+          <a class="article-more-a" href="/2017/01/19/Http抓包与调试(Firefox插件)/#more">Read More >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Http抓包与调试</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Firebug</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Tamper Data</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">LiveHttpHeaders</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Hackbar</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Modify Headers</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/19/Http抓包与调试(Firefox插件)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<!---->
+
+  
     <article id="post-PBC库的常用函数解释" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -510,6 +682,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">小记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">小结</a>
               </li>
              
@@ -527,10 +703,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kinaba</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">小记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,6 +734,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
               </li>
              
@@ -582,10 +762,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">计算机基础知识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java语言基础</a>
               </li>
              
@@ -598,11 +774,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
+                <a href="javascript:void(0)" class="js-tag color3">计算机基础知识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,6 +798,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
               </li>
              
@@ -634,19 +810,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">循环结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">继承</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数组操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
+                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -658,19 +830,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
+                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+                <a href="javascript:void(0)" class="js-tag color5">循环结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,7 +846,31 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">类加载器</a>
+                <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">AOP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,7 +882,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+                <a href="javascript:void(0)" class="js-tag color5">类加载器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,15 +894,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VC6.0</a>
+                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
             
             <div class="clearfix"></div>

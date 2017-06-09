@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2017-05-25T15:11:37.559Z</updated>
+  <updated>2017-06-09T15:26:20.563Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -14,6 +14,75 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2017年5月小结</title>
+    <link href="http://harmansecurity.cn/2017/06/09/2017%E5%B9%B45%E6%9C%88%E5%B0%8F%E7%BB%93/"/>
+    <id>http://harmansecurity.cn/2017/06/09/2017年5月小结/</id>
+    <published>2017-06-09T14:28:31.000Z</published>
+    <updated>2017-06-09T15:26:20.563Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　这一个月时间过得很快，主要就是继续按照之前制定的计划进行学习和找实习。准备好好打理自己的博客和GitHub，所以把之前的一些东西整理到GitHub上面，也阅读了《图解HTTP》、《MYSQL必知必会》两本书，然后对Java进行了一个加强的学习。</p>
+<h4 id="Java加强学习"><a href="#Java加强学习" class="headerlink" title="Java加强学习"></a>Java加强学习</h4><ul>
+<li>Java加强<ul>
+<li><a href="http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%8F%8D%E5%B0%84/">深入理解Java反射</a></li>
+<li><a href="http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E6%B3%A8%E8%A7%A3/">深入理解Java注解</a></li>
+<li><a href="http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E6%B3%9B%E5%9E%8B/">深入理解Java泛型</a></li>
+<li><a href="http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">深入理解Java类加载器</a></li>
+<li><a href="http://harmansecurity.cn/2017/05/25/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">深入理解Java动态代理 </a></li>
+<li><a href="http://harmansecurity.cn/2017/05/25/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%8A%E5%B9%B6%E5%8F%91/">深入理解Java多线程及并发 </a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="找实习总结"><a href="#找实习总结" class="headerlink" title="找实习总结"></a>找实习总结</h4><ul>
+<li><p>众安保险：技术面，大概四十分钟。面试是在楼下的一个咖啡厅，主要的问的都是简历上写的内容：IO流、反射、多线程、集合泛型、动态代理、静态代理。笔试题：两道编程题，主要考察的是HashSet、TreeSet。</p>
+</li>
+<li><p>中软融鑫：Hr面，一个小时左右。其实也没聊什么，很快就伸出了橄榄枝。不过建议我去做数据库开发(这边的数据库开发是对数据进行一些处理，然后存储到Oracle中)。我的体会是：Hr完全不懂技术，然后我和另一个人同时面的都是Java岗位，她们缺做数据库开发的人，就说我们的经历更适合做数据库开发，跟我扯什么未来的规划，做数据库可以以后做项目经理，带团队，做Java开发就是个码农等等。最不能理解的是，说之前很多面试的人都不是很符合要求，说上海理工的学生跟我们的差距是不是因为学校的原因等等，总之给我留下的印象很差。</p>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>B站：技术面，大概四十分钟。可能由于早上七点钟左右就起床，然后早上面试完中软融鑫，下午又赶来面试B站，整个人的状态就很晕。总体给我的感觉还好，面试官也很亲切，B站公司的环境也很年轻化。问的问题比较多，比较细。问题有：泛型、反射、多线程、代理、mybatis、spring（AOP，IOC）、servlet和servlet容器和Javabean的区别、对json的认识。MySQL的问题也问的比较多，回答的不是很理想，其实刚看了MySQL必知必会，很多都没想起来，所以书上的内容还是需要实践的。MySQL方面的问题有：索引、MySQL有哪些引擎、什么是等值联结、left join和right join和inner join的区别等等。</p>
+</li>
+<li><p>饿了么：面试整个流程大概一小时，问的内容也很基础。一面项目经理：面向对象的几个特征、final能不能被继承、string的变量能不能被修改、SSH框架架构、集合、反射、多线程。二面架构师：后台的概念、我以前做的项目是前后台分离的还是什么、手写一个韩信点兵程序等等。三面Hr面：简单聊了聊，然后说前面两位面试官对我的评价都挺高，直接给我offer，然后今天就收到了Hr发的正式邮件offer。</p>
+</li>
+<li><p>EMC：EMC面试的很顺利啊，陆陆续续大概有四面。一面Hr面：简单问了下我的情况，做过什么，看我情况基本与岗位匹配，就把邮件转发给了应聘的部门。二面技术面：主要还是问的简历写的，还有一个算法是排序，对我了解ELK应该是加分项。接下来的两面就是去公司面的。三面技术面：一个其他部门的人来面的，也没问太多问题，就觉得我很优秀什么的，然后问我以后的规划。四面技术面：应该是部门老大，跟我讲了下部门的人员情况和详细介绍了做什么，问了一个简单算法(一个数组里面如果有重复的就返回true)，最后说没什么问题，之后让Hr通知给我offer。</p>
+</li>
+</ul>
+<p>　　面了五家目前收到了三家的offer，最大的感受是基础很重要。其实在EMC和饿了么飘摇不定，EMC给我的整体感受是很轻松，比较安逸，饿了么的话是互联网公司，可能加班严重会更辛苦，不过现阶段想学习更多的技术，最后还是决定去饿了么，离学校也是挺近的，只有两站路。半个月找实习已告一段落，接下来开始准备期末考试，然后去公司好好实习，按照制定的计划一步步来。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　这一个月时间过得很快，主要就是继续按照之前制定的计划进行学习和找实习。准备好好打理自己的博客和GitHub，所以把之前的一些东西整理到GitHub上面，也阅读了《图解HTTP》、《MYSQL必知必会》两本书，然后对Java进行了一个加强的学习。&lt;/p&gt;
+&lt;h4 id=&quot;Java加强学习&quot;&gt;&lt;a href=&quot;#Java加强学习&quot; class=&quot;headerlink&quot; title=&quot;Java加强学习&quot;&gt;&lt;/a&gt;Java加强学习&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Java加强&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%8F%8D%E5%B0%84/&quot;&gt;深入理解Java反射&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E6%B3%A8%E8%A7%A3/&quot;&gt;深入理解Java注解&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E6%B3%9B%E5%9E%8B/&quot;&gt;深入理解Java泛型&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://harmansecurity.cn/2017/05/24/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/&quot;&gt;深入理解Java类加载器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://harmansecurity.cn/2017/05/25/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/&quot;&gt;深入理解Java动态代理 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://harmansecurity.cn/2017/05/25/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8F%8A%E5%B9%B6%E5%8F%91/&quot;&gt;深入理解Java多线程及并发 &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&quot;找实习总结&quot;&gt;&lt;a href=&quot;#找实习总结&quot; class=&quot;headerlink&quot; title=&quot;找实习总结&quot;&gt;&lt;/a&gt;找实习总结&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;众安保险：技术面，大概四十分钟。面试是在楼下的一个咖啡厅，主要的问的都是简历上写的内容：IO流、反射、多线程、集合泛型、动态代理、静态代理。笔试题：两道编程题，主要考察的是HashSet、TreeSet。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;中软融鑫：Hr面，一个小时左右。其实也没聊什么，很快就伸出了橄榄枝。不过建议我去做数据库开发(这边的数据库开发是对数据进行一些处理，然后存储到Oracle中)。我的体会是：Hr完全不懂技术，然后我和另一个人同时面的都是Java岗位，她们缺做数据库开发的人，就说我们的经历更适合做数据库开发，跟我扯什么未来的规划，做数据库可以以后做项目经理，带团队，做Java开发就是个码农等等。最不能理解的是，说之前很多面试的人都不是很符合要求，说上海理工的学生跟我们的差距是不是因为学校的原因等等，总之给我留下的印象很差。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://harmansecurity.cn/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="小结" scheme="http://harmansecurity.cn/tags/%E5%B0%8F%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>深入理解Java多线程及并发</title>
@@ -558,6 +627,43 @@
   </entry>
   
   <entry>
+    <title>ARM Linux2.6.37系统调用原理</title>
+    <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
+    <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37系统调用原理/</id>
+    <published>2017-05-19T10:40:11.000Z</published>
+    <updated>2017-05-19T10:47:32.378Z</updated>
+    
+    <content type="html"><![CDATA[<p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
+<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
+<a id="more"></a>
+<p><strong>2.调转到entry-common.S中执行vector_swi软中断指令</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%862.png" alt=""></p>
+<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
+<li><code>http://www.linuxidc.com/Linux/2015-04/116546.htm</code></li>
+<li><code>http://blog.csdn.net/tommy_wxie/article/details/7610118</code></li>
+<li><code>http://blog.csdn.net/myarrow/article/details/7036266</code></li>
+<li><code>http://blog.chinaunix.net/uid-28236237-id-3404140.html</code></li>
+<li><code>http://blog.csdn.net/liduxun/article/details/48119849</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。&lt;/p&gt;
+&lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.entry-armv.S里面有switch软件中断的入口&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    
+      <category term="ARM Linux2.6.37" scheme="http://harmansecurity.cn/tags/ARM-Linux2-6-37/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ARM Linux2.6.37中获取系统调用号</title>
     <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7/"/>
     <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37中获取系统调用号/</id>
@@ -588,43 +694,6 @@
 &lt;li&gt;1.在linux-2.6.37/arch/arm/kernel文件下找到entry-common.S修改源码，在软中断里面添加实现获取调用号的函数&lt;code&gt;bl get_syscall_num&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
-    
-      <category term="ARM Linux2.6.37" scheme="http://harmansecurity.cn/tags/ARM-Linux2-6-37/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ARM Linux2.6.37系统调用原理</title>
-    <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
-    <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37系统调用原理/</id>
-    <published>2017-05-19T10:40:11.000Z</published>
-    <updated>2017-05-19T10:47:32.378Z</updated>
-    
-    <content type="html"><![CDATA[<p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
-<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
-<a id="more"></a>
-<p><strong>2.调转到entry-common.S中执行vector_swi软中断指令</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%862.png" alt=""></p>
-<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
-<li><code>http://www.linuxidc.com/Linux/2015-04/116546.htm</code></li>
-<li><code>http://blog.csdn.net/tommy_wxie/article/details/7610118</code></li>
-<li><code>http://blog.csdn.net/myarrow/article/details/7036266</code></li>
-<li><code>http://blog.chinaunix.net/uid-28236237-id-3404140.html</code></li>
-<li><code>http://blog.csdn.net/liduxun/article/details/48119849</code></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt; 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。&lt;/p&gt;
-&lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.entry-armv.S里面有switch软件中断的入口&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1715,311 +1784,6 @@ Teacher
       <category term="构造方法" scheme="http://harmansecurity.cn/tags/%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95/"/>
     
       <category term="static" scheme="http://harmansecurity.cn/tags/static/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java基础学习笔记(六)</title>
-    <link href="http://harmansecurity.cn/2017/03/19/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AD)/"/>
-    <id>http://harmansecurity.cn/2017/03/19/Java基础学习笔记(六)/</id>
-    <published>2017-03-19T14:40:21.000Z</published>
-    <updated>2017-03-19T15:16:09.170Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="06-01-面向对象-面向对象思想概述-了解"><a href="#06-01-面向对象-面向对象思想概述-了解" class="headerlink" title="06.01_面向对象(面向对象思想概述)(了解)"></a>06.01_面向对象(面向对象思想概述)(了解)</h3><ul>
-<li>A:面向过程思想概述<ul>
-<li>第一步</li>
-<li>第二步 </li>
-</ul>
-</li>
-<li>B:面向对象思想概述<ul>
-<li>找对象(第一步,第二步) </li>
-</ul>
-</li>
-<li>C:举例<ul>
-<li>买煎饼果子</li>
-<li>洗衣服 </li>
-</ul>
-</li>
-<li>D:面向对象思想特点<ul>
-<li>a:是一种更符合我们思想习惯的思想</li>
-<li>b:可以将复杂的事情简单化</li>
-<li>c:将我们从执行者变成了指挥者<ul>
-<li>角色发生了转换</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>E:面向对象开发<ul>
-<li>就是不断的创建对象，使用对象，指挥对象做事情。</li>
-</ul>
-</li>
-<li>F:面向对象设计<ul>
-<li>其实就是在管理和维护对象之间的关系。</li>
-</ul>
-</li>
-<li>G:面向对象特征<ul>
-<li>封装(encapsulation)</li>
-<li>继承(inheritance)</li>
-<li>多态(polymorphism)</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h3 id="06-02-面向对象-类与对象概述-掌握"><a href="#06-02-面向对象-类与对象概述-掌握" class="headerlink" title="06.02_面向对象(类与对象概述)(掌握)"></a>06.02_面向对象(类与对象概述)(掌握)</h3><ul>
-<li>A:我们学习编程是为了什么<ul>
-<li>为了把我们日常生活中实物用学习语言描述出来</li>
-</ul>
-</li>
-<li>B:我们如何描述现实世界事物<ul>
-<li>属性    就是该事物的描述信息(事物身上的名词)</li>
-<li>行为    就是该事物能够做什么(事物身上的动词)</li>
-</ul>
-</li>
-<li>C:Java中最基本的单位是类,Java中用class描述事物也是如此<ul>
-<li>成员变量    就是事物的属性</li>
-<li>成员方法    就是事物的行为</li>
-</ul>
-</li>
-<li>D:定义类其实就是定义类的成员(成员变量和成员方法)<ul>
-<li>a:成员变量    和以前定义变量是一样的，只不过位置发生了改变。在类中，方法外。</li>
-<li>b:成员方法    和以前定义方法是一样的，只不过把static去掉，后面在详细讲解static的作用。</li>
-</ul>
-</li>
-<li>E:类和对象的概念<ul>
-<li>a:类：是一组相关的属性和行为的集合</li>
-<li>b:对象：是该类事物的具体体现</li>
-<li>c:举例：<ul>
-<li>类     学生</li>
-<li>对象    具体的某个学生就是一个对象</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-03-面向对象-学生类的定义-掌握"><a href="#06-03-面向对象-学生类的定义-掌握" class="headerlink" title="06.03_面向对象(学生类的定义)(掌握)"></a>06.03_面向对象(学生类的定义)(掌握)</h3><ul>
-<li>A:学生事物</li>
-<li>B:学生类</li>
-<li>C:案例演示<ul>
-<li>属性:姓名,年龄,性别</li>
-<li>行为:学习,睡觉</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-04-面向对象-手机类的定义-掌握"><a href="#06-04-面向对象-手机类的定义-掌握" class="headerlink" title="06.04_面向对象(手机类的定义)(掌握)"></a>06.04_面向对象(手机类的定义)(掌握)</h3><ul>
-<li>模仿学生类，让学生自己完成<ul>
-<li>属性:品牌(brand)价格(price)</li>
-<li>行为:打电话(call),发信息(sendMessage)玩游戏(playGame)</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-05-面向对象-学生类的使用-掌握"><a href="#06-05-面向对象-学生类的使用-掌握" class="headerlink" title="06.05_面向对象(学生类的使用)(掌握)"></a>06.05_面向对象(学生类的使用)(掌握)</h3><ul>
-<li>A:文件名问题<ul>
-<li>在一个java文件中写两个类：一个基本的类，一个测试类。</li>
-<li>建议：文件名称和测试类名称一致。</li>
-</ul>
-</li>
-<li>B:如何使用对象?<ul>
-<li>创建对象并使用</li>
-<li>格式：类名 对象名 = new 类名();</li>
-</ul>
-</li>
-<li>D:如何使用成员变量呢?<ul>
-<li>对象名.变量名</li>
-</ul>
-</li>
-<li>E:如何使用成员方法呢?<ul>
-<li>对象名.方法名(…)</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-06-面向对象-手机类的使用-掌握"><a href="#06-06-面向对象-手机类的使用-掌握" class="headerlink" title="06.06_面向对象(手机类的使用)(掌握)"></a>06.06_面向对象(手机类的使用)(掌握)</h3><ul>
-<li>A:学生自己完成<ul>
-<li>模仿学生类，让学生自己完成</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-07-面向对象-一个对象的内存图-掌握"><a href="#06-07-面向对象-一个对象的内存图-掌握" class="headerlink" title="06.07_面向对象(一个对象的内存图)(掌握)"></a>06.07_面向对象(一个对象的内存图)(掌握)</h3><ul>
-<li>A:画图演示<ul>
-<li>一个对象</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-08-面向对象-二个对象的内存图-了解"><a href="#06-08-面向对象-二个对象的内存图-了解" class="headerlink" title="06.08_面向对象(二个对象的内存图)(了解)"></a>06.08_面向对象(二个对象的内存图)(了解)</h3><ul>
-<li>A:画图演示<ul>
-<li>二个不同的对象</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-09-面向对象-三个引用两个对象的内存图-了解"><a href="#06-09-面向对象-三个引用两个对象的内存图-了解" class="headerlink" title="06.09_面向对象(三个引用两个对象的内存图)(了解)"></a>06.09_面向对象(三个引用两个对象的内存图)(了解)</h3><ul>
-<li>A:画图演示<ul>
-<li>三个引用，有两个对象的引用指向同一个地址</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-10-面向对象-成员变量和局部变量的区别-掌握"><a href="#06-10-面向对象-成员变量和局部变量的区别-掌握" class="headerlink" title="06.10_面向对象(成员变量和局部变量的区别)(掌握)"></a>06.10_面向对象(成员变量和局部变量的区别)(掌握)</h3><ul>
-<li>A:在类中的位置不同<ul>
-<li>成员变量：在类中方法外</li>
-<li>局部变量：在方法定义中或者方法声明上</li>
-</ul>
-</li>
-<li>B:在内存中的位置不同<ul>
-<li>成员变量：在堆内存(成员变量属于对象,对象进堆内存)</li>
-<li>局部变量：在栈内存(局部变量属于方法,方法进栈内存)</li>
-</ul>
-</li>
-<li>C:生命周期不同<ul>
-<li>成员变量：随着对象的创建而存在，随着对象的消失而消失</li>
-<li>局部变量：随着方法的调用而存在，随着方法的调用完毕而消失</li>
-</ul>
-</li>
-<li><p>D:初始化值不同</p>
-<ul>
-<li>成员变量：有默认初始化值</li>
-<li>局部变量：没有默认初始化值，必须定义，赋值，然后才能使用。</li>
-</ul>
-</li>
-<li><p>注意事项：</p>
-<ul>
-<li>局部变量名称可以和成员变量名称一样，在方法中使用的时候，采用的是就近原则。</li>
-<li>基本数据类型变量包括哪些:byte,short,int,long,float,double,boolean,char</li>
-<li>引用数据类型变量包括哪些:数组,类,接口,枚举</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-11-面向对象-方法的形式参数是类名的时候如何调用-掌握"><a href="#06-11-面向对象-方法的形式参数是类名的时候如何调用-掌握" class="headerlink" title="06.11_面向对象(方法的形式参数是类名的时候如何调用)(掌握)"></a>06.11_面向对象(方法的形式参数是类名的时候如何调用)(掌握)</h3><ul>
-<li>A:方法的参数是类名public void print(Student s){}//print(new Student());<ul>
-<li>如果你看到了一个方法的形式参数是一个类类型(引用类型)，这里其实需要的是该类的对象。</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-12-面向对象-匿名对象的概述和应用-掌握"><a href="#06-12-面向对象-匿名对象的概述和应用-掌握" class="headerlink" title="06.12_面向对象(匿名对象的概述和应用)(掌握)"></a>06.12_面向对象(匿名对象的概述和应用)(掌握)</h3><ul>
-<li>A:什么是匿名对象<ul>
-<li>没有名字的对象 </li>
-</ul>
-</li>
-<li>B:匿名对象应用场景<ul>
-<li>a:调用方法，仅仅只调用一次的时候。<ul>
-<li>那么，这种匿名调用有什么好处吗?<ul>
-<li>节省代码 </li>
-</ul>
-</li>
-<li>注意：调用多次的时候，不适合。匿名对象调用完毕就是垃圾。可以被垃圾回收器回收。</li>
-</ul>
-</li>
-<li>b:匿名对象可以作为实际参数传递</li>
-</ul>
-</li>
-<li>C:案例演示<ul>
-<li>匿名对象应用场景</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-13-面向对象-封装的概述-掌握"><a href="#06-13-面向对象-封装的概述-掌握" class="headerlink" title="06.13_面向对象(封装的概述)(掌握)"></a>06.13_面向对象(封装的概述)(掌握)</h3><ul>
-<li><p>A:封装概述</p>
-<ul>
-<li>是指隐藏对象的属性和实现细节，仅对外提供公共访问方式。</li>
-</ul>
-</li>
-<li><p>B:封装好处</p>
-<ul>
-<li>隐藏实现细节，提供公共的访问方式</li>
-<li>提高了代码的复用性</li>
-<li>提高安全性。</li>
-</ul>
-</li>
-<li>C:封装原则<ul>
-<li>将不需要对外提供的内容都隐藏起来。</li>
-<li>把属性隐藏，提供公共方法对其访问。</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-14-面向对象-private关键字的概述和特点-掌握"><a href="#06-14-面向对象-private关键字的概述和特点-掌握" class="headerlink" title="06.14_面向对象(private关键字的概述和特点)(掌握)"></a>06.14_面向对象(private关键字的概述和特点)(掌握)</h3><ul>
-<li>A:人类赋值年龄的问题</li>
-<li>B:private关键字特点<ul>
-<li>a:是一个权限修饰符</li>
-<li>b:可以修饰成员变量和成员方法</li>
-<li>c:被其修饰的成员只能在本类中被访问</li>
-</ul>
-</li>
-<li>C:案例演示<ul>
-<li>封装和private的应用：</li>
-<li>A:把成员变量用private修饰</li>
-<li>B:提供对应的getXxx()和setXxx()方法</li>
-<li>private仅仅是封装的一种体现形式,不能说封装就是私有</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-15-面向对象-this关键字的概述和应用-掌握"><a href="#06-15-面向对象-this关键字的概述和应用-掌握" class="headerlink" title="06.15_面向对象(this关键字的概述和应用)(掌握)"></a>06.15_面向对象(this关键字的概述和应用)(掌握)</h3><ul>
-<li>A:this关键字特点<ul>
-<li>代表当前对象的引用 </li>
-</ul>
-</li>
-<li>B:案例演示<ul>
-<li>this的应用场景</li>
-<li>用来区分成员变量和局部变量重名</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-16-面向对象-手机类代码及其测试-掌握"><a href="#06-16-面向对象-手机类代码及其测试-掌握" class="headerlink" title="06.16_面向对象(手机类代码及其测试)(掌握)"></a>06.16_面向对象(手机类代码及其测试)(掌握)</h3><ul>
-<li>A:学生练习<ul>
-<li>请把手机类写成一个标准类，然后创建对象测试功能。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo2_Phone</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Phone p1 = <span class="keyword">new</span> Phone();</div><div class="line">		p1.setBrand(<span class="string">"三星"</span>);</div><div class="line">		p1.setPrice(<span class="number">5288</span>);</div><div class="line"></div><div class="line">		System.out.println(p1.getBrand() + <span class="string">"..."</span> + p1.getPrice());</div><div class="line">		p1.call();</div><div class="line">		p1.sendMessage();</div><div class="line">		p1.playGame();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">手机类</div><div class="line">	属性:品牌brand,价格price</div><div class="line">	行为:打电话call,发短信sendMessage,玩游戏,playGame</div><div class="line">*/</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>&#123;								<span class="comment">//java bean</span></div><div class="line">	<span class="keyword">private</span> String brand;					<span class="comment">//品牌</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> price;						<span class="comment">//价格</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBrand</span><span class="params">(String brand)</span> </span>&#123;	<span class="comment">//设置品牌</span></div><div class="line">		<span class="keyword">this</span>.brand = brand;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getBrand</span><span class="params">()</span> </span>&#123;				<span class="comment">//获取品牌</span></div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.brand;					<span class="comment">//this.可以省略,你不加系统会默认给你加</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrice</span><span class="params">(<span class="keyword">int</span> price)</span> </span>&#123;		<span class="comment">//设置价格</span></div><div class="line">		<span class="keyword">this</span>.price = price;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPrice</span><span class="params">()</span> </span>&#123;					<span class="comment">//获取价格</span></div><div class="line">		<span class="keyword">return</span> price;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span> </span>&#123;					<span class="comment">//打电话</span></div><div class="line">		System.out.println(<span class="string">"打电话"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">()</span> </span>&#123;				<span class="comment">//发短信</span></div><div class="line">		System.out.println(<span class="string">"发短信"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">playGame</span><span class="params">()</span> </span>&#123;				<span class="comment">//玩游戏</span></div><div class="line">		System.out.println(<span class="string">"玩游戏"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-17-day06总结"><a href="#06-17-day06总结" class="headerlink" title="06.17_day06总结"></a>06.17_day06总结</h3><ul>
-<li>把今天的知识点总结一遍。</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;06-01-面向对象-面向对象思想概述-了解&quot;&gt;&lt;a href=&quot;#06-01-面向对象-面向对象思想概述-了解&quot; class=&quot;headerlink&quot; title=&quot;06.01_面向对象(面向对象思想概述)(了解)&quot;&gt;&lt;/a&gt;06.01_面向对象(面向对象思想概述)(了解)&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;A:面向过程思想概述&lt;ul&gt;
-&lt;li&gt;第一步&lt;/li&gt;
-&lt;li&gt;第二步 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;B:面向对象思想概述&lt;ul&gt;
-&lt;li&gt;找对象(第一步,第二步) &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;C:举例&lt;ul&gt;
-&lt;li&gt;买煎饼果子&lt;/li&gt;
-&lt;li&gt;洗衣服 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;D:面向对象思想特点&lt;ul&gt;
-&lt;li&gt;a:是一种更符合我们思想习惯的思想&lt;/li&gt;
-&lt;li&gt;b:可以将复杂的事情简单化&lt;/li&gt;
-&lt;li&gt;c:将我们从执行者变成了指挥者&lt;ul&gt;
-&lt;li&gt;角色发生了转换&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;E:面向对象开发&lt;ul&gt;
-&lt;li&gt;就是不断的创建对象，使用对象，指挥对象做事情。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;F:面向对象设计&lt;ul&gt;
-&lt;li&gt;其实就是在管理和维护对象之间的关系。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;G:面向对象特征&lt;ul&gt;
-&lt;li&gt;封装(encapsulation)&lt;/li&gt;
-&lt;li&gt;继承(inheritance)&lt;/li&gt;
-&lt;li&gt;多态(polymorphism)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
-    
-      <category term="面向对象" scheme="http://harmansecurity.cn/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   

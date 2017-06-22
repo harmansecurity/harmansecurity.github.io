@@ -155,6 +155,87 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-QEMU安装和调试运行Linux0.11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/19/QEMU安装和调试运行Linux0.11/">QEMU安装和调试运行Linux0.11</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/19/QEMU安装和调试运行Linux0.11/" class="archive-article-date">
+  	<time datetime="2017-05-19T06:33:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 　 　首先遇到的一个问题就是虚拟机装了VMaretools还是得用Ctrl+Alt和Ctrl+G切入切出特别麻烦，而且虚拟机和物理机不能进行复制粘贴。重新安装了VMare tools也没有用，至少能让我复制粘贴，其他倒无所谓啊。试了不少办法都没解决问题，最后发现我虚拟机和物理机不是在一个网段，我物理机的ip是：192.168.115.23。我把我虚拟机的ip也设置成一个网段，命令式：<code>sudo ifconfig eth0 192.168.115.150</code>。</p>
+<h4 id="一、QEMU安装"><a href="#一、QEMU安装" class="headerlink" title="一、QEMU安装"></a>一、QEMU安装</h4><ul>
+<li><p>1.<code>sudo apt-get install libsdl1.2-dev</code> (安装一些必要的库，并不只是这个，可以根据参考资料的第二个链接)</p>
+</li>
+<li><p>2.<code>git clone git://git.qemu-project.org/qemu.git</code></p>
+</li>
+<li><p>3.进入qemu的目录下面：<code>./configure --enable-debug --enable-tcg-interpreter --enable-sdl --enable-gtk --enable-debug-info --enable-kvm --enable-vnc --enable-curses --prefix=/home/wlwaq/qemu</code>（prefix如果不配置默认是usr/local/bin，配置完的话运行就需要加前缀/home/wlwaq/qemu/bin如第六步）</p>
+</li>
+<li><p>4.<code>sudo make -j4</code></p>
+</li>
+<li><p>5.<code>sudo make install</code></p>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/05/19/QEMU安装和调试运行Linux0.11/#more">Read More >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Linux0.11</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">QEMU</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/19/QEMU安装和调试运行Linux0.11/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<!---->
+
+  
     <article id="post-Linux0.11系统调用原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -441,81 +522,6 @@
 <!---->
 
   
-    <article id="post-Bochs运行Linux0.11内核" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/19/Bochs运行Linux0.11内核/">Bochs运行Linux0.11内核</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/19/Bochs运行Linux0.11内核/" class="archive-article-date">
-  	<time datetime="2017-05-19T02:36:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
-</a>
-        
-      </header>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="一、Bochs安装"><a href="#一、Bochs安装" class="headerlink" title="一、Bochs安装"></a>一、Bochs安装</h4><p><strong>1.手动安装</strong></p>
-<p>具体的安装步骤可以参考这篇博客，很详细：<code>http://os.51cto.com/art/201407/446838_all.htm</code></p>
-<p>安装过程中遇到的一个小问题：</p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/Bochs%E8%BF%90%E8%A1%8CLinux0.11%E5%86%85%E6%A0%B8.png" alt=""></p>
-<p>解决方法：我的解决方法与博客里面提到的不一样：打开Makefile文件，找到<code>X_LIBS=</code> 添加“-lpthread” 即 <code>X_LIBS=-lpthread.S</code></p>
-<p><strong>2.源安装</strong></p>
-<p>安装本身源里面的bochs:<code>sudo apt-get install bochs</code></p>
-        
-          <a class="article-more-a" href="/2017/05/19/Bochs运行Linux0.11内核/#more">Read More >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Bochs</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Linux0.11</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/19/Bochs运行Linux0.11内核/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-<!---->
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -613,11 +619,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">小记</a>
+                <a href="javascript:void(0)" class="js-tag color3">小结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">小结</a>
+                <a href="javascript:void(0)" class="js-tag color3">小记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,22 +679,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">计算机基础知识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java语言基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
               </li>
              
@@ -706,6 +696,22 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Modify Headers</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">计算机基础知识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java语言基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -749,15 +755,23 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">继承</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">循环结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -770,10 +784,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -801,15 +811,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -821,10 +831,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hook</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">用户态</a>
               </li>
              
@@ -833,11 +839,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
+                <a href="javascript:void(0)" class="js-tag color5">hook</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
+                <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
               </li>
             
             <div class="clearfix"></div>

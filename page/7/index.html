@@ -155,82 +155,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Http抓包与调试(Wireshark)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/14/Http抓包与调试(Wireshark)/">Http抓包与调试(Wireshark)</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/14/Http抓包与调试(Wireshark)/" class="archive-article-date">
-  	<time datetime="2017-02-14T06:23:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-14</time>
-</a>
-        
-      </header>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 　 　wireshark是非常流行的网络封包分析软件，功能十分强大。可以截取各种网络封包，显示网络封包的详细信息。使用wireshark的人必须了解网络协议，否则就看不懂wireshark了。为了安全考虑，wireshark只能查看封包，而不能修改封包的内容，或者发送封包。wireshark能获取HTTP，也能获取HTTPS，但是不能解密HTTPS，所以wireshark看不懂HTTPS中的内容，总结，<strong>如果是处理HTTP,HTTPS 还是用Fiddler, 其他协议比如TCP,UDP就用wireshark.</strong></p>
-<h6 id="1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考："><a href="#1-wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：" class="headerlink" title="1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考："></a>1.wireshark是搞IT经常用到的一个工具，主要整理了一下一些资料可供参考：</h6><ul>
-<li><code>http://blog.csdn.net/lina_acm/article/details/53404429</code></li>
-<li><code>http://www.cnblogs.com/dragonir/p/6219541.html</code></li>
-<li><code>http://www.9upk.com/article/2537.html</code></li>
-<li><code>http://www.cnblogs.com/TankXiao/archive/2012/10/10/2711777.html</code></li>
-<li><code>http://blog.jobbole.com/70907/</code>(一站式学习系列文章可以参考)</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/02/14/Http抓包与调试(Wireshark)/#more">Read More >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Wireshark</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">抓包分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/14/Http抓包与调试(Wireshark)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-<!---->
-
-  
     <article id="post-解决端口被占用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -549,6 +473,99 @@
 <!---->
 
   
+    <article id="post-VC6.0插件安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/17/VC6.0插件安装/">VC6.0插件安装</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/17/VC6.0插件安装/" class="archive-article-date">
+  	<time datetime="2017-01-17T06:49:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-17</time>
+</a>
+        
+      </header>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　 　因为PBC源码库的一些函数不是很全，导致用VS写了几个程序只好放弃，而支持VC6.0的PBC库比较全，绕了一圈所以只好转战VC++6.0。VC++6.0是一款很老的工具，不是很人性化，对于我这个深度完美主义者肯定是不能接受的，想方设法使它更适合开发，所以安装了一些插件，使开发效率更高。</p>
+<p>我主要安装的插件是:<br>1.Visual studio Boosteer;(源码窗口管理)</p>
+<ul>
+<li>下载地址:<code>http://pan.baidu.com/s/1pJAZApP</code>.</li>
+<li>功能:方便查看源码，一页里面可以打开多个C文件。</li>
+</ul>
+<p>2.Visual assist Options;(强烈推荐)</p>
+<ul>
+<li>下载地址:<code>http://pan.baidu.com/s/1dDh7Mtb</code>.</li>
+<li>功能:自动识别各种关键字，系统函数，成员变量，自动给出输入提示，自动更正大小写错误，自动标示错误等等。</li>
+</ul>
+<p>3.为了解决VC++6.0不能添加和打开文件的功能安装了FileTool。</p>
+<ul>
+<li>下载地址:<code>http://download.csdn.net/detail/ttfy1234/9696351</code>.</li>
+<li>功能:VC6.0在添加和打开文件时经常会崩掉，这个插件就是为了解决这个问题。  </li>
+</ul>
+<p>4.VC6LineNumberAddin;</p>
+<ul>
+<li>下载地址:<code>http://pan.baidu.com/s/1dD8CfGd</code></li>
+<li>功能:VC6.0不自带行号，不方便阅读查找，这个是行号插件。</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/01/17/VC6.0插件安装/#more">Read More >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PBC</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">密码学</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">VC6.0</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/17/VC6.0插件安装/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+<!---->
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
@@ -646,11 +663,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">小结</a>
+                <a href="javascript:void(0)" class="js-tag color3">小记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">小记</a>
+                <a href="javascript:void(0)" class="js-tag color3">小结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -706,6 +723,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Firebug</a>
               </li>
              
@@ -723,14 +748,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Modify Headers</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Wireshark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">抓包分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -794,14 +811,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PBC</a>
               </li>
              
@@ -811,6 +820,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">双线性配对</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">QEMU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -838,15 +851,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -858,6 +871,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hook</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">用户态</a>
               </li>
              
@@ -866,11 +883,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hook</a>
+                <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">端口占用</a>
+                <a href="javascript:void(0)" class="js-tag color1">系统调用号</a>
               </li>
             
             <div class="clearfix"></div>

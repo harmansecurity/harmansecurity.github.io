@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://harmansecurity.cn/"/>
-  <updated>2018-01-05T07:49:50.308Z</updated>
+  <updated>2017-06-09T15:26:20.563Z</updated>
   <id>http://harmansecurity.cn/</id>
   
   <author>
@@ -14,106 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://harmansecurity.cn/2018/01/05/alihongbao/"/>
-    <id>http://harmansecurity.cn/2018/01/05/alihongbao/</id>
-    <published>2018-01-05T07:36:34.386Z</published>
-    <updated>2018-01-05T07:49:50.308Z</updated>
-    
-    <content type="html"><![CDATA[<!DOCTYPE html>
-<html lang="zh-cmn-hans">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge, chrome=1">
-        <title>领取红包的路上</title>
-    </head>
-    <body>
-        <script>
-    var _0 = "https://qr.alipay.com/c1x07326zm8wfunvg3ique4";
-    var _1 = "https://qr.alipay.com/c1x07326zm8wfunvg3ique4";
-
-    function is_weixin() {
-        if (/MicroMessenger/i.test(navigator.userAgent)) {
-            return true
-        } else {
-            return false
-        }
-    }
-    function is_android() {
-        var a = navigator.userAgent.toLowerCase();
-        if (a.match(/(Android|SymbianOS)/i)) {
-            return true
-        } else {
-            return false
-        }
-    }
-    function is_ios() {
-        var a = navigator.userAgent.toLowerCase();
-        if (/iphone|ipad|ipod/.test(a)) {
-            return true
-        } else {
-            return false
-        }
-    }
-    function android_auto_jump() {
-        WeixinJSBridge.invoke("jumpToInstallUrl", {}, function (e) {});
-        window.close();
-        WeixinJSBridge.call("closeWindow")
-    }
-    function ios_auto_jump() {
-        if (_0 != "") {
-            location.href = _0
-        } else {
-            window.close();
-            WeixinJSBridge.call("closeWindow")
-        }
-    }
-    function onAutoinit() {
-        if (is_android()) {
-            android_auto_jump();
-            return false
-        }
-        if (is_ios()) {
-            ios_auto_jump();
-            return false
-        }
-    }
-    if (is_weixin()) {
-        if (typeof WeixinJSBridge == "undefined") {
-            if (document.addEventListener) {
-                document.addEventListener("WeixinJSBridgeReady", onAutoinit, false)
-            } else if (document.attachEvent) {
-                document.attachEvent("WeixinJSBridgeReady", onAutoinit);
-                document.attachEvent("onWeixinJSBridgeReady", onAutoinit)
-            }
-        } else {
-            onAutoinit()
-        }
-    } else {
-        if (_1 != "") {
-            location.href = _1
-        } else {
-            window.close()
-        }
-    }</script>
-    </body>
-</html>]]></content>
-    
-    <summary type="html">
-    
-      &lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;zh-cmn-hans&quot;&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot;&gt;
-        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-widt
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>2017年5月小结</title>
@@ -895,9 +795,9 @@
     </summary>
     
     
-      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
-    
       <category term="Linux0.11" scheme="http://harmansecurity.cn/tags/Linux0-11/"/>
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
     
   </entry>
   
@@ -976,9 +876,9 @@
     </summary>
     
     
-      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
-    
       <category term="Linux0.11" scheme="http://harmansecurity.cn/tags/Linux0-11/"/>
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
     
   </entry>
   
@@ -1538,6 +1438,352 @@ Teacher
       <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
     
       <category term="继承" scheme="http://harmansecurity.cn/tags/%E7%BB%A7%E6%89%BF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java基础学习笔记(七)</title>
+    <link href="http://harmansecurity.cn/2017/03/19/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%83)/"/>
+    <id>http://harmansecurity.cn/2017/03/19/Java基础学习笔记(七)/</id>
+    <published>2017-03-19T14:41:21.000Z</published>
+    <updated>2017-03-19T15:16:56.722Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="07-01-面向对象-构造方法Constructor概述和格式-掌握"><a href="#07-01-面向对象-构造方法Constructor概述和格式-掌握" class="headerlink" title="07.01_面向对象(构造方法Constructor概述和格式)(掌握)"></a>07.01_面向对象(构造方法Constructor概述和格式)(掌握)</h3><ul>
+<li>A:构造方法概述和作用<ul>
+<li>给对象的数据(属性)进行初始化</li>
+</ul>
+</li>
+<li>B:构造方法格式特点<ul>
+<li>a:方法名与类名相同(大小也要与类名一致)</li>
+<li>b:没有返回值类型，连void都没有</li>
+<li>c:没有具体的返回值return;</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-02-面向对象-构造方法的重载及注意事项-掌握"><a href="#07-02-面向对象-构造方法的重载及注意事项-掌握" class="headerlink" title="07.02_面向对象(构造方法的重载及注意事项)(掌握)"></a>07.02_面向对象(构造方法的重载及注意事项)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>构造方法的重载</li>
+<li>重载:方法名相同,与返回值类型无关(构造方法没有返回值),只看参数列表</li>
+</ul>
+</li>
+<li>B:构造方法注意事项<ul>
+<li>a:如果我们没有给出构造方法，系统将自动提供一个无参构造方法。</li>
+<li>b:如果我们给出了构造方法，系统将不再提供默认的无参构造方法。<ul>
+<li>注意：这个时候，如果我们还想使用无参构造方法，就必须自己给出。建议永远自己给出无参构造方法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="07-03-面向对象-给成员变量赋值的两种方式的区别"><a href="#07-03-面向对象-给成员变量赋值的两种方式的区别" class="headerlink" title="07.03_面向对象(给成员变量赋值的两种方式的区别)"></a>07.03_面向对象(给成员变量赋值的两种方式的区别)</h3><ul>
+<li>A:setXxx()方法<ul>
+<li>修改属性值 </li>
+</ul>
+</li>
+<li>B:构造方法<ul>
+<li>给对象中属性进行初始化 </li>
+</ul>
+</li>
+</ul>
+<h3 id="07-04-面向对象-学生类的代码及测试-掌握"><a href="#07-04-面向对象-学生类的代码及测试-掌握" class="headerlink" title="07.04_面向对象(学生类的代码及测试)(掌握)"></a>07.04_面向对象(学生类的代码及测试)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>学生类：<ul>
+<li>成员变量：<ul>
+<li>name，age</li>
+</ul>
+</li>
+<li>构造方法：<ul>
+<li>无参，带两个参</li>
+</ul>
+</li>
+<li>成员方法：<ul>
+<li>getXxx()/setXxx()</li>
+<li>show()：输出该类的所有成员变量值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>B:给成员变量赋值：</p>
+<ul>
+<li>a:setXxx()方法</li>
+<li>b:构造方法</li>
+</ul>
+</li>
+<li><p>C:输出成员变量值的方式：</p>
+<ul>
+<li>a:通过getXxx()分别获取然后拼接</li>
+<li>b:通过调用show()方法搞定</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-05-面向对象-手机类的代码及测试-掌握"><a href="#07-05-面向对象-手机类的代码及测试-掌握" class="headerlink" title="07.05_面向对象(手机类的代码及测试)(掌握)"></a>07.05_面向对象(手机类的代码及测试)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>模仿学生类，完成手机类代码</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-06-面向对象-创建一个对象的步骤-掌握"><a href="#07-06-面向对象-创建一个对象的步骤-掌握" class="headerlink" title="07.06_面向对象(创建一个对象的步骤)(掌握)"></a>07.06_面向对象(创建一个对象的步骤)(掌握)</h3><ul>
+<li>A:画图演示<ul>
+<li>画图说明一个对象的创建过程做了哪些事情?</li>
+<li>Student s = new Student();</li>
+<li>1,Student.class加载进内存</li>
+<li>2,声明一个Student类型引用s</li>
+<li>3,在堆内存创建对象,</li>
+<li>4,给对象中属性默认初始化值</li>
+<li>5,属性进行显示初始化</li>
+<li>6,构造方法进栈,对对象中的属性赋值,构造方法弹栈</li>
+<li>7,将对象的地址值赋值给s</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-07-面向对象-长方形案例练习-掌握"><a href="#07-07-面向对象-长方形案例练习-掌握" class="headerlink" title="07.07_面向对象(长方形案例练习)(掌握)"></a>07.07_面向对象(长方形案例练习)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>需求：<ul>
+<li>定义一个长方形类,定义 求周长和面积的方法，</li>
+<li>然后定义一个测试类进行测试。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-08-面向对象-员工类案例练习-掌握"><a href="#07-08-面向对象-员工类案例练习-掌握" class="headerlink" title="07.08_面向对象(员工类案例练习)(掌握)"></a>07.08_面向对象(员工类案例练习)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>需求：定义一个员工类Employee</li>
+<li>自己分析出几个成员，然后给出成员变量<ul>
+<li>姓名name,工号id,工资salary </li>
+</ul>
+</li>
+<li>构造方法，<ul>
+<li>空参和有参的</li>
+</ul>
+</li>
+<li>getXxx()setXxx()方法，</li>
+<li>以及一个显示所有成员信息的方法。并测试。<ul>
+<li>work </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-09-面向对象-static关键字及内存图-了解"><a href="#07-09-面向对象-static关键字及内存图-了解" class="headerlink" title="07.09_面向对象(static关键字及内存图)(了解)"></a>07.09_面向对象(static关键字及内存图)(了解)</h3><ul>
+<li><p>A:案例演示</p>
+<ul>
+<li>通过一个案例引入static关键字。</li>
+<li>人类：Person。每个人都有国籍，中国。</li>
+</ul>
+</li>
+<li><p>B:画图演示</p>
+<ul>
+<li>带有static的内存图</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-10-面向对象-static关键字的特点-掌握"><a href="#07-10-面向对象-static关键字的特点-掌握" class="headerlink" title="07.10_面向对象(static关键字的特点)(掌握)"></a>07.10_面向对象(static关键字的特点)(掌握)</h3><ul>
+<li>A:static关键字的特点<ul>
+<li>a:随着类的加载而加载</li>
+<li>b:优先于对象存在</li>
+<li>c:被类的所有对象共享<ul>
+<li>举例：咱们班级的学生应该共用同一个班级编号。</li>
+<li>其实这个特点也是在告诉我们什么时候使用静态?<ul>
+<li>如果某个成员变量是被所有对象共享的，那么它就应该定义为静态的。</li>
+</ul>
+</li>
+<li>举例：<ul>
+<li>饮水机(用静态修饰)</li>
+<li>水杯(不能用静态修饰)</li>
+<li>共性用静态,特性用非静态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>d:可以通过类名调用<ul>
+<li>其实它本身也可以通过对象名调用。</li>
+<li>推荐使用类名调用。</li>
+<li>静态修饰的内容一般我们称其为：与类相关的，类成员</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>static关键字的特点</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-11-面向对象-static的注意事项-掌握"><a href="#07-11-面向对象-static的注意事项-掌握" class="headerlink" title="07.11_面向对象(static的注意事项)(掌握)"></a>07.11_面向对象(static的注意事项)(掌握)</h3><ul>
+<li>A:static的注意事项<ul>
+<li>a:在静态方法中是没有this关键字的<ul>
+<li>如何理解呢?<ul>
+<li>静态是随着类的加载而加载，this是随着对象的创建而存在。</li>
+<li>静态比对象先存在。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>b:静态方法只能访问静态的成员变量和静态的成员方法<ul>
+<li>静态方法：<ul>
+<li>成员变量：只能访问静态变量</li>
+<li>成员方法：只能访问静态成员方法</li>
+</ul>
+</li>
+<li>非静态方法：<ul>
+<li>成员变量：可以是静态的，也可以是非静态的</li>
+<li>成员方法：可是是静态的成员方法，也可以是非静态的成员方法。</li>
+</ul>
+</li>
+<li>简单记：<ul>
+<li>静态只能访问静态。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>static的注意事项</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-12-面向对象-静态变量和成员变量的区别-掌握"><a href="#07-12-面向对象-静态变量和成员变量的区别-掌握" class="headerlink" title="07.12_面向对象(静态变量和成员变量的区别)(掌握)"></a>07.12_面向对象(静态变量和成员变量的区别)(掌握)</h3><ul>
+<li>静态变量也叫类变量  成员变量也叫对象变量</li>
+<li>A:所属不同<ul>
+<li>静态变量属于类，所以也称为为类变量</li>
+<li>成员变量属于对象，所以也称为实例变量(对象变量)</li>
+</ul>
+</li>
+<li>B:内存中位置不同<ul>
+<li>静态变量存储于方法区的静态区</li>
+<li>成员变量存储于堆内存</li>
+</ul>
+</li>
+<li>C:内存出现时间不同<ul>
+<li>静态变量随着类的加载而加载，随着类的消失而消失</li>
+<li>成员变量随着对象的创建而存在，随着对象的消失而消失</li>
+</ul>
+</li>
+<li>D:调用不同<ul>
+<li>静态变量可以通过类名调用，也可以通过对象调用</li>
+<li>成员变量只能通过对 象名调用</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-13-面向对象-main方法的格式详细解释-了解"><a href="#07-13-面向对象-main方法的格式详细解释-了解" class="headerlink" title="07.13_面向对象(main方法的格式详细解释)(了解)"></a>07.13_面向对象(main方法的格式详细解释)(了解)</h3><ul>
+<li>A:格式<ul>
+<li>public static void main(String[] args) {}</li>
+</ul>
+</li>
+<li>B:针对格式的解释<ul>
+<li>public 被jvm调用，访问权限足够大。</li>
+<li>static 被jvm调用，不用创建对象，直接类名访问</li>
+<li>void被jvm调用，不需要给jvm返回值</li>
+<li>main 一个通用的名称，虽然不是关键字，但是被jvm识别</li>
+<li>String[] args 以前用于接收键盘录入的</li>
+</ul>
+</li>
+<li>C:演示案例<ul>
+<li>通过args接收键盘例如数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-14-面向对象-工具类中使用静态-了解"><a href="#07-14-面向对象-工具类中使用静态-了解" class="headerlink" title="07.14_面向对象(工具类中使用静态)(了解)"></a>07.14_面向对象(工具类中使用静态)(了解)</h3><ul>
+<li>A:制作一个工具类<ul>
+<li>ArrayTool</li>
+<li>1,获取最大值</li>
+<li>2,数组的遍历</li>
+<li>3,数组的反转</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-15-面向对象-说明书的制作过程-了解"><a href="#07-15-面向对象-说明书的制作过程-了解" class="headerlink" title="07.15_面向对象(说明书的制作过程)(了解)"></a>07.15_面向对象(说明书的制作过程)(了解)</h3><ul>
+<li>A:对工具类加入文档注释</li>
+<li>B:通过javadoc命令生成说明书<ul>
+<li>@author(提取作者内容)</li>
+<li>@version(提取版本内容)</li>
+<li>javadoc -d 指定的文件目录 -author -version ArrayTool.java</li>
+<li>@param 参数名称//形式参数的变量名称@return 函数运行完返回的数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-16-面向对象-如何使用JDK提供的帮助文档-了解"><a href="#07-16-面向对象-如何使用JDK提供的帮助文档-了解" class="headerlink" title="07.16_面向对象(如何使用JDK提供的帮助文档)(了解)"></a>07.16_面向对象(如何使用JDK提供的帮助文档)(了解)</h3><ul>
+<li>A:找到文档，打开文档</li>
+<li>B:点击显示，找到索引，出现输入框</li>
+<li>C:你应该知道你找谁?举例：Scanner</li>
+<li>D:看这个类的结构(需不需要导包)<ul>
+<li>成员变量    字段</li>
+<li>构造方法    构造方法</li>
+<li>成员方法    方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-17-面向对象-学习Math类的随机数功能-了解"><a href="#07-17-面向对象-学习Math类的随机数功能-了解" class="headerlink" title="07.17_面向对象(学习Math类的随机数功能)(了解)"></a>07.17_面向对象(学习Math类的随机数功能)(了解)</h3><ul>
+<li>打开JDK提供的帮助文档学习</li>
+<li>A:Math类概述<ul>
+<li>类包含用于执行基本数学运算的方法</li>
+</ul>
+</li>
+<li>B:Math类特点<ul>
+<li>由于Math类在java.lang包下，所以不需要导包。</li>
+<li>因为它的成员全部是静态的,所以私有了构造方法</li>
+</ul>
+</li>
+<li>C:获取随机数的方法<ul>
+<li>public static double random():返回带正号的 double 值，该值大于等于 0.0 且小于 1.0。</li>
+</ul>
+</li>
+<li>D:我要获取一个1-100之间的随机数，肿么办?<ul>
+<li>int number = (int)(Math.random()*100)+1;</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-18-面向对象-猜数字小游戏案例-了解"><a href="#07-18-面向对象-猜数字小游戏案例-了解" class="headerlink" title="07.18_面向对象(猜数字小游戏案例)(了解)"></a>07.18_面向对象(猜数字小游戏案例)(了解)</h3><ul>
+<li>A:案例演示<ul>
+<li>需求：猜数字小游戏(数据在1-100之间)</li>
+</ul>
+</li>
+</ul>
+<h3 id="07-19-day07总结"><a href="#07-19-day07总结" class="headerlink" title="07.19_day07总结"></a>07.19_day07总结</h3><p>把今天的知识点总结一遍。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;07-01-面向对象-构造方法Constructor概述和格式-掌握&quot;&gt;&lt;a href=&quot;#07-01-面向对象-构造方法Constructor概述和格式-掌握&quot; class=&quot;headerlink&quot; title=&quot;07.01_面向对象(构造方法Constructor概述和格式)(掌握)&quot;&gt;&lt;/a&gt;07.01_面向对象(构造方法Constructor概述和格式)(掌握)&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;A:构造方法概述和作用&lt;ul&gt;
+&lt;li&gt;给对象的数据(属性)进行初始化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;B:构造方法格式特点&lt;ul&gt;
+&lt;li&gt;a:方法名与类名相同(大小也要与类名一致)&lt;/li&gt;
+&lt;li&gt;b:没有返回值类型，连void都没有&lt;/li&gt;
+&lt;li&gt;c:没有具体的返回值return;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;07-02-面向对象-构造方法的重载及注意事项-掌握&quot;&gt;&lt;a href=&quot;#07-02-面向对象-构造方法的重载及注意事项-掌握&quot; class=&quot;headerlink&quot; title=&quot;07.02_面向对象(构造方法的重载及注意事项)(掌握)&quot;&gt;&lt;/a&gt;07.02_面向对象(构造方法的重载及注意事项)(掌握)&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;A:案例演示&lt;ul&gt;
+&lt;li&gt;构造方法的重载&lt;/li&gt;
+&lt;li&gt;重载:方法名相同,与返回值类型无关(构造方法没有返回值),只看参数列表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;B:构造方法注意事项&lt;ul&gt;
+&lt;li&gt;a:如果我们没有给出构造方法，系统将自动提供一个无参构造方法。&lt;/li&gt;
+&lt;li&gt;b:如果我们给出了构造方法，系统将不再提供默认的无参构造方法。&lt;ul&gt;
+&lt;li&gt;注意：这个时候，如果我们还想使用无参构造方法，就必须自己给出。建议永远自己给出无参构造方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Java语言基础" scheme="http://harmansecurity.cn/tags/Java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="构造方法" scheme="http://harmansecurity.cn/tags/%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95/"/>
+    
+      <category term="static" scheme="http://harmansecurity.cn/tags/static/"/>
     
   </entry>
   

@@ -627,6 +627,43 @@
   </entry>
   
   <entry>
+    <title>ARM Linux2.6.37系统调用原理</title>
+    <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
+    <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37系统调用原理/</id>
+    <published>2017-05-19T10:40:11.000Z</published>
+    <updated>2017-06-22T04:48:53.987Z</updated>
+    
+    <content type="html"><![CDATA[<p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
+<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
+<a id="more"></a>
+<p><strong>2.调转到entry-common.S中执行vector_swi软中断指令</strong></p>
+<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%862.png" alt=""></p>
+<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
+<li><code>http://www.linuxidc.com/Linux/2015-04/116546.htm</code></li>
+<li><code>http://blog.csdn.net/tommy_wxie/article/details/7610118</code></li>
+<li><code>http://blog.csdn.net/myarrow/article/details/7036266</code></li>
+<li><code>http://blog.chinaunix.net/uid-28236237-id-3404140.html</code></li>
+<li><code>http://blog.csdn.net/liduxun/article/details/48119849</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。&lt;/p&gt;
+&lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.entry-armv.S里面有switch软件中断的入口&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    
+      <category term="ARM Linux2.6.37" scheme="http://harmansecurity.cn/tags/ARM-Linux2-6-37/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ARM Linux2.6.37中获取系统调用号</title>
     <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B7/"/>
     <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37中获取系统调用号/</id>
@@ -657,43 +694,6 @@
 &lt;li&gt;1.在linux-2.6.37/arch/arm/kernel文件下找到entry-common.S修改源码，在软中断里面添加实现获取调用号的函数&lt;code&gt;bl get_syscall_num&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8F%B71.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="系统调用" scheme="http://harmansecurity.cn/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
-    
-      <category term="ARM Linux2.6.37" scheme="http://harmansecurity.cn/tags/ARM-Linux2-6-37/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ARM Linux2.6.37系统调用原理</title>
-    <link href="http://harmansecurity.cn/2017/05/19/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
-    <id>http://harmansecurity.cn/2017/05/19/ARM Linux2.6.37系统调用原理/</id>
-    <published>2017-05-19T10:40:11.000Z</published>
-    <updated>2017-06-22T04:48:53.987Z</updated>
-    
-    <content type="html"><![CDATA[<p> 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。</p>
-<h4 id="一、系统调用原理"><a href="#一、系统调用原理" class="headerlink" title="一、系统调用原理"></a>一、系统调用原理</h4><p><strong>1.entry-armv.S里面有switch软件中断的入口</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png" alt=""></p>
-<a id="more"></a>
-<p><strong>2.调转到entry-common.S中执行vector_swi软中断指令</strong></p>
-<p><img src="http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%862.png" alt=""></p>
-<h4 id="二、参考资料"><a href="#二、参考资料" class="headerlink" title="二、参考资料"></a>二、参考资料</h4><ul>
-<li><code>http://www.linuxidc.com/Linux/2015-04/116546.htm</code></li>
-<li><code>http://blog.csdn.net/tommy_wxie/article/details/7610118</code></li>
-<li><code>http://blog.csdn.net/myarrow/article/details/7036266</code></li>
-<li><code>http://blog.chinaunix.net/uid-28236237-id-3404140.html</code></li>
-<li><code>http://blog.csdn.net/liduxun/article/details/48119849</code></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt; 　 　系统调用是操作系统提供给用户（应用程序）的一组接口，每个系统调用都有一个对应的系统调用函数来完成相应的工作。用户通过这个接口向操作系统申请服务， 如访问硬件，管理进程等等。但是因为用户程序运行在用户空间，而系统调用运行在内核空间，因此用户程序不能直接调用系统调用函数，我们经常看到的比如 fork、open、write 等等函数实际上并不是真正的系统调用函数，他们都只是c库，在这些函数里将执行一个软中断 swi 指令，产生一个软中断，使CPU 陷入内核态，接着在内核中进行一系列的判断，判断出是哪个系统调用，再转到真正的系统调用函数，完成相应的功能。&lt;/p&gt;
-&lt;h4 id=&quot;一、系统调用原理&quot;&gt;&lt;a href=&quot;#一、系统调用原理&quot; class=&quot;headerlink&quot; title=&quot;一、系统调用原理&quot;&gt;&lt;/a&gt;一、系统调用原理&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1.entry-armv.S里面有switch软件中断的入口&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ojto7c1rw.bkt.clouddn.com/ARM%20Linux2.6.37%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%861.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
